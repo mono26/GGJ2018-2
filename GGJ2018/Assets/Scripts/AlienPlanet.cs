@@ -5,7 +5,7 @@ using UnityEngine;
 public class AlienPlanet : Planet
 {
     [SerializeField]
-    private Transform[] aliens;
+    private Transform[] aliens = null;
 
     // Use this for initialization
     public override void Start()
@@ -15,8 +15,8 @@ public class AlienPlanet : Planet
         {
             if (alien != null)
             {
-                alien.RotateAround(transform.position, transform.forward, GravitationalFieldStrenght * Time.deltaTime);
-                alien.up = (alien.position - transform.position).normalized;
+                LocateAliens(alien);
+                ChangeUpDirectionTowardsPlanet(alien);
             }
         }
         // Make all the aliens rotate 
@@ -30,8 +30,18 @@ public class AlienPlanet : Planet
             if (alien != null)
             {
                 alien.RotateAround(transform.position, transform.forward, GravitationalFieldStrenght * Time.deltaTime);
-                alien.up = (alien.position - transform.position).normalized;
+                ChangeUpDirectionTowardsPlanet(alien);
             }
         }
+    }
+
+    private void LocateAliens(Transform _alien)
+    {
+        _alien.position = GetComponent<CircleCollider2D>().bounds.min;
+    }
+
+    private void ChangeUpDirectionTowardsPlanet(Transform _alien)
+    {
+        _alien.up = (_alien.position - transform.position).normalized;
     }
 }

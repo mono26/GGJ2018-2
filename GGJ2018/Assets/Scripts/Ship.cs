@@ -22,7 +22,7 @@ public class Ship : MonoBehaviour
     private LayerMask planetLayer;
 
 	// Use this for initialization
-	void Start ()
+	void Awake()
     {
         Engine = new Components.Engine(this, settings.EngineSettings);
         Radar = new Components.Radar(this, settings.RadarSettings);
