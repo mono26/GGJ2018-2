@@ -120,7 +120,6 @@ MonoBehaviour:
   aliens:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
 --- !u!212 &212251884888083670
 SpriteRenderer:
   m_ObjectHideFlags: 1
