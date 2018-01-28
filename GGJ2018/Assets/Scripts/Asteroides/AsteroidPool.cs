@@ -37,7 +37,7 @@ public class AsteroidPool : MonoBehaviour
     private void PrepareAsteroide()
     {
         asteroides = new List<Rigidbody2D>();
-        for (int i = 0; i > size; i++)
+        for (int i = 0; i > asteroides.Capacity; i++)
             AddAsteroide();
     }
 
