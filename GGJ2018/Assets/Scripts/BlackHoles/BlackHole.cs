@@ -24,8 +24,7 @@ public class BlackHole : MonoBehaviour
     {
         Vector2 direccion = this.transform.position - collision.transform.position;
         distancia = Vector2.Distance(this.transform.position, collision.transform.position);
-        float fuerza = force /(distancia*2);
+        float fuerza = force;
         collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direccion * fuerza);
-        Debug.Log(distancia);
     }
 }

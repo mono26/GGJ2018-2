@@ -48,7 +48,7 @@ public class AsteroidPool : MonoBehaviour
         asteroides.Add(instance);
     }
 
-    private void ReleaseAsteroide(Rigidbody2D asteroide)
+    public void ReleaseAsteroide(Rigidbody2D asteroide)
     {
         asteroide.gameObject.SetActive(false);
         asteroides.Add(asteroide);

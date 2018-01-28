@@ -146,6 +146,12 @@ public class Ship : MonoBehaviour
         {
             Engine.RechargeFuel();
         }
+        if (collision.gameObject.CompareTag("Asteroide"))
+        {
+            Engine.RecieveDamage(25);
+            Debug.Log("Recibi daño de asteroide");
+            //TODO: definir bien el daño del asteroide
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -161,6 +167,13 @@ public class Ship : MonoBehaviour
             Destroy(collision.gameObject);
             GameController.Instance.IncreaseScore();
         }
+
+        if (collision.gameObject.CompareTag("Blackhole"))
+        {
+            Debug.Log("Recibi daño de Hoyo Negro");
+            Engine.RecieveDamage(30);
+        }
+
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
