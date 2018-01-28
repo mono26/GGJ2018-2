@@ -8,6 +8,8 @@ TagManager:
   - Score Planet
   - Gravitation Field
   - Alien
+  - Asteroide
+  - Blackhole
   layers:
   - Default
   - TransparentFX
