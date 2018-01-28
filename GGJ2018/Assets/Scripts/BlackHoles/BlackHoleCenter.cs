@@ -20,9 +20,12 @@ public class BlackHoleCenter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var vel = collision.GetComponent<Rigidbody2D>().velocity;
-        collision.GetComponent<Rigidbody2D>().velocity = vel * 0.2f;
-        StartCoroutine(ImplotarCR());
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            var vel = collision.GetComponent<Rigidbody2D>().velocity;
+            collision.GetComponent<Rigidbody2D>().velocity = vel * 0.2f;
+            StartCoroutine(ImplotarCR());
+        }
     }
 
     private IEnumerator ImplotarCR()
