@@ -56,7 +56,17 @@ public class SignalOscillator : MonoBehaviour {
     {
         //distance= ship.distanciaOscilacion
         //Debug.Log(ship.distanciaOscilacion);
-
+        if (ship.Radar.ActivePlanets[ship.PlanetaBuscado] != null)
+        {
+            if (ship.Radar.ActivePlanets[ship.PlanetaBuscado].gameObject.tag == "Fuel Planet")
+            {
+                gasStationDetected = true;
+            }
+            if (ship.Radar.ActivePlanets[ship.PlanetaBuscado].gameObject.tag == "Score Planet")
+            {
+                planetDetected = true;
+            }
+        }
         if (ship.Radar.IsRadarOn)
         {
             if (ship.Radar.activePlanets[ship.PlanetaBuscado] != null)
@@ -72,7 +82,7 @@ public class SignalOscillator : MonoBehaviour {
                 enemyDetected = false;
             }
 
-            /*       if (gasStationDetected)
+                   if (gasStationDetected)
                    {
                        signalOscillator.startColor = gasStationSignal;
                        signalOscillator.endColor = gasStationSignal;
@@ -85,19 +95,20 @@ public class SignalOscillator : MonoBehaviour {
                        signalOscillator.endColor = enemySignal;
                        planetDetected = false;
                        gasStationDetected = false;
-                   }*/
+                   }
+
+                for (int i = 0; i <= drawPositions.Length - 1; i++)
+                {
+
+                    drawPositions[i].y = Mathf.Sin(rayPeriod * drawPositions[i].x + Time.time * raySpeed);
+                    signalOscillator.SetPositions(drawPositions);
+                }
             /*   for (int i = 0; i <= drawPositions.Length - 1; i++)
-               {
+           {
 
-                   drawPositions[i].y = Mathf.Sin(rayPeriod  *drawPositions[i].x + Time.time * raySpeed);
-                   signalOscillator.SetPositions(drawPositions);
-               }*/
-            for (int i = 0; i <= drawPositions.Length - 1; i++)
-            {
-
-                drawPositions[i].y = Mathf.Sin(rayPeriod * drawPositions[i].x + Time.time * raySpeed);
-                signalOscillator.SetPositions(drawPositions);
-            }
+               drawPositions[i].y = Mathf.Sin(rayPeriod  *drawPositions[i].x + Time.time * raySpeed);
+               signalOscillator.SetPositions(drawPositions);
+           }*/
         }
     }
 

@@ -663,6 +663,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4485343844356438, guid: b7c6f5c3edbcb634ea9978843f83d7c9,
     type: 2}
   m_PrefabInternal: {fileID: 246243788}
+--- !u!1001 &511191324
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1031728165}
+    m_Modifications:
+    - target: {fileID: 4134392713868294, guid: 65d7afb37c9a8594fbff254e109dd31f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134392713868294, guid: 65d7afb37c9a8594fbff254e109dd31f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134392713868294, guid: 65d7afb37c9a8594fbff254e109dd31f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134392713868294, guid: 65d7afb37c9a8594fbff254e109dd31f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134392713868294, guid: 65d7afb37c9a8594fbff254e109dd31f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134392713868294, guid: 65d7afb37c9a8594fbff254e109dd31f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134392713868294, guid: 65d7afb37c9a8594fbff254e109dd31f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134392713868294, guid: 65d7afb37c9a8594fbff254e109dd31f, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 65d7afb37c9a8594fbff254e109dd31f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &513487657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,6 +1478,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4315113267096494, guid: 449614fad2a9be34e93e5c46d2b34cb6,
     type: 2}
   m_PrefabInternal: {fileID: 464986237}
+--- !u!4 &1031728165 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4304359893575004, guid: 265ece424b2a4c44c995b2fa3ccc814d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1803109202}
 --- !u!1001 &1084267837
 Prefab:
   m_ObjectHideFlags: 0
@@ -2300,6 +2347,11 @@ Prefab:
         type: 2}
       propertyPath: settings.AlienRaySettings.Strenght
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114643004580401058, guid: 265ece424b2a4c44c995b2fa3ccc814d,
+        type: 2}
+      propertyPath: settings.RadarSettings.Range
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}

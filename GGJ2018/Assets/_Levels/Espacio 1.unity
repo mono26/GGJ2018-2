@@ -1106,6 +1106,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1853965188113642, guid: b7c6f5c3edbcb634ea9978843f83d7c9, type: 2}
+      propertyPath: m_TagString
+      value: Fuel Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1853965188113642, guid: b7c6f5c3edbcb634ea9978843f83d7c9, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7c6f5c3edbcb634ea9978843f83d7c9, type: 2}
   m_IsPrefabParent: 0
