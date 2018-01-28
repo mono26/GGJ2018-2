@@ -93,7 +93,7 @@ public class Ship : MonoBehaviour
         {
             if (Engine.CurrentFuel > 0)
             {
-                Force = transform.right * -settings.HorizontalThrust;
+                Force = transform.right * -settings.EngineSettings.HorizontalThrust;
                 Rigidbody2D.AddForce(Force);
                 Engine.LoseFuel();
                 return;
@@ -105,7 +105,7 @@ public class Ship : MonoBehaviour
             // Check if there is enough fuel for moving
             if (Engine.CurrentFuel > 0)
             {
-                Force = transform.right * settings.HorizontalThrust;
+                Force = transform.right * settings.EngineSettings.HorizontalThrust;
                 Rigidbody2D.AddForce(Force);
                 Engine.LoseFuel();
                 return;
@@ -119,7 +119,7 @@ public class Ship : MonoBehaviour
             // Check if there is enough fuel for moving
             if (Engine.CurrentFuel > 0)
             {
-                Force = transform.up * settings.VerticalThrust;
+                Force = transform.up * settings.EngineSettings.VerticalThrust;
                 Rigidbody2D.AddForce(Force);
                 Engine.LoseFuel();
             }
@@ -130,7 +130,7 @@ public class Ship : MonoBehaviour
             // Check if there is enough fuel for moving
             if (Engine.CurrentFuel > 0)
             {
-                Force = transform.up * -settings.VerticalThrust;
+                Force = transform.up * -settings.EngineSettings.VerticalThrust;
                 Rigidbody2D.AddForce(Force);
                 Engine.LoseFuel();
                 return;
@@ -198,9 +198,6 @@ public class Ship : MonoBehaviour
     [System.Serializable]
     public class Settings
     {
-        public float VerticalThrust = 1.0f;
-        public float HorizontalThrust = 1.0f;
-
         public Components.Engine.Settings EngineSettings;
         public Components.Radar.Settings RadarSettings;
         public Components.AlienRay.Settings AlienRaySettings;

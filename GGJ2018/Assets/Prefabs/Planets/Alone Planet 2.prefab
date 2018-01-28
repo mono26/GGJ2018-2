@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetRadius: 4.7
-  gravitationalFieldStrenght: 50
+  gravitationalFieldStrenght: 25
   gravitationalField: {fileID: 58315486521717562}
 --- !u!212 &212100620997393202
 SpriteRenderer:

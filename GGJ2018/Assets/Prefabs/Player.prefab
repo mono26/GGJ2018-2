@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114643004580401058}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,7 +215,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -302,9 +302,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings:
-    VerticalThrust: 5
-    HorizontalThrust: 5
     EngineSettings:
+      VerticalThrust: 10
+      HorizontalThrust: 10
       maxFuel: 1000
       fuelLossRate: 0.1
     RadarSettings:
@@ -314,9 +314,9 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 0
     AlienRaySettings:
-      Range: 2
-      Radius: 1
-      Strenght: 20
+      Range: 10
+      Radius: 3
+      Strenght: 50
       Rate: 0.5
       LayerMask:
         serializedVersion: 2
@@ -324,6 +324,8 @@ MonoBehaviour:
   distanciaOscilacion: 0
   Engine:
     settings:
+      VerticalThrust: 1
+      HorizontalThrust: 1
       maxFuel: 9999
       fuelLossRate: 1
     currentFuel: 100

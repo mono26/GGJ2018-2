@@ -46,6 +46,9 @@ public class Components
         [System.Serializable]
         public class Settings
         {
+            public float VerticalThrust = 1.0f;
+            public float HorizontalThrust = 1.0f;
+
             public float maxFuel = 9999.0f;
             public float fuelLossRate = 1.0f;
         }

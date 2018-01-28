@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetRadius: 5.2
-  gravitationalFieldStrenght: 50
+  gravitationalFieldStrenght: 25
   gravitationalField: {fileID: 58199946706670938}
   aliens:
   - {fileID: 0}
