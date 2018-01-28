@@ -30,7 +30,8 @@ public class BlackHole : MonoBehaviour
 
         if (tiempoRestante <= 0)
         {
-            BlackholePool.Instance.ReleaseBlackholes(this.GetComponent<Rigidbody2D>());
+            Destroy(this.gameObject);
+            //BlackholePool.Instance.ReleaseBlackholes(this.GetComponent<Rigidbody2D>());
         }
 	}
 
@@ -39,10 +40,11 @@ public class BlackHole : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInactive = false;
+            Vector2 direccion = this.transform.position - collision.transform.position;
+            distancia = Vector2.Distance(this.transform.position, collision.transform.position);
+            float fuerza = force;
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direccion * fuerza);
         }
-        Vector2 direccion = this.transform.position - collision.transform.position;
-        distancia = Vector2.Distance(this.transform.position, collision.transform.position);
-        float fuerza = force;
-        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direccion * fuerza);
+        
     }
 }
