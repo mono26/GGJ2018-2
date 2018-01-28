@@ -285,6 +285,27 @@ Prefab:
       propertyPath: m_Name
       value: Alien
       objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d9f2961fde0e1546a172a9cd00502a0, type: 2}
   m_IsPrefabParent: 0
@@ -392,6 +413,27 @@ Prefab:
       propertyPath: m_Name
       value: Alien
       objectReference: {fileID: 0}
+    - target: {fileID: 212611930614191322, guid: 449614fad2a9be34e93e5c46d2b34cb6,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212611930614191322, guid: 449614fad2a9be34e93e5c46d2b34cb6,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212611930614191322, guid: 449614fad2a9be34e93e5c46d2b34cb6,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212611930614191322, guid: 449614fad2a9be34e93e5c46d2b34cb6,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 449614fad2a9be34e93e5c46d2b34cb6, type: 2}
   m_IsPrefabParent: 0
@@ -461,6 +503,27 @@ Prefab:
     - target: {fileID: 1810407283923976, guid: 4d9f2961fde0e1546a172a9cd00502a0, type: 2}
       propertyPath: m_Name
       value: Alien Planet 4 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d9f2961fde0e1546a172a9cd00502a0, type: 2}
@@ -654,6 +717,27 @@ Prefab:
     - target: {fileID: 1076643016636238, guid: 449614fad2a9be34e93e5c46d2b34cb6, type: 2}
       propertyPath: m_Name
       value: Alien Planet 1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 212611930614191322, guid: 449614fad2a9be34e93e5c46d2b34cb6,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212611930614191322, guid: 449614fad2a9be34e93e5c46d2b34cb6,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212611930614191322, guid: 449614fad2a9be34e93e5c46d2b34cb6,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212611930614191322, guid: 449614fad2a9be34e93e5c46d2b34cb6,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 449614fad2a9be34e93e5c46d2b34cb6, type: 2}
@@ -1083,6 +1167,27 @@ Prefab:
       propertyPath: m_Name
       value: Alien Planet 2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b5a59a19f939994185719004880754f, type: 2}
   m_IsPrefabParent: 0
@@ -1258,6 +1363,27 @@ Prefab:
       propertyPath: m_Name
       value: Alien Planet 3 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbcda9668f9b5d74cb9c87dad2248f78, type: 2}
   m_IsPrefabParent: 0
@@ -1408,6 +1534,27 @@ Prefab:
     - target: {fileID: 1826367231837382, guid: cbcda9668f9b5d74cb9c87dad2248f78, type: 2}
       propertyPath: m_Name
       value: Alien Planet 3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbcda9668f9b5d74cb9c87dad2248f78, type: 2}
@@ -1738,6 +1885,27 @@ Prefab:
       propertyPath: m_Name
       value: Alien Planet 4 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d9f2961fde0e1546a172a9cd00502a0, type: 2}
   m_IsPrefabParent: 0
@@ -2063,6 +2231,27 @@ Prefab:
       propertyPath: m_Name
       value: Alien
       objectReference: {fileID: 0}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b5a59a19f939994185719004880754f, type: 2}
   m_IsPrefabParent: 0
@@ -2353,6 +2542,12 @@ Prefab:
       propertyPath: settings.RadarSettings.Range
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 212064254396551320, guid: 265ece424b2a4c44c995b2fa3ccc814d,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 21aadedf776048747a35b49fd29a7feb,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}
   m_IsPrefabParent: 0
@@ -2451,6 +2646,27 @@ Prefab:
     - target: {fileID: 1050387121000458, guid: 9b5a59a19f939994185719004880754f, type: 2}
       propertyPath: m_Name
       value: Alien Planet 2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212414380418878080, guid: 9b5a59a19f939994185719004880754f,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b5a59a19f939994185719004880754f, type: 2}
@@ -2635,6 +2851,27 @@ Prefab:
       propertyPath: aliens.Array.data[0]
       value: 
       objectReference: {fileID: 2137639611}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212247856275515550, guid: cbcda9668f9b5d74cb9c87dad2248f78,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbcda9668f9b5d74cb9c87dad2248f78, type: 2}
   m_IsPrefabParent: 0
@@ -2699,6 +2936,27 @@ Prefab:
     - target: {fileID: 1810407283923976, guid: 4d9f2961fde0e1546a172a9cd00502a0, type: 2}
       propertyPath: m_Name
       value: Alien Planet 4 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ac0d275b9263244b9ea43f6f2a02216,
+        type: 3}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212936345129106730, guid: 4d9f2961fde0e1546a172a9cd00502a0,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d9f2961fde0e1546a172a9cd00502a0, type: 2}
