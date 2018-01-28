@@ -21,7 +21,7 @@ public class Planet : MonoBehaviour
     // Use this for initialization
     public virtual void Start()
     {
-        gravitationalFieldRadius = planetRadius * 3;
+        gravitationalFieldRadius = planetRadius + planetRadius;
         gravitationalField.radius = gravitationalFieldRadius;
 	}
 }

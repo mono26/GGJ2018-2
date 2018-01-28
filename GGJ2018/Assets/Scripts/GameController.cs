@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -40,5 +41,10 @@ public class GameController : MonoBehaviour
     public void IncreaseScore()
     {
         scorePoints += 1;
+    }
+
+    public void WinGame()
+    {
+        SceneManager.LoadSceneAsync("Credits");
     }
 }
