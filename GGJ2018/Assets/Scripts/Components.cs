@@ -38,6 +38,11 @@ public class Components
             else currentFuel -= 1 * settings.fuelLossRate;
         }
 
+        public void RecieveDamage(int daño)
+        {
+            currentFuel -= daño;
+        }
+
         [System.Serializable]
         public class Settings
         {
