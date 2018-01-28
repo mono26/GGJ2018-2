@@ -13,7 +13,11 @@ public class AlienPlanet : Planet
         base.Start();
         foreach (Transform alien in aliens)
         {
-            alien.RotateAround(transform.position, transform.forward, GravitationalFieldStrenght * Time.deltaTime);
+            if (alien != null)
+            {
+                alien.RotateAround(transform.position, transform.forward, GravitationalFieldStrenght * Time.deltaTime);
+                alien.up = (alien.position - transform.position).normalized;
+            }
         }
         // Make all the aliens rotate 
     }
@@ -26,6 +30,7 @@ public class AlienPlanet : Planet
             if (alien != null)
             {
                 alien.RotateAround(transform.position, transform.forward, GravitationalFieldStrenght * Time.deltaTime);
+                alien.up = (alien.position - transform.position).normalized;
             }
         }
     }

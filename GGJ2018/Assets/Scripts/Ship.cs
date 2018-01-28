@@ -188,7 +188,7 @@ public class Ship : MonoBehaviour
         while (isOnGravitationalField)
         {
             transform.RotateAround(_planet.transform.position, _planet.transform.forward, _planet.GravitationalFieldStrenght * Time.deltaTime);
-            transform.up = transform.position - _planet.transform.position;
+            transform.up = (transform.position - _planet.transform.position).normalized;
             yield return null;
         }
         yield return null;
