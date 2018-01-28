@@ -1,2 +1,2 @@
-# GGJ2018-2
-New repo for the GGJ2018
+# GGJ2018
+Global Game Jam 2018
