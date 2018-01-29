@@ -37,7 +37,10 @@ public class AlienPlanet : Planet
 
     private void LocateAliens(Transform _alien)
     {
-        _alien.position = GetComponent<CircleCollider2D>().bounds.min;
+        var angle = Random.Range(0f, 360f);
+        var x = Mathf.Cos(angle) * PlanetRadius;
+        var y = Mathf.Sin(angle) * PlanetRadius;
+        _alien.position = transform.position + new Vector3(x, y);
     }
 
     private void ChangeUpDirectionTowardsPlanet(Transform _alien)

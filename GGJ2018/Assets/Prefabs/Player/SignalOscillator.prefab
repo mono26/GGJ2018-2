@@ -94,6 +94,7 @@ MonoBehaviour:
   planetDetected: 1
   gasStationDetected: 0
   enemyDetected: 0
+  ratio: 0
 --- !u!120 &120181445213664336
 LineRenderer:
   m_ObjectHideFlags: 1

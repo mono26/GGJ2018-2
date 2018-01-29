@@ -19,6 +19,16 @@ public class Planet : MonoBehaviour
     public CircleCollider2D GravitationalField{ get { return gravitationalField; } }
 
     // Use this for initialization
+    public void Awake()
+    {
+        var collider = GetComponent<CircleCollider2D>();
+        if (collider)
+        {
+            planetRadius = GetComponent<CircleCollider2D>().radius;
+        }
+        else return;
+    }
+
     public virtual void Start()
     {
         gravitationalFieldRadius = planetRadius + planetRadius;

@@ -100,7 +100,7 @@ public class Components
                         if (!existe)
                         {
                             ActivePlanets[activeIndex] = planet;
-                            if (activeIndex < ActivePlanets.Length)
+                            if (activeIndex < ActivePlanets.Length -1)
                                 activeIndex++;
                             else
                                 activeIndex = 0;
@@ -178,7 +178,8 @@ public class Components
         private IEnumerator FindAliens()
         {
             Debug.Log("Alien Ray is ticking");
-            aliensHit = Physics2D.CircleCastAll(ship.transform.position, settings.Radius, -ship.transform.forward, settings.Range, settings.LayerMask);
+            Debug.DrawRay(ship.transform.position, -ship.transform.up * settings.Range, Color.white, 1);
+            aliensHit = Physics2D.CircleCastAll(ship.transform.position, settings.Radius, -ship.transform.up, settings.Range, settings.LayerMask);
             if (aliensHit.Length > 0)
             {
                 Debug.Log("Econtre colliders");

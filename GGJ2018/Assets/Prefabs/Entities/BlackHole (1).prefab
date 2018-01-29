@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5
+  tiempoRestante: 0
 --- !u!114 &114965293190083302
 MonoBehaviour:
   m_ObjectHideFlags: 1

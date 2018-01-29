@@ -48,6 +48,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Planets
+    uniqueID: 4049983811
+    locked: 0
+  - name: Alien
+    uniqueID: 2184044331
+    locked: 0
   - name: Player
     uniqueID: 908101847
+    locked: 0
+  - name: Asteroid
+    uniqueID: 965975595
     locked: 0

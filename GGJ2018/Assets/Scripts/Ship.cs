@@ -32,7 +32,6 @@ public class Ship : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, Radar.settings.Range);
-        Gizmos.DrawRay(transform.position, -transform.up);
     }
 
     // Update is called once per frame
@@ -80,7 +79,7 @@ public class Ship : MonoBehaviour
         }
 
         //Input for changing frecuency
-        if (Input.GetKeyDown(KeyCode.L) && planetaBuscado < 6)
+        if (Input.GetKeyDown(KeyCode.L) && planetaBuscado < 5)
         {
             planetaBuscado++;
         }
