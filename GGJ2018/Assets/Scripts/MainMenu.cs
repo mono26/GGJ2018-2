@@ -4,31 +4,49 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField]
+    GameObject howToPlayPanel;
+
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
 		
 	}
 
     public void PlayGame()
     {
-        StartCoroutine(LoadGame());
+        StartCoroutine(LoadLevel("Espacio"));
     }
 
     public void Credits()
     {
         // TODO load credits screen
+        StartCoroutine(LoadLevel("Credits"));
     }
 
-    private IEnumerator LoadGame()
+    public void GoToMainMenu()
     {
-        var load = SceneManager.LoadSceneAsync(1);
-        while(load.isDone)
+        StartCoroutine(LoadLevel("Main Menu"));
+    }
+
+    private IEnumerator LoadLevel(string _level)
+    {
+        var load = SceneManager.LoadSceneAsync(_level);
+        Debug.Log("se empieza a cargar el nivel");
+        if (_level == "Espacio")
         {
+            //load.allowSceneActivation = false;
+            howToPlayPanel.SetActive(true);
+            yield return null;
+        }
+
+        while (load.progress < 0.9f)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //load.allowSceneActivation = true;
+                Debug.Log(load.allowSceneActivation);
+                yield return null;
+            }
             // TODO loading screen
         }
         yield return null;

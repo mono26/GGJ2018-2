@@ -1,9 +1,18 @@
 fileFormatVersion: 2
 guid: aa167d0d5ca188f4da84a88a63662b11
-timeCreated: 1517170266
+timeCreated: 1517262388
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: INTRO_0
+    21300002: INTRO_1
+    21300004: INTRO_2
+    21300006: INTRO_3
+    21300008: INTRO_4
+    21300010: INTRO_5
+    21300012: INTRO_6
+    21300014: INTRO_7
+    21300016: INTRO_8
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -39,12 +48,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  alignment: 9
+  spritePivot: {x: 0.4981326, y: 0.6512605}
+  spriteBorder: {x: 604, y: 1146, z: 595, w: 531}
   spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -89,7 +98,133 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: INTRO_0
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 1191
+        width: 710
+        height: 276
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: INTRO_1
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 816
+        width: 6
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: INTRO_2
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 827
+        width: 374
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: INTRO_3
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 827
+        width: 295
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: INTRO_4
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 827
+        width: 260
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: INTRO_5
+      rect:
+        serializedVersion: 2
+        x: 1676
+        y: 816
+        width: 6
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: INTRO_6
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 739
+        width: 67
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: INTRO_7
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 744
+        width: 1203
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: INTRO_8
+      rect:
+        serializedVersion: 2
+        x: 1612
+        y: 724
+        width: 80
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 

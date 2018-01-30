@@ -10,16 +10,21 @@ public class GameController : MonoBehaviour
     private Ship ship;
 
     [SerializeField]
-    private float scorePoints;
-    public float ScorePoints { get { return scorePoints; } }
+    private int initialScorePoints = 0;
+    [SerializeField]
+    private int maxScorePoints = 5;
+    private int scorePoints;
+    public int ScorePoints { get { return scorePoints; } }
     [SerializeField]
     private Text scoreText = null;
+
     [SerializeField]
     private Slider fuelSlider = null;
 
 	// Use this for initialization
 	void Start ()
     {
+        scorePoints = initialScorePoints;
         instance = this;
         ship = GameObject.Find("Player").GetComponent<Ship>();
         fuelSlider.maxValue = ship.Engine.settings.maxFuel;
@@ -32,9 +37,9 @@ public class GameController : MonoBehaviour
         scoreText.text = scorePoints.ToString();
         fuelSlider.value = ship.Engine.CurrentFuel;
 		// Look if the player score limit has reach
-        if (ScorePoints > 3)
+        if (ScorePoints >= maxScorePoints)
         {
-            // TODO win level
+            WinGame();
         }
 	}
 
@@ -46,5 +51,10 @@ public class GameController : MonoBehaviour
     public void WinGame()
     {
         SceneManager.LoadSceneAsync("Credits");
+    }
+
+    public void LoseGame()
+    {
+
     }
 }

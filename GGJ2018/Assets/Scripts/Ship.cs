@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEditor;
+
 public class Ship : MonoBehaviour
 {
     [SerializeField]
@@ -150,6 +150,7 @@ public class Ship : MonoBehaviour
             Engine.RecieveDamage(25);
             Debug.Log("Recibi daño de asteroide");
             //TODO: definir bien el daño del asteroide
+            //TODO Enviar o destruir asteoroide
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
