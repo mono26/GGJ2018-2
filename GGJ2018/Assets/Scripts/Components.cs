@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEditor;
 
 public class Components
 {
@@ -21,36 +20,51 @@ public class Components
         {
             ship = _ship;
             settings = _settings;
-            currentFuel = settings.maxFuel;
+            currentFuel = settings.MaxFuel;
+            return;
+        }
+
+        public void ApplyForce(Vector3 _direction)
+        {
+            settings.RigidBody.AddForce(_direction * settings.Thrust);
+            return;
         }
 
         public void RechargeFuel()
         {
-            currentFuel = settings.maxFuel;
+            currentFuel = settings.MaxFuel;
+            return;
         }
 
         public void LoseFuel()
         {
             if (ship.Radar.IsRadarOn)
             {
-                currentFuel -= 2 * settings.fuelLossRate;
+                currentFuel -= 2 * settings.FuelLossRate;
+                return;
             }
-            else currentFuel -= 1 * settings.fuelLossRate;
+            else
+            {
+                currentFuel -= 1 * settings.FuelLossRate;
+                return;
+            }
         }
 
         public void RecieveDamage(int daño)
         {
             currentFuel -= daño;
+            return;
         }
 
         [System.Serializable]
         public class Settings
         {
-            public float VerticalThrust = 1.0f;
-            public float HorizontalThrust = 1.0f;
+            public Rigidbody2D RigidBody;
 
-            public float maxFuel = 9999.0f;
-            public float fuelLossRate = 1.0f;
+            public float Thrust = 1.0f;
+
+            public float MaxFuel = 9999.0f;
+            public float FuelLossRate = 1.0f;
         }
     }
 
@@ -61,19 +75,26 @@ public class Components
         public Settings settings;
 
         [SerializeField]
-        public Collider2D[] ActivePlanets = new Collider2D[6];
-        public Collider2D[] activePlanets { get { return ActivePlanets; } }
+        public Collider2D[] activePlanets = new Collider2D[6];
+        public Collider2D[] ActivePlanets { get { return activePlanets; } }
         private int activeIndex = 0;
+
+        private bool existe = false;
 
         [SerializeField]
         bool isRadarOn;
         public bool IsRadarOn { get { return isRadarOn; } }
 
-        [SerializeField]
+        /*[SerializeField]
         private Transform target;
-        public Transform Target { get { return target; } set { target = value; } }
+        public Transform Target { get { return target; } set { target = value; } }*/
 
         private Coroutine routine = null;
+
+        public void Update()
+        {
+
+        }
 
         public Radar(Ship _ship, Settings _settings)
         {
@@ -91,36 +112,41 @@ public class Components
             {
                 // Saves the distance of the first object
                 var distance1 = (planets[0].transform.position - ship.transform.position).sqrMagnitude;
-                Target = planets[0].transform;
+                //Target = planets[0].transform;
                 foreach (Collider2D planet in planets)
                 {
                     if (planet.gameObject.tag == "Score Planet" || planet.gameObject.tag == "Fuel Planet")
                     {
-                        bool existe = ArrayUtility.Contains(ActivePlanets, planet);
+                        foreach (Collider2D planeta in activePlanets)
+                        {
+                            if (planeta == planet)
+                            {
+                                existe = true;
+                            }
+                            else
+                            {
+                                existe = false;
+                            }
+                        }
                         if (!existe)
                         {
-                            ActivePlanets[activeIndex] = planet;
-                            if (activeIndex < ActivePlanets.Length -1)
+                            activePlanets[activeIndex] = planet;
+                            if (activeIndex < activePlanets.Length -1)
                                 activeIndex++;
                             else
                                 activeIndex = 0;
-                           
-
                         }
                     }
-                    var distance2 = (planet.transform.position - ship.transform.position).sqrMagnitude;
+                    /* var distance2 = (planet.transform.position - ship.transform.position).sqrMagnitude;
                     if (distance2 < distance1)
                     {
                         distance1 = distance2;
                         Target = planet.transform;
-                    }
+                    }*/
                     else yield return null;
-                   
                 }
-
+                yield return null;
             }
-
-            else yield return null;
             yield return new WaitForSeconds(settings.Rate);
             routine = ship.StartCoroutine(DetectPlanet());
         }
@@ -139,14 +165,14 @@ public class Components
 
         public float calcularDistancia(int index)
         {
-            if (ActivePlanets[index] != null)
+            if (activePlanets[index] != null)
             {
-                float dist = (ActivePlanets[index].transform.position - ship.transform.position).sqrMagnitude;
+                float dist = (activePlanets[index].transform.position - ship.transform.position).sqrMagnitude;
                 return dist;
             }
             return 0;
-
         }
+
         [System.Serializable]
         public class Settings
         {
@@ -177,22 +203,20 @@ public class Components
 
         private IEnumerator FindAliens()
         {
-            Debug.Log("Alien Ray is ticking");
-            Debug.DrawRay(ship.transform.position, -ship.transform.up * settings.Range, Color.white, 1);
+            settings.SpriteEffect.SetActive(true);
             aliensHit = Physics2D.CircleCastAll(ship.transform.position, settings.Radius, -ship.transform.up, settings.Range, settings.LayerMask);
             if (aliensHit.Length > 0)
             {
-                Debug.Log("Econtre colliders");
                 foreach (RaycastHit2D hit in aliensHit)
                 {
                     if (hit.collider.CompareTag("Alien"))
                     {
-                        Debug.Log("Le di al alien");
                         hit.collider.GetComponent<Rigidbody2D>().AddForce(hit.transform.up * settings.Strenght);
                     }
                 }
             }
             else yield return null;
+            settings.SpriteEffect.SetActive(false);
             yield return new WaitForSeconds(settings.Rate);
             routine = ship.StartCoroutine(FindAliens());
         }
@@ -217,6 +241,8 @@ public class Components
             public float Strenght;
             public float Rate;
             public LayerMask LayerMask;
+
+            public GameObject SpriteEffect;
         }
     }
 }

@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
         scorePoints = initialScorePoints;
         instance = this;
         ship = GameObject.Find("Player").GetComponent<Ship>();
-        fuelSlider.maxValue = ship.Engine.settings.maxFuel;
+        fuelSlider.maxValue = ship.Engine.settings.MaxFuel;
 	}
 	
 	// Update is called once per frame

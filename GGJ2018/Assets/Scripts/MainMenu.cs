@@ -19,7 +19,6 @@ public class MainMenu : MonoBehaviour
 
     public void Credits()
     {
-        // TODO load credits screen
         StartCoroutine(LoadLevel("Credits"));
     }
 

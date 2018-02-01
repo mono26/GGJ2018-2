@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Asteroide : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject deadParticle;
 
 	// Use this for initialization
 	void Start ()
     {
-        StartCoroutine(ReleaseAsteroidCR());
+        StartCoroutine(DeadTimer());
 	}
 
-    public IEnumerator ReleaseAsteroidCR()
+    public IEnumerator DeadTimer()
     {
         yield return new WaitForSeconds(5);
         AsteroidPool.Instance.ReleaseAsteroide(this.GetComponent<Rigidbody2D>());
     }
 
-    // Update is called once per frame
-    void Update ()
+    public void ReleaseAsteroid()
     {
-		
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
+        Instantiate(deadParticle, transform.position, transform.rotation);
+        AsteroidPool.Instance.ReleaseAsteroide(this.GetComponent<Rigidbody2D>());
     }
 }

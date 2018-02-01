@@ -32,6 +32,7 @@ public class Ship : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, Radar.settings.Range);
+        Gizmos.DrawWireSphere(transform.position, AlienRay.settings.Radius);
     }
 
     // Update is called once per frame
@@ -42,12 +43,12 @@ public class Ship : MonoBehaviour
 
         for (int i = 0; i < Radar.activePlanets.Length; i++)
         {
-            if (Radar.ActivePlanets[i] != null)
+            if (Radar.activePlanets[i] != null)
             {
                 if ((Radar.activePlanets[i].transform.position - this.transform.position).sqrMagnitude > 617f)
                 {
                     Debug.LogWarning("si me active");
-                    Radar.ActivePlanets[i] = null;
+                    Radar.activePlanets[i] = null;
                 }
             }
         }
@@ -63,6 +64,7 @@ public class Ship : MonoBehaviour
             else if(Radar.IsRadarOn)
             {
                 Radar.StopRadar();
+                return;
             }
         }
         if (Input.GetKeyDown(KeyCode.T))
@@ -75,6 +77,7 @@ public class Ship : MonoBehaviour
             else if (AlienRay.IsAlienRayOn)
             {
                 AlienRay.StopRay();
+                return;
             }
         }
 
@@ -87,13 +90,13 @@ public class Ship : MonoBehaviour
         {
             planetaBuscado--;
         }
+
         // Input from keyboard HORIZONTAL
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             if (Engine.CurrentFuel > 0)
             {
-                Force = transform.right * -settings.EngineSettings.HorizontalThrust;
-                Rigidbody2D.AddForce(Force);
+                Engine.ApplyForce(-transform.right);
                 Engine.LoseFuel();
                 return;
             }
@@ -104,8 +107,7 @@ public class Ship : MonoBehaviour
             // Check if there is enough fuel for moving
             if (Engine.CurrentFuel > 0)
             {
-                Force = transform.right * settings.EngineSettings.HorizontalThrust;
-                Rigidbody2D.AddForce(Force);
+                Engine.ApplyForce(transform.right);
                 Engine.LoseFuel();
                 return;
             }
@@ -118,8 +120,7 @@ public class Ship : MonoBehaviour
             // Check if there is enough fuel for moving
             if (Engine.CurrentFuel > 0)
             {
-                Force = transform.up * settings.EngineSettings.VerticalThrust;
-                Rigidbody2D.AddForce(Force);
+                Engine.ApplyForce(transform.up);
                 Engine.LoseFuel();
             }
             else return;
@@ -129,8 +130,7 @@ public class Ship : MonoBehaviour
             // Check if there is enough fuel for moving
             if (Engine.CurrentFuel > 0)
             {
-                Force = transform.up * -settings.EngineSettings.VerticalThrust;
-                Rigidbody2D.AddForce(Force);
+                Engine.ApplyForce(-transform.up);
                 Engine.LoseFuel();
                 return;
             }
@@ -149,6 +149,7 @@ public class Ship : MonoBehaviour
         {
             Engine.RecieveDamage(25);
             Debug.Log("Recibi daño de asteroide");
+            collision.gameObject.GetComponent<Asteroide>().ReleaseAsteroid();
             //TODO: definir bien el daño del asteroide
             //TODO Enviar o destruir asteoroide
         }

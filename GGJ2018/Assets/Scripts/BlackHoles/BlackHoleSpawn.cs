@@ -40,7 +40,7 @@ public class BlackHoleSpawn : MonoBehaviour
         var positionX = this.transform.position.x + offsetX;
         var positionY = this.transform.position.y + offsetY;
         GameObject blackholeGO = Instantiate(blackHolePref);
-        //blackhole = BlackholePool.Instance.GetBlackHole();
+        blackhole = BlackholePool.Instance.GetBlackHole();
         blackholeGO.transform.position = new Vector2(positionX, positionY);
     }
 }

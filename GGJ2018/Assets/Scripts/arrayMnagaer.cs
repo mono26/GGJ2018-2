@@ -22,10 +22,10 @@ public class arrayMnagaer : MonoBehaviour
         if (collision.gameObject.layer == 8)
         {
 
-            indexSalida = Array.IndexOf(ship.Radar.ActivePlanets, collision.gameObject);
+            indexSalida = Array.IndexOf(ship.Radar.activePlanets, collision.gameObject);
             Debug.Log(collision.name);
             Debug.Log(indexSalida);
-            ship.Radar.ActivePlanets[indexSalida] = null;
+            ship.Radar.activePlanets[indexSalida] = null;
         }
     }
 }

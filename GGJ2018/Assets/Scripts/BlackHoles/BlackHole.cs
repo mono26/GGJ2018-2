@@ -31,7 +31,7 @@ public class BlackHole : MonoBehaviour
         if (tiempoRestante <= 0)
         {
             Destroy(this.gameObject);
-            //BlackholePool.Instance.ReleaseBlackholes(this.GetComponent<Rigidbody2D>());
+            BlackholePool.Instance.ReleaseBlackholes(this.GetComponent<Rigidbody2D>());
         }
 	}
 

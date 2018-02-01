@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26bf6b05243f44994f531c82159ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 0
+  spawnRate: 10
   blackHolePref: {fileID: 1242909717354880, guid: c4d1f1278f31f6d43ba389f6e898be00,
     type: 2}
   maxOffsetX: 50

@@ -56,13 +56,13 @@ public class SignalOscillator : MonoBehaviour {
     {
         //distance= ship.distanciaOscilacion
         //Debug.Log(ship.distanciaOscilacion);
-        if (ship.Radar.ActivePlanets[ship.PlanetaBuscado] != null)
+        if (ship.Radar.activePlanets[ship.PlanetaBuscado] != null)
         {
-            if (ship.Radar.ActivePlanets[ship.PlanetaBuscado].gameObject.tag == "Fuel Planet")
+            if (ship.Radar.activePlanets[ship.PlanetaBuscado].gameObject.tag == "Fuel Planet")
             {
                 gasStationDetected = true;
             }
-            if (ship.Radar.ActivePlanets[ship.PlanetaBuscado].gameObject.tag == "Score Planet")
+            if (ship.Radar.activePlanets[ship.PlanetaBuscado].gameObject.tag == "Score Planet")
             {
                 planetDetected = true;
             }

@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class AlienPlanet : Planet
 {
+    public enum PlanetState
+    {
+        hasAliens,
+        noAliens
+    }
+
     [SerializeField]
-    private Transform[] aliens = null;
+    private PlanetState planetState;
+    public PlanetState State { get { return planetState; } }
+
+    [SerializeField]
+    private List<Transform> aliens = null;
 
     // Use this for initialization
     public override void Start()
@@ -13,26 +23,41 @@ public class AlienPlanet : Planet
         base.Start();
         foreach (Transform alien in aliens)
         {
-            if (alien != null)
+            if (alien != null && alien.gameObject.activeInHierarchy)
             {
                 LocateAliens(alien);
                 ChangeUpDirectionTowardsPlanet(alien);
             }
         }
-        // Make all the aliens rotate 
     }
 
     // Update is called once per frame
     void Update ()
     {
+        if (aliens.Count > 0 && planetState == PlanetState.hasAliens)
+        {
+            planetState = PlanetState.noAliens;
+            return;
+        }
+        else if (planetState != PlanetState.hasAliens)
+        {
+            planetState = PlanetState.hasAliens;
+        }
+
         foreach (Transform alien in aliens)
         {
-            if (alien != null)
+            if (alien != null && alien.gameObject.activeInHierarchy)
             {
                 alien.RotateAround(transform.position, transform.forward, GravitationalFieldStrenght * Time.deltaTime);
                 ChangeUpDirectionTowardsPlanet(alien);
             }
+            else
+            {
+                aliens.Remove(alien);
+                return;
+            }
         }
+        return;
     }
 
     private void LocateAliens(Transform _alien)
@@ -46,5 +71,10 @@ public class AlienPlanet : Planet
     private void ChangeUpDirectionTowardsPlanet(Transform _alien)
     {
         _alien.up = (_alien.position - transform.position).normalized;
+    }
+
+    public override void OnCollisionEnter2D(Collision2D collision)
+    {
+        base.OnCollisionEnter2D(collision);
     }
 }

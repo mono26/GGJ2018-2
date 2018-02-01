@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d629f54f396efbf45b8d094551b1b16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scorePoints: 0
+  initialScorePoints: 0
+  maxScorePoints: 5
   scoreText: {fileID: 0}
   fuelSlider: {fileID: 0}

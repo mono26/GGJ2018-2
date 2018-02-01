@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
@@ -34,4 +32,13 @@ public class Planet : MonoBehaviour
         gravitationalFieldRadius = planetRadius + planetRadius;
         gravitationalField.radius = gravitationalFieldRadius;
 	}
+
+    public virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Asteroid"))
+        {
+            // TODO Release asteroid and spawn particles
+            collision.gameObject.GetComponent<Asteroide>().ReleaseAsteroid();
+        }
+    }
 }
