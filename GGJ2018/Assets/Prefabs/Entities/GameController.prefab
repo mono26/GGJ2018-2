@@ -54,4 +54,4 @@ MonoBehaviour:
   initialScorePoints: 0
   maxScorePoints: 5
   scoreText: {fileID: 0}
-  fuelSlider: {fileID: 0}
+  fuelBar: {fileID: 0}

@@ -203,7 +203,6 @@ public class Components
 
         private IEnumerator FindAliens()
         {
-            settings.SpriteEffect.SetActive(true);
             aliensHit = Physics2D.CircleCastAll(ship.transform.position, settings.Radius, -ship.transform.up, settings.Range, settings.LayerMask);
             if (aliensHit.Length > 0)
             {
@@ -216,7 +215,6 @@ public class Components
                 }
             }
             else yield return null;
-            settings.SpriteEffect.SetActive(false);
             yield return new WaitForSeconds(settings.Rate);
             routine = ship.StartCoroutine(FindAliens());
         }
@@ -225,12 +223,14 @@ public class Components
         {
             isAlienRayOn = true;
             routine = ship.StartCoroutine(FindAliens());
+            settings.SpriteEffect.SetActive(true);
         }
 
         public void StopRay()
         {
             isAlienRayOn = false;
             ship.StopCoroutine(routine);
+            settings.SpriteEffect.SetActive(false);
         }
 
         [System.Serializable]

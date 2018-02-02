@@ -4,7 +4,7 @@ using UnityEngine;
 public class ParticleKiller : MonoBehaviour
 {
     [SerializeField]
-    public float lifeTime;
+    private float lifeTime;
 
 	// Use this for initialization
 	void Start ()

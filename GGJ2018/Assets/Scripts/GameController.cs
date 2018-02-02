@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     private Text scoreText = null;
 
     [SerializeField]
-    private Slider fuelSlider = null;
+    private Image fuelBar = null;
 
 	// Use this for initialization
 	void Start ()
@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
         scorePoints = initialScorePoints;
         instance = this;
         ship = GameObject.Find("Player").GetComponent<Ship>();
-        fuelSlider.maxValue = ship.Engine.settings.MaxFuel;
+        fuelBar.fillAmount = ship.Engine.CurrentFuel / ship.Engine.settings.MaxFuel;
 	}
 	
 	// Update is called once per frame
@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
     {
         // Set score text to the actual score number
         scoreText.text = scorePoints.ToString();
-        fuelSlider.value = ship.Engine.CurrentFuel;
+        fuelBar.fillAmount = ship.Engine.CurrentFuel / ship.Engine.settings.MaxFuel;
 		// Look if the player score limit has reach
         if (ScorePoints >= maxScorePoints)
         {

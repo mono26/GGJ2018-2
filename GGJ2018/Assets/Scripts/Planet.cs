@@ -35,7 +35,7 @@ public class Planet : MonoBehaviour
 
     public virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Asteroid"))
+        if(collision.gameObject.CompareTag("Asteroide"))
         {
             // TODO Release asteroid and spawn particles
             collision.gameObject.GetComponent<Asteroide>().ReleaseAsteroid();
