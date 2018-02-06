@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private int initialScorePoints = 0;
     [SerializeField]
-    private int maxScorePoints = 5;
+    private int maxScorePoints = 30;
     private int scorePoints;
     public int ScorePoints { get { return scorePoints; } }
     [SerializeField]

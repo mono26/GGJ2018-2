@@ -17,7 +17,7 @@ public class Planet : MonoBehaviour
     public CircleCollider2D GravitationalField{ get { return gravitationalField; } }
 
     // Use this for initialization
-    public void Awake()
+    public virtual void Awake()
     {
         var collider = GetComponent<CircleCollider2D>();
         if (collider)

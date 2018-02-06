@@ -54,7 +54,7 @@ public class Ship : MonoBehaviour
         }
 
         // Input for the radar
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if (Engine.CurrentFuel > 0 && !Radar.IsRadarOn)
             {
@@ -67,7 +67,7 @@ public class Ship : MonoBehaviour
                 return;
             }
         }
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             if (!AlienRay.IsAlienRayOn)
             {

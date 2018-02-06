@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
-    GameObject howToPlayPanel;
+    private ScreenManager screenManager;
 
 	// Use this for initialization
 	void Start () {
@@ -14,40 +14,16 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        StartCoroutine(LoadLevel("Espacio"));
+        screenManager.StartCoroutine(screenManager.LoadLevel("Espacio"));
     }
 
     public void Credits()
     {
-        StartCoroutine(LoadLevel("Credits"));
+        screenManager.StartCoroutine(screenManager.LoadLevel("Credits"));
     }
 
     public void GoToMainMenu()
     {
-        StartCoroutine(LoadLevel("Main Menu"));
-    }
-
-    private IEnumerator LoadLevel(string _level)
-    {
-        var load = SceneManager.LoadSceneAsync(_level);
-        Debug.Log("se empieza a cargar el nivel");
-        if (_level == "Espacio")
-        {
-            //load.allowSceneActivation = false;
-            howToPlayPanel.SetActive(true);
-            yield return null;
-        }
-
-        while (load.progress < 0.9f)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                //load.allowSceneActivation = true;
-                Debug.Log(load.allowSceneActivation);
-                yield return null;
-            }
-            // TODO loading screen
-        }
-        yield return null;
+        screenManager.StartCoroutine(screenManager.LoadLevel("Main Menu"));
     }
 }

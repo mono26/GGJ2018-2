@@ -15,8 +15,23 @@ public class AlienPlanet : Planet
     public PlanetState State { get { return planetState; } }
 
     [SerializeField]
+    private int numberOfAliens;
+
+    [SerializeField]
+    private GameObject alien;
+
     private List<Transform> aliens = null;
 
+    public override void Awake()
+    {
+        base.Start();
+        aliens = new List<Transform>(numberOfAliens);
+        for (int index = 0; index < numberOfAliens; index++)
+        {
+            var tempAlien = Instantiate(alien, transform.position, transform.rotation, transform.Find("Aliens"));
+            aliens.Add(tempAlien.transform);
+        }
+    }
     // Use this for initialization
     public override void Start()
     {
