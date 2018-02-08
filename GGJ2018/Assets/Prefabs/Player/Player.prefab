@@ -146,7 +146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1786620731303034
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +408,7 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 256
     AlienRaySettings:
-      Range: 2
+      Range: 1.5
       Radius: 0.7
       Strenght: 100
       Rate: 0.5
@@ -3340,7 +3340,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 2
-    worldSpace: 1
+    worldSpace: 0
     dieWithParticles: 0
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
