@@ -167,6 +167,7 @@ MonoBehaviour:
   planetState: 0
   numberOfAliens: 40
   alien: {fileID: 1493918104206506, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
+  aliens: []
 --- !u!212 &212690610004491504
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -56,24 +56,25 @@ public class SignalOscillator : MonoBehaviour {
     {
         //distance= ship.distanciaOscilacion
         //Debug.Log(ship.distanciaOscilacion);
-        if (ship.Radar.activePlanets[ship.PlanetaBuscado] != null)
+        if (ship.Radar.FoundPlanets.Length > ship.Radar.LookedSigneld && ship.Radar.FoundPlanets[ship.Radar.LookedSigneld] != null)
         {
-            if (ship.Radar.activePlanets[ship.PlanetaBuscado].gameObject.tag == "Fuel Planet")
+            if (ship.Radar.FoundPlanets[ship.Radar.LookedSigneld].gameObject.tag == "Fuel Planet")
             {
                 gasStationDetected = true;
             }
-            if (ship.Radar.activePlanets[ship.PlanetaBuscado].gameObject.tag == "Score Planet")
+            if (ship.Radar.FoundPlanets[ship.Radar.LookedSigneld].gameObject.tag == "Score Planet")
             {
                 planetDetected = true;
             }
         }
         if (ship.Radar.IsRadarOn)
         {
-            if (ship.Radar.activePlanets[ship.PlanetaBuscado] != null)
+            if (ship.Radar.FoundPlanets.Length > ship.Radar.LookedSigneld && ship.Radar.FoundPlanets[ship.Radar.LookedSigneld] != null)
             {
-                raySpeed = 40 - (ship.distanciaOscilacion / 15.4f);
-                rayPeriod = 6 - (ship.distanciaOscilacion / 102.8f);
+                raySpeed = 40 - (ship.Radar.DistanceToPlanet / 15.4f);
+                rayPeriod = 6 - (ship.Radar.DistanceToPlanet / 102.8f);
             }
+
             if (planetDetected)
             {
                 signalOscillator.startColor = planetSignal;
@@ -82,27 +83,20 @@ public class SignalOscillator : MonoBehaviour {
                 enemyDetected = false;
             }
 
-                   if (gasStationDetected)
-                   {
-                       signalOscillator.startColor = gasStationSignal;
-                       signalOscillator.endColor = gasStationSignal;
-                       planetDetected  = false;
-                       enemyDetected = false;
-                   }
-                   if (enemyDetected)
-                   {
-                       signalOscillator.startColor = enemySignal;
-                       signalOscillator.endColor = enemySignal;
-                       planetDetected = false;
-                       gasStationDetected = false;
-                   }
+            if (gasStationDetected)
+            {
+                signalOscillator.startColor = gasStationSignal;
+                signalOscillator.endColor = gasStationSignal;
+                planetDetected = false;
+                enemyDetected = false;
+            }
 
-                for (int i = 0; i <= drawPositions.Length - 1; i++)
-                {
+            for (int i = 0; i <= drawPositions.Length - 1; i++)
+            {
+                drawPositions[i].y = Mathf.Sin(rayPeriod * drawPositions[i].x + Time.time * raySpeed);
+                signalOscillator.SetPositions(drawPositions);
+            }
 
-                    drawPositions[i].y = Mathf.Sin(rayPeriod * drawPositions[i].x + Time.time * raySpeed);
-                    signalOscillator.SetPositions(drawPositions);
-                }
             /*   for (int i = 0; i <= drawPositions.Length - 1; i++)
            {
 

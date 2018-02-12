@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Components
@@ -75,31 +76,25 @@ public class Components
         public Settings settings;
 
         [SerializeField]
-        public Collider2D[] activePlanets = new Collider2D[6];
-        public Collider2D[] ActivePlanets { get { return activePlanets; } }
-        private int activeIndex = 0;
-
-        private bool existe = false;
-
+        private Transform[] foundPlanets;
+        private int lookedSigneld = 0;
+        private float distanceToPlanet;
         [SerializeField]
         bool isRadarOn;
+
+        public Transform[] FoundPlanets { get { return foundPlanets; } }
+        public int LookedSigneld { get { return lookedSigneld; } }
+        public float DistanceToPlanet { get { return distanceToPlanet; } }
         public bool IsRadarOn { get { return isRadarOn; } }
 
-        /*[SerializeField]
-        private Transform target;
-        public Transform Target { get { return target; } set { target = value; } }*/
-
-        private Coroutine routine = null;
-
-        public void Update()
-        {
-
-        }
+        private Coroutine lookForPlanets = null;
+        private Coroutine lookDistanceToPlanet = null;
 
         public Radar(Ship _ship, Settings _settings)
         {
             ship = _ship;
             settings = _settings;
+            foundPlanets = new Transform[settings.maxRadarCapacity];
         }
 
         // Method for detecting planets in range
@@ -108,69 +103,72 @@ public class Components
             Debug.Log("Radar is ticking");
             // Check for all the colliders and store it in a variable
             Collider2D[] planets = Physics2D.OverlapCircleAll(ship.transform.position, settings.Range, settings.LayerMask);
+            Debug.Log(planets.Length);
             if (planets.Length > 0)
             {
-                // Saves the distance of the first object
-                var distance1 = (planets[0].transform.position - ship.transform.position).sqrMagnitude;
-                //Target = planets[0].transform;
-                foreach (Collider2D planet in planets)
+                for (int planet = 0; planet < planets.Length; planet++)
                 {
-                    if (planet.gameObject.tag == "Score Planet" || planet.gameObject.tag == "Fuel Planet")
+                    if (planets[planet].gameObject.CompareTag("Score Planet") || planets[planet].gameObject.CompareTag("Fuel Planet"))
                     {
-                        foreach (Collider2D planeta in activePlanets)
-                        {
-                            if (planeta == planet)
-                            {
-                                existe = true;
-                            }
-                            else
-                            {
-                                existe = false;
-                            }
-                        }
-                        if (!existe)
-                        {
-                            activePlanets[activeIndex] = planet;
-                            if (activeIndex < activePlanets.Length -1)
-                                activeIndex++;
-                            else
-                                activeIndex = 0;
-                        }
+                        if(foundPlanets[planet] == null)
+                            foundPlanets[planet] = planets[planet].transform;
                     }
-                    /* var distance2 = (planet.transform.position - ship.transform.position).sqrMagnitude;
-                    if (distance2 < distance1)
-                    {
-                        distance1 = distance2;
-                        Target = planet.transform;
-                    }*/
-                    else yield return null;
                 }
                 yield return null;
             }
             yield return new WaitForSeconds(settings.Rate);
-            routine = ship.StartCoroutine(DetectPlanet());
+            lookForPlanets = ship.StartCoroutine(DetectPlanet());
         }
 
         public void StartRadar()
         {
             isRadarOn = true;
-            routine = ship.StartCoroutine(DetectPlanet());
+            lookForPlanets = ship.StartCoroutine(DetectPlanet());
+            lookDistanceToPlanet = ship.StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
         }
 
         public void StopRadar()
         {
             isRadarOn = false;
-            ship.StopCoroutine(routine);
+            ship.StopCoroutine(lookForPlanets);
+            ship.StopCoroutine(lookDistanceToPlanet);
         }
 
-        public float calcularDistancia(int index)
+        public float CalcularDistancia(int index)
         {
-            if (activePlanets[index] != null)
+            if (foundPlanets[index] != null)
             {
-                float dist = (activePlanets[index].transform.position - ship.transform.position).sqrMagnitude;
+                float dist = (foundPlanets[index].transform.position - ship.transform.position).magnitude;
                 return dist;
             }
             return 0;
+        }
+
+        public void ChangeFrecuency(int _value)
+        {
+            _value = Mathf.Clamp(_value, -1, 1);
+            if (lookedSigneld > 0 && lookedSigneld < foundPlanets.Length)
+            {
+                lookedSigneld += _value;
+            }
+            else return;
+        }
+
+        public IEnumerator CheckDistanceToPlanetsInRadarAndRemove()
+        {
+            if (foundPlanets.Length > 0)
+            {
+                for (int planet = 0; planet < foundPlanets.Length; planet++)
+                {
+                    Debug.Log("Looking distance to found planets");
+                    if (foundPlanets[planet] && Vector2.Distance(foundPlanets[planet].transform.position, ship.transform.position) > settings.Range)
+                    {
+                        foundPlanets[planet] = null;
+                    }
+                }
+            }
+            yield return new WaitForSeconds(settings.Rate);
+            lookDistanceToPlanet = ship.StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
         }
 
         [System.Serializable]
@@ -179,6 +177,7 @@ public class Components
             public float Range;
             public float Rate = 1.0f;
             public LayerMask LayerMask;
+            public int maxRadarCapacity;
         }
     }
 

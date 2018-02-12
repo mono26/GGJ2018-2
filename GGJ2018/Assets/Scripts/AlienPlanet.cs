@@ -1,34 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AlienPlanet : Planet
 {
-    public enum PlanetState
-    {
-        hasAliens,
-        noAliens
-    }
-
-    [SerializeField]
-    private PlanetState planetState;
-    public PlanetState State { get { return planetState; } }
-
     [SerializeField]
     private int numberOfAliens;
 
     [SerializeField]
     private GameObject alien;
 
-    private List<Transform> aliens = null;
+    [SerializeField]
+    private List<Transform> aliens;
 
     public override void Awake()
     {
         base.Start();
-        aliens = new List<Transform>(numberOfAliens);
-        for (int index = 0; index < numberOfAliens; index++)
+        aliens = new List<Transform>();
+        for (int alien = 0; alien < numberOfAliens; alien++)
         {
-            var tempAlien = Instantiate(alien, transform.position, transform.rotation, transform.Find("Aliens"));
+            var tempAlien = Instantiate(this.alien, transform.position, transform.rotation, transform.Find("Aliens"));
             aliens.Add(tempAlien.transform);
         }
     }
@@ -47,29 +37,18 @@ public class AlienPlanet : Planet
     }
 
     // Update is called once per frame
-    void Update ()
+    public void Update ()
     {
-        if (aliens.Count > 0 && planetState == PlanetState.hasAliens)
+        for (int alien = 0; alien < aliens.Count; alien++)
         {
-            planetState = PlanetState.noAliens;
-            return;
-        }
-        else if (planetState != PlanetState.hasAliens)
-        {
-            planetState = PlanetState.hasAliens;
-        }
-
-        foreach (Transform alien in aliens)
-        {
-            if (alien != null && alien.gameObject.activeInHierarchy)
+            if (aliens[alien] != null && aliens[alien].gameObject.activeInHierarchy)
             {
-                alien.RotateAround(transform.position, transform.forward, GravitationalFieldStrenght * Time.deltaTime);
-                ChangeUpDirectionTowardsPlanet(alien);
+                aliens[alien].RotateAround(transform.position, transform.forward, GravitationalFieldStrenght * Time.deltaTime);
+                ChangeUpDirectionTowardsPlanet(aliens[alien]);
             }
             else
             {
-                aliens.Remove(alien);
-                return;
+                aliens[alien] = null;
             }
         }
         return;
@@ -88,8 +67,14 @@ public class AlienPlanet : Planet
         _alien.up = (_alien.position - transform.position).normalized;
     }
 
+    public void RemoveAlien(Transform _alien)
+    {
+        aliens.Remove(_alien);
+    }
+
     public override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
     }
+
 }

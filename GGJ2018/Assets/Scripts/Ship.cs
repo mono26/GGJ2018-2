@@ -6,11 +6,8 @@ public class Ship : MonoBehaviour
     [SerializeField]
     Settings settings;
 
-    private int planetaBuscado = 0;
-    public int PlanetaBuscado { get { return planetaBuscado; } }
-    public float distanciaOscilacion;
+    public Rigidbody2D Rigidbody2D { get { return settings.Rigidbody2D; } }
 
-    private Rigidbody2D Rigidbody2D { get { return GetComponent<Rigidbody2D>(); } }
     private Vector2 Force;
     private bool isOnGravitationalField;
 
@@ -38,21 +35,6 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        distanciaOscilacion = Radar.calcularDistancia(planetaBuscado);
-        var planetasactivos = Radar.activePlanets;
-
-        for (int i = 0; i < Radar.activePlanets.Length; i++)
-        {
-            if (Radar.activePlanets[i] != null)
-            {
-                if ((Radar.activePlanets[i].transform.position - this.transform.position).sqrMagnitude > 617f)
-                {
-                    Debug.LogWarning("si me active");
-                    Radar.activePlanets[i] = null;
-                }
-            }
-        }
-
         // Input for the radar
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -81,14 +63,15 @@ public class Ship : MonoBehaviour
             }
         }
 
+        //TODO use change frecuency method
         //Input for changing frecuency
-        if (Input.GetKeyDown(KeyCode.L) && planetaBuscado < 5)
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            planetaBuscado++;
+            //TODO method for increase the index of the looked planet
         }
-        if (Input.GetKeyDown(KeyCode.K) && planetaBuscado > 0)
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            planetaBuscado--;
+            //TODO method for decrease the index of the looked planet
         }
 
         // Input from keyboard HORIZONTAL
@@ -199,6 +182,8 @@ public class Ship : MonoBehaviour
     [System.Serializable]
     public class Settings
     {
+        public Rigidbody2D Rigidbody2D;
+
         public Components.Engine.Settings EngineSettings;
         public Components.Radar.Settings RadarSettings;
         public Components.AlienRay.Settings AlienRaySettings;
