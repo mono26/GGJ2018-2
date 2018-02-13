@@ -77,6 +77,7 @@ public class Components
 
         [SerializeField]
         private Transform[] foundPlanets;
+        [SerializeField]
         private int lookedSigneld = 0;
         private float distanceToPlanet;
         [SerializeField]
@@ -95,6 +96,7 @@ public class Components
             ship = _ship;
             settings = _settings;
             foundPlanets = new Transform[settings.maxRadarCapacity];
+            return;
         }
 
         // Method for detecting planets in range
@@ -106,12 +108,11 @@ public class Components
             Debug.Log(planets.Length);
             if (planets.Length > 0)
             {
-                for (int planet = 0; planet < planets.Length; planet++)
+                foreach (Collider2D planet in planets)
                 {
-                    if (planets[planet].gameObject.CompareTag("Score Planet") || planets[planet].gameObject.CompareTag("Fuel Planet"))
+                    if (planet.gameObject.CompareTag("Score Planet") || planet.gameObject.CompareTag("Fuel Planet"))
                     {
-                        if(foundPlanets[planet] == null)
-                            foundPlanets[planet] = planets[planet].transform;
+                            AddPlanetToEmptySpot(planet.transform);
                     }
                 }
                 yield return null;
@@ -125,6 +126,7 @@ public class Components
             isRadarOn = true;
             lookForPlanets = ship.StartCoroutine(DetectPlanet());
             lookDistanceToPlanet = ship.StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
+            return;
         }
 
         public void StopRadar()
@@ -132,6 +134,7 @@ public class Components
             isRadarOn = false;
             ship.StopCoroutine(lookForPlanets);
             ship.StopCoroutine(lookDistanceToPlanet);
+            return;
         }
 
         public float CalcularDistancia(int index)
@@ -169,6 +172,35 @@ public class Components
             }
             yield return new WaitForSeconds(settings.Rate);
             lookDistanceToPlanet = ship.StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
+        }
+
+        private void AddPlanetToEmptySpot(Transform _planet)
+        {
+            if (CheckIfIsInTheArray(_planet)) { return; }
+
+            for(int index = 0; index < foundPlanets.Length; index++)
+            {
+                if (!foundPlanets[index])
+                {
+                    foundPlanets[index] = _planet;
+                    return;
+                }
+            }
+            return;
+        }
+
+        private bool CheckIfIsInTheArray(Transform _planet)
+        {
+            bool isInTheArray = false;
+            for(int index = 0; index < foundPlanets.Length; index++)
+            {
+                if(_planet == foundPlanets[index])
+                {
+                    isInTheArray = true;
+                    return isInTheArray;
+                }
+            }
+            return isInTheArray;
         }
 
         [System.Serializable]
