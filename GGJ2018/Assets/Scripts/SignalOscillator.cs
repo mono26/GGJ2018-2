@@ -8,7 +8,7 @@ public class SignalOscillator : MonoBehaviour {
 
     [SerializeField]
     private Ship ship;
-    private float distance;
+    private float minimunDistanceToPlanet = 5; //In centimeters
 
     [SerializeField]
     private Vector3[] drawPositions;
@@ -71,8 +71,10 @@ public class SignalOscillator : MonoBehaviour {
         {
             if (ship.Radar.FoundPlanets.Length > ship.Radar.LookedSigneld && ship.Radar.FoundPlanets[ship.Radar.LookedSigneld] != null)
             {
-                raySpeed = 40 - (ship.Radar.DistanceToPlanet / 15.4f);
-                rayPeriod = 6 - (ship.Radar.DistanceToPlanet / 102.8f);
+                /*raySpeed = 40 - (ship.Radar.DistanceToPlanet / 15.4f);
+                rayPeriod = 6 - (ship.Radar.DistanceToPlanet / 102.8f);*/
+                raySpeed = 40 * (minimunDistanceToPlanet * minimunDistanceToPlanet / ship.Radar.CalculateDistanceToPlanet(ship.Radar.LookedSigneld));
+                rayPeriod = 6 * (minimunDistanceToPlanet * minimunDistanceToPlanet / ship.Radar.CalculateDistanceToPlanet(ship.Radar.LookedSigneld));
             }
 
             if (planetDetected)

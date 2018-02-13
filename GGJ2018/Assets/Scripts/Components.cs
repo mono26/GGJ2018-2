@@ -79,13 +79,11 @@ public class Components
         private Transform[] foundPlanets;
         [SerializeField]
         private int lookedSigneld = 0;
-        private float distanceToPlanet;
         [SerializeField]
         bool isRadarOn;
 
         public Transform[] FoundPlanets { get { return foundPlanets; } }
         public int LookedSigneld { get { return lookedSigneld; } }
-        public float DistanceToPlanet { get { return distanceToPlanet; } }
         public bool IsRadarOn { get { return isRadarOn; } }
 
         private Coroutine lookForPlanets = null;
@@ -137,11 +135,11 @@ public class Components
             return;
         }
 
-        public float CalcularDistancia(int index)
+        public float CalculateDistanceToPlanet(int index)
         {
             if (foundPlanets[index] != null)
             {
-                float dist = (foundPlanets[index].transform.position - ship.transform.position).magnitude;
+                float dist = (foundPlanets[index].transform.position - ship.transform.position).sqrMagnitude;
                 return dist;
             }
             return 0;
@@ -154,7 +152,15 @@ public class Components
             {
                 lookedSigneld += _value;
             }
-            else return;
+            else
+            {
+                lookedSigneld = 0;
+            }
+            while (foundPlanets[lookedSigneld] == null)
+            {
+                lookedSigneld += _value;
+            }
+            return;
         }
 
         public IEnumerator CheckDistanceToPlanetsInRadarAndRemove()
