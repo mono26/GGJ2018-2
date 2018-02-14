@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SignalOscillator : MonoBehaviour {
-
+public class SignalOscillator : MonoBehaviour
+{
     private LineRenderer signalOscillator;
 
     [SerializeField]
@@ -33,8 +33,16 @@ public class SignalOscillator : MonoBehaviour {
 
     public float ratio;
 
+    [SerializeField]
+    private float screenPositionX = 0.8f;
+    [SerializeField]
+    private float screenPositionY = 0.9f;
+
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        LocateSignalOscilatorInTheWorld();
+
         signalOscillator = GetComponent<LineRenderer>();
         ship = GameObject.Find("Player").GetComponent<Ship>();
 
@@ -108,4 +116,15 @@ public class SignalOscillator : MonoBehaviour {
         }
     }
 
+    private void LocateSignalOscilatorInTheWorld()
+    {
+        var camera = Camera.main;
+        var position = new Vector2(camera.pixelWidth * screenPositionX, camera.pixelHeight * screenPositionY);
+        Debug.Log("Position in screen: " + position);
+        position = camera.ScreenToWorldPoint(position);
+        Debug.Log("Position in world: " + position);
+        position = ship.transform.InverseTransformPoint(position);
+        Debug.Log("Position relative to ship: " + position);
+        transform.localPosition = position;
+    }
 }
