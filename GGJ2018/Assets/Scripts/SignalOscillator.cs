@@ -25,11 +25,6 @@ public class SignalOscillator : MonoBehaviour
 
     public Color planetSignal;
     public Color gasStationSignal;
-    public Color enemySignal;
-
-    public bool planetDetected;
-    public bool gasStationDetected;
-    public bool enemyDetected;
 
     public float ratio;
 
@@ -56,49 +51,37 @@ public class SignalOscillator : MonoBehaviour
             drawPositions[i].y = Mathf.Sin(drawPositions[i].x);
             signalOscillator.SetPositions(drawPositions);
         }
-      
-	}
+
+        StartCoroutine(UpdateSignalOscilator());
+    }
 	
 	// Update is called once per frame
-	void Update ()
+	private IEnumerator UpdateSignalOscilator()
     {
-        //distance= ship.distanciaOscilacion
-        //Debug.Log(ship.distanciaOscilacion);
         if (ship.Radar.FoundPlanets.Length > ship.Radar.LookedSigneld && ship.Radar.FoundPlanets[ship.Radar.LookedSigneld] != null)
         {
             if (ship.Radar.FoundPlanets[ship.Radar.LookedSigneld].gameObject.tag == "Fuel Planet")
             {
-                gasStationDetected = true;
+                signalOscillator.startColor = planetSignal;
+                signalOscillator.endColor = planetSignal;
             }
             if (ship.Radar.FoundPlanets[ship.Radar.LookedSigneld].gameObject.tag == "Score Planet")
             {
-                planetDetected = true;
+                signalOscillator.startColor = gasStationSignal;
+                signalOscillator.endColor = gasStationSignal;
             }
         }
         if (ship.Radar.IsRadarOn)
         {
             if (ship.Radar.FoundPlanets.Length > ship.Radar.LookedSigneld && ship.Radar.FoundPlanets[ship.Radar.LookedSigneld] != null)
             {
-                /*raySpeed = 40 - (ship.Radar.DistanceToPlanet / 15.4f);
-                rayPeriod = 6 - (ship.Radar.DistanceToPlanet / 102.8f);*/
                 raySpeed = 40 * (minimunDistanceToPlanet * minimunDistanceToPlanet / ship.Radar.CalculateDistanceToPlanet(ship.Radar.LookedSigneld));
                 rayPeriod = 6 * (minimunDistanceToPlanet * minimunDistanceToPlanet / ship.Radar.CalculateDistanceToPlanet(ship.Radar.LookedSigneld));
             }
-
-            if (planetDetected)
+            else
             {
-                signalOscillator.startColor = planetSignal;
-                signalOscillator.endColor = planetSignal;
-                gasStationDetected = false;
-                enemyDetected = false;
-            }
-
-            if (gasStationDetected)
-            {
-                signalOscillator.startColor = gasStationSignal;
-                signalOscillator.endColor = gasStationSignal;
-                planetDetected = false;
-                enemyDetected = false;
+                raySpeed = 0;
+                rayPeriod = 0;
             }
 
             for (int i = 0; i <= drawPositions.Length - 1; i++)
@@ -106,25 +89,17 @@ public class SignalOscillator : MonoBehaviour
                 drawPositions[i].y = Mathf.Sin(rayPeriod * drawPositions[i].x + Time.time * raySpeed);
                 signalOscillator.SetPositions(drawPositions);
             }
-
-            /*   for (int i = 0; i <= drawPositions.Length - 1; i++)
-           {
-
-               drawPositions[i].y = Mathf.Sin(rayPeriod  *drawPositions[i].x + Time.time * raySpeed);
-               signalOscillator.SetPositions(drawPositions);
-           }*/
         }
+        yield return new WaitForSeconds(ratio);
+        StartCoroutine(UpdateSignalOscilator());
     }
 
     private void LocateSignalOscilatorInTheWorld()
     {
         var camera = Camera.main;
         var position = new Vector2(camera.pixelWidth * screenPositionX, camera.pixelHeight * screenPositionY);
-        Debug.Log("Position in screen: " + position);
         position = camera.ScreenToWorldPoint(position);
-        Debug.Log("Position in world: " + position);
         position = ship.transform.InverseTransformPoint(position);
-        Debug.Log("Position relative to ship: " + position);
         transform.localPosition = position;
     }
 }
