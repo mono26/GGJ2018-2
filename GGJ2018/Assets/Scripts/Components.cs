@@ -27,7 +27,7 @@ public class Components
 
         public void ApplyForce(Vector3 _direction)
         {
-            settings.RigidBody.AddForce(_direction * settings.Thrust);
+            ship.Rigidbody2D.AddForce(_direction * settings.Thrust);
             return;
         }
 
@@ -60,8 +60,6 @@ public class Components
         [System.Serializable]
         public class Settings
         {
-            public Rigidbody2D RigidBody;
-
             public float Thrust = 1.0f;
 
             public float MaxFuel = 9999.0f;
@@ -73,6 +71,7 @@ public class Components
     public class Radar
     {
         private Ship ship;
+        public LineRenderer signalOscillator;
         public Settings settings;
 
         [SerializeField]
@@ -94,16 +93,15 @@ public class Components
             ship = _ship;
             settings = _settings;
             foundPlanets = new Transform[settings.maxRadarCapacity];
+            signalOscillator = _ship.settings.LineRenderer;
             return;
         }
 
         // Method for detecting planets in range
         private IEnumerator DetectPlanet()
         {
-            Debug.Log("Radar is ticking");
             // Check for all the colliders and store it in a variable
             Collider2D[] planets = Physics2D.OverlapCircleAll(ship.transform.position, settings.Range, settings.LayerMask);
-            Debug.Log(planets.Length);
             if (planets.Length > 0)
             {
                 foreach (Collider2D planet in planets)
@@ -139,7 +137,7 @@ public class Components
         {
             if (foundPlanets[index] != null)
             {
-                float dist = (foundPlanets[index].transform.position - ship.transform.position).sqrMagnitude;
+                float dist = (foundPlanets[index].transform.position - ship.transform.position).magnitude;
                 return dist;
             }
             return 0;
@@ -169,7 +167,6 @@ public class Components
             {
                 for (int planet = 0; planet < foundPlanets.Length; planet++)
                 {
-                    Debug.Log("Looking distance to found planets");
                     if (foundPlanets[planet] && Vector2.Distance(foundPlanets[planet].transform.position, ship.transform.position) > settings.Range)
                     {
                         foundPlanets[planet] = null;
@@ -223,6 +220,7 @@ public class Components
     public class AlienRay
     {
         private Ship ship;
+        private GameObject spriteEffect;
         public Settings settings;
 
         private RaycastHit2D[] aliensHit;
@@ -236,6 +234,7 @@ public class Components
         {
             ship = _ship;
             settings = _settings;
+            spriteEffect = _ship.settings.UfoRay;
         }
 
         private IEnumerator FindAliens()
@@ -260,14 +259,14 @@ public class Components
         {
             isAlienRayOn = true;
             routine = ship.StartCoroutine(FindAliens());
-            settings.SpriteEffect.SetActive(true);
+            spriteEffect.SetActive(true);
         }
 
         public void StopRay()
         {
             isAlienRayOn = false;
             ship.StopCoroutine(routine);
-            settings.SpriteEffect.SetActive(false);
+            spriteEffect.SetActive(false);
         }
 
         [System.Serializable]
@@ -278,8 +277,116 @@ public class Components
             public float Strenght;
             public float Rate;
             public LayerMask LayerMask;
+        }
+    }
 
-            public GameObject SpriteEffect;
+    [System.Serializable]
+    public class SignalOscillator
+    {
+        private LineRenderer signalOscillator;
+        private Ship ship;
+        public Settings settings;
+
+        [SerializeField]
+        private Vector3[] drawPositions = new Vector3[10];
+
+        [SerializeField]
+        private float rayLenght = 3f;
+        [SerializeField]
+        private float rayIterations;
+
+        [Range(1, 40)]
+        private float raySpeed = 5;
+        [Range(1, 6)]
+        private float rayPeriod = 10;
+
+        public SignalOscillator(Ship _ship, Settings _settings)
+        {
+            ship = _ship;
+            settings = _settings;
+            signalOscillator = _ship.settings.LineRenderer;
+        }
+
+        // Use this for initialization
+        public void Start()
+        {
+            LocateSignalOscilatorInTheWorld();
+
+            rayIterations = rayLenght / drawPositions.Length;
+            signalOscillator.positionCount = drawPositions.Length;
+
+            for (int i = 0; i <= drawPositions.Length - 1; i++)
+            {
+
+                drawPositions[i].x = rayIterations * i;
+                drawPositions[i].y = Mathf.Sin(drawPositions[i].x);
+                signalOscillator.SetPositions(drawPositions);
+            }
+
+            ship.StartCoroutine(UpdateSignalOscilator());
+        }
+
+        // Update is called once per frame
+        private IEnumerator UpdateSignalOscilator()
+        {
+            if (ship.Radar.FoundPlanets.Length > ship.Radar.LookedSigneld && ship.Radar.FoundPlanets[ship.Radar.LookedSigneld] != null)
+            {
+                if (ship.Radar.FoundPlanets[ship.Radar.LookedSigneld].gameObject.tag == "Fuel Planet")
+                {
+                    signalOscillator.startColor = settings.PlanetSignal;
+                    signalOscillator.endColor = settings.PlanetSignal;
+                }
+                if (ship.Radar.FoundPlanets[ship.Radar.LookedSigneld].gameObject.tag == "Score Planet")
+                {
+                    signalOscillator.startColor = settings.GasStationSignal;
+                    signalOscillator.endColor = settings.GasStationSignal;
+                }
+            }
+            if (ship.Radar.IsRadarOn)
+            {
+                if (ship.Radar.FoundPlanets.Length > ship.Radar.LookedSigneld && ship.Radar.FoundPlanets[ship.Radar.LookedSigneld] != null)
+                {
+                    raySpeed = 40 * (settings.MinimunDistanceToPlanet / ship.Radar.CalculateDistanceToPlanet(ship.Radar.LookedSigneld));
+                    rayPeriod = 6 * (settings.MinimunDistanceToPlanet / ship.Radar.CalculateDistanceToPlanet(ship.Radar.LookedSigneld));
+                    raySpeed = Mathf.Clamp(raySpeed, 0, 40);
+                    rayPeriod = Mathf.Clamp(rayPeriod, 0, 40);
+                }
+                else
+                {
+                    raySpeed = 0;
+                    rayPeriod = 0;
+                }
+
+                for (int i = 0; i <= drawPositions.Length - 1; i++)
+                {
+                    drawPositions[i].y = Mathf.Sin(rayPeriod * drawPositions[i].x + Time.time * raySpeed);
+                    signalOscillator.SetPositions(drawPositions);
+                }
+            }
+            yield return new WaitForSeconds(settings.Ratio);
+            ship.StartCoroutine(UpdateSignalOscilator());
+        }
+
+        private void LocateSignalOscilatorInTheWorld()
+        {
+            var camera = Camera.main;
+            var position = new Vector2(camera.pixelWidth * settings.ScreenPositionX, camera.pixelHeight * settings.ScreenPositionY);
+            position = camera.ScreenToWorldPoint(position);
+            position = ship.transform.InverseTransformPoint(position);
+            signalOscillator.transform.localPosition = position;
+        }
+
+        [System.Serializable]
+        public class Settings
+        {
+            public float MinimunDistanceToPlanet = 5; //In centimeters
+            public Color PlanetSignal;
+            public Color GasStationSignal;
+
+            public float Ratio;
+
+            public float ScreenPositionX = 0.8f;
+            public float ScreenPositionY = 0.9f;
         }
     }
 }

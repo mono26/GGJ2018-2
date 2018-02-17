@@ -3,27 +3,30 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    [SerializeField]
-    Settings settings;
+    public Settings settings;
 
     public Rigidbody2D Rigidbody2D { get { return settings.Rigidbody2D; } }
 
     private Vector2 Force;
     private bool isOnGravitationalField;
 
-    public Components.Engine Engine;
-    public Components.Radar Radar;
-    public Components.AlienRay AlienRay;
+    private Components.Engine engine;
+    private Components.Radar radar;
+    private Components.AlienRay alienRay;
+    private Components.SignalOscillator signalOscillator;
 
-    [SerializeField]
-    private LayerMask planetLayer;
+    public Components.Engine Engine { get { return engine; } }
+    public Components.Radar Radar { get { return radar; } }
+    public Components.AlienRay AlienRay { get { return alienRay; } }
+    public Components.SignalOscillator SignalOscillator { get { return signalOscillator; } }
 
 	// Use this for initialization
 	void Awake()
     {
-        Engine = new Components.Engine(this, settings.EngineSettings);
-        Radar = new Components.Radar(this, settings.RadarSettings);
-        AlienRay = new Components.AlienRay(this, settings.AlienRaySettings);
+        engine = new Components.Engine(this, settings.EngineSettings);
+        radar = new Components.Radar(this, settings.RadarSettings);
+        alienRay = new Components.AlienRay(this, settings.AlienRaySettings);
+        signalOscillator = new Components.SignalOscillator(this, settings.SignalOscillator);
 	}
 
     void OnDrawGizmos()
@@ -32,6 +35,10 @@ public class Ship : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, AlienRay.settings.Radius);
     }
 
+    private void Start()
+    {
+        signalOscillator.Start();
+    }
     // Update is called once per frame
     void Update ()
     {
@@ -183,9 +190,12 @@ public class Ship : MonoBehaviour
     public class Settings
     {
         public Rigidbody2D Rigidbody2D;
+        public LineRenderer LineRenderer;
+        public GameObject UfoRay;
 
         public Components.Engine.Settings EngineSettings;
         public Components.Radar.Settings RadarSettings;
         public Components.AlienRay.Settings AlienRaySettings;
+        public Components.SignalOscillator.Settings SignalOscillator;
     }
 }

@@ -156,7 +156,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4369239017966742}
   - component: {fileID: 120251505796105658}
-  - component: {fileID: 114943099108193230}
   m_Layer: 5
   m_Name: SignalOscillator
   m_TagString: Untagged
@@ -396,9 +395,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings:
-    Rigidbody2D: {fileID: 0}
+    Rigidbody2D: {fileID: 50062640748544502}
+    LineRenderer: {fileID: 120251505796105658}
+    UfoRay: {fileID: 1732044408788034}
     EngineSettings:
-      RigidBody: {fileID: 50062640748544502}
       Thrust: 10
       MaxFuel: 9999
       FuelLossRate: 1
@@ -417,94 +417,34 @@ MonoBehaviour:
       LayerMask:
         serializedVersion: 2
         m_Bits: 512
-      SpriteEffect: {fileID: 1732044408788034}
-  Engine:
+    SignalOscillator:
+      MinimunDistanceToPlanet: 5
+      PlanetSignal: {r: 0, g: 0.7103448, b: 1, a: 0}
+      GasStationSignal: {r: 0, g: 1, b: 0.2551725, a: 0}
+      Ratio: 0.5
+      ScreenPositionX: 0.8
+      ScreenPositionY: 0.9
+  signalOscillator:
     settings:
-      RigidBody: {fileID: 0}
-      Thrust: 1
-      MaxFuel: 9999
-      FuelLossRate: 1
-    currentFuel: 100
-  Radar:
-    settings:
-      Range: 0
-      Rate: 1
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 0
-      maxRadarCapacity: 0
-    foundPlanets: []
-    lookedSigneld: 0
-    isRadarOn: 0
-  AlienRay:
-    settings:
-      Range: 0
-      Radius: 0
-      Strenght: 0
-      Rate: 0
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 0
-      SpriteEffect: {fileID: 0}
-  planetLayer:
-    serializedVersion: 2
-    m_Bits: 256
---- !u!114 &114943099108193230
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944077490133280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff4e7d6cf4f5444794bc66aa32ec356, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ship: {fileID: 114643004580401058}
-  drawPositions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  rayLenght: 4
-  rayIterations: 0
-  raySpeed: 1
-  rayPeriod: 1
-  planetSignal: {r: 0, g: 0.83448267, b: 1, a: 0}
-  gasStationSignal: {r: 0, g: 1, b: 0.08965516, a: 0}
-  enemySignal: {r: 1, g: 0, b: 0, a: 0}
-  planetDetected: 1
-  gasStationDetected: 0
-  enemyDetected: 0
-  ratio: 0
-  screenPositionX: 0.85
-  screenPositionY: 0.85
+      MinimunDistanceToPlanet: 5
+      PlanetSignal: {r: 0, g: 0, b: 0, a: 0}
+      GasStationSignal: {r: 0, g: 0, b: 0, a: 0}
+      Ratio: 0
+      ScreenPositionX: 0.8
+      ScreenPositionY: 0.9
+    drawPositions:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    rayLenght: 0
+    rayIterations: 0
 --- !u!120 &120251505796105658
 LineRenderer:
   m_ObjectHideFlags: 1

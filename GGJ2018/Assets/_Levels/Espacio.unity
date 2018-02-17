@@ -17283,9 +17283,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114943099108193230, guid: 265ece424b2a4c44c995b2fa3ccc814d,
+    - target: {fileID: 114643004580401058, guid: 265ece424b2a4c44c995b2fa3ccc814d,
         type: 2}
-      propertyPath: ratio
+      propertyPath: settings.AlienRaySettings.Rate
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114643004580401058, guid: 265ece424b2a4c44c995b2fa3ccc814d,
+        type: 2}
+      propertyPath: settings.SignalOscillator.Ratio
       value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
