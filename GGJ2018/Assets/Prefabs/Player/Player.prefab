@@ -413,7 +413,7 @@ MonoBehaviour:
       Range: 1.5
       Radius: 0.7
       Strenght: 100
-      Rate: 0.5
+      Rate: 0.25
       LayerMask:
         serializedVersion: 2
         m_Bits: 512
@@ -421,30 +421,9 @@ MonoBehaviour:
       MinimunDistanceToPlanet: 5
       PlanetSignal: {r: 0, g: 0.7103448, b: 1, a: 0}
       GasStationSignal: {r: 0, g: 1, b: 0.2551725, a: 0}
-      Ratio: 0.5
+      Ratio: 0.05
       ScreenPositionX: 0.8
       ScreenPositionY: 0.9
-  signalOscillator:
-    settings:
-      MinimunDistanceToPlanet: 5
-      PlanetSignal: {r: 0, g: 0, b: 0, a: 0}
-      GasStationSignal: {r: 0, g: 0, b: 0, a: 0}
-      Ratio: 0
-      ScreenPositionX: 0.8
-      ScreenPositionY: 0.9
-    drawPositions:
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    - {x: 0, y: 0, z: 0}
-    rayLenght: 0
-    rayIterations: 0
 --- !u!120 &120251505796105658
 LineRenderer:
   m_ObjectHideFlags: 1

@@ -5,8 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class ScreenManager : MonoBehaviour
 {
+    private static ScreenManager instance;
+    public static ScreenManager Instance { get { return instance; } }
+
     [SerializeField]
     private float minDuration = 1.5f;
+
+    private void Awake()
+    {
+        if (instance)
+        {
+            Destroy(instance);
+            instance = this;
+        }
+
+        instance = this;
+    }
 
     public IEnumerator LoadLevel(string _level)
     {

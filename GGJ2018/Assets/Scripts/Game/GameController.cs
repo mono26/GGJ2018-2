@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -8,6 +7,8 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get { return instance; } }
 
     private Ship ship;
+
+    //TODO create a class for managing UI only
 
     [SerializeField]
     private int initialScorePoints = 0;
@@ -21,11 +22,26 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Image fuelBar = null;
 
-	// Use this for initialization
-	void Start ()
+    private void Awake()
     {
-        scorePoints = initialScorePoints;
+        if (instance)
+        {
+            Destroy(instance);
+            instance = this;
+        }
+
         instance = this;
+
+        scoreText.gameObject.SetActive(false);
+        fuelBar.gameObject.SetActive(false);
+    }
+    // Use this for initialization
+    void Start ()
+    {
+        scoreText.gameObject.SetActive(true);
+        fuelBar.gameObject.SetActive(true);
+
+        scorePoints = initialScorePoints;
         ship = GameObject.Find("Player").GetComponent<Ship>();
         fuelBar.fillAmount = ship.Engine.CurrentFuel / ship.Engine.settings.MaxFuel;
 	}
@@ -41,6 +57,11 @@ public class GameController : MonoBehaviour
         {
             WinGame();
         }
+
+        if(ship.Engine.CurrentFuel <= 0)
+        {
+            LoseGame();
+        }
 	}
 
     public void IncreaseScore()
@@ -50,11 +71,17 @@ public class GameController : MonoBehaviour
 
     public void WinGame()
     {
-        SceneManager.LoadSceneAsync("Credits");
+        ScreenManager.Instance.StartCoroutine
+            (
+                ScreenManager.Instance.LoadLevel("Credits")
+            );
     }
 
     public void LoseGame()
     {
-
+        ScreenManager.Instance.StartCoroutine
+            (
+                ScreenManager.Instance.LoadLevel("Credits")
+            );
     }
 }

@@ -7,11 +7,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private ScreenManager screenManager;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-
     public void PlayGame()
     {
         screenManager.StartCoroutine(screenManager.LoadLevel("Espacio"));
