@@ -21,4 +21,9 @@ public class MainMenu : MonoBehaviour
     {
         screenManager.StartCoroutine(screenManager.LoadLevel("Main Menu"));
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

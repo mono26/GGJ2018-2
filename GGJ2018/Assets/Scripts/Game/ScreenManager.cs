@@ -24,7 +24,7 @@ public class ScreenManager : MonoBehaviour
 
     public IEnumerator LoadLevel(string _level)
     {
-        yield return SceneManager.LoadSceneAsync("Load Scene");
+        yield return SceneManager.LoadSceneAsync("LoadScene");
 
         bool continueToLevel = false;
 
@@ -39,11 +39,11 @@ public class ScreenManager : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 continueToLevel = true;
-                yield return null;
+                yield return 0;
             }
-            yield return null;
+            yield return 0;
         }
 
-        yield return SceneManager.UnloadSceneAsync("Load Scene");
+        yield return SceneManager.UnloadSceneAsync("LoadScene");
     }
 }
