@@ -17277,11 +17277,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4304359893575004, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.27
+      value: -4.79
       objectReference: {fileID: 0}
     - target: {fileID: 4304359893575004, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 9.33
+      value: 11.09
       objectReference: {fileID: 0}
     - target: {fileID: 4304359893575004, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}
       propertyPath: m_LocalPosition.z
@@ -17310,41 +17310,6 @@ Prefab:
     - target: {fileID: 1090479860174372, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}
       propertyPath: m_Name
       value: BobTheGreenAlien
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556843189717020, guid: 265ece424b2a4c44c995b2fa3ccc814d,
-        type: 2}
-      propertyPath: PlanetSignal.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556843189717020, guid: 265ece424b2a4c44c995b2fa3ccc814d,
-        type: 2}
-      propertyPath: PlanetSignal.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556843189717020, guid: 265ece424b2a4c44c995b2fa3ccc814d,
-        type: 2}
-      propertyPath: PlanetSignal.b
-      value: 0.25517225
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556843189717020, guid: 265ece424b2a4c44c995b2fa3ccc814d,
-        type: 2}
-      propertyPath: GasStationSignal.r
-      value: 0.07586192
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556843189717020, guid: 265ece424b2a4c44c995b2fa3ccc814d,
-        type: 2}
-      propertyPath: GasStationSignal.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556843189717020, guid: 265ece424b2a4c44c995b2fa3ccc814d,
-        type: 2}
-      propertyPath: GasStationSignal.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556843189717020, guid: 265ece424b2a4c44c995b2fa3ccc814d,
-        type: 2}
-      propertyPath: Ratio
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}

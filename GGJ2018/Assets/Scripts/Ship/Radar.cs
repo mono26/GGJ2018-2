@@ -27,6 +27,7 @@ public class Radar : ShipComponent
 
     void OnDrawGizmos()
     {
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
