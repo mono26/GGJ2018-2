@@ -1,25 +1,23 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class AtractorRay : MonoBehaviour
+public class AtractorRay : ShipComponent
 {
     [Header("Atractor Ray settings")]
     [SerializeField]
+    protected LayerMask layerMask;
+    [SerializeField]
     protected float range;
     [SerializeField]
-    protected float radius;
+    protected float radius = 1;
+    [SerializeField]
+    protected float ticksPerSecond = 10;
     [SerializeField]
     protected float strenght;
-    [SerializeField]
-    protected float rate;
-    [SerializeField]
-    protected LayerMask layerMask;
 
     [Header("Components")]
     [SerializeField]
-    protected Ship ship;
-    [SerializeField]
-    protected GameObject spriteEffect;
+    protected GameObject ufoRay;
 
     [Header("Edittor debugging")]
     [SerializeField]
@@ -28,7 +26,26 @@ public class AtractorRay : MonoBehaviour
     private bool isAlienRayOn;
     public bool IsAlienRayOn { get { return isAlienRayOn; } }
 
-    Coroutine routine = null;
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawRay(transform.position, -transform.up);
+    }
+
+    protected override void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            if (isAlienRayOn == false)
+            {
+                StartRay();
+            }
+            else if (isAlienRayOn == true)
+            {
+                StopRay();
+            }
+        }
+    }
 
     private IEnumerator FindAliens()
     {
@@ -44,21 +61,21 @@ public class AtractorRay : MonoBehaviour
             }
         }
         else yield return null;
-        yield return new WaitForSeconds(rate);
-        routine = ship.StartCoroutine(FindAliens());
+        yield return new WaitForSeconds(1 / ticksPerSecond);
+        StartCoroutine(FindAliens());
     }
 
     public void StartRay()
     {
         isAlienRayOn = true;
-        routine = ship.StartCoroutine(FindAliens());
-        spriteEffect.SetActive(true);
+        StartCoroutine(FindAliens());
+        ufoRay.SetActive(true);
     }
 
     public void StopRay()
     {
         isAlienRayOn = false;
-        ship.StopCoroutine(routine);
-        spriteEffect.SetActive(false);
+        ship.StopCoroutine(FindAliens());
+        ufoRay.SetActive(false);
     }
 }

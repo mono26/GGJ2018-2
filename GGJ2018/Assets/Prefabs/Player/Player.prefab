@@ -38,6 +38,10 @@ GameObject:
   - component: {fileID: 61447186059202600}
   - component: {fileID: 50062640748544502}
   - component: {fileID: 114643004580401058}
+  - component: {fileID: 114630621338153652}
+  - component: {fileID: 114275024230028044}
+  - component: {fileID: 114556843189717020}
+  - component: {fileID: 114002122197072118}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -174,8 +178,9 @@ GameObject:
   - component: {fileID: 224439181109031808}
   - component: {fileID: 222195341096275056}
   - component: {fileID: 114577022317193082}
+  - component: {fileID: 114699152907884658}
   m_Layer: 5
-  m_Name: Fuel Liquid
+  m_Name: FuelBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,7 +197,7 @@ GameObject:
   - component: {fileID: 222304107369896334}
   - component: {fileID: 114755488835153712}
   m_Layer: 5
-  m_Name: Score Text
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,7 +270,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1090479860174372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.05, y: 9.392, z: 0}
+  m_LocalPosition: {x: -5.27, y: 9.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4431245151641940}
@@ -282,7 +287,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1944077490133280}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.04, y: 4.62, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4304359893575004}
@@ -445,6 +450,27 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1221419260528498}
   m_Enabled: 1
+--- !u!114 &114002122197072118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090479860174372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62b13511de0685408d10604ae882243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship: {fileID: 114643004580401058}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  range: 2
+  radius: 1
+  ticksPerSecond: 10
+  strenght: 10
+  ufoRay: {fileID: 1732044408788034}
+  isAlienRayOn: 0
 --- !u!114 &114087037844022776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -472,6 +498,27 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114275024230028044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090479860174372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688781fadaa6a104ca3a601432317073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship: {fileID: 114643004580401058}
+  range: 5
+  ticksPerSecond: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  maxRadarCapacity: 5
+  foundPlanets: []
+  lookedSigneld: 0
+  isRadarOn: 0
 --- !u!114 &114350977420507798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,6 +535,39 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114556843189717020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090479860174372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439c77324ecaab84abb6498fbce396f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship: {fileID: 114643004580401058}
+  minimunDistanceToPlanet: 5
+  planetSignal: {r: 0, g: 0, b: 0, a: 0}
+  gasStationSignal: {r: 0, g: 0, b: 0, a: 0}
+  ticksPerSecond: 0
+  screenPositionX: 0.8
+  screenPositionY: 0.9
+  radar: {fileID: 114275024230028044}
+  oscillator: {fileID: 120251505796105658}
+  drawPositions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  rayLenght: 3
+  rayIterations: 0
 --- !u!114 &114577022317193082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -536,6 +616,23 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114630621338153652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090479860174372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dabf80c37a16be246ae536b497545c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship: {fileID: 114643004580401058}
+  fuelLossPerSecond: 1
+  maxFuel: 9999
+  thrust: 10
+  fuelDisplay: {fileID: 114699152907884658}
+  currentFuel: 0
 --- !u!114 &114643004580401058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -547,36 +644,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55465648f9b97054aa24c907a1d5758f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    Rigidbody2D: {fileID: 50062640748544502}
-    LineRenderer: {fileID: 120251505796105658}
-    UfoRay: {fileID: 1732044408788034}
-    EngineSettings:
-      Thrust: 10
-      MaxFuel: 1000
-      FuelLossRate: 1
-    RadarSettings:
-      Range: 20
-      Rate: 1
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 256
-      maxRadarCapacity: 3
-    AlienRaySettings:
-      Range: 1.5
-      Radius: 0.7
-      Strenght: 100
-      Rate: 0.25
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 512
-    SignalOscillator:
-      MinimunDistanceToPlanet: 5
-      PlanetSignal: {r: 0, g: 0.7103448, b: 1, a: 0}
-      GasStationSignal: {r: 0, g: 1, b: 0.2551725, a: 0}
-      Ratio: 0.05
-      ScreenPositionX: 0.8
-      ScreenPositionY: 0.9
+  shipCollider: {fileID: 0}
+  shipSprite: {fileID: 0}
+  shipBody: {fileID: 0}
+--- !u!114 &114699152907884658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1746410764409550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e4b1af6b289ad46b2cb58604d384aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressBar: {fileID: 114577022317193082}
+  _percent: 0
 --- !u!114 &114755488835153712
 MonoBehaviour:
   m_ObjectHideFlags: 1

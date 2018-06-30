@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Radar : MonoBehaviour
+public class Radar : ShipComponent
 {
     [Header("Radar settings")]
     [SerializeField]
     protected float range;
     [SerializeField]
-    protected float rate = 1.0f;
+    protected float ticksPerSecond = 1.0f;
     [SerializeField]
     protected LayerMask layerMask;
     [SerializeField]
     protected int maxRadarCapacity;
-
-    [Header("Components")]
-    [SerializeField]
-    protected Ship ship;
-    [SerializeField]
-    protected LineRenderer signalOscillator;
 
     [Header("Editor debugging")]
     [SerializeField]
@@ -30,6 +24,39 @@ public class Radar : MonoBehaviour
     [SerializeField]
     protected bool isRadarOn;
     public bool IsRadarOn { get { return isRadarOn; } }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    protected override void HandleInput()
+    {
+        // Input for the radar
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (IsRadarOn == false)
+            {
+                StartRadar();
+                return;
+            }
+            else if (IsRadarOn == true)
+            {
+                StopRadar();
+                return;
+            }
+        }
+        //TODO use change frecuency method
+        //Input for changing frecuency
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            //TODO method for increase the index of the looked planet
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            //TODO method for decrease the index of the looked planet
+        }
+    }
 
     // Method for detecting planets in range
     private IEnumerator DetectPlanet()
@@ -47,7 +74,7 @@ public class Radar : MonoBehaviour
             }
             yield return null;
         }
-        yield return new WaitForSeconds(rate);
+        yield return new WaitForSeconds(1 / ticksPerSecond);
         StartCoroutine(DetectPlanet());
     }
 
@@ -107,7 +134,7 @@ public class Radar : MonoBehaviour
                 }
             }
         }
-        yield return new WaitForSeconds(rate);
+        yield return new WaitForSeconds(ticksPerSecond);
         StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
     }
 

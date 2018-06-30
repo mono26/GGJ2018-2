@@ -42,8 +42,7 @@ public class GameController : MonoBehaviour
         fuelBar.gameObject.SetActive(true);
 
         scorePoints = initialScorePoints;
-        ship = GameObject.Find("Player").GetComponent<Ship>();
-        fuelBar.fillAmount = ship.Engine.CurrentFuel / ship.Engine.settings.MaxFuel;
+        ship = GameObject.Find("BobTheGreenAlien").GetComponent<Ship>();
 	}
 	
 	// Update is called once per frame
@@ -51,16 +50,10 @@ public class GameController : MonoBehaviour
     {
         // Set score text to the actual score number
         scoreText.text = scorePoints.ToString();
-        fuelBar.fillAmount = ship.Engine.CurrentFuel / ship.Engine.settings.MaxFuel;
 		// Look if the player score limit has reach
         if (ScorePoints >= maxScorePoints)
         {
             WinGame();
-        }
-
-        if(ship.Engine.CurrentFuel <= 0)
-        {
-            LoseGame();
         }
 	}
 

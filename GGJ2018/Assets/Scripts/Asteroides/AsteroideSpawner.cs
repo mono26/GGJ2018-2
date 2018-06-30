@@ -21,7 +21,7 @@ public class AsteroideSpawner : MonoBehaviour
     void Start()
     {
         tiempo = Random.Range(3f, 10f);
-        player = GameObject.Find("Player");
+        player = GameObject.Find("BobTheGreenAlien");
         timer = tiempo;
 	}
 	
