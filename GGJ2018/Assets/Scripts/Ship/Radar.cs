@@ -22,8 +22,8 @@ public class Radar : ShipComponent
     protected bool isRadarOn;
     public bool IsRadarOn { get { return isRadarOn; } }
     [SerializeField]
-    protected int lookedSigneld = 0;
-    public int LookedSigneld { get { return lookedSigneld; } }
+    protected int lookedSignal = 0;
+    public int LookedSigneld { get { return lookedSignal; } }
     [SerializeField]
     protected Collider2D[] nearplanets;
 
@@ -69,10 +69,12 @@ public class Radar : ShipComponent
         if (Input.GetKeyDown(KeyCode.L))
         {
             //TODO method for increase the index of the looked planet
+            ChangeFrecuency(1);
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
             //TODO method for decrease the index of the looked planet
+            ChangeFrecuency(-1);
         }
     }
 
@@ -108,6 +110,8 @@ public class Radar : ShipComponent
                 if (foundPlanetsWithSignal[i] != null && CalculateDistanceToPlanet(i) > range + foundPlanetsWithSignal[i].PlanetRadius)
                 {
                     foundPlanetsWithSignal.Remove(foundPlanetsWithSignal[i]);
+                    if (lookedSignal >= foundPlanetsWithSignal.Count)
+                        lookedSignal = foundPlanetsWithSignal.Count - 1;
                 }
             }
         }
@@ -144,17 +148,24 @@ public class Radar : ShipComponent
     public void ChangeFrecuency(int _value)
     {
         _value = Mathf.Clamp(_value, -1, 1);
-        if (lookedSigneld > 0 && lookedSigneld < foundPlanetsWithSignal.Count)
+        if (lookedSignal > 0 && lookedSignal < foundPlanetsWithSignal.Count)
         {
-            lookedSigneld += _value;
+            lookedSignal += _value;
         }
         else
         {
-            lookedSigneld = 0;
+            lookedSignal = 0;
         }
-        while (foundPlanetsWithSignal[lookedSigneld] == null)
+        while (foundPlanetsWithSignal[lookedSignal] == null)
         {
-            lookedSigneld += _value;
+            if (lookedSignal > 0 && lookedSignal < foundPlanetsWithSignal.Count)
+            {
+                lookedSignal += _value;
+            }
+            else
+            {
+                lookedSignal = 0;
+            }
         }
         return;
     }
