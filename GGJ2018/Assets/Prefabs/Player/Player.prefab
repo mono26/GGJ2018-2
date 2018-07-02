@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 198872078516760076}
   - component: {fileID: 199944057636769280}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: UFOParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,7 +270,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1090479860174372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.27, y: 9.33, z: 0}
+  m_LocalPosition: {x: -4.79, y: 11.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4431245151641940}
@@ -465,8 +465,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 512
-  range: 2
-  radius: 1
+  range: 1.5
+  radius: 0.7
   ticksPerSecond: 10
   strenght: 10
   ufoRay: {fileID: 1732044408788034}
@@ -511,14 +511,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 114643004580401058}
   range: 5
-  ticksPerSecond: 1
+  ticksPerSecond: 10
   layerMask:
     serializedVersion: 2
     m_Bits: 256
   maxRadarCapacity: 5
-  foundPlanets: []
-  lookedSigneld: 0
+  foundPlanetsWithSignal: []
   isRadarOn: 0
+  lookedSigneld: 0
+  nearplanets: []
 --- !u!114 &114350977420507798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -548,13 +549,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 114643004580401058}
   minimunDistanceToPlanet: 5
-  planetSignal: {r: 0, g: 0, b: 0, a: 0}
-  gasStationSignal: {r: 0, g: 0, b: 0, a: 0}
-  ticksPerSecond: 0
+  planetSignal: {r: 0, g: 1, b: 0.048275948, a: 0}
+  gasStationSignal: {r: 0.07586192, g: 0, b: 1, a: 0}
+  ticksPerSecond: 10
   screenPositionX: 0.8
   screenPositionY: 0.9
   radar: {fileID: 114275024230028044}
-  oscillator: {fileID: 120251505796105658}
+  oscilator: {fileID: 120251505796105658}
   drawPositions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}

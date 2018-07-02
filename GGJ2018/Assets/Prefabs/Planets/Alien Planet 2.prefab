@@ -20,12 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4962426094550428}
   - component: {fileID: 212251884888083670}
+  - component: {fileID: 95530368154939320}
   - component: {fileID: 58331147674821732}
   - component: {fileID: 114469543221975496}
-  - component: {fileID: 95530368154939320}
+  - component: {fileID: 114562478748535502}
   m_Layer: 8
   m_Name: Alien Planet 2
-  m_TagString: Score Planet
+  m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,8 +56,8 @@ GameObject:
   - component: {fileID: 4301455577658354}
   - component: {fileID: 58411296840660902}
   - component: {fileID: 212576501975225694}
-  m_Layer: 8
-  m_Name: Gravitation Field
+  m_Layer: 10
+  m_Name: GravitationField
   m_TagString: Gravitation Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,12 +162,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aba901a77848e49959d5b9af1c691e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetRadius: 5.2
+  gravitationalFieldRadius: 0
   gravitationalFieldStrenght: 25
   gravitationalField: {fileID: 58411296840660902}
-  planetState: 0
-  numberOfAliens: 20
+  planetRadius: 5.2
+  signal: {fileID: 114562478748535502}
   alien: {fileID: 1493918104206506, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
+  numberOfAliens: 30
+  aliens: []
+--- !u!114 &114562478748535502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050387121000458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21061d08f11a7b0408a01e8dac6eb087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  type: 0
 --- !u!212 &212251884888083670
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -176,6 +192,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -191,6 +208,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -218,6 +236,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -233,6 +252,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

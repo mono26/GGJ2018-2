@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4854191476842786}
   - component: {fileID: 212100620997393202}
   - component: {fileID: 58315486521717562}
-  m_Layer: 8
-  m_Name: Gravitational Field
+  m_Layer: 10
+  m_Name: GravitationField
   m_TagString: Gravitation Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,9 +114,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ad66d8d9811e34286191edaa6eeff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetRadius: 4.7
+  gravitationalFieldRadius: 0
   gravitationalFieldStrenght: 25
   gravitationalField: {fileID: 58315486521717562}
+  signal: {fileID: 0}
+  planetRadius: 4.7
 --- !u!212 &212100620997393202
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -126,6 +128,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -141,6 +144,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -168,6 +172,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -183,6 +188,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

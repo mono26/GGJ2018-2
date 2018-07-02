@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SignalEmitter : MonoBehaviour {
+public class SignalEmitter : MonoBehaviour
+{
+    public enum SignalType { AlienPlanet, FuelPlanet}
+    public enum SignalState { ON, OFF }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [Header("Editor debugging")]
+    [SerializeField]
+    protected SignalState state = SignalState.OFF;
+    [SerializeField]
+    protected SignalType type;
+    public SignalType Type { get { return type; } }
+
+    public void TurnSignal(SignalState _state)
+    {
+        state = _state;
+        return;
+    }
 }

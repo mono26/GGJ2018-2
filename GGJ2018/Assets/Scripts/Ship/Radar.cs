@@ -16,19 +16,36 @@ public class Radar : ShipComponent
 
     [Header("Editor debugging")]
     [SerializeField]
-    protected Transform[] foundPlanets;
-    public Transform[] FoundPlanets { get { return foundPlanets; } }
+    protected List<Planet> foundPlanetsWithSignal;
+    public List<Planet> FoundPlanetsWithSignal { get { return foundPlanetsWithSignal; } }
+    [SerializeField]
+    protected bool isRadarOn;
+    public bool IsRadarOn { get { return isRadarOn; } }
     [SerializeField]
     protected int lookedSigneld = 0;
     public int LookedSigneld { get { return lookedSigneld; } }
     [SerializeField]
-    protected bool isRadarOn;
-    public bool IsRadarOn { get { return isRadarOn; } }
+    protected Collider2D[] nearplanets;
 
-    void OnDrawGizmos()
+    protected Coroutine planetDetection;
+    protected Coroutine distanceDetection;
+
+    protected virtual void Start()
+    {
+        foundPlanetsWithSignal = new List<Planet>();
+        return;
+    }
+
+    protected void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    protected void OnEnable()
+    {
+        isRadarOn = false;
+        return;
     }
 
     protected override void HandleInput()
@@ -62,44 +79,63 @@ public class Radar : ShipComponent
     // Method for detecting planets in range
     private IEnumerator DetectPlanet()
     {
-        // Check for all the colliders and store it in a variable
-        Collider2D[] planets = Physics2D.OverlapCircleAll(ship.transform.position, range, layerMask);
-        if (planets.Length > 0)
+        nearplanets = Physics2D.OverlapCircleAll(ship.transform.position, range, layerMask);
+        if (nearplanets.Length > 0)
         {
-            foreach (Collider2D planet in planets)
+            foreach (Collider2D planet in nearplanets)
             {
-                if (planet.gameObject.CompareTag("Score Planet") || planet.gameObject.CompareTag("Fuel Planet"))
+                if (planet.gameObject.CompareTag("Planet"))
                 {
-                    AddPlanetToEmptySpot(planet.transform);
+                    Planet planetComponent = planet.GetComponent<Planet>();
+                    if (planetComponent.Signal !=  null)
+                    {
+                        AddPlanetWithSignal(planetComponent);
+                    }
                 }
             }
-            yield return null;
         }
         yield return new WaitForSeconds(1 / ticksPerSecond);
-        StartCoroutine(DetectPlanet());
+        planetDetection = StartCoroutine(DetectPlanet());
+        yield break;
+    }
+
+    public IEnumerator CheckDistanceToPlanetsInRadarAndRemove()
+    {
+        if (foundPlanetsWithSignal.Count > 0)
+        {
+            for (int i = 0; i < foundPlanetsWithSignal.Count; i++)
+            {
+                if (foundPlanetsWithSignal[i] != null && CalculateDistanceToPlanet(i) > range + foundPlanetsWithSignal[i].PlanetRadius)
+                {
+                    foundPlanetsWithSignal.Remove(foundPlanetsWithSignal[i]);
+                }
+            }
+        }
+        yield return new WaitForSeconds(1 / ticksPerSecond);
+        distanceDetection = StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
     }
 
     public void StartRadar()
     {
         isRadarOn = true;
-        StartCoroutine(DetectPlanet());
-        StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
+        planetDetection = StartCoroutine(DetectPlanet());
+        distanceDetection = StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
         return;
     }
 
     public void StopRadar()
     {
         isRadarOn = false;
-        StopCoroutine(DetectPlanet());
-        StopCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
+        StopCoroutine(planetDetection);
+        StopCoroutine(distanceDetection);
         return;
     }
 
     public float CalculateDistanceToPlanet(int index)
     {
-        if (foundPlanets[index] != null)
+        if (foundPlanetsWithSignal[index] != null)
         {
-            float dist = (foundPlanets[index].transform.position - ship.transform.position).magnitude;
+            float dist = Vector3.Distance(ship.transform.position, foundPlanetsWithSignal[index].transform.position);
             return dist;
         }
         return 0;
@@ -108,7 +144,7 @@ public class Radar : ShipComponent
     public void ChangeFrecuency(int _value)
     {
         _value = Mathf.Clamp(_value, -1, 1);
-        if (lookedSigneld > 0 && lookedSigneld < foundPlanets.Length)
+        if (lookedSigneld > 0 && lookedSigneld < foundPlanetsWithSignal.Count)
         {
             lookedSigneld += _value;
         }
@@ -116,55 +152,21 @@ public class Radar : ShipComponent
         {
             lookedSigneld = 0;
         }
-        while (foundPlanets[lookedSigneld] == null)
+        while (foundPlanetsWithSignal[lookedSigneld] == null)
         {
             lookedSigneld += _value;
         }
         return;
     }
 
-    public IEnumerator CheckDistanceToPlanetsInRadarAndRemove()
+    private void AddPlanetWithSignal(Planet _planet)
     {
-        if (foundPlanets.Length > 0)
+        if (foundPlanetsWithSignal.Contains(_planet) == false)
         {
-            for (int planet = 0; planet < foundPlanets.Length; planet++)
-            {
-                if (foundPlanets[planet] && Vector2.Distance(foundPlanets[planet].transform.position, ship.transform.position) > range)
-                {
-                    foundPlanets[planet] = null;
-                }
-            }
+            Debug.Log(_planet.gameObject.name + "Adding Planet" + _planet);
+            foundPlanetsWithSignal.Add(_planet);
         }
-        yield return new WaitForSeconds(ticksPerSecond);
-        StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
-    }
 
-    private void AddPlanetToEmptySpot(Transform _planet)
-    {
-        if (CheckIfIsInTheArray(_planet)) { return; }
-
-        for (int index = 0; index < foundPlanets.Length; index++)
-        {
-            if (!foundPlanets[index])
-            {
-                foundPlanets[index] = _planet;
-                return;
-            }
-        }
         return;
-    }
-
-    private bool CheckIfIsInTheArray(Transform _planet)
-    {
-        bool isInTheArray = false;
-        for (int index = 0; index < foundPlanets.Length; index++)
-        {
-            if (_planet == foundPlanets[index])
-            {
-                isInTheArray = true;
-                return isInTheArray;
-            }
-        }
-        return isInTheArray;
     }
 }

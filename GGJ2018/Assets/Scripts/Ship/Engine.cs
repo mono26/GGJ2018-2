@@ -109,18 +109,20 @@ public class Engine : ShipComponent
         return;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D _collision)
     {
         // Look if is a fuel planet or a signal planet
-        if (collision.gameObject.CompareTag("Fuel Planet"))
+        if (_collision.gameObject.CompareTag("Planet"))
         {
-            RechargeFuel();
+            Planet planetComponent = _collision.gameObject.GetComponent<Planet>();
+            if(planetComponent.Signal.Type == SignalEmitter.SignalType.FuelPlanet)
+                RechargeFuel();
         }
-        if (collision.gameObject.CompareTag("Asteroide"))
+        if (_collision.gameObject.CompareTag("Asteroide"))
         {
             RecieveDamage(25);
             Debug.Log("Recibi daño de asteroide");
-            collision.gameObject.GetComponent<Asteroide>().ReleaseAsteroid();
+            _collision.gameObject.GetComponent<Asteroide>().ReleaseAsteroid();
             //TODO: definir bien el daño del asteroide
             //TODO Enviar o destruir asteoroide
         }

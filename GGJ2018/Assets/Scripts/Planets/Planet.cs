@@ -2,19 +2,22 @@
 
 public class Planet : MonoBehaviour
 {
-    // Assigned by editor or taken by the radius of the collider
+    [Header("Planet settings")]
     [SerializeField]
-    float planetRadius;
-    float gravitationalFieldRadius;
+    protected float gravitationalFieldRadius;
     [SerializeField]
-    float gravitationalFieldStrenght;
-    [SerializeField]
-    private CircleCollider2D gravitationalField;
-
-    public float PlanetRadius { get { return planetRadius; } }
-    public float GravitationalFieldRadius { get { return gravitationalFieldRadius; } }
+    protected float gravitationalFieldStrenght;
     public float GravitationalFieldStrenght { get { return gravitationalFieldStrenght; } }
-    public CircleCollider2D GravitationalField{ get { return gravitationalField; } }
+    [SerializeField]
+    protected CircleCollider2D gravitationalField;
+    [SerializeField]
+    protected float planetRadius;
+    public float PlanetRadius { get { return planetRadius; } }
+
+    [Header("Components")]
+    [SerializeField]
+    protected SignalEmitter signal;
+    public SignalEmitter Signal { get { return signal; } }
 
     // Use this for initialization
     public virtual void Awake()
@@ -24,13 +27,20 @@ public class Planet : MonoBehaviour
         {
             planetRadius = GetComponent<CircleCollider2D>().radius;
         }
+
+        if (signal == false)
+            signal = GetComponent<SignalEmitter>();
+
         else return;
     }
 
     public virtual void Start()
     {
         gravitationalFieldRadius = planetRadius + planetRadius;
-        gravitationalField.radius = gravitationalFieldRadius;
+        if(gravitationalField != null)
+            gravitationalField.radius = gravitationalFieldRadius;
+
+        return;
 	}
 
     public virtual void OnCollisionEnter2D(Collision2D collision)

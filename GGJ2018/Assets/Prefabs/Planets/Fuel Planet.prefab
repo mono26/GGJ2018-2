@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4968955411117436}
   - component: {fileID: 58951071852926638}
   - component: {fileID: 212454299827274810}
-  m_Layer: 8
-  m_Name: Gravitation Field
+  m_Layer: 10
+  m_Name: GravitationField
   m_TagString: Gravitation Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,11 +37,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4485343844356438}
   - component: {fileID: 212130416342089136}
-  - component: {fileID: 114100064732119054}
   - component: {fileID: 95369347447082068}
+  - component: {fileID: 114100064732119054}
+  - component: {fileID: 114494846662596814}
   m_Layer: 8
   m_Name: Fuel Planet
-  m_TagString: Fuel Planet
+  m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,9 +179,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ad66d8d9811e34286191edaa6eeff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetRadius: 2.2
+  gravitationalFieldRadius: 0
   gravitationalFieldStrenght: 25
   gravitationalField: {fileID: 58951071852926638}
+  signal: {fileID: 0}
+  planetRadius: 2.2
+--- !u!114 &114494846662596814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1491111122904462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21061d08f11a7b0408a01e8dac6eb087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  type: 0
 --- !u!212 &212130416342089136
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -190,6 +206,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -205,6 +222,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -232,6 +250,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -247,6 +266,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

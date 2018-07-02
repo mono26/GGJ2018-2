@@ -3,24 +3,27 @@ using UnityEngine;
 
 public class AlienPlanet : Planet
 {
+    [Header("Alien Planet settings")]
+    [SerializeField]
+    private GameObject alien;
     [SerializeField]
     private int numberOfAliens;
 
-    [SerializeField]
-    private GameObject alien;
-
+    [Header("Editor debugging")]
     [SerializeField]
     private List<Transform> aliens;
 
     public override void Awake()
     {
-        base.Start();
+        base.Awake();
+
         aliens = new List<Transform>();
         for (int alien = 0; alien < numberOfAliens; alien++)
         {
             var tempAlien = Instantiate(this.alien, transform.position, transform.rotation, transform.Find("Aliens"));
             aliens.Add(tempAlien.transform);
         }
+        return;
     }
     // Use this for initialization
     public override void Start()
@@ -34,6 +37,13 @@ public class AlienPlanet : Planet
                 ChangeUpDirectionTowardsPlanet(alien);
             }
         }
+        return;
+    }
+
+    public void OnEnable()
+    {
+        signal.TurnSignal(SignalEmitter.SignalState.ON);
+        return;
     }
 
     // Update is called once per frame
@@ -43,7 +53,7 @@ public class AlienPlanet : Planet
         {
             if (aliens[alien] != null && aliens[alien].gameObject.activeInHierarchy)
             {
-                aliens[alien].RotateAround(transform.position, transform.forward, GravitationalFieldStrenght * Time.deltaTime);
+                aliens[alien].RotateAround(transform.position, transform.forward, gravitationalFieldStrenght * Time.deltaTime);
                 ChangeUpDirectionTowardsPlanet(aliens[alien]);
             }
             else
@@ -57,24 +67,21 @@ public class AlienPlanet : Planet
     private void LocateAliens(Transform _alien)
     {
         var angle = Random.Range(0f, 360f);
-        var x = Mathf.Cos(angle) * PlanetRadius;
-        var y = Mathf.Sin(angle) * PlanetRadius;
+        var x = Mathf.Cos(angle) * planetRadius;
+        var y = Mathf.Sin(angle) * planetRadius;
         _alien.position = transform.position + new Vector3(x, y);
+        return;
     }
 
     private void ChangeUpDirectionTowardsPlanet(Transform _alien)
     {
         _alien.up = (_alien.position - transform.position).normalized;
+        return;
     }
 
     public void RemoveAlien(Transform _alien)
     {
         aliens.Remove(_alien);
+        return;
     }
-
-    public override void OnCollisionEnter2D(Collision2D collision)
-    {
-        base.OnCollisionEnter2D(collision);
-    }
-
 }

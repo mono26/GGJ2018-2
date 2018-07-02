@@ -7,11 +7,11 @@ public class SignalOscilator : ShipComponent
     [SerializeField]
     protected float minimunDistanceToPlanet = 5;    //In metters
     [SerializeField]
-    protected Color planetSignal;
+    protected Color planetSignal = Color.green;
     [SerializeField]
-    protected Color gasStationSignal;
+    protected Color gasStationSignal = Color.blue;
     [SerializeField]
-    protected float ticksPerSecond;
+    protected float ticksPerSecond = 10;
     [SerializeField]
     protected float screenPositionX = 0.8f;
     [SerializeField]
@@ -21,7 +21,7 @@ public class SignalOscilator : ShipComponent
     [SerializeField]
     protected Radar radar;
     [SerializeField]
-    protected LineRenderer oscillator;
+    protected LineRenderer oscilator;
 
     [Header("Editor debugging")]
     [SerializeField]
@@ -41,14 +41,14 @@ public class SignalOscilator : ShipComponent
         LocateSignalOscilatorInTheWorld();
 
         rayIterations = rayLenght / drawPositions.Length;
-        oscillator.positionCount = drawPositions.Length;
+        oscilator.positionCount = drawPositions.Length;
 
         for (int i = 0; i <= drawPositions.Length - 1; i++)
         {
 
             drawPositions[i].x = rayIterations * i;
             drawPositions[i].y = Mathf.Sin(drawPositions[i].x);
-            oscillator.SetPositions(drawPositions);
+            oscilator.SetPositions(drawPositions);
         }
 
         ship.StartCoroutine(UpdateSignalOscilator());
@@ -59,22 +59,27 @@ public class SignalOscilator : ShipComponent
     {
         if(radar != null)
         {
-            if (radar.FoundPlanets.Length > radar.LookedSigneld && radar.FoundPlanets[radar.LookedSigneld] != null)
+            if (radar.IsRadarOn == true)
+                oscilator.gameObject.SetActive(true);
+            else if (radar.IsRadarOn == false)
+                oscilator.gameObject.SetActive(false);
+
+            if (radar.FoundPlanetsWithSignal.Count > radar.LookedSigneld && radar.FoundPlanetsWithSignal[radar.LookedSigneld] != null)
             {
-                if (radar.FoundPlanets[radar.LookedSigneld].gameObject.tag == "Fuel Planet")
+                if (radar.FoundPlanetsWithSignal[radar.LookedSigneld].Signal.Type == SignalEmitter.SignalType.AlienPlanet)
                 {
-                    oscillator.startColor = planetSignal;
-                    oscillator.endColor = planetSignal;
+                    oscilator.startColor = planetSignal;
+                    oscilator.endColor = planetSignal;
                 }
-                if (radar.FoundPlanets[radar.LookedSigneld].gameObject.tag == "Score Planet")
+                if (radar.FoundPlanetsWithSignal[radar.LookedSigneld].Signal.Type == SignalEmitter.SignalType.FuelPlanet)
                 {
-                    oscillator.startColor = gasStationSignal;
-                    oscillator.endColor = gasStationSignal;
+                    oscilator.startColor = gasStationSignal;
+                    oscilator.endColor = gasStationSignal;
                 }
             }
             if (radar.IsRadarOn)
             {
-                if (radar.FoundPlanets.Length > radar.LookedSigneld && radar.FoundPlanets[radar.LookedSigneld] != null)
+                if (radar.FoundPlanetsWithSignal.Count > radar.LookedSigneld && radar.FoundPlanetsWithSignal[radar.LookedSigneld] != null)
                 {
                     raySpeed = 40 * (minimunDistanceToPlanet / radar.CalculateDistanceToPlanet(radar.LookedSigneld));
                     rayPeriod = 6 * (minimunDistanceToPlanet / radar.CalculateDistanceToPlanet(radar.LookedSigneld));
@@ -90,7 +95,7 @@ public class SignalOscilator : ShipComponent
                 for (int i = 0; i <= drawPositions.Length - 1; i++)
                 {
                     drawPositions[i].y = Mathf.Sin(rayPeriod * drawPositions[i].x + Time.time * raySpeed);
-                    oscillator.SetPositions(drawPositions);
+                    oscilator.SetPositions(drawPositions);
                 }
             }
         }
@@ -104,6 +109,6 @@ public class SignalOscilator : ShipComponent
         var position = new Vector2(camera.pixelWidth * screenPositionX, camera.pixelHeight * screenPositionY);
         position = camera.ScreenToWorldPoint(position);
         position = ship.transform.InverseTransformPoint(position);
-        oscillator.transform.localPosition = position;
+        oscilator.transform.localPosition = position;
     }
 }

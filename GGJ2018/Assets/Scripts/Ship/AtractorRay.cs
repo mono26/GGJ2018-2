@@ -7,13 +7,13 @@ public class AtractorRay : ShipComponent
     [SerializeField]
     protected LayerMask layerMask;
     [SerializeField]
-    protected float range;
+    protected float range = 1.5f;
     [SerializeField]
-    protected float radius = 1;
+    protected float radius = 0.7f;
     [SerializeField]
     protected float ticksPerSecond = 10;
     [SerializeField]
-    protected float strenght;
+    protected float strenght = 10;
 
     [Header("Components")]
     [SerializeField]
@@ -23,15 +23,24 @@ public class AtractorRay : ShipComponent
     [SerializeField]
     private RaycastHit2D[] aliensHit;
     [SerializeField]
-    private bool isAlienRayOn;
+    private bool isAlienRayOn = false;
     public bool IsAlienRayOn { get { return isAlienRayOn; } }
 
-    void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position + (Vector3.down * range), radius);
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, -transform.up);
+
+        return;
+    }
+
+    protected void OnEnable()
+    {
+        ufoRay.SetActive(false);
+        isAlienRayOn = false;
+        return;
     }
 
     protected override void HandleInput()
