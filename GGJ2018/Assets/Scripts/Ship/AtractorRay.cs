@@ -28,10 +28,10 @@ public class AtractorRay : ShipComponent
 
     protected void OnDrawGizmos()
     {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position - (transform.up * range), radius);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position + (Vector3.down * range), radius);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, -transform.up);
+        Gizmos.DrawLine(transform.position, transform.position - (transform.up * range));
 
         return;
     }

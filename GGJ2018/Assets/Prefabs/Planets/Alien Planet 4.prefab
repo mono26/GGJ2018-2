@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 212871617535750584}
   m_Layer: 10
   m_Name: GravitationField
-  m_TagString: Gravitation Field
+  m_TagString: GravitationField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,11 +175,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aba901a77848e49959d5b9af1c691e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravitationalFieldDirection: 1
   gravitationalFieldRadius: 0
   gravitationalFieldStrenght: 25
   gravitationalField: {fileID: 58408090004370560}
   planetRadius: 4.5
   signal: {fileID: 114337747323321020}
+  objectsInsideGravitationField: []
   alien: {fileID: 1493918104206506, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
   numberOfAliens: 30
   aliens: []

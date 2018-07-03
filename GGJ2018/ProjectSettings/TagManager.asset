@@ -6,11 +6,11 @@ TagManager:
   tags:
   - Fuel Planet
   - Score Planet
-  - Gravitation Field
   - Alien
   - Asteroide
   - Blackhole
   - Planet
+  - GravitationField
   layers:
   - Default
   - TransparentFX

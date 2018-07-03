@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 58622635712402336}
   m_Layer: 10
   m_Name: GravitationField
-  m_TagString: Gravitation Field
+  m_TagString: GravitationField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,11 +114,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ad66d8d9811e34286191edaa6eeff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravitationalFieldDirection: 0
   gravitationalFieldRadius: 0
   gravitationalFieldStrenght: 25
   gravitationalField: {fileID: 58622635712402336}
-  signal: {fileID: 0}
   planetRadius: 6.3
+  signal: {fileID: 0}
+  objectsInsideGravitationField: []
 --- !u!212 &212359388721485538
 SpriteRenderer:
   m_ObjectHideFlags: 1

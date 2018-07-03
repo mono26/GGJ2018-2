@@ -45,7 +45,8 @@ public class Ship : MonoBehaviour
             transform.up = Vector2.Lerp(transform.up, direction, 0.05f);
             yield return null;
         }
-        yield return null;
+
+        yield break;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,11 +58,7 @@ public class Ship : MonoBehaviour
             StartCoroutine(RotateArroundPlanet(collision.GetComponentInParent<Planet>()));
         }
 
-        if (collision.gameObject.CompareTag("Alien"))
-        {
-            Destroy(collision.gameObject);
-            GameController.Instance.IncreaseScore();
-        }
+        return;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -69,5 +66,7 @@ public class Ship : MonoBehaviour
         {
             isOnGravitationalField = false;
         }
+
+        return;
     }
 }

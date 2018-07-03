@@ -29,6 +29,7 @@ public class AlienPlanet : Planet
     public override void Start()
     {
         base.Start();
+
         foreach (Transform alien in aliens)
         {
             if (alien != null && alien.gameObject.activeInHierarchy)
@@ -43,24 +44,6 @@ public class AlienPlanet : Planet
     public void OnEnable()
     {
         signal.TurnSignal(SignalEmitter.SignalState.ON);
-        return;
-    }
-
-    // Update is called once per frame
-    public void Update ()
-    {
-        for (int alien = 0; alien < aliens.Count; alien++)
-        {
-            if (aliens[alien] != null && aliens[alien].gameObject.activeInHierarchy)
-            {
-                aliens[alien].RotateAround(transform.position, transform.forward, gravitationalFieldStrenght * Time.deltaTime);
-                ChangeUpDirectionTowardsPlanet(aliens[alien]);
-            }
-            else
-            {
-                aliens[alien] = null;
-            }
-        }
         return;
     }
 
@@ -82,6 +65,36 @@ public class AlienPlanet : Planet
     public void RemoveAlien(Transform _alien)
     {
         aliens.Remove(_alien);
+        return;
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D _collider)
+    {
+        base.OnTriggerEnter2D(_collider);
+
+        if (_collider.CompareTag("Alien") == true)
+        {
+            if(aliens.Contains(_collider.transform) == false)
+            {
+                aliens.Add(_collider.transform);
+            }
+        }
+
+        return;
+    }
+
+    protected override void OnTriggerExit2D(Collider2D _collider)
+    {
+        base.OnTriggerExit2D(_collider);
+
+        if (_collider.CompareTag("Alien") == true)
+        {
+            if (aliens.Contains(_collider.transform) == true)
+            {
+                aliens.Remove(_collider.transform);
+            }
+        }
+
         return;
     }
 }

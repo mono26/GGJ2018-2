@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
     [Header("Planet settings")]
+    [SerializeField][Range(-1,1)]
+    protected int gravitationalFieldDirection;
     [SerializeField]
     protected float gravitationalFieldRadius;
     [SerializeField]
@@ -18,6 +21,10 @@ public class Planet : MonoBehaviour
     [SerializeField]
     protected SignalEmitter signal;
     public SignalEmitter Signal { get { return signal; } }
+
+    [Header("Editor debuggin")]
+    [SerializeField]
+    protected List<GameObject> objectsInsideGravitationField;
 
     // Use this for initialization
     public virtual void Awake()
@@ -43,12 +50,50 @@ public class Planet : MonoBehaviour
         return;
 	}
 
-    public virtual void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void Update()
+    {
+        RotateObjectsInGravitationField();
+    }
+
+    protected void RotateObjectsInGravitationField()
+    {
+        if(objectsInsideGravitationField.Count > 0)
+        {
+            foreach (GameObject obj in objectsInsideGravitationField)
+            {
+                obj.transform.RotateAround(transform.position, transform.forward, gravitationalFieldStrenght * gravitationalFieldDirection * Time.deltaTime);
+                var direction = (obj.transform.position - transform.position).normalized;
+                obj.transform.up = Vector2.Lerp(obj.transform.up, direction, 0.05f);
+            }
+        }
+
+        return;
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Asteroide"))
         {
             // TODO Release asteroid and spawn particles
             collision.gameObject.GetComponent<Asteroide>().ReleaseAsteroid();
         }
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D _collider)
+    {
+        if(objectsInsideGravitationField.Contains(_collider.gameObject) == false)
+        {
+            objectsInsideGravitationField.Add(_collider.gameObject);
+        }
+        return;
+    }
+
+    protected virtual void OnTriggerExit2D(Collider2D _collider)
+    {
+        if (objectsInsideGravitationField.Contains(_collider.gameObject) == true)
+        {
+            objectsInsideGravitationField.Remove(_collider.gameObject);
+        }
+        return;
     }
 }
