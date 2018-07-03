@@ -14,7 +14,6 @@ public class Ship : MonoBehaviour
     public Rigidbody2D ShipBody { get { return shipBody; } }
 
     protected ShipComponent[] shipComponents;
-    protected bool isOnGravitationalField = false;
 
 	void Awake()
     {
@@ -28,44 +27,10 @@ public class Ship : MonoBehaviour
         shipComponents = GetComponents<ShipComponent>();
     }
 
-    void Update ()
+    protected void Update ()
     {
         foreach (ShipComponent component in shipComponents)
             component.EveryFrame();
-
-        return;
-    }
-
-    private IEnumerator RotateArroundPlanet(Planet _planet)
-    {
-        while (isOnGravitationalField)
-        {
-            transform.RotateAround(_planet.transform.position, _planet.transform.forward, _planet.GravitationalFieldStrenght * Time.deltaTime);
-            var direction = (transform.position - _planet.transform.position).normalized;
-            transform.up = Vector2.Lerp(transform.up, direction, 0.05f);
-            yield return null;
-        }
-
-        yield break;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("Gravitation Field"))
-        {
-            Debug.Log("Entrando en la orbita del planeta");
-            isOnGravitationalField = true;
-            StartCoroutine(RotateArroundPlanet(collision.GetComponentInParent<Planet>()));
-        }
-
-        return;
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Gravitation Field"))
-        {
-            isOnGravitationalField = false;
-        }
 
         return;
     }

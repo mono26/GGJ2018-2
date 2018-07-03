@@ -5,32 +5,37 @@ public class AlienPlanet : Planet
 {
     [Header("Alien Planet settings")]
     [SerializeField]
-    private GameObject alien;
+    private Alien alien;
     [SerializeField]
     private int numberOfAliens;
 
     [Header("Editor debugging")]
     [SerializeField]
-    private List<Transform> aliens;
+    private List<Transform> aliensInPlanet;
 
-    public override void Awake()
+    protected override void Awake()
     {
         base.Awake();
 
-        aliens = new List<Transform>();
-        for (int alien = 0; alien < numberOfAliens; alien++)
+        aliensInPlanet = new List<Transform>();
+        if(alien != null)
         {
-            var tempAlien = Instantiate(this.alien, transform.position, transform.rotation, transform.Find("Aliens"));
-            aliens.Add(tempAlien.transform);
+            for (int i = 0; i < numberOfAliens; i++)
+            {
+                Alien tempAlien = Instantiate(alien, transform.position, transform.rotation, transform.Find("Aliens"));
+                tempAlien.transform.SetParent(transform);
+                aliensInPlanet.Add(tempAlien.transform);
+            }
         }
+
         return;
     }
-    // Use this for initialization
-    public override void Start()
+
+    protected override void Start()
     {
         base.Start();
 
-        foreach (Transform alien in aliens)
+        foreach (Transform alien in aliensInPlanet)
         {
             if (alien != null && alien.gameObject.activeInHierarchy)
             {
@@ -41,7 +46,7 @@ public class AlienPlanet : Planet
         return;
     }
 
-    public void OnEnable()
+    protected void OnEnable()
     {
         signal.TurnSignal(SignalEmitter.SignalState.ON);
         return;
@@ -62,21 +67,15 @@ public class AlienPlanet : Planet
         return;
     }
 
-    public void RemoveAlien(Transform _alien)
-    {
-        aliens.Remove(_alien);
-        return;
-    }
-
     protected override void OnTriggerEnter2D(Collider2D _collider)
     {
         base.OnTriggerEnter2D(_collider);
 
         if (_collider.CompareTag("Alien") == true)
         {
-            if(aliens.Contains(_collider.transform) == false)
+            if(aliensInPlanet.Contains(_collider.transform) == false)
             {
-                aliens.Add(_collider.transform);
+                aliensInPlanet.Add(_collider.transform);
             }
         }
 
@@ -89,9 +88,9 @@ public class AlienPlanet : Planet
 
         if (_collider.CompareTag("Alien") == true)
         {
-            if (aliens.Contains(_collider.transform) == true)
+            if (aliensInPlanet.Contains(_collider.transform) == true)
             {
-                aliens.Remove(_collider.transform);
+                aliensInPlanet.Remove(_collider.transform);
             }
         }
 

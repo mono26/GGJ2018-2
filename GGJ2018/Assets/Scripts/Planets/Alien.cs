@@ -9,10 +9,10 @@ public class Alien : MonoBehaviour
     [SerializeField]
     protected Planet planet;
 
-    protected void Awake()
+    public void Awake()
     {
         if (planet == null)
-            planet.GetComponentInParent<Planet>();
+            planet = GetComponentInParent<Planet>();
 
         return;
     }
@@ -52,8 +52,6 @@ public class Alien : MonoBehaviour
         {
             Destroy(collision.gameObject);
             GameController.Instance.IncreaseScore();
-
-            //TODO increase fuel.
         }
 
         return;

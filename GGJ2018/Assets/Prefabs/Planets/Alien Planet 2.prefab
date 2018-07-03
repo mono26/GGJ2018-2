@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212251884888083670}
   - component: {fileID: 95530368154939320}
   - component: {fileID: 58331147674821732}
+  - component: {fileID: 50613407309119470}
   - component: {fileID: 114469543221975496}
   - component: {fileID: 114562478748535502}
   m_Layer: 8
@@ -104,6 +105,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50613407309119470
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050387121000458}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 10000
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 3
 --- !u!58 &58331147674821732
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -169,9 +190,9 @@ MonoBehaviour:
   planetRadius: 5.2
   signal: {fileID: 114562478748535502}
   objectsInsideGravitationField: []
-  alien: {fileID: 1493918104206506, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
+  alien: {fileID: 114053472491642104, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
   numberOfAliens: 30
-  aliens: []
+  aliensInPlanet: []
 --- !u!114 &114562478748535502
 MonoBehaviour:
   m_ObjectHideFlags: 1

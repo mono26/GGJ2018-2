@@ -91,9 +91,10 @@ public class Engine : ShipComponent
         return;
     }
 
-    public void RechargeFuel()
+    public void RechargeFuel(float _fuelToAdd)
     {
-        currentFuel = maxFuel;
+        currentFuel = _fuelToAdd;
+        currentFuel = Mathf.Clamp(currentFuel, 0, maxFuel);
         return;
     }
 
@@ -116,7 +117,7 @@ public class Engine : ShipComponent
         {
             Planet planetComponent = _collision.gameObject.GetComponent<Planet>();
             if(planetComponent.Signal.Type == SignalEmitter.SignalType.FuelPlanet)
-                RechargeFuel();
+                RechargeFuel(maxFuel);
         }
         if (_collision.gameObject.CompareTag("Asteroide"))
         {
@@ -125,6 +126,12 @@ public class Engine : ShipComponent
             _collision.gameObject.GetComponent<Asteroide>().ReleaseAsteroid();
             //TODO: definir bien el daño del asteroide
             //TODO Enviar o destruir asteoroide
+        }
+
+        if (_collision.gameObject.CompareTag("Alien"))
+        {
+            // TODO eliminate magic number
+            RechargeFuel(5);
         }
     }
 

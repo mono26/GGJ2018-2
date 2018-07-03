@@ -27,7 +27,7 @@ public class Planet : MonoBehaviour
     protected List<GameObject> objectsInsideGravitationField;
 
     // Use this for initialization
-    public virtual void Awake()
+    protected virtual void Awake()
     {
         var collider = GetComponent<CircleCollider2D>();
         if (collider)
@@ -41,7 +41,7 @@ public class Planet : MonoBehaviour
         else return;
     }
 
-    public virtual void Start()
+    protected virtual void Start()
     {
         gravitationalFieldRadius = planetRadius + planetRadius;
         if(gravitationalField != null)
