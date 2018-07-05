@@ -52,6 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialScorePoints: 0
-  maxScorePoints: 5
+  maxScorePoints: 30
   scoreText: {fileID: 0}
   fuelBar: {fileID: 0}

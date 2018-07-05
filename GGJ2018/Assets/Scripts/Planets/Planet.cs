@@ -70,15 +70,6 @@ public class Planet : MonoBehaviour
         return;
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Asteroide"))
-        {
-            // TODO Release asteroid and spawn particles
-            collision.gameObject.GetComponent<Asteroide>().ReleaseAsteroid();
-        }
-    }
-
     protected virtual void OnTriggerEnter2D(Collider2D _collider)
     {
         if(objectsInsideGravitationField.Contains(_collider.gameObject) == false)

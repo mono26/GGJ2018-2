@@ -50,8 +50,8 @@ public class Alien : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
-            GameController.Instance.IncreaseScore();
+            Destroy(gameObject);
+            LevelManager.Instance.IncreaseScore();
         }
 
         return;

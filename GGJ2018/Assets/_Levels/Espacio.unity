@@ -17095,11 +17095,6 @@ Prefab:
       propertyPath: fuelBar
       value: 
       objectReference: {fileID: 2005365200}
-    - target: {fileID: 114122653093813352, guid: 8d3409e53c6fafa41805f3e9efd3858b,
-        type: 2}
-      propertyPath: maxScorePoints
-      value: 30
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d3409e53c6fafa41805f3e9efd3858b, type: 2}
   m_IsPrefabParent: 0
@@ -17323,29 +17318,6 @@ Prefab:
     - target: {fileID: 1090479860174372, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}
       propertyPath: m_Name
       value: BobTheGreenAlien
-      objectReference: {fileID: 0}
-    - target: {fileID: 114275024230028044, guid: 265ece424b2a4c44c995b2fa3ccc814d,
-        type: 2}
-      propertyPath: range
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556843189717020, guid: 265ece424b2a4c44c995b2fa3ccc814d,
-        type: 2}
-      propertyPath: ticksPerSecond
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1732044408788034, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1090479860174372, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 50062640748544502, guid: 265ece424b2a4c44c995b2fa3ccc814d,
-        type: 2}
-      propertyPath: m_Mass
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 265ece424b2a4c44c995b2fa3ccc814d, type: 2}

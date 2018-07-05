@@ -14,7 +14,7 @@ public class Engine : ShipComponent
 
     [Header("Components ")]
     [SerializeField]
-    protected FuelBar fuelDisplay;
+    protected ProgressBar fuelDisplay;
 
     [Header("Editor debugging")]
     [SerializeField]
@@ -36,7 +36,7 @@ public class Engine : ShipComponent
 
         if (currentFuel <= 0)
         {
-            GameController.Instance.LoseGame();
+            LevelManager.Instance.LoseGame();
         }
     }
 
@@ -123,9 +123,7 @@ public class Engine : ShipComponent
         {
             RecieveDamage(25);
             Debug.Log("Recibi daño de asteroide");
-            _collision.gameObject.GetComponent<Asteroide>().ReleaseAsteroid();
             //TODO: definir bien el daño del asteroide
-            //TODO Enviar o destruir asteoroide
         }
 
         if (_collision.gameObject.CompareTag("Alien"))

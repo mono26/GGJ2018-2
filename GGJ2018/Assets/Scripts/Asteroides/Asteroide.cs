@@ -4,18 +4,23 @@ using UnityEngine;
 public class Asteroide : MonoBehaviour
 {
     [SerializeField]
-    private GameObject deadParticle;
+    protected GameObject deadParticle;
     [SerializeField]
-    public float lifeTime;
+    protected float lifeTime;
 
-    private Rigidbody2D body;
-    public Rigidbody2D Body { get { return body; } }
+    [SerializeField]
+    protected Rigidbody2D body;
+    protected Rigidbody2D Body { get { return body; } }
 
     // Use this for initialization
     void Start ()
     {
-        body = GetComponent<Rigidbody2D>();
+        if(body == null)
+            body = GetComponent<Rigidbody2D>();
+
         StartCoroutine(DeadTimer());
+
+        return;
 	}
 
     public IEnumerator DeadTimer()
@@ -30,5 +35,11 @@ public class Asteroide : MonoBehaviour
         var particle = Instantiate(deadParticle, transform.position, transform.rotation);
         particle.transform.rotation = Quaternion.FromToRotation(particle.transform.up, body.velocity);
         AsteroidPool.Instance.ReleaseAsteroide(this.GetComponent<Rigidbody2D>());
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        ReleaseAsteroid();
+        return;
     }
 }

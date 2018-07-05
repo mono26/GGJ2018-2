@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class FuelBar : MonoBehaviour
+public class ProgressBar : MonoBehaviour
 {
     /// the healthbar's foreground bar
     [SerializeField]

@@ -3,36 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidPool : MonoBehaviour
+public class AsteroidPool : Singleton<AsteroidPool>
 {
-    private static AsteroidPool instance;
-
-    public static AsteroidPool Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
+    [Header("Asteroid Pool settings")]
     [SerializeField]
     private Rigidbody2D asteroidePrefab;
-    [SerializeField]
-    private int size;
 
     private List<Rigidbody2D> asteroides;
-
-    // Use this for initialization
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            PrepareAsteroide();
-        }
-        else
-            Destroy(gameObject);
-    }
 
     private void PrepareAsteroide()
     {

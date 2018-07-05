@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
-    private static GameController instance;
-    public static GameController Instance { get { return instance; } }
-
     private Ship ship;
 
     //TODO create a class for managing UI only
@@ -17,23 +14,19 @@ public class GameController : MonoBehaviour
     private int scorePoints;
     public int ScorePoints { get { return scorePoints; } }
     [SerializeField]
-    private Text scoreText = null;
+    private Text scoreText;
 
     [SerializeField]
-    private Image fuelBar = null;
+    private Image fuelBar;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (instance)
-        {
-            Destroy(instance);
-            instance = this;
-        }
-
-        instance = this;
+        base.Awake();
 
         scoreText.gameObject.SetActive(false);
         fuelBar.gameObject.SetActive(false);
+
+        return;
     }
     // Use this for initialization
     void Start ()
@@ -60,21 +53,22 @@ public class GameController : MonoBehaviour
     public void IncreaseScore()
     {
         scorePoints += 1;
+        return;
     }
 
     public void WinGame()
     {
-        ScreenManager.Instance.StartCoroutine
+        GameManager.Instance.StartCoroutine
             (
-                ScreenManager.Instance.LoadLevel("Credits")
+                GameManager.Instance.LoadLevel("Credits")
             );
     }
 
     public void LoseGame()
     {
-        ScreenManager.Instance.StartCoroutine
+        GameManager.Instance.StartCoroutine
             (
-                ScreenManager.Instance.LoadLevel("Credits")
+                GameManager.Instance.LoadLevel("Credits")
             );
     }
 }

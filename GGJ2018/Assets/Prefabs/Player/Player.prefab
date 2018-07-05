@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114275024230028044}
   - component: {fileID: 114556843189717020}
   - component: {fileID: 114002122197072118}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -409,7 +409,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 1
   m_AngularDrag: 1
   m_GravityScale: 0
@@ -468,7 +468,7 @@ MonoBehaviour:
   range: 1.5
   radius: 0.7
   ticksPerSecond: 10
-  strenght: 10
+  strenght: 1000
   ufoRay: {fileID: 1732044408788034}
   isAlienRayOn: 0
 --- !u!114 &114087037844022776
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 114643004580401058}
-  range: 5
+  range: 10
   ticksPerSecond: 10
   layerMask:
     serializedVersion: 2
@@ -518,7 +518,7 @@ MonoBehaviour:
   maxRadarCapacity: 5
   foundPlanetsWithSignal: []
   isRadarOn: 0
-  lookedSigneld: 0
+  lookedSignal: 0
   nearplanets: []
 --- !u!114 &114350977420507798
 MonoBehaviour:
@@ -551,7 +551,7 @@ MonoBehaviour:
   minimunDistanceToPlanet: 5
   planetSignal: {r: 0, g: 1, b: 0.048275948, a: 0}
   gasStationSignal: {r: 0.07586192, g: 0, b: 1, a: 0}
-  ticksPerSecond: 10
+  ticksPerSecond: 20
   screenPositionX: 0.8
   screenPositionY: 0.9
   radar: {fileID: 114275024230028044}
@@ -630,8 +630,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 114643004580401058}
   fuelLossPerSecond: 1
-  maxFuel: 9999
-  thrust: 10
+  maxFuel: 100
+  thrust: 1000
   fuelDisplay: {fileID: 114699152907884658}
   currentFuel: 0
 --- !u!114 &114643004580401058
@@ -645,9 +645,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55465648f9b97054aa24c907a1d5758f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipCollider: {fileID: 0}
+  shipCollider: {fileID: 61447186059202600}
   shipSprite: {fileID: 0}
-  shipBody: {fileID: 0}
+  shipBody: {fileID: 50062640748544502}
 --- !u!114 &114699152907884658
 MonoBehaviour:
   m_ObjectHideFlags: 1
