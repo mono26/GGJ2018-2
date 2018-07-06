@@ -6,13 +6,11 @@ public class Radar : ShipComponent
 {
     [Header("Radar settings")]
     [SerializeField]
-    protected float range;
+    protected float range = 30f;
     [SerializeField]
     protected float ticksPerSecond = 1.0f;
     [SerializeField]
     protected LayerMask layerMask;
-    [SerializeField]
-    protected int maxRadarCapacity;
 
     [Header("Editor debugging")]
     [SerializeField]

@@ -35,7 +35,18 @@ public class SignalOscilator : ShipComponent
     [Range(1, 6)]
     protected float rayPeriod = 10;
 
-    // Use this for initialization
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if(oscilator == null)
+        {
+            oscilator = transform.Find("Oscilator").GetComponent<LineRenderer>();
+        }
+
+        return;
+    }
+
     public void Start()
     {
         LocateSignalOscilatorInTheWorld();

@@ -11,6 +11,13 @@ public class AsteroidPool : Singleton<AsteroidPool>
 
     private List<Rigidbody2D> asteroides;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        PrepareAsteroide();
+    }
+
     private void PrepareAsteroide()
     {
         asteroides = new List<Rigidbody2D>();

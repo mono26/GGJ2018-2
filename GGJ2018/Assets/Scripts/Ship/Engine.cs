@@ -10,7 +10,7 @@ public class Engine : ShipComponent
     [SerializeField]
     protected float maxFuel = 9999.0f;
     [SerializeField]
-    protected float thrust = 1.0f;
+    protected float thrust = 1000f;
 
     [Header("Components ")]
     [SerializeField]
@@ -36,8 +36,10 @@ public class Engine : ShipComponent
 
         if (currentFuel <= 0)
         {
-            LevelManager.Instance.LoseGame();
+            LevelManager.Instance.EndGame();
         }
+
+        return;
     }
 
     protected override void HandleInput()

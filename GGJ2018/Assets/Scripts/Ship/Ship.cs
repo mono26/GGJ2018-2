@@ -18,11 +18,17 @@ public class Ship : MonoBehaviour
 	void Awake()
     {
         if (shipCollider == null)
+        {
             shipCollider = GetComponent<BoxCollider2D>();
+        }
         if (shipSprite == null)
+        {
             shipSprite = GetComponent<SpriteRenderer>();
+        }
         if (shipBody == null)
+        {
             shipBody = GetComponent<Rigidbody2D>();
+        }
 
         shipComponents = GetComponents<ShipComponent>();
     }

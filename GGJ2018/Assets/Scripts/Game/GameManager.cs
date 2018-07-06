@@ -5,28 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    public IEnumerator LoadLevel(string _level)
+    public bool IsPaused { get; protected set; }
+
+    public void TriggerPause(bool _pause)
     {
-        yield return SceneManager.LoadSceneAsync("LoadScene");
-
-        bool continueToLevel = false;
-
-        // Load level async
-        yield return SceneManager.LoadSceneAsync(_level, LoadSceneMode.Additive);
-
-        var text = GameObject.Find("State Text");
-        text.GetComponent<Text>().text = "Click to continue";
-
-        while (!continueToLevel)
+        IsPaused = _pause;
+        if (IsPaused == true)
         {
-            if (Input.GetMouseButton(0))
-            {
-                continueToLevel = true;
-                yield return 0;
-            }
-            yield return 0;
+            LevelUIManager.Instance.ActivatePauseUI(true);
+            Time.timeScale = 0;
+            return;
         }
-
-        yield return SceneManager.UnloadSceneAsync("LoadScene");
+        else if (IsPaused == false)
+        {
+            LevelUIManager.Instance.ActivatePauseUI(false);
+            Time.timeScale = 1;
+            return;
+        }
     }
+
 }

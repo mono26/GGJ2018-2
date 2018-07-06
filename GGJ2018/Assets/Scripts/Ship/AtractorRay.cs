@@ -13,7 +13,7 @@ public class AtractorRay : ShipComponent
     [SerializeField]
     protected float ticksPerSecond = 10;
     [SerializeField]
-    protected float strenght = 10;
+    protected float strenght = 1000 ;
 
     [Header("Components")]
     [SerializeField]
@@ -25,6 +25,16 @@ public class AtractorRay : ShipComponent
     [SerializeField]
     private bool isAlienRayOn = false;
     public bool IsAlienRayOn { get { return isAlienRayOn; } }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if(ufoRay == null)
+        {
+            ufoRay = transform.Find("UFORay").gameObject;
+        }
+    }
 
     protected void OnDrawGizmos()
     {

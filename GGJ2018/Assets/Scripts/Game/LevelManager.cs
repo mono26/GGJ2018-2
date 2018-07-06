@@ -46,7 +46,7 @@ public class LevelManager : Singleton<LevelManager>
 		// Look if the player score limit has reach
         if (ScorePoints >= maxScorePoints)
         {
-            WinGame();
+            EndGame();
         }
 	}
 
@@ -56,19 +56,10 @@ public class LevelManager : Singleton<LevelManager>
         return;
     }
 
-    public void WinGame()
+    public void EndGame()
     {
-        GameManager.Instance.StartCoroutine
-            (
-                GameManager.Instance.LoadLevel("Credits")
-            );
-    }
-
-    public void LoseGame()
-    {
-        GameManager.Instance.StartCoroutine
-            (
-                GameManager.Instance.LoadLevel("Credits")
-            );
+        //TODO activate en game screen.
+        //LoadManager.LoadScene("Credits");
+        return;
     }
 }

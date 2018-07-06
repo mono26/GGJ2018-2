@@ -9,6 +9,14 @@ public class ProgressBar : MonoBehaviour
     [SerializeField]
     protected float _percent;
 
+    protected void Awake()
+    {
+        if(progressBar == null)
+            progressBar = transform.Find("ProgressFill").GetComponent<Image>();
+
+        return;
+    }
+
     public virtual void UpdateBar(float currentValue, float maxValue)
     {
         _percent = currentValue / maxValue;

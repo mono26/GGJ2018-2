@@ -4,22 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField]
-    private GameManager screenManager;
-
-    public void PlayGame()
+    public void LoadLevel(string _level)
     {
-        screenManager.StartCoroutine(screenManager.LoadLevel("Espacio"));
-    }
-
-    public void Credits()
-    {
-        screenManager.StartCoroutine(screenManager.LoadLevel("Credits"));
-    }
-
-    public void GoToMainMenu()
-    {
-        screenManager.StartCoroutine(screenManager.LoadLevel("Main Menu"));
+        LoadManager.LoadScene(_level);
+        return;
     }
 
     public void QuitGame()
