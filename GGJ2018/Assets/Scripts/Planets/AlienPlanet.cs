@@ -52,7 +52,7 @@ public class AlienPlanet : Planet
         return;
     }
 
-    private void LocateAliens(Transform _alien)
+    protected void LocateAliens(Transform _alien)
     {
         var angle = Random.Range(0f, 360f);
         var x = Mathf.Cos(angle) * planetRadius;

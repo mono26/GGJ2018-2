@@ -184,12 +184,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitationalFieldDirection: -1
-  gravitationalFieldRadius: 0
-  gravitationalFieldStrenght: 25
+  gravitationalFieldStrenght: 3500
+  gravityStrenght: 900
   gravitationalField: {fileID: 58411296840660902}
   planetRadius: 5.2
   signal: {fileID: 114562478748535502}
   objectsInsideGravitationField: []
+  gravitationalFieldRadius: 0
   alien: {fileID: 114053472491642104, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
   numberOfAliens: 30
   aliensInPlanet: []

@@ -4,12 +4,12 @@ using UnityEngine;
 public class Planet : MonoBehaviour
 {
     [Header("Planet settings")]
-    [SerializeField][Range(-1,1)]
-    protected int gravitationalFieldDirection;
+    [SerializeField][Range(-1,1)]   // +1 right, -1 left
+    protected int gravitationalFieldDirection = 1;
     [SerializeField]
-    protected float gravitationalFieldRadius;
+    protected float gravitationalFieldStrenght = 1000f;
     [SerializeField]
-    protected float gravitationalFieldStrenght;
+    protected float gravityStrenght = 900f;
     public float GravitationalFieldStrenght { get { return gravitationalFieldStrenght; } }
     [SerializeField]
     protected CircleCollider2D gravitationalField;
@@ -24,7 +24,9 @@ public class Planet : MonoBehaviour
 
     [Header("Editor debuggin")]
     [SerializeField]
-    protected List<GameObject> objectsInsideGravitationField;
+    protected List<Rigidbody2D> objectsInsideGravitationField;
+    [SerializeField]
+    protected float gravitationalFieldRadius;
 
     // Use this for initialization
     protected virtual void Awake()
@@ -50,18 +52,25 @@ public class Planet : MonoBehaviour
         return;
 	}
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         RotateObjectsInGravitationField();
+        ApplyGravityOnObjects();
+
+        return;
     }
 
     protected void RotateObjectsInGravitationField()
     {
         if(objectsInsideGravitationField.Count > 0)
         {
-            foreach (GameObject obj in objectsInsideGravitationField)
+            foreach (Rigidbody2D obj in objectsInsideGravitationField)
             {
-                obj.transform.RotateAround(transform.position, transform.forward, gravitationalFieldStrenght * gravitationalFieldDirection * Time.deltaTime);
+                Vector2 directionFromCenterToObject = obj.position - (Vector2)transform.position;
+                Debug.DrawRay(obj.position, -directionFromCenterToObject);
+                Vector2 tangentToDirectionToTheObject = new Vector2(directionFromCenterToObject.y, -directionFromCenterToObject.x).normalized * gravitationalFieldDirection;
+                Debug.DrawRay(obj.position, tangentToDirectionToTheObject);
+                obj.AddForce(tangentToDirectionToTheObject * gravitationalFieldStrenght * Time.fixedDeltaTime, ForceMode2D.Force);
                 var direction = (obj.transform.position - transform.position).normalized;
                 obj.transform.up = Vector2.Lerp(obj.transform.up, direction, 0.05f);
             }
@@ -70,20 +79,35 @@ public class Planet : MonoBehaviour
         return;
     }
 
+    protected void ApplyGravityOnObjects()
+    {
+        if (objectsInsideGravitationField.Count > 0)
+        {
+            foreach (Rigidbody2D obj in objectsInsideGravitationField)
+            {
+                Vector2 directionFromCenterToObject = obj.position - (Vector2)transform.position;
+                Debug.DrawRay(obj.position, -directionFromCenterToObject.normalized, Color.red);
+                obj.AddForce(-directionFromCenterToObject.normalized * gravityStrenght * Time.fixedDeltaTime, ForceMode2D.Force);
+            }
+        }
+    }
+
     protected virtual void OnTriggerEnter2D(Collider2D _collider)
     {
-        if(objectsInsideGravitationField.Contains(_collider.gameObject) == false)
+        Rigidbody2D objectsBody = _collider.GetComponent<Rigidbody2D>();
+        if (objectsBody != null && objectsInsideGravitationField.Contains(objectsBody) == false)
         {
-            objectsInsideGravitationField.Add(_collider.gameObject);
+            objectsInsideGravitationField.Add(objectsBody);
         }
         return;
     }
 
     protected virtual void OnTriggerExit2D(Collider2D _collider)
     {
-        if (objectsInsideGravitationField.Contains(_collider.gameObject) == true)
+        Rigidbody2D objectsBody = _collider.GetComponent<Rigidbody2D>();
+        if (objectsBody != null && objectsInsideGravitationField.Contains(objectsBody) == true)
         {
-            objectsInsideGravitationField.Remove(_collider.gameObject);
+            objectsInsideGravitationField.Remove(objectsBody);
         }
         return;
     }

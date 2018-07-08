@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4584930305192336}
   - component: {fileID: 212433247600774092}
-  - component: {fileID: 58600969339420060}
   - component: {fileID: 50580160215431128}
+  - component: {fileID: 58600969339420060}
   - component: {fileID: 95359084304161248}
   - component: {fileID: 114968396568510102}
   m_Layer: 8
@@ -137,13 +137,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ad66d8d9811e34286191edaa6eeff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravitationalFieldDirection: 0
-  gravitationalFieldRadius: 0
-  gravitationalFieldStrenght: 0
+  gravitationalFieldDirection: -1
+  gravitationalFieldStrenght: 1000
+  gravityStrenght: 900
   gravitationalField: {fileID: 0}
   planetRadius: 0.33
   signal: {fileID: 0}
   objectsInsideGravitationField: []
+  gravitationalFieldRadius: 0
 --- !u!212 &212036120968054520
 SpriteRenderer:
   m_ObjectHideFlags: 1

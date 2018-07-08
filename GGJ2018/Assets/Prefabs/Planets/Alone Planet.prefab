@@ -135,13 +135,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ad66d8d9811e34286191edaa6eeff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravitationalFieldDirection: 0
-  gravitationalFieldRadius: 0
-  gravitationalFieldStrenght: 25
+  gravitationalFieldDirection: 1
+  gravitationalFieldStrenght: 1000
+  gravityStrenght: 900
   gravitationalField: {fileID: 58622635712402336}
   planetRadius: 6.3
   signal: {fileID: 0}
   objectsInsideGravitationField: []
+  gravitationalFieldRadius: 0
 --- !u!212 &212359388721485538
 SpriteRenderer:
   m_ObjectHideFlags: 1
