@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class AsteroideSpawner : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject player;
-
+    [Header("Asteroid settings")]
     [SerializeField]
     protected float maxForce = 3500f;
     [SerializeField]
@@ -20,18 +18,32 @@ public class AsteroideSpawner : MonoBehaviour
     [SerializeField]
     protected float offsetY;
 
+    [Header("Components")]
     [SerializeField]
-    private float timer;
+    protected GameObject player;
+    [SerializeField]
+    protected Transform[] spawnPoints;
+    [SerializeField]
+    protected float timer;
 
-    private float tiempo;
+    protected void Awake()
+    {
+        player = GameObject.Find("BobTheGreenAlien");
+        GameObject[] sPoints = GameObject.FindGameObjectsWithTag("AsteroidSpawnPoint");
+        spawnPoints = new Transform[sPoints.Length];
+        for (int i = 0; i < sPoints.Length; i++)
+        {
+            spawnPoints[i] = sPoints[i].GetComponent<Transform>();
+        }
 
-    // Use this for initialization
+        return;
+    }
     void Start()
     {
-        tiempo = Random.Range(minSpawnTime, maxSpawnTime);
-        player = GameObject.Find("BobTheGreenAlien");
-        timer = tiempo;
-	}
+        timer = Random.Range(minSpawnTime, maxSpawnTime);
+
+        return;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -40,16 +52,21 @@ public class AsteroideSpawner : MonoBehaviour
         if (timer <= 0)
         {
             LanzarAsteroide();
-            timer = tiempo;
+            timer = Random.Range(minSpawnTime, maxSpawnTime);
         }
+
+        return;
 	}
 
     private void LanzarAsteroide()
     {
         float force = Random.Range(minForce, maxForce);
-        this.transform.LookAt(player.transform);
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Vector2 direction = (player.transform.position - spawnPoint.position).normalized;
         Rigidbody2D asteroide = AsteroidPool.Instance.GetAsteroide();
-        asteroide.transform.position = this.transform.position;
-        asteroide.AddForce(transform.forward * force, ForceMode2D.Force);
+        asteroide.transform.position = spawnPoint.position;
+        asteroide.AddForce(direction * force, ForceMode2D.Force);
+
+        return;
       }
 }

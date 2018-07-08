@@ -51,11 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec257743122491a4787642c23d2e4436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  maxForce: 35000
-  minForce: 15000
+  maxForce: 55000
+  minForce: 35000
   maxSpawnTime: 3
-  minSpawnTime: 5
+  minSpawnTime: 0.5
   offsetX: 0
   offsetY: 0
+  player: {fileID: 0}
+  spawnPoints: []
   timer: 0

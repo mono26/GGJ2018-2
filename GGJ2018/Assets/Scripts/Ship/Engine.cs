@@ -119,7 +119,7 @@ public class Engine : ShipComponent
         if (_collision.gameObject.CompareTag("Planet"))
         {
             Planet planetComponent = _collision.gameObject.GetComponent<Planet>();
-            if(planetComponent.Signal.Type == SignalEmitter.SignalType.FuelPlanet)
+            if(planetComponent.Signal != null && planetComponent.Signal.Type == SignalEmitter.SignalType.FuelPlanet)
                 RechargeFuel(maxFuel);
         }
         if (_collision.gameObject.CompareTag("Asteroide"))

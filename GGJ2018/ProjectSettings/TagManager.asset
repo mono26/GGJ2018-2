@@ -11,6 +11,7 @@ TagManager:
   - Blackhole
   - Planet
   - GravitationField
+  - AsteroidSpawnPoint
   layers:
   - Default
   - TransparentFX
