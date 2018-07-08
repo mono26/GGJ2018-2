@@ -6,22 +6,15 @@ public class Alien : MonoBehaviour
 {
     [Header("Alien settings")]
     [SerializeField]
-    protected float lifeTime = 5.0f;
+    protected GameObject deathVfx;
     [SerializeField]
-    protected Planet planet;
-
-    public void Awake()
-    {
-        if (planet == null)
-            planet = GetComponentInParent<Planet>();
-
-        return;
-    }
+    protected float lifeTime = 5.0f;
 
     public IEnumerator KillAlien()
     {
         yield return new WaitForSeconds(lifeTime);
 
+        Instantiate(deathVfx, transform.position, transform.rotation);
         DestroyObject(gameObject);
 
         yield break;

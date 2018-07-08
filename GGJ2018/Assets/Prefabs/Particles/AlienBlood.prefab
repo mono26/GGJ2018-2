@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4727467754973272}
   - component: {fileID: 198725356534087886}
   - component: {fileID: 199084037839440628}
+  - component: {fileID: 114194399382825142}
   m_Layer: 0
   m_Name: AlienBlood
   m_TagString: Untagged
@@ -41,6 +42,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114194399382825142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1414585641286992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287f88844ec0e5a4ca25e3d6b9452ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyDelay: 5
+  isTheParticleAAnimation: 0
+  particle: {fileID: 198725356534087886}
+  animationParticle: {fileID: 0}
 --- !u!198 &198725356534087886
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -51,7 +67,7 @@ ParticleSystem:
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -101,7 +117,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -792483174
+  randomSeed: 1707269429
   InitialModule:
     serializedVersion: 3
     enabled: 1

@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc41dfe288c24fb47bf32677cc322c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathVfx: {fileID: 1414585641286992, guid: 70e129d0fe2eb5b44a2825a222f13b27, type: 2}
   lifeTime: 5
-  planet: {fileID: 0}
 --- !u!212 &212761370544525494
 SpriteRenderer:
   m_ObjectHideFlags: 1
