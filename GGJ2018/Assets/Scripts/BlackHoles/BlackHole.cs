@@ -51,9 +51,10 @@ public class BlackHole : Planet
         {
             if(Vector3.Distance(obj.position, transform.position) < minimumDistanceToCenter)
             {
-                // TODO destroy de object.
-                // TODO apply damage to engine.
+                EventManager.TriggerEvent<BlackHoleCenterReachEvent>(new BlackHoleCenterReachEvent(obj));
             }
         }
+
+        return;
     }
 }
