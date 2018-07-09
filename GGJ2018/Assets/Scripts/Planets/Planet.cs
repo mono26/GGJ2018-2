@@ -67,12 +67,9 @@ public class Planet : MonoBehaviour
             foreach (Rigidbody2D obj in objectsInsideGravitationField)
             {
                 Vector2 directionFromCenterToObject = obj.position - (Vector2)transform.position;
-                Debug.DrawRay(obj.position, -directionFromCenterToObject);
                 Vector2 tangentToDirectionToTheObject = new Vector2(directionFromCenterToObject.y, -directionFromCenterToObject.x).normalized * gravitationalFieldDirection;
-                Debug.DrawRay(obj.position, tangentToDirectionToTheObject);
                 obj.AddForce(tangentToDirectionToTheObject * gravitationalFieldStrenght * Time.fixedDeltaTime, ForceMode2D.Force);
-                var direction = (obj.transform.position - transform.position).normalized;
-                obj.transform.up = Vector2.Lerp(obj.transform.up, direction, 0.05f);
+                obj.transform.up = Vector2.Lerp(obj.transform.up, directionFromCenterToObject.normalized, 0.05f);
             }
         }
 
@@ -86,7 +83,6 @@ public class Planet : MonoBehaviour
             foreach (Rigidbody2D obj in objectsInsideGravitationField)
             {
                 Vector2 directionFromCenterToObject = obj.position - (Vector2)transform.position;
-                Debug.DrawRay(obj.position, -directionFromCenterToObject.normalized, Color.red);
                 obj.AddForce(-directionFromCenterToObject.normalized * gravityStrenght * Time.fixedDeltaTime, ForceMode2D.Force);
             }
         }

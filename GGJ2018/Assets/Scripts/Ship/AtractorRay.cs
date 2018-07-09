@@ -22,9 +22,11 @@ public class AtractorRay : ShipComponent
     [Header("Edittor debugging")]
     [SerializeField]
     private RaycastHit2D[] aliensHit;
+    protected Coroutine atractAliens;
     [SerializeField]
     private bool isAlienRayOn = false;
     public bool IsAlienRayOn { get { return isAlienRayOn; } }
+
 
     protected override void Awake()
     {
@@ -81,22 +83,24 @@ public class AtractorRay : ShipComponent
                 }
             }
         }
-        else yield return null;
+
         yield return new WaitForSeconds(1 / ticksPerSecond);
-        StartCoroutine(FindAliens());
+        atractAliens = StartCoroutine(FindAliens());
+
+        yield break;
     }
 
     public void StartRay()
     {
         isAlienRayOn = true;
-        StartCoroutine(FindAliens());
+        atractAliens = StartCoroutine(FindAliens());
         ufoRay.SetActive(true);
     }
 
     public void StopRay()
     {
         isAlienRayOn = false;
-        ship.StopCoroutine(FindAliens());
+        StopCoroutine(atractAliens);
         ufoRay.SetActive(false);
     }
 }

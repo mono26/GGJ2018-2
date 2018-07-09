@@ -96,7 +96,7 @@ public class Engine : ShipComponent
 
     public void RechargeFuel(float _fuelToAdd)
     {
-        currentFuel = _fuelToAdd;
+        currentFuel += _fuelToAdd;
         currentFuel = Mathf.Clamp(currentFuel, 0, maxFuel);
         return;
     }
