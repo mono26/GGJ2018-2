@@ -7,10 +7,10 @@ public class Planet : MonoBehaviour
     [SerializeField][Range(-1,1)]   // +1 right, -1 left
     protected int gravitationalFieldDirection = 1;
     [SerializeField]
-    protected float gravitationalFieldStrenght = 1000f;
+    protected float gravitationalRotation = 9.8f;
     [SerializeField]
-    protected float gravityStrenght = 900f;
-    public float GravitationalFieldStrenght { get { return gravitationalFieldStrenght; } }
+    protected float gravity = 9.8f;
+    public float GravitationalFieldStrenght { get { return gravitationalRotation; } }
     [SerializeField]
     protected CircleCollider2D gravitationalField;
     [SerializeField]
@@ -66,10 +66,11 @@ public class Planet : MonoBehaviour
         {
             foreach (Rigidbody2D obj in objectsInsideGravitationField)
             {
-                Vector2 directionFromCenterToObject = obj.position - (Vector2)transform.position;
-                Vector2 tangentToDirectionToTheObject = new Vector2(directionFromCenterToObject.y, -directionFromCenterToObject.x).normalized * gravitationalFieldDirection;
-                obj.AddForce(tangentToDirectionToTheObject * gravitationalFieldStrenght * Time.fixedDeltaTime, ForceMode2D.Force);
-                obj.transform.up = Vector2.Lerp(obj.transform.up, directionFromCenterToObject.normalized, 0.05f);
+                Vector2 directionFromObjectToCenter = obj.position - (Vector2)transform.position;
+                Vector2 tangentToDirectionToTheObject = new Vector2(directionFromObjectToCenter.y, -directionFromObjectToCenter.x).normalized * gravitationalFieldDirection;
+                float rotationForce = obj.mass * gravitationalRotation;
+                obj.AddForce(tangentToDirectionToTheObject * rotationForce * Time.fixedDeltaTime, ForceMode2D.Force);
+                obj.transform.up = Vector2.Lerp(obj.transform.up, directionFromObjectToCenter.normalized, 0.05f);
             }
         }
 
@@ -82,10 +83,13 @@ public class Planet : MonoBehaviour
         {
             foreach (Rigidbody2D obj in objectsInsideGravitationField)
             {
-                Vector2 directionFromCenterToObject = obj.position - (Vector2)transform.position;
-                obj.AddForce(-directionFromCenterToObject.normalized * gravityStrenght * Time.fixedDeltaTime, ForceMode2D.Force);
+                Vector2 directionFromObjectToCenter = obj.position - (Vector2)transform.position;
+                float gravityForce = obj.mass * gravity;
+                obj.AddForce(-directionFromObjectToCenter.normalized * gravityForce * Time.fixedDeltaTime, ForceMode2D.Force);
             }
         }
+
+        return;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D _collider)

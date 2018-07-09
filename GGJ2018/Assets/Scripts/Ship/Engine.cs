@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Engine : ShipComponent
+public class Engine : ShipComponent, EventHandler<BlackHoleCenterReachEvent>
 {
     [Header("Engine settings")]
     [SerializeField]
@@ -26,6 +26,18 @@ public class Engine : ShipComponent
     {
         currentFuel = maxFuel;
         fuelDisplay.UpdateBar(currentFuel, maxFuel);
+        return;
+    }
+
+    protected void OnEnable()
+    {
+        EventManager.AddListener<BlackHoleCenterReachEvent>(this);
+        return;
+    }
+
+    protected void OnDisable()
+    {
+        EventManager.RemoveListener<BlackHoleCenterReachEvent>(this);
         return;
     }
 
@@ -85,9 +97,6 @@ public class Engine : ShipComponent
         return;
     }
 
-    // Event for fuel loss
-    // Fijarse si el radar esta prendido
-    // Event for recharging fuel
     public void ApplyForce(Vector3 _direction)
     {
         ship.ShipBody.AddForce(_direction * thrust);
@@ -136,12 +145,13 @@ public class Engine : ShipComponent
         }
     }
 
-    protected void OnTriggerEnter2D(Collider2D _collision)
+    public void OnEvent(BlackHoleCenterReachEvent _blackHoleEvent)
     {
-        if (_collision.gameObject.CompareTag("Blackhole"))
+        if(_blackHoleEvent.affectedObject.Equals(ship.ShipBody) == true)
         {
-            Debug.Log("Recibi daño de Hoyo Negro");
             RecieveDamage(30);
         }
+
+        return;
     }
 }

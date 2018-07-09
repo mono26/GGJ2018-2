@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitationalFieldDirection: 1
-  gravitationalFieldStrenght: 1000
-  gravityStrenght: 900
+  gravitationalRotation: 9.8
+  gravity: 100
   gravitationalField: {fileID: 58951071852926638}
   planetRadius: 2.2
   signal: {fileID: 0}

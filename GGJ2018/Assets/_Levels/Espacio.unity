@@ -10700,6 +10700,11 @@ Prefab:
       propertyPath: maxSpawnTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114199038662733922, guid: c0f00fadda844954aa85ab38276b46dc,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0f00fadda844954aa85ab38276b46dc, type: 2}
   m_IsPrefabParent: 0

@@ -2,48 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHole : MonoBehaviour
+public class BlackHoleCenterReachEvent : SpaceEvent
 {
-    [SerializeField]
-    private float force = 1f;
-    private float distancia;
+    public Rigidbody2D affectedObject;
 
-    [SerializeField]
-    private float tiempoRestante;
-
-    private bool isInactive;
-
-	// Use this for initialization
-	void Start ()
+    public BlackHoleCenterReachEvent(Rigidbody2D _affectedObject)
     {
-        tiempoRestante = 10;
-        isInactive = true;
+        affectedObject = _affectedObject;
+    }
+}
+
+public class BlackHole : Planet
+{
+    [Header("Black Hole settings")]
+    [SerializeField]
+    private float lifeTime;
+    protected float minimumDistanceToCenter;
+    [SerializeField]
+    private float lifeTimeCounter;
+
+    protected void OnEnable ()
+    {
+        lifeTimeCounter = lifeTime;
+
+        return;
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	protected override void FixedUpdate ()
     {
-        if (isInactive)
+        if (lifeTimeCounter <= 0)
         {
-            tiempoRestante -= Time.deltaTime;
-        }
-
-        if (tiempoRestante <= 0)
-        {
-            //Destroy(this.gameObject);
             BlackholePool.Instance.ReleaseBlackholes(this.GetComponent<Rigidbody2D>());
+            return;
         }
-	}
 
-    private void OnTriggerStay2D(Collider2D collision)
+        //base.FixedUpdate();
+        ApplyGravityOnObjects();
+
+        lifeTimeCounter -= Time.deltaTime;
+
+        return;
+    }
+
+    protected void CheckObjectsDistanceToCenter()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        foreach(Rigidbody2D obj in objectsInsideGravitationField)
         {
-            isInactive = false;
-            Vector2 direccion = (this.transform.position - collision.transform.position).normalized;
-            distancia = Vector2.Distance(this.transform.position, collision.transform.position);
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(direccion * force);
+            if(Vector3.Distance(obj.position, transform.position) < minimumDistanceToCenter)
+            {
+                // TODO destroy de object.
+                // TODO apply damage to engine.
+            }
         }
-        
     }
 }

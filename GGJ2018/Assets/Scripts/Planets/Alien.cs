@@ -8,7 +8,7 @@ public class Alien : MonoBehaviour
     [SerializeField]
     protected GameObject deathVfx;
     [SerializeField]
-    protected float lifeTime = 5.0f;
+    protected float lifeTime = 3.0f;
 
     public IEnumerator KillAlien()
     {

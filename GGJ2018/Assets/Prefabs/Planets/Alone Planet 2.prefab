@@ -38,8 +38,8 @@ GameObject:
   - component: {fileID: 4042629383176486}
   - component: {fileID: 212338284238477042}
   - component: {fileID: 50935241412403000}
-  - component: {fileID: 114178262049866828}
   - component: {fileID: 58841051525047866}
+  - component: {fileID: 114178262049866828}
   m_Layer: 8
   m_Name: Alone Planet 2
   m_TagString: Planet
@@ -136,8 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitationalFieldDirection: -1
-  gravitationalFieldStrenght: 1000
-  gravityStrenght: 900
+  gravitationalRotation: 9.8
+  gravity: 100
   gravitationalField: {fileID: 58315486521717562}
   planetRadius: 4.7
   signal: {fileID: 0}
