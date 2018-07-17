@@ -1,23 +1,30 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    private Ship ship;
-
     //TODO create a class for managing UI only
-
+    [Header("Level Manager settings")]
     [SerializeField]
     private int initialScorePoints = 0;
     [SerializeField]
+    protected AudioClip loseSfx;
+    [SerializeField]
+    protected string mainMenuScene;
+    [SerializeField]
     private int maxScorePoints = 30;
-    private int scorePoints;
-    public int ScorePoints { get { return scorePoints; } }
+    [SerializeField]
+    protected AudioClip winSfx;
+
+    [Header("Components")]
+    [SerializeField]
+    private Image fuelBar;
     [SerializeField]
     private Text scoreText;
 
-    [SerializeField]
-    private Image fuelBar;
+    [Header("Editor debbuging")]
+    private int scorePoints;
 
     protected override void Awake()
     {
@@ -28,14 +35,15 @@ public class LevelManager : Singleton<LevelManager>
 
         return;
     }
-    // Use this for initialization
+
     void Start ()
     {
         scoreText.gameObject.SetActive(true);
         fuelBar.gameObject.SetActive(true);
 
         scorePoints = initialScorePoints;
-        ship = GameObject.Find("BobTheGreenAlien").GetComponent<Ship>();
+
+        return;
 	}
 	
 	// Update is called once per frame
@@ -44,15 +52,18 @@ public class LevelManager : Singleton<LevelManager>
         // Set score text to the actual score number
         scoreText.text = scorePoints.ToString();
 		// Look if the player score limit has reach
-        if (ScorePoints >= maxScorePoints)
+        if (scorePoints >= maxScorePoints)
         {
             EndGame();
         }
+
+        return;
 	}
 
     public void IncreaseScore()
     {
         scorePoints += 1;
+
         return;
     }
 
@@ -60,6 +71,21 @@ public class LevelManager : Singleton<LevelManager>
     {
         //TODO activate en game screen.
         //LoadManager.LoadScene("Credits");
+        return;
+    }
+
+    public void QuitLevel()
+    {
+        Time.timeScale = 1;
+        LoadManager.LoadScene(mainMenuScene);
+        //SoundManager.Instance.StopSound();
+        return;
+    }
+
+    public void RetryLevel()
+    {
+        //EventManager.TriggerEvent(new GameEvent(GameEventTypes.UnPause));
+        LoadManager.LoadScene(SceneManager.GetActiveScene().name);
         return;
     }
 }

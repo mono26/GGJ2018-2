@@ -32,9 +32,9 @@ public class LoadManager : MonoBehaviour
     private void Awake()
     {
         if (loadingText == null)
-            loadingText = GameObject.Find("LoadText").GetComponent<Text>();
+            loadingText = GameObject.Find("LoadingText").GetComponent<Text>();
         if (loadingFill == null)
-            loadingFill = GameObject.Find("LoadBar").GetComponentInChildren<Image>();
+            loadingFill = GameObject.Find("LoadingBar").GetComponentInChildren<Image>();
 
         return;
     }

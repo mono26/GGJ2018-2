@@ -191,7 +191,6 @@ GameObject:
   - component: {fileID: 312804986}
   - component: {fileID: 312804988}
   - component: {fileID: 312804987}
-  - component: {fileID: 312804989}
   m_Layer: 5
   m_Name: LoadScreen
   m_TagString: Untagged
@@ -253,19 +252,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 312804985}
---- !u!114 &312804989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 312804985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01aa315e59cd28f4fbe576677e41d60b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadingText: {fileID: 1741343745}
-  loadingFill: {fileID: 207012761}
 --- !u!1 &367334328
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,8 +263,9 @@ GameObject:
   - component: {fileID: 367334331}
   - component: {fileID: 367334330}
   - component: {fileID: 367334329}
+  - component: {fileID: 367334333}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: LoadScreenUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,14 +339,27 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 312804986}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 897051655}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &367334333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 367334328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01aa315e59cd28f4fbe576677e41d60b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingText: {fileID: 1741343745}
+  loadingFill: {fileID: 207012761}
 --- !u!1 &542547445
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +574,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 367334332}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -654,7 +655,7 @@ GameObject:
   - component: {fileID: 1741343746}
   - component: {fileID: 1741343745}
   m_Layer: 5
-  m_Name: LoadText
+  m_Name: LoadingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
