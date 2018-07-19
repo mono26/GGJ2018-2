@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LoadManager : MonoBehaviour
 {
     [SerializeField]
-    private static string loadingScreenSceneName = "LoadingScreen";
+    private static string loadingScreenSceneName = "LoadScreen";
     private static string sceneToLoad;
 
     [SerializeField]
