@@ -30,16 +30,20 @@ public class LevelManager : Singleton<LevelManager>
     {
         base.Awake();
 
-        scoreText.gameObject.SetActive(false);
-        fuelBar.gameObject.SetActive(false);
+        if(scoreText != null)
+            scoreText.gameObject.SetActive(false);
+        if (fuelBar != null)
+            fuelBar.gameObject.SetActive(false);
 
         return;
     }
 
     void Start ()
     {
-        scoreText.gameObject.SetActive(true);
-        fuelBar.gameObject.SetActive(true);
+        if (scoreText != null)
+            scoreText.gameObject.SetActive(true);
+        if (fuelBar != null)
+            fuelBar.gameObject.SetActive(true);
 
         scorePoints = initialScorePoints;
 
@@ -50,7 +54,8 @@ public class LevelManager : Singleton<LevelManager>
 	void Update ()
     {
         // Set score text to the actual score number
-        scoreText.text = scorePoints.ToString();
+        if (scoreText != null)
+            scoreText.text = scorePoints.ToString();
 		// Look if the player score limit has reach
         if (scorePoints >= maxScorePoints)
         {

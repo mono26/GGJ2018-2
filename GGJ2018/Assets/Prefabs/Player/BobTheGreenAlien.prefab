@@ -415,7 +415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1580697500715266
 GameObject:
   m_ObjectHideFlags: 1
@@ -511,6 +511,7 @@ GameObject:
   - component: {fileID: 223397720278477496}
   - component: {fileID: 114253260732229658}
   - component: {fileID: 114907072513685842}
+  - component: {fileID: 114386237127576186}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -1289,6 +1290,20 @@ MonoBehaviour:
   m_Text: 'Retry
 
 '
+--- !u!114 &114386237127576186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1746908027217708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb55d37eedf255043b4e983f9475de60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverUI: {fileID: 1568283391504368}
+  pauseUI: {fileID: 1819345926371164}
+  winUI: {fileID: 1568283391504368}
 --- !u!114 &114465578780492410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1429,7 +1444,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114654165359349814}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: QuitLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114604078945582880
@@ -9296,10 +9322,10 @@ RectTransform:
   m_Father: {fileID: 224591575484703160}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 285, y: -187.5}
+  m_SizeDelta: {x: 470, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224227949153167470
 RectTransform:
@@ -9484,10 +9510,10 @@ RectTransform:
   m_Father: {fileID: 224591575484703160}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 285, y: -62.5}
+  m_SizeDelta: {x: 470, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224759324117070656
 RectTransform:

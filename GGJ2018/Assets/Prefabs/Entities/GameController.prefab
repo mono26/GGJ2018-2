@@ -52,6 +52,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialScorePoints: 0
+  loseSfx: {fileID: 0}
+  mainMenuScene: MainMenu
   maxScorePoints: 30
-  scoreText: {fileID: 0}
+  winSfx: {fileID: 0}
   fuelBar: {fileID: 0}
+  scoreText: {fileID: 0}
