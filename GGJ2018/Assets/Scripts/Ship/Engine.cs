@@ -49,7 +49,7 @@ public class Engine : ShipComponent, EventHandler<BlackHoleCenterReachEvent>
 
         if (currentFuel <= 0)
         {
-            LevelManager.Instance.EndGame();
+            LevelUIManager.Instance.ActivateGameOverUI(true);
         }
 
         return;

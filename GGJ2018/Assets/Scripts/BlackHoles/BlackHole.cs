@@ -21,6 +21,11 @@ public class BlackHole : Planet
     [SerializeField]
     private float lifeTimeCounter;
 
+    [Header("Balck Hole components")]
+    [SerializeField] private SpawnableObject spawnableComponent;
+
+    public SpawnableObject GetSpawnableComponent { get { return spawnableComponent; } }
+
     protected void OnEnable ()
     {
         lifeTimeCounter = lifeTime;
@@ -33,15 +38,11 @@ public class BlackHole : Planet
     {
         if (lifeTimeCounter <= 0)
         {
-            BlackholePool.Instance.ReleaseBlackholes(this.GetComponent<Rigidbody2D>());
+            BlackHolePool.Instance.ReleaseBlackHole(this);
             return;
         }
-
-        //base.FixedUpdate();
         ApplyGravityOnObjects();
-
         lifeTimeCounter -= Time.deltaTime;
-
         return;
     }
 

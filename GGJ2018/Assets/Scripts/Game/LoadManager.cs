@@ -13,7 +13,7 @@ public class LoadManager : MonoBehaviour
     private Text loadingText;
     [SerializeField]
     private Image loadingFill;
-    private const float loadDelay = 1.0f;
+    private const float loadDelay = 0.5f;
     private const float exitFadeDuration = 1.0f;
     private AsyncOperation loadOperation;
 

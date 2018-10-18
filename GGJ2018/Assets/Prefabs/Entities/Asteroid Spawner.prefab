@@ -46,15 +46,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1874265655140844}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec257743122491a4787642c23d2e4436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxForce: 55000
   minForce: 35000
-  maxSpawnTime: 3
-  minSpawnTime: 0.5
+  maxSpawnTime: 5
+  minSpawnTime: 1
   offsetX: 0
   offsetY: 0
   player: {fileID: 0}

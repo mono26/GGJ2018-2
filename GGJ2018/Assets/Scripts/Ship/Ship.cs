@@ -17,16 +17,16 @@ public class Ship : MonoBehaviour
 
 	void Awake()
     {
-        if (shipCollider == null)
-        {
+        if (shipCollider == null) {
             shipCollider = GetComponent<BoxCollider2D>();
         }
-        if (shipSprite == null)
-        {
+        if (shipSprite == null) {
             shipSprite = GetComponent<SpriteRenderer>();
+            if(shipSprite == null) {
+                shipSprite = GetComponentInChildren<SpriteRenderer>();
+            }
         }
-        if (shipBody == null)
-        {
+        if (shipBody == null) {
             shipBody = GetComponent<Rigidbody2D>();
         }
 

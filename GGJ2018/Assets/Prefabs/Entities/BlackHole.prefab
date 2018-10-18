@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 58626897860147646}
   - component: {fileID: 212297474541861160}
   - component: {fileID: 114658066407859314}
+  - component: {fileID: 114952423413972156}
   m_Layer: 0
   m_Name: BlackHole
   m_TagString: Blackhole
@@ -130,6 +131,19 @@ MonoBehaviour:
   gravitationalFieldRadius: 0
   lifeTime: 10
   lifeTimeCounter: 0
+  spawnableComponent: {fileID: 114952423413972156}
+--- !u!114 &114952423413972156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242909717354880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f7abbd3dedbb44dabdee9e8ff12871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 2.5
 --- !u!198 &198009345818855504
 ParticleSystem:
   m_ObjectHideFlags: 1

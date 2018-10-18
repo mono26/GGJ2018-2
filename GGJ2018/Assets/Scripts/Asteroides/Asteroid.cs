@@ -2,22 +2,22 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Asteroide : MonoBehaviour, EventHandler<BlackHoleCenterReachEvent>
+public class Asteroid : MonoBehaviour, EventHandler<BlackHoleCenterReachEvent>
 {
-    [SerializeField]
-    protected GameObject deadParticle;
-    [SerializeField]
-    protected float lifeTime = 10;
+    [SerializeField] protected GameObject deadParticle;
+    [SerializeField] protected float lifeTime = 10;
 
-    [SerializeField]
-    protected Rigidbody2D body;
-    protected Rigidbody2D Body { get { return body; } }
+    [SerializeField] protected Rigidbody2D bodyComponent;
+    [SerializeField] private SpawnableObject spawnableComponent;
+
+    public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
+    public SpawnableObject GetSpawnableComponent { get { return spawnableComponent; } }
 
     // Use this for initialization
     protected void Start ()
     {
-        if(body == null)
-            body = GetComponent<Rigidbody2D>();
+        if(bodyComponent == null)
+            bodyComponent = GetComponent<Rigidbody2D>();
 
         StartCoroutine(DeadTimer());
 
@@ -39,9 +39,7 @@ public class Asteroide : MonoBehaviour, EventHandler<BlackHoleCenterReachEvent>
     protected IEnumerator DeadTimer()
     {
         yield return new WaitForSeconds(lifeTime);
-
-        AsteroidPool.Instance.ReleaseAsteroide(this.GetComponent<Rigidbody2D>());
-
+        AsteroidPool.Instance.ReleaseAsteroide(this);
         yield break;
     }
 
@@ -49,26 +47,22 @@ public class Asteroide : MonoBehaviour, EventHandler<BlackHoleCenterReachEvent>
     {
         // TODO pass direction of movement from the asteroid to the rotation of the particle
         var particle = Instantiate(deadParticle, transform.position, transform.rotation);
-        particle.transform.rotation = Quaternion.FromToRotation(particle.transform.up, body.velocity);
-        AsteroidPool.Instance.ReleaseAsteroide(this.GetComponent<Rigidbody2D>());
-
+        particle.transform.rotation = Quaternion.FromToRotation(particle.transform.up, bodyComponent.velocity);
+        AsteroidPool.Instance.ReleaseAsteroide(this);
         return;
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         ReleaseAsteroid();
-
         return;
     }
 
     public void OnEvent(BlackHoleCenterReachEvent _blackHoleEvent)
     {
-        if (_blackHoleEvent.affectedObject.Equals(body) == true)
-        {
+        if (_blackHoleEvent.affectedObject.Equals(bodyComponent) == true) {
             ReleaseAsteroid();
         }
-
         return;
     }
 }

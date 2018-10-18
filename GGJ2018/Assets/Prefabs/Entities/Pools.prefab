@@ -52,9 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c251d82029c3b6418913f5fa85d8447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackholePrefab: {fileID: 50122391854520214, guid: c4d1f1278f31f6d43ba389f6e898be00,
+  blackholePrefab: {fileID: 114658066407859314, guid: c4d1f1278f31f6d43ba389f6e898be00,
     type: 2}
-  size: 0
+  size: 10
 --- !u!114 &114727009090263700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,6 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88312b173a55836409efad1fa78f4208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidePrefab: {fileID: 50098178575817834, guid: f2647d68380f08a4eb8ce4af5d6921d1,
+  asteroidePrefab: {fileID: 114255368610047976, guid: f2647d68380f08a4eb8ce4af5d6921d1,
     type: 2}
-  size: 0
+  size: 10

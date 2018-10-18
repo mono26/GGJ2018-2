@@ -23,8 +23,9 @@ GameObject:
   - component: {fileID: 50098178575817834}
   - component: {fileID: 58224094565840894}
   - component: {fileID: 114255368610047976}
+  - component: {fileID: 114510045144601786}
   m_Layer: 0
-  m_Name: Asteroide
+  m_Name: Asteroid
   m_TagString: Asteroide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +108,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.88458323
+  m_Radius: 0.8
 --- !u!114 &114255368610047976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -122,7 +123,20 @@ MonoBehaviour:
   deadParticle: {fileID: 1768081658256074, guid: ef56f4b1cb2d41042996e81c9d427426,
     type: 2}
   lifeTime: 10
-  body: {fileID: 50098178575817834}
+  bodyComponent: {fileID: 50098178575817834}
+  spawnableComponent: {fileID: 114510045144601786}
+--- !u!114 &114510045144601786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1369015871017888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f7abbd3dedbb44dabdee9e8ff12871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.8
 --- !u!212 &212002400596311176
 SpriteRenderer:
   m_ObjectHideFlags: 1

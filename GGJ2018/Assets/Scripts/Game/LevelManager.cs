@@ -75,7 +75,7 @@ public class LevelManager : Singleton<LevelManager>
     public void EndGame()
     {
         //TODO activate en game screen.
-        //LoadManager.LoadScene("Credits");
+        LoadManager.LoadScene("Credits");
         return;
     }
 

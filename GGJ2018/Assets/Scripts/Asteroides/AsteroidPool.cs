@@ -6,50 +6,50 @@ using UnityEngine;
 public class AsteroidPool : Singleton<AsteroidPool>
 {
     [Header("Asteroid Pool settings")]
-    [SerializeField]
-    private Rigidbody2D asteroidePrefab;
+    [SerializeField] private Asteroid asteroidePrefab;
 
-    private List<Rigidbody2D> asteroides;
+    [SerializeField] private List<Asteroid> asteroides;
+
+    [SerializeField] private int size = 10;
 
     protected override void Awake()
     {
         base.Awake();
-
         PrepareAsteroide();
     }
 
     private void PrepareAsteroide()
     {
-        asteroides = new List<Rigidbody2D>();
-        for (int i = 0; i > asteroides.Capacity; i++)
+        asteroides = new List<Asteroid>();
+        for (int i = 0; i < size; i++)
             AddAsteroide();
     }
 
     private void AddAsteroide()
     {
-        Rigidbody2D instance = Instantiate(asteroidePrefab);
+        Asteroid instance = Instantiate(asteroidePrefab);
         instance.gameObject.SetActive(false);
         asteroides.Add(instance);
     }
 
-    public void ReleaseAsteroide(Rigidbody2D asteroide)
+    public void ReleaseAsteroide(Asteroid asteroide)
     {
         asteroide.gameObject.SetActive(false);
         asteroides.Add(asteroide);
     }
 
-    public Rigidbody2D GetAsteroide()
+    private Asteroid AllocateAsteroide()
+    {
+        Asteroid asteroide = asteroides[asteroides.Count - 1];
+        asteroides.RemoveAt(asteroides.Count - 1);
+        asteroide.gameObject.SetActive(true);
+        return asteroide;
+    }
+
+    public Asteroid GetAsteroide()
     {
         if (asteroides.Count == 0)
             AddAsteroide();
         return AllocateAsteroide();
-    }
-
-    private Rigidbody2D AllocateAsteroide()
-    {
-        Rigidbody2D asteroide = asteroides[asteroides.Count - 1];
-        asteroides.RemoveAt(asteroides.Count - 1);
-        asteroide.gameObject.SetActive(true);
-        return asteroide;
     }
 }

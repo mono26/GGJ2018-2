@@ -1,67 +1,52 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackholePool : MonoBehaviour
+public class BlackHolePool : Singleton<BlackHolePool>
 {
-    private static BlackholePool instance;
+    [Header("Black Hole Pool settings")]
+    [SerializeField] private BlackHole blackholePrefab;
+    [SerializeField] private int size = 10;
 
-    public static BlackholePool Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
-    [SerializeField]
-    private Rigidbody2D blackholePrefab;
-    [SerializeField]
-    private int size;
-
-    private List<Rigidbody2D> blackholes;
+    [SerializeField] private List<BlackHole> blackholes;
 
     // Use this for initialization
-    void Awake()
+    protected override void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            PrepareBlackHoles();
-        }
-        else
-            Destroy(gameObject);
+        base.Awake();
+        PrepareBlackHoles();
+        return;
     }
 
     private void PrepareBlackHoles()
     {
-        blackholes = new List<Rigidbody2D>();
-        for (int i = 0; i > size; i++)
+        blackholes = new List<BlackHole>();
+        for (int i = 0; i < size; i++)
             AddBlackHole();
     }
 
     private void AddBlackHole()
     {
-        Rigidbody2D instance = Instantiate(blackholePrefab);
+        BlackHole instance = Instantiate(blackholePrefab);
         instance.gameObject.SetActive(false);
         blackholes.Add(instance);
     }
 
-    public void ReleaseBlackholes(Rigidbody2D blackhole)
+    public void ReleaseBlackHole(BlackHole blackhole)
     {
         blackhole.gameObject.SetActive(false);
         blackholes.Add(blackhole);
     }
 
-    public Rigidbody2D GetBlackHole()
+    public BlackHole GetBlackHole()
     {
         if (blackholes.Count == 0)
             AddBlackHole();
         return AllocateBlackHole();
     }
 
-    private Rigidbody2D AllocateBlackHole()
+    private BlackHole AllocateBlackHole()
     {
-        Rigidbody2D blackhole = blackholes[blackholes.Count - 1];
+        BlackHole blackhole = blackholes[blackholes.Count - 1];
         blackholes.RemoveAt(blackholes.Count - 1);
         blackhole.gameObject.SetActive(true);
         return blackhole;
