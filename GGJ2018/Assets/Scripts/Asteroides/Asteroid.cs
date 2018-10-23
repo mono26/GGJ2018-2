@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿// Copyright (c) What a Box Creative Studio. All rights reserved.
+
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Asteroid : MonoBehaviour, EventHandler<BlackHoleCenterReachEvent>
+public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>
 {
     [SerializeField] protected GameObject deadParticle;
     [SerializeField] protected float lifeTime = 10;
@@ -26,13 +28,13 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackHoleCenterReachEvent>
 
     protected void OnEnable()
     {
-        EventManager.AddListener<BlackHoleCenterReachEvent>(this);
+        EventManager.AddListener<BlackHoleEvent>(this);
         return;
     }
 
     protected void OnDisable()
     {
-        EventManager.RemoveListener<BlackHoleCenterReachEvent>(this);
+        EventManager.RemoveListener<BlackHoleEvent>(this);
         return;
     }
 
@@ -58,9 +60,9 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackHoleCenterReachEvent>
         return;
     }
 
-    public void OnEvent(BlackHoleCenterReachEvent _blackHoleEvent)
+    public void OnGameEvent(BlackHoleEvent _blackHoleEvent)
     {
-        if (_blackHoleEvent.affectedObject.Equals(bodyComponent) == true) {
+        if (_blackHoleEvent.GetAffectedObject.Equals(bodyComponent) == true) {
             ReleaseAsteroid();
         }
         return;

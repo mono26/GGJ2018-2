@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4966113047103744}
   - component: {fileID: 198118586148454688}
   - component: {fileID: 199931930053443824}
-  - component: {fileID: 114727679787579526}
   - component: {fileID: 114288583854714398}
   m_Layer: 0
   m_Name: Asteroid Particle Explosion
@@ -58,18 +57,6 @@ MonoBehaviour:
   isTheParticleAAnimation: 0
   particle: {fileID: 198118586148454688}
   animationParticle: {fileID: 0}
---- !u!114 &114727679787579526
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1130349790516682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda082ecbe4ccdc429004e8917676a38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 1.5
 --- !u!198 &198118586148454688
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -1,10 +1,9 @@
-﻿using System;
+﻿// Copyright (c) What a Box Creative Studio. All rights reserved.
+
+using System;
 using System.Collections.Generic;
 
-public class SpaceEvent
-{
-
-}
+public class GameEvent { }
 
 public static class EventManager
 {
@@ -13,108 +12,106 @@ public static class EventManager
     static EventManager()
     {
         events = new Dictionary<Type, List<EventHandlerBase>>();
-    }
-
-    public static void AddListener<T>(EventHandler<T> listener) where T : SpaceEvent
-    {
-        if (!events.ContainsKey(typeof(T)))
-            events[typeof(T)] = new List<EventHandlerBase>();
-
-        if (!SubscriptionExists(typeof(T), listener))
-            events[typeof(T)].Add(listener);
-
         return;
     }
 
-    public static void RemoveListener<T>(EventHandler<T> listener) where T : SpaceEvent
+    public static void AddListener<T>(EventHandler<T> listener) where T : GameEvent
+    {
+        if (!ExistsEventType<T>()) {
+            events[typeof(T)] = new List<EventHandlerBase>();
+        }
+        if (!SubscriptionExists(listener)) {
+            events[typeof(T)].Add(listener);
+        }
+        return;
+    }
+
+    private static bool ExistsEventType<T>() where T : GameEvent
+    {
+        bool eventTypeExists = true;
+        if (!events.ContainsKey(typeof(T))) {
+            eventTypeExists = false;
+        }
+        return eventTypeExists;
+    }
+
+    private static bool SubscriptionExists<T>(EventHandler<T> receiver) where T : GameEvent
+    {
+        bool existsSubscription = false;
+        if (ExistsEventType<T>())
+        {
+            List<EventHandlerBase> receivers;
+            events.TryGetValue(typeof(T), out receivers);
+            for (int i = 0; i < receivers.Count; i++)
+            {
+                if (receivers[i] == receiver)
+                {
+                    existsSubscription = true;
+                    break;
+                }
+            }
+        }
+        return existsSubscription;
+    }
+
+    public static void RemoveListener<T>(EventHandler<T> listener) where T : GameEvent
     {
         Type eventType = typeof(T);
-
-        if (!events.ContainsKey(eventType))
+        try
         {
-            #if EVENTROUTER_THROWEXCEPTIONS
-			    throw new ArgumentException( string.Format( "Removing listener \"{0}\", but the event type \"{1}\" isn't registered.", listener, eventType.ToString() ) );
-            #else
-                return;
-            #endif
-        }
-
-        List<EventHandlerBase> subscriberList = events[typeof(T)];
-        bool listenerFound;
-        listenerFound = false;
-
-        if (listenerFound)
-        {
-
-        }
-
-        for (int i = 0; i < subscriberList.Count; i++)
-        {
-            if (subscriberList[i] == listener)
+            if (ExistsEventType<T>() && SubscriptionExists<T>(listener))
             {
-                subscriberList.Remove(subscriberList[i]);
-                listenerFound = true;
-
-                if (subscriberList.Count == 0)
-                    events.Remove(eventType);
-
-                return;
+                List<EventHandlerBase> subscriberList = events[typeof(T)];
+                for (int i = 0; i < subscriberList.Count; i++)
+                {
+                    if (subscriberList[i] == listener)
+                    {
+                        subscriberList.Remove(subscriberList[i]);
+                        if (subscriberList.Count == 0)
+                        {
+                            events.Remove(eventType);
+                        }
+                    }
+                }
+            }
+            else {
+                throw new EventException(typeof(T), string.Format(listener + "not subscribed to the event"));
             }
         }
-
-        #if EVENTROUTER_THROWEXCEPTIONS
-		if( !listenerFound )
-		{
-			throw new ArgumentException( string.Format( "Removing listener, but the supplied receiver isn't subscribed to event type \"{0}\".", eventType.ToString() ) );
-		}
-        #endif
+        catch (EventException eventException) {
+            eventException.DisplayException();
+        }
+        return;
     }
 
-    private static bool SubscriptionExists<T>(Type type, EventHandler<T> receiver) where T : SpaceEvent
+    public static void TriggerEvent<T>(T newEvent) where T : GameEvent
     {
-        List<EventHandlerBase> receivers;
-
-        if (!events.TryGetValue(type, out receivers)) return false;
-
-        bool exists = false;
-
-        for (int i = 0; i < receivers.Count; i++)
+        try
         {
-            if (receivers[i] == receiver)
+            if (ExistsEventType<T>())
             {
-                exists = true;
-                break;
+                List<EventHandlerBase> subscribersList;
+                events.TryGetValue(typeof(T), out subscribersList);
+                for (int i = 0; i < subscribersList.Count; i++)
+                {
+                    (subscribersList[i] as EventHandler<T>).OnGameEvent(newEvent);
+                }
+            }
+            else{
+                throw new EventException(typeof(T), "Has no listeners.");
             }
         }
-
-        return exists;
-    }
-
-    public static void TriggerEvent<T>(T newEvent) where T : SpaceEvent
-    {
-        List<EventHandlerBase> list;
-        if (!events.TryGetValue(typeof(T), out list))
-        {
-            #if EVENTROUTER_REQUIRELISTENER
-	                        throw new ArgumentException( string.Format( "Attempting to send event of type \"{0}\", but no listener for this type has been found. Make sure this.Subscribe<{0}>(EventRouter) has been called, or that all listeners to this event haven't been unsubscribed.", typeof( MMEvent ).ToString() ) );
-            #else
-                return;
-            #endif
+        catch (EventException eventException) {
+            eventException.DisplayException();
         }
-
-        for (int i = 0; i < list.Count; i++)
-        {
-            (list[i] as EventHandler<T>).OnEvent(newEvent);
-        }
+        return;
     }
 }
 
-public interface EventHandlerBase
-{
-
-}
+// TODO check if refactorization is possible
+public interface EventHandlerBase { }
 
 public interface EventHandler<T> : EventHandlerBase
 {
-    void OnEvent(T eventType);
+    void OnGameEvent(T eventType);
 }

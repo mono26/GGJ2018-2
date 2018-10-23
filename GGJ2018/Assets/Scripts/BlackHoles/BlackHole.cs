@@ -1,25 +1,33 @@
-﻿using System.Collections;
+﻿// Copyright (c) What a Box Creative Studio. All rights reserved.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHoleCenterReachEvent : SpaceEvent
-{
-    public Rigidbody2D affectedObject;
+public enum BlackHoleEventType { CenterReachead, LifeTimeEnd }
 
-    public BlackHoleCenterReachEvent(Rigidbody2D _affectedObject)
+public class BlackHoleEvent : GameEvent
+{
+    private GameObject affectedGameObject;
+    private BlackHoleEventType eventType;
+
+    public GameObject GetAffectedObject { get { return affectedGameObject; } }
+    public BlackHoleEventType GetEventType { get { return eventType; } }
+
+    public BlackHoleEvent(GameObject _affectedGameObject, BlackHoleEventType _eventType)
     {
-        affectedObject = _affectedObject;
+        affectedGameObject = _affectedGameObject;
+        eventType = _eventType;
+        return;
     }
 }
 
 public class BlackHole : Planet
 {
     [Header("Black Hole settings")]
-    [SerializeField]
-    private float lifeTime;
+    [SerializeField] private float lifeTime;
     protected float minimumDistanceToCenter;
-    [SerializeField]
-    private float lifeTimeCounter;
+    [SerializeField] private float lifeTimeCounter;
 
     [Header("Balck Hole components")]
     [SerializeField] private SpawnableObject spawnableComponent;
@@ -29,11 +37,9 @@ public class BlackHole : Planet
     protected void OnEnable ()
     {
         lifeTimeCounter = lifeTime;
-
         return;
 	}
 	
-	// Update is called once per frame
 	protected override void FixedUpdate ()
     {
         if (lifeTimeCounter <= 0)
@@ -48,14 +54,12 @@ public class BlackHole : Planet
 
     protected void CheckObjectsDistanceToCenter()
     {
-        foreach(Rigidbody2D obj in objectsInsideGravitationField)
+        foreach(Rigidbody2D body in objectsInsideGravitationField)
         {
-            if(Vector3.Distance(obj.position, transform.position) < minimumDistanceToCenter)
-            {
-                EventManager.TriggerEvent<BlackHoleCenterReachEvent>(new BlackHoleCenterReachEvent(obj));
+            if(Vector3.Distance(body.position, transform.position) < minimumDistanceToCenter) {
+                EventManager.TriggerEvent<BlackHoleEvent>(new BlackHoleEvent(body.gameObject, BlackHoleEventType.CenterReachead));
             }
         }
-
         return;
     }
 }

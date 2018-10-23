@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 58224094565840894}
   - component: {fileID: 114255368610047976}
   - component: {fileID: 114510045144601786}
-  m_Layer: 0
+  - component: {fileID: 114184783772500382}
+  m_Layer: 12
   m_Name: Asteroid
   m_TagString: Asteroide
   m_Icon: {fileID: 0}
@@ -40,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4939690088775884}
   - component: {fileID: 212769381877460806}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Aura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +110,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
+--- !u!114 &114184783772500382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1369015871017888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d7dff9fbae9654ea93eff7fa6ad6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTags:
+  - Player
+  - Alien
+  damageOnTouch: 5
 --- !u!114 &114255368610047976
 MonoBehaviour:
   m_ObjectHideFlags: 1
