@@ -9594,6 +9594,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4727467754973272, guid: 70e129d0fe2eb5b44a2825a222f13b27, type: 2}
       propertyPath: m_LocalPosition.x
       value: -68.782
@@ -9625,6 +9630,81 @@ Prefab:
     - target: {fileID: 4727467754973272, guid: 70e129d0fe2eb5b44a2825a222f13b27, type: 2}
       propertyPath: m_RootOrder
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: randomSeed
+      value: 1826643274
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outSlope
+      value: -0.00000064099424
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
+      value: -0.27790496
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
+      value: 0.34875157
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
+      value: 0.8536907
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
+      value: -0.00000064099424
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
+      value: -0.27790496
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].inSlope
+      value: -2.25967
+      objectReference: {fileID: 0}
+    - target: {fileID: 198725356534087886, guid: 70e129d0fe2eb5b44a2825a222f13b27,
+        type: 2}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].outSlope
+      value: -2.25967
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 70e129d0fe2eb5b44a2825a222f13b27, type: 2}
@@ -17381,61 +17461,6 @@ Prefab:
     - target: {fileID: 4218939198969006, guid: e9fc52c01928c814588868868247ff44, type: 2}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114010422602522362, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114010422602522362, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114010422602522362, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114010422602522362, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_PreserveAspect
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114981962741963100, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_PreserveAspect
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224048356543885328, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -9.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114981962741963100, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114981962741963100, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114981962741963100, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 0.91724133
-      objectReference: {fileID: 0}
-    - target: {fileID: 114981962741963100, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114981962741963100, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e9fc52c01928c814588868868247ff44, type: 2}
