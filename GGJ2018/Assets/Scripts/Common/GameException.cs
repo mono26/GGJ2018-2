@@ -86,3 +86,8 @@ public class EventException : GameException
         return message;
     }
 }
+
+public class InputException : GameException
+{
+    // TODO input exceptions.
+}

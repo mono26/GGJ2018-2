@@ -46,36 +46,6 @@ public class Radar : ShipComponent
         return;
     }
 
-    protected override void HandleInput()
-    {
-        // Input for the radar
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (IsRadarOn == false)
-            {
-                StartRadar();
-                return;
-            }
-            else if (IsRadarOn == true)
-            {
-                StopRadar();
-                return;
-            }
-        }
-        //TODO use change frecuency method
-        //Input for changing frecuency
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            //TODO method for increase the index of the looked planet
-            ChangeFrecuency(1);
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            //TODO method for decrease the index of the looked planet
-            ChangeFrecuency(-1);
-        }
-    }
-
     // Method for detecting planets in range
     private IEnumerator DetectPlanet()
     {
@@ -87,8 +57,7 @@ public class Radar : ShipComponent
                 if (planet.gameObject.CompareTag("Planet"))
                 {
                     Planet planetComponent = planet.GetComponent<Planet>();
-                    if (planetComponent.Signal !=  null)
-                    {
+                    if (planetComponent.Signal !=  null) {
                         AddPlanetWithSignal(planetComponent);
                     }
                 }
@@ -99,17 +68,28 @@ public class Radar : ShipComponent
         yield break;
     }
 
-    public IEnumerator CheckDistanceToPlanetsInRadarAndRemove()
+    private void AddPlanetWithSignal(Planet _planet)
+    {
+        if (foundPlanetsWithSignal.Contains(_planet) == false)
+        {
+            Debug.Log(_planet.gameObject.name + "Adding Planet" + _planet);
+            foundPlanetsWithSignal.Add(_planet);
+        }
+        return;
+    }
+
+    private IEnumerator CheckDistanceToPlanetsInRadarAndRemove()
     {
         if (foundPlanetsWithSignal.Count > 0)
         {
             for (int i = 0; i < foundPlanetsWithSignal.Count; i++)
             {
-                if (foundPlanetsWithSignal[i] != null && CalculateDistanceToPlanet(i) > range + foundPlanetsWithSignal[i].PlanetRadius)
+                if (foundPlanetsWithSignal[i] != null && CalculateDistanceToPlanet(i) > range + foundPlanetsWithSignal[i].GetPlanetRadius)
                 {
                     foundPlanetsWithSignal.Remove(foundPlanetsWithSignal[i]);
-                    if (lookedSignal >= foundPlanetsWithSignal.Count)
+                    if (lookedSignal >= foundPlanetsWithSignal.Count){
                         lookedSignal = foundPlanetsWithSignal.Count - 1;
+                    }
                 }
             }
         }
@@ -117,7 +97,7 @@ public class Radar : ShipComponent
         distanceDetection = StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
     }
 
-    public void StartRadar()
+    private void StartRadar()
     {
         isRadarOn = true;
         planetDetection = StartCoroutine(DetectPlanet());
@@ -125,11 +105,23 @@ public class Radar : ShipComponent
         return;
     }
 
-    public void StopRadar()
+    private void StopRadar()
     {
         isRadarOn = false;
         StopCoroutine(planetDetection);
         StopCoroutine(distanceDetection);
+        return;
+    }
+
+    public void ActivateRadar()
+    {
+        isRadarOn = !isRadarOn;
+        if (isRadarOn) {
+            StartRadar();
+        }
+        else {
+            StopRadar();
+        }
         return;
     }
 
@@ -146,36 +138,24 @@ public class Radar : ShipComponent
     public void ChangeFrecuency(int _value)
     {
         _value = Mathf.Clamp(_value, -1, 1);
-        if (lookedSignal > 0 && lookedSignal < foundPlanetsWithSignal.Count)
-        {
+        if (lookedSignal >= 0 && lookedSignal < foundPlanetsWithSignal.Count) {
             lookedSignal += _value;
         }
-        else
-        {
+        else {
             lookedSignal = 0;
         }
-        while (foundPlanetsWithSignal[lookedSignal] == null)
+        if(foundPlanetsWithSignal.Count > 0)
         {
-            if (lookedSignal > 0 && lookedSignal < foundPlanetsWithSignal.Count)
+            while (foundPlanetsWithSignal[lookedSignal] == null)
             {
-                lookedSignal += _value;
-            }
-            else
-            {
-                lookedSignal = 0;
+                if (lookedSignal >= 0 && lookedSignal < foundPlanetsWithSignal.Count) {
+                    lookedSignal += _value;
+                }
+                else {
+                    lookedSignal = 0;
+                }
             }
         }
-        return;
-    }
-
-    private void AddPlanetWithSignal(Planet _planet)
-    {
-        if (foundPlanetsWithSignal.Contains(_planet) == false)
-        {
-            Debug.Log(_planet.gameObject.name + "Adding Planet" + _planet);
-            foundPlanetsWithSignal.Add(_planet);
-        }
-
         return;
     }
 }

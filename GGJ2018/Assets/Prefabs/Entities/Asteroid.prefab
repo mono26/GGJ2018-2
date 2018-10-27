@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4939690088775884}
   - component: {fileID: 212769381877460806}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Aura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,9 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d565fe092097145870cc91747ef06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 10
   deadParticle: {fileID: 1768081658256074, guid: ef56f4b1cb2d41042996e81c9d427426,
     type: 2}
-  lifeTime: 10
   bodyComponent: {fileID: 50098178575817834}
   spawnableComponent: {fileID: 114510045144601786}
 --- !u!114 &114510045144601786

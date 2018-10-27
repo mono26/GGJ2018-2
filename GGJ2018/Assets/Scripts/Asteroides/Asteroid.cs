@@ -6,9 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>
 {
-    [SerializeField] protected GameObject deadParticle;
+    [Header("Asteroid settings")]
     [SerializeField] protected float lifeTime = 10;
 
+    [Header("Asteroid components")]
+    [SerializeField] protected GameObject deadParticle;
     [SerializeField] protected Rigidbody2D bodyComponent;
     [SerializeField] private SpawnableObject spawnableComponent;
 
@@ -18,11 +20,10 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>
     // Use this for initialization
     protected void Start ()
     {
-        if(bodyComponent == null)
+        if(bodyComponent == null){
             bodyComponent = GetComponent<Rigidbody2D>();
-
+        }
         StartCoroutine(DeadTimer());
-
         return;
 	}
 
@@ -60,9 +61,18 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>
         return;
     }
 
+    private bool WeReachedABlackholeCenter(BlackHoleEvent _blackHoleEvent)
+    {
+        bool centerReached = false;
+        if (_blackHoleEvent.GetAffectedObject.Equals(bodyComponent) && _blackHoleEvent.GetEventType == BlackHoleEventType.CenterReachead) {
+            centerReached = true;
+        }
+        return centerReached;
+    }
+
     public void OnGameEvent(BlackHoleEvent _blackHoleEvent)
     {
-        if (_blackHoleEvent.GetAffectedObject.Equals(bodyComponent) == true) {
+        if (WeReachedABlackholeCenter(_blackHoleEvent)) {
             ReleaseAsteroid();
         }
         return;

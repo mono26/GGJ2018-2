@@ -42,13 +42,14 @@ public class BlackHole : Planet
 	
 	protected override void FixedUpdate ()
     {
-        if (lifeTimeCounter <= 0)
+        if (lifeTimeCounter > 0)
         {
-            BlackHolePool.Instance.ReleaseBlackHole(this);
-            return;
+            ApplyGravityOnObjects();
+            lifeTimeCounter -= Time.deltaTime;
         }
-        ApplyGravityOnObjects();
-        lifeTimeCounter -= Time.deltaTime;
+        else{
+            BlackHolePool.Instance.ReleaseBlackHole(this);
+        }
         return;
     }
 

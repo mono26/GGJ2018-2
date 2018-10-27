@@ -10,15 +10,15 @@ public class ShipComponent : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if(ship == null)
+        if(ship == null){
             ship = GetComponent<Ship>();
-
+        }
         return;
     }
 
     public virtual void EveryFrame()
     {
-        HandleInput();
+
     }
 
     public virtual void FixedFrame()
@@ -27,11 +27,6 @@ public class ShipComponent : MonoBehaviour
     }
 
     public virtual void LateFrame()
-    {
-
-    }
-
-    protected virtual void HandleInput()
     {
 
     }

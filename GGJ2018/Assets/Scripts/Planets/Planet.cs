@@ -6,40 +6,32 @@ public class Planet : MonoBehaviour
     [Header("Planet settings")]
     [SerializeField][Range(-1,1)]   // +1 right, -1 left
     protected int gravitationalFieldDirection = 1;
-    [SerializeField]
-    protected float gravitationalRotation = 9.8f;
-    [SerializeField]
-    protected float gravity = 9.8f;
-    public float GravitationalFieldStrenght { get { return gravitationalRotation; } }
-    [SerializeField]
-    protected CircleCollider2D gravitationalField;
-    [SerializeField]
-    protected float planetRadius;
-    public float PlanetRadius { get { return planetRadius; } }
+    [SerializeField] protected float gravitationalRotation = 9.8f;
+    [SerializeField] protected float gravity = 9.8f;
+    [SerializeField] protected CircleCollider2D gravitationalField;
+    [SerializeField] protected float planetRadius;
 
-    [Header("Components")]
+    [Header("Planet components")]
     [SerializeField]
     protected SignalEmitter signal;
     public SignalEmitter Signal { get { return signal; } }
 
-    [Header("Editor debuggin")]
-    [SerializeField]
-    protected List<Rigidbody2D> objectsInsideGravitationField;
-    [SerializeField]
-    protected float gravitationalFieldRadius;
+    [Header("Planet editor debuggin")]
+    [SerializeField] protected List<Rigidbody2D> objectsInsideGravitationField;
+    [SerializeField] protected float gravitationalFieldRadius;
+    public float GetPlanetRadius { get { return planetRadius; } }
+    public float GetGravitationalFieldStrenght { get { return gravitationalRotation; } }
 
     // Use this for initialization
     protected virtual void Awake()
     {
-        var collider = GetComponent<CircleCollider2D>();
-        if (collider)
-        {
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        if (collider) {
             planetRadius = GetComponent<CircleCollider2D>().radius;
         }
-
-        if (signal == false)
+        if (signal == false){
             signal = GetComponent<SignalEmitter>();
-
+        }
         else return;
     }
 
@@ -56,7 +48,6 @@ public class Planet : MonoBehaviour
     {
         RotateObjectsInGravitationField();
         ApplyGravityOnObjects();
-
         return;
     }
 
@@ -73,7 +64,6 @@ public class Planet : MonoBehaviour
                 obj.transform.up = Vector2.Lerp(obj.transform.up, directionFromObjectToCenter.normalized, 0.05f);
             }
         }
-
         return;
     }
 
@@ -88,7 +78,6 @@ public class Planet : MonoBehaviour
                 obj.AddForce(-directionFromObjectToCenter.normalized * gravityForce * Time.fixedDeltaTime, ForceMode2D.Force);
             }
         }
-
         return;
     }
 

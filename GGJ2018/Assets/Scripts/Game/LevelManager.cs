@@ -68,7 +68,6 @@ public class LevelManager : Singleton<LevelManager>
     public void IncreaseScore()
     {
         scorePoints += 1;
-
         return;
     }
 

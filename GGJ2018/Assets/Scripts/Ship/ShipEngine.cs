@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Engine : ShipComponent, Damageable, EventHandler<BlackHoleEvent>
+public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackHoleEvent>
 {
     [Header("Engine settings")]
     [SerializeField] private float fuelLossPerSecond = 1.0f;
@@ -36,54 +36,6 @@ public class Engine : ShipComponent, Damageable, EventHandler<BlackHoleEvent>
     private void OnDisable()
     {
         EventManager.RemoveListener<BlackHoleEvent>(this);
-        return;
-    }
-
-    protected override void HandleInput()
-    {
-        // Input from the mouse VERTICAL
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            // Check if there is enough fuel for moving
-            if (currentFuel > 0)
-            {
-                ApplyForce(transform.up);
-                LoseFuel();
-            }
-        }
-        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            // Check if there is enough fuel for moving
-            if (currentFuel > 0)
-            {
-                ApplyForce(-transform.up);
-                LoseFuel();
-            }
-        }
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (currentFuel > 0)
-            {
-                ApplyForce(-transform.right);
-                LoseFuel();
-            }
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            if (currentFuel > 0)
-            {
-                ApplyForce(transform.right);
-                LoseFuel();
-            }
-        }
-
-        return;
-    }
-
-    private void ApplyForce(Vector3 _direction)
-    {
-        ship.ShipBody.AddForce(_direction * thrust);
         return;
     }
 
@@ -133,6 +85,16 @@ public class Engine : ShipComponent, Damageable, EventHandler<BlackHoleEvent>
             centerReachead = true;
         }
         return centerReachead;
+    }
+
+    public void ApplyEngineThrust(Vector3 _direction)
+    {
+        if(currentFuel > 0)
+        {
+            ship.GetShipBody.AddForce(_direction * thrust);
+            LoseFuel();
+        }
+        return;
     }
 
     public void OnGameEvent(BlackHoleEvent _blackHoleEvent)
