@@ -97,7 +97,7 @@ public class Health : MonoBehaviour, Damageable
             if(healthBar == null) 
             {
                 canToggle = false;
-                throw new MissingComponentException(gameObject, typeof(Health));
+                //throw new MissingComponentException(gameObject, typeof(Health));
             }
         }
         catch (MissingComponentException _missingComponentException) {

@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4364514774736288}
   - component: {fileID: 61645573983826568}
   - component: {fileID: 114084582516287356}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1007,7 +1007,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1867904808052798}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.09000063, y: -3.2400012, z: 0.1}
+  m_LocalPosition: {x: -0.09000063, y: -2.86, z: 0.1}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4966180833446288}
@@ -1126,7 +1126,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.25}
+  m_Offset: {x: 0, y: 1.3614328}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -1137,7 +1137,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1, y: 2.2}
+  m_Size: {x: 1.1, y: 1.9771342}
   m_EdgeRadius: 0
 --- !u!61 &61645573983826568
 BoxCollider2D:
@@ -1162,8 +1162,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 3.7, y: 1.3}
+  m_EdgeRadius: 3.7
 --- !u!81 &81453674263166858
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1191,6 +1191,7 @@ MonoBehaviour:
   ticksPerSecond: 10
   strenght: 1500
   ufoRay: {fileID: 1867904808052798}
+  door: {fileID: 0}
   isAlienRayOn: 0
 --- !u!114 &114010422602522362
 MonoBehaviour:
@@ -1897,7 +1898,7 @@ MonoBehaviour:
   ship: {fileID: 114020360296148358}
   fuelLossPerSecond: 1
   maxFuel: 500
-  thrust: 1000
+  thrust: 2500
   fuelDisplay: {fileID: 114890448170325758}
   currentFuel: 0
 --- !u!114 &114646980496384262
