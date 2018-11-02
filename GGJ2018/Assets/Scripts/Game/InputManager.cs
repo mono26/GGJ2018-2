@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class InputManager
 {
-    private static bool forceMobileMode = false;
+    private static bool forceMobileMode = true;
     private static bool IsOnMobile { get;  set; }
     private static InputButton RayButton { get;  set; }
     private static InputButton RadarButton { get;  set; }

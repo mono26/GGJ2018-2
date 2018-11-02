@@ -1163,7 +1163,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 3.7, y: 1.3}
-  m_EdgeRadius: 3.7
+  m_EdgeRadius: 0
 --- !u!81 &81453674263166858
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1191,7 +1191,7 @@ MonoBehaviour:
   ticksPerSecond: 10
   strenght: 1500
   ufoRay: {fileID: 1867904808052798}
-  door: {fileID: 0}
+  door: {fileID: 1080706513235740}
   isAlienRayOn: 0
 --- !u!114 &114010422602522362
 MonoBehaviour:
@@ -1585,7 +1585,7 @@ MonoBehaviour:
   representedHorizontalAxisID: Horizontal
   representedVerticalAxisID: Vertical
   axisOptions: 0
-  TargetCamera: {fileID: 20911679552111536}
+  targetCamera: {fileID: 20911679552111536}
   joystick: {fileID: 224560837099800878}
   knob: {fileID: 224095275050209404}
 --- !u!114 &114386237127576186
@@ -2209,11 +2209,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615d18f9413df1149a21909c9d974e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRange: 1.5
+  maxRange: 1
   representedHorizontalAxisID: RadarFrequency
   representedVerticalAxisID: 
   axisOptions: 2
-  TargetCamera: {fileID: 20911679552111536}
+  targetCamera: {fileID: 20911679552111536}
   joystick: {fileID: 224510141281934768}
   knob: {fileID: 224425781563143892}
 --- !u!114 &114884103398498018

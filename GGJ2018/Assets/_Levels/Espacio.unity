@@ -7995,7 +7995,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114593263562726984, guid: e9fc52c01928c814588868868247ff44,
+    - target: {fileID: 114611753756388358, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -8005,34 +8005,29 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2017733096}
-    - target: {fileID: 114611753756388358, guid: e9fc52c01928c814588868868247ff44,
+    - target: {fileID: 114593263562726984, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2017733096}
-    - target: {fileID: 61075786538678366, guid: e9fc52c01928c814588868868247ff44,
+    - target: {fileID: 223397720278477496, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 61645573983826568, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_EdgeRadius
+      propertyPath: m_PlaneDistance
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114004955614317346, guid: e9fc52c01928c814588868868247ff44,
+    - target: {fileID: 223397720278477496, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
-      propertyPath: door
-      value: 
-      objectReference: {fileID: 908379499}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114369623921913926, guid: e9fc52c01928c814588868868247ff44,
+        type: 2}
+      propertyPath: maxRange
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e9fc52c01928c814588868868247ff44, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &908379499 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1080706513235740, guid: e9fc52c01928c814588868868247ff44,
-    type: 2}
-  m_PrefabInternal: {fileID: 908379498}
 --- !u!4 &908798671 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4485343844356438, guid: b7c6f5c3edbcb634ea9978843f83d7c9,

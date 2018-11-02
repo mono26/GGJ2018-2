@@ -15,28 +15,22 @@ public class JoystickEvent : UnityEvent<Vector2> { }
 public class TouchJoystick : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     [Header("Touch Joystick settings")]
-    [SerializeField] private float maxRange = 1.5f;
+    [SerializeField] private float maxRange = 1.0f;
     [SerializeField] private string representedHorizontalAxisID;
     [SerializeField] private string representedVerticalAxisID;
     [SerializeField] private AxisOptions axisOptions;
 
     [Header("Touch Joystick components")]
-    [SerializeField] private Camera TargetCamera;
+    [SerializeField] private Camera targetCamera;
     [SerializeField] private RectTransform joystick;
     [SerializeField] private RectTransform knob;
 
     [SerializeField] private RenderMode ParentCanvasRenderMode { get; set; }
     protected Vector2 joystickValue;
 
-    protected virtual void Start()
-    {
-        Initialize();
-        return;
-    }
-
     public virtual void Initialize()
     {
-        if (TargetCamera == null) {
+        if (targetCamera == null) {
             throw new Exception("TouchJoystick : you have to set a target camera");
         }
         ParentCanvasRenderMode = GetComponentInParent<Canvas>().renderMode;
@@ -64,7 +58,8 @@ public class TouchJoystick : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         Vector3 newTargetPosition = Vector3.zero;
         if (ParentCanvasRenderMode == RenderMode.ScreenSpaceCamera){
-            newTargetPosition = TargetCamera.ScreenToWorldPoint(eventData.position);
+            //newTargetPosition = targetCamera.ScreenToWorldPoint(eventData.position);
+            newTargetPosition = targetCamera.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, targetCamera.nearClipPlane));
         }
         else {
             newTargetPosition = eventData.position;
@@ -96,7 +91,7 @@ public class TouchJoystick : MonoBehaviour, IDragHandler, IEndDragHandler
 
     protected virtual float EvaluateInputValue(float vectorPosition)
     {
-        return Mathf.InverseLerp(0, maxRange, Mathf.Abs(vectorPosition)) * Mathf.Sign(vectorPosition);
+        return Mathf.InverseLerp(0, 1, Mathf.Abs(vectorPosition)) * Mathf.Sign(vectorPosition);
     }
 }
 
