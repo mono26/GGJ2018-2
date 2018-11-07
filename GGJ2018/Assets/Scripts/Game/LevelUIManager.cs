@@ -59,7 +59,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     public void ActivatePlayerControls(bool _active)
     {
         movementJoystick.SetActive(_active);
-        radarFrequencyJoystick.SetActive(_active);
+   //     radarFrequencyJoystick.SetActive(_active);
         radarButton.SetActive(_active);
         rayButton.SetActive(_active);
         return;
