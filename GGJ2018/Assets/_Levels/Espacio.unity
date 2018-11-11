@@ -167,7 +167,7 @@ Prefab:
     - target: {fileID: 198472130044974522, guid: d9b93dfee56c6434581b60184f3e06a9,
         type: 2}
       propertyPath: randomSeed
-      value: -783709222
+      value: 153317485
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9b93dfee56c6434581b60184f3e06a9, type: 2}
@@ -16115,6 +16115,10 @@ Prefab:
         type: 2}
       propertyPath: maxTimeToSpawn
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437263803463854, guid: 0d703d96b9bcee2449edbf7944d4a5b6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d703d96b9bcee2449edbf7944d4a5b6, type: 2}
