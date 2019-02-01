@@ -2305,14 +2305,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8a2d9f2b064a9499dfae5cb323a89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRange: 70
+  maxRange: 30
   representedHorizontalAxisID: Horizontal
   representedVerticalAxisID: Vertical
   axisOptions: 0
   targetCamera: {fileID: 20911679552111536}
   joystick: {fileID: 224560837099800878}
   knob: {fileID: 224095275050209404}
-  touchArea: {fileID: 224669379191433980}
+  activeAlpha: 1
+  inactiveAlpha: 0.3
+  touchArea: {fileID: 225082555097147978}
   canMoveToClickPosition: 1
 --- !u!114 &114946330032410694
 MonoBehaviour:
@@ -9461,7 +9463,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1427682268
+  randomSeed: 88755761
   InitialModule:
     serializedVersion: 3
     enabled: 1

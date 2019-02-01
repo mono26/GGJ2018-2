@@ -6,14 +6,23 @@ using UnityEngine.UI;
 
 public class MovingJoystick : TouchJoystick, IPointerDownHandler, IPointerUpHandler
 {
-	[SerializeField] RectTransform touchArea;
+	[SerializeField] float activeAlpha, inactiveAlpha;
+	[SerializeField] CanvasGroup touchArea;
 	[SerializeField] bool canMoveToClickPosition;
 
 	Vector2 initialJoystickPosition, initialKnobPosition;
 
-	// Use this for initialization
+	void Awake() 
+	{
+		if(touchArea == null)
+		{
+			touchArea = GetComponent<CanvasGroup>();
+		}
+	}
 	void Start()
 	{
+		SetAlpha(0.3f);
+
 		initialJoystickPosition = joystick.position;
 		initialKnobPosition = knob.position;
 	}
@@ -25,13 +34,22 @@ public class MovingJoystick : TouchJoystick, IPointerDownHandler, IPointerUpHand
 			return;
 		}
 
-		Debug.LogError(pointerData.position);
+		SetAlpha(1);
+
 		joystick.position = pointerData.position;
 		//knob.anchoredPosition = pointerData.position;
 	}
 
+	void SetAlpha(float _targetAlpha)
+	{
+		float targetAlpha = Mathf.Clamp(_targetAlpha, 0, 1);
+		touchArea.alpha = targetAlpha;
+	}
+
 	public void OnPointerUp(PointerEventData pointerData)
 	{
+		SetAlpha(0.3f);
+
 		joystick.position = initialJoystickPosition;
 		knob.position = initialKnobPosition;
 	}
