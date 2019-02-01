@@ -122,10 +122,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitationalFieldDirection: 1
-  gravitationalRotation: 9.8
-  gravity: 100
+  gravitationalRotation: 16
+  gravity: 200
   gravitationalField: {fileID: 58626897860147646}
-  planetRadius: 2.5
+  planetRadius: 3
+  playerInPlanet: 0
   signal: {fileID: 0}
   objectsInsideGravitationField: []
   gravitationalFieldRadius: 0
@@ -204,7 +205,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 464733222
+  randomSeed: -70236163
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -652,8 +653,8 @@ ParticleSystem:
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
-    donutRadius: 0.28
-    m_Position: {x: -0.24, y: 0, z: 0}
+    donutRadius: 0.7387543
+    m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
@@ -669,7 +670,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.97
+      value: 3.23
       mode: 0
       spread: 0
       speed:

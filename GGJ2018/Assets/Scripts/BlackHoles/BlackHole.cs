@@ -39,8 +39,22 @@ public class BlackHole : Planet
         lifeTimeCounter = lifeTime;
         return;
 	}
-	
-	protected override void FixedUpdate ()
+
+    protected override void ApplyGravityOnObjects()
+    {
+        if (objectsInsideGravitationField.Count > 0 && playerInPlanet)
+        {
+            foreach (Rigidbody2D obj in objectsInsideGravitationField)
+            {
+                Vector2 directionFromObjectToCenter = obj.position - (Vector2)transform.position;
+                float gravityForce = obj.mass * gravity;
+                obj.AddForce(-directionFromObjectToCenter.normalized * gravityForce * Time.fixedDeltaTime, ForceMode2D.Force);
+            }
+        }
+        return;
+    }
+
+    protected override void FixedUpdate ()
     {
         if (lifeTimeCounter > 0)
         {
@@ -52,6 +66,9 @@ public class BlackHole : Planet
         }
         return;
     }
+
+
+
 
     protected void CheckObjectsDistanceToCenter()
     {

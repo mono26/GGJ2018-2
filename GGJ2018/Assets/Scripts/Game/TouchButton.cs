@@ -13,10 +13,12 @@ public class TouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [Header("Touch Button settings")]
 	[SerializeField] private string representedButtonID;
     public TouchButtonStates CurrentState { get; protected set; }
-	
+
+    [SerializeField] private bool canPress = true;
+
 	void Update ()
     {
-        if(CurrentState == TouchButtonStates.ButtonPressed) {
+        if(CurrentState == TouchButtonStates.ButtonPressed && canPress) {
 			OnPointerPressed();
 		}
 		return;
@@ -26,6 +28,7 @@ public class TouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (CurrentState == TouchButtonStates.ButtonUp) {
             CurrentState = TouchButtonStates.Off;
+            
         }
         if (CurrentState == TouchButtonStates.ButtonDown) {
             CurrentState = TouchButtonStates.ButtonPressed;
@@ -35,6 +38,7 @@ public class TouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public virtual void OnPointerPressed()
     {
+        canPress = false;
         CurrentState = TouchButtonStates.ButtonPressed;
 		InputManager.InteractWithButton(representedButtonID, InputButtonStates.Pressed);
 		return;
@@ -44,6 +48,7 @@ public class TouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (CurrentState == TouchButtonStates.Off) 
 		{
+            canPress = false;
         	CurrentState = TouchButtonStates.ButtonDown;
 			InputManager.InteractWithButton(representedButtonID, InputButtonStates.Down);
         }
@@ -54,6 +59,7 @@ public class TouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (CurrentState == TouchButtonStates.ButtonPressed || CurrentState == TouchButtonStates.ButtonDown) 
 		{
+            canPress = true;
         	CurrentState = TouchButtonStates.ButtonUp;
 			InputManager.InteractWithButton(representedButtonID, InputButtonStates.Up);
         }

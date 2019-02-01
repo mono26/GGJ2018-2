@@ -44,6 +44,7 @@ public class AtractorRay : ShipComponent
     protected void OnEnable()
     {
         ufoRay.SetActive(false);
+        door.SetActive(true);
         isAlienRayOn = false;
         return;
     }
@@ -71,19 +72,21 @@ public class AtractorRay : ShipComponent
         isAlienRayOn = true;
         atractAliens = StartCoroutine(FindAliens());
         ufoRay.SetActive(true);
+        door.SetActive(false);
     }
 
-    private void OpenDoor()
+   /* private void OpenDoor()
     {
         door.SetActive(!isAlienRayOn);
         return;
-    }
+    }*/
 
     private void StopRay()
     {
         isAlienRayOn = false;
         StopCoroutine(atractAliens);
         ufoRay.SetActive(false);
+        door.SetActive(true);
     }
 
     public void ActivateRay()

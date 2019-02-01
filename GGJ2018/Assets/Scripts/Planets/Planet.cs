@@ -10,6 +10,7 @@ public class Planet : MonoBehaviour
     [SerializeField] protected float gravity = 9.8f;
     [SerializeField] protected CircleCollider2D gravitationalField;
     [SerializeField] protected float planetRadius;
+    [SerializeField] protected bool playerInPlanet;
 
     [Header("Planet components")]
     [SerializeField]
@@ -37,6 +38,7 @@ public class Planet : MonoBehaviour
 
     protected virtual void Start()
     {
+        playerInPlanet = false;
         gravitationalFieldRadius = planetRadius + planetRadius;
         if(gravitationalField != null)
             gravitationalField.radius = gravitationalFieldRadius;
@@ -53,7 +55,7 @@ public class Planet : MonoBehaviour
 
     protected void RotateObjectsInGravitationField()
     {
-        if(objectsInsideGravitationField.Count > 0)
+        if(objectsInsideGravitationField.Count > 0 && playerInPlanet)
         {
             foreach (Rigidbody2D obj in objectsInsideGravitationField)
             {
@@ -67,15 +69,18 @@ public class Planet : MonoBehaviour
         return;
     }
 
-    protected void ApplyGravityOnObjects()
+    protected virtual void ApplyGravityOnObjects()
     {
-        if (objectsInsideGravitationField.Count > 0)
+        if (objectsInsideGravitationField.Count > 0 && playerInPlanet)
         {
             foreach (Rigidbody2D obj in objectsInsideGravitationField)
             {
-                Vector2 directionFromObjectToCenter = obj.position - (Vector2)transform.position;
-                float gravityForce = obj.mass * gravity;
-                obj.AddForce(-directionFromObjectToCenter.normalized * gravityForce * Time.fixedDeltaTime, ForceMode2D.Force);
+                if(obj.tag != "Player")
+                {
+                    Vector2 directionFromObjectToCenter = obj.position - (Vector2)transform.position;
+                    float gravityForce = obj.mass * gravity;
+                    obj.AddForce(-directionFromObjectToCenter.normalized * gravityForce * Time.fixedDeltaTime, ForceMode2D.Force);
+                }   
             }
         }
         return;
@@ -87,7 +92,10 @@ public class Planet : MonoBehaviour
         if (objectsBody != null && objectsInsideGravitationField.Contains(objectsBody) == false)
         {
             objectsInsideGravitationField.Add(objectsBody);
+            
         }
+        if(_collider.tag == "Player")
+            playerInPlanet = true;
         return;
     }
 
@@ -98,6 +106,8 @@ public class Planet : MonoBehaviour
         {
             objectsInsideGravitationField.Remove(objectsBody);
         }
+        if (_collider.tag == "Player")
+            playerInPlanet = false;
         return;
     }
 }
