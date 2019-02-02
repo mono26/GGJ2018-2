@@ -101,7 +101,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 5
+  groundCheckDistance: 0.26
+  planetsLayer:
+    serializedVersion: 2
+    m_Bits: 256
   healthComponent: {fileID: 114868541396192072}
+  bodyComponent: {fileID: 50765660470139336}
 --- !u!114 &114868541396192072
 MonoBehaviour:
   m_ObjectHideFlags: 1

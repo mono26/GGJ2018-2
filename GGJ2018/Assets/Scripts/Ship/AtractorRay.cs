@@ -15,7 +15,6 @@ public class AtractorRay : ShipComponent
     [SerializeField] protected GameObject door;
 
     [Header("Edittor debugging")]
-    [SerializeField] private RaycastHit2D[] aliensHit;
     protected Coroutine atractAliens;
     [SerializeField] private bool isAlienRayOn = false;
     public bool IsAlienRayOn { get { return isAlienRayOn; } }
@@ -51,7 +50,7 @@ public class AtractorRay : ShipComponent
 
     private IEnumerator FindAliens()
     {
-        aliensHit = Physics2D.CircleCastAll(ship.transform.position, radius, -ship.transform.up, range, layerMask);
+        RaycastHit2D[] aliensHit = Physics2D.CircleCastAll(ship.transform.position, radius, -ship.transform.up, range, layerMask);
         if (aliensHit.Length > 0)
         {
             foreach (RaycastHit2D hit in aliensHit)
@@ -62,6 +61,7 @@ public class AtractorRay : ShipComponent
                 }
             }
         }
+
         yield return new WaitForSeconds(1 / ticksPerSecond);
         atractAliens = StartCoroutine(FindAliens());
         yield break;
@@ -75,7 +75,7 @@ public class AtractorRay : ShipComponent
         door.SetActive(false);
     }
 
-   /* private void OpenDoor()
+    /*private void OpenDoor()
     {
         door.SetActive(!isAlienRayOn);
         return;

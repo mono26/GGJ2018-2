@@ -123,7 +123,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 6.3
+  m_Radius: 6.1
 --- !u!114 &114379990198208300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,8 +140,8 @@ MonoBehaviour:
   gravity: 100
   gravitationalField: {fileID: 58622635712402336}
   planetRadius: 6.3
+  playerInPlanet: 0
   signal: {fileID: 0}
-  objectsInsideGravitationField: []
   gravitationalFieldRadius: 0
 --- !u!212 &212359388721485538
 SpriteRenderer:

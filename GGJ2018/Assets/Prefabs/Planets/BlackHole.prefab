@@ -109,7 +109,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 3.3
 --- !u!114 &114658066407859314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,10 +125,9 @@ MonoBehaviour:
   gravitationalRotation: 16
   gravity: 200
   gravitationalField: {fileID: 58626897860147646}
-  planetRadius: 3
+  planetRadius: 3.3
   playerInPlanet: 0
   signal: {fileID: 0}
-  objectsInsideGravitationField: []
   gravitationalFieldRadius: 0
   lifeTime: 10
   lifeTimeCounter: 0
@@ -205,7 +204,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -70236163
+  randomSeed: -235967331
   InitialModule:
     serializedVersion: 3
     enabled: 1

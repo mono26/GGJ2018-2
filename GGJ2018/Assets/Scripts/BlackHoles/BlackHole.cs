@@ -40,44 +40,27 @@ public class BlackHole : Planet
         return;
 	}
 
-    protected override void ApplyGravityOnObjects()
-    {
-        if (objectsInsideGravitationField.Count > 0 && playerInPlanet)
-        {
-            foreach (Rigidbody2D obj in objectsInsideGravitationField)
-            {
-                Vector2 directionFromObjectToCenter = obj.position - (Vector2)transform.position;
-                float gravityForce = obj.mass * gravity;
-                obj.AddForce(-directionFromObjectToCenter.normalized * gravityForce * Time.fixedDeltaTime, ForceMode2D.Force);
-            }
-        }
-        return;
-    }
-
     protected override void FixedUpdate ()
     {
         if (lifeTimeCounter > 0)
         {
-            ApplyGravityOnObjects();
             lifeTimeCounter -= Time.deltaTime;
         }
-        else{
+        else
+        {
             BlackHolePool.Instance.ReleaseBlackHole(this);
         }
-        return;
+
+        base.FixedUpdate();
     }
-
-
-
 
     protected void CheckObjectsDistanceToCenter()
     {
-        foreach(Rigidbody2D body in objectsInsideGravitationField)
+        foreach(IInfluencedByGravity obj in objectsInsideGravitationField)
         {
-            if(Vector3.Distance(body.position, transform.position) < minimumDistanceToCenter) {
-                EventManager.TriggerEvent<BlackHoleEvent>(new BlackHoleEvent(body.gameObject, BlackHoleEventType.CenterReachead));
+            if(Vector3.Distance(obj.GetBodyComponent.position, transform.position) < minimumDistanceToCenter) {
+                EventManager.TriggerEvent<BlackHoleEvent>(new BlackHoleEvent(obj.GetBodyComponent.gameObject, BlackHoleEventType.CenterReachead));
             }
         }
-        return;
     }
 }

@@ -91,10 +91,9 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackHoleEvent
     {
         if(currentFuel > 0)
         {
-            ship.GetShipBody.AddForce(_direction * thrust);
+            ship.GetBodyComponent.AddForce(_direction * thrust);
             LoseFuel();
         }
-        return;
     }
 
     public void OnGameEvent(BlackHoleEvent _blackHoleEvent)

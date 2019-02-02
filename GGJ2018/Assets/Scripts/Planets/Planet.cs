@@ -4,13 +4,13 @@ using UnityEngine;
 public class Planet : MonoBehaviour
 {
     [Header("Planet settings")]
-    [SerializeField][Range(-1,1)]   // +1 right, -1 left
-    protected int gravitationalFieldDirection = 1;
-    [SerializeField] protected float gravitationalRotation = 9.8f;
-    [SerializeField] protected float gravity = 9.8f;
-    [SerializeField] protected CircleCollider2D gravitationalField;
+    [SerializeField][Range(-1,1)] int gravitationalFieldDirection = 1; // +1 left, -1 right
+    [SerializeField] float gravitationalRotation = 9.8f;
+    [SerializeField] float gravity = 9.8f;
+    [SerializeField] CircleCollider2D gravitationalField;
+    [SerializeField]  bool playerInPlanet;
+    [SerializeField] float rotationSpeed;
     [SerializeField] protected float planetRadius;
-    [SerializeField] protected bool playerInPlanet;
 
     [Header("Planet components")]
     [SerializeField]
@@ -18,7 +18,7 @@ public class Planet : MonoBehaviour
     public SignalEmitter Signal { get { return signal; } }
 
     [Header("Planet editor debuggin")]
-    [SerializeField] protected List<Rigidbody2D> objectsInsideGravitationField;
+    [SerializeField] protected List<IInfluencedByGravity> objectsInsideGravitationField = new List<IInfluencedByGravity>();
     [SerializeField] protected float gravitationalFieldRadius;
     public float GetPlanetRadius { get { return planetRadius; } }
     public float GetGravitationalFieldStrenght { get { return gravitationalRotation; } }
@@ -48,66 +48,74 @@ public class Planet : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        if(!playerInPlanet)
+        {
+            return;
+        }
+
+        transform.Rotate(new Vector3(0, 0, rotationSpeed * gravitationalFieldDirection * Time.fixedDeltaTime));
+
         RotateObjectsInGravitationField();
         ApplyGravityOnObjects();
-        return;
     }
 
     protected void RotateObjectsInGravitationField()
     {
-        if(objectsInsideGravitationField.Count > 0 && playerInPlanet)
+        if(objectsInsideGravitationField.Count == 0)
         {
-            foreach (Rigidbody2D obj in objectsInsideGravitationField)
-            {
-                Vector2 directionFromObjectToCenter = obj.position - (Vector2)transform.position;
-                Vector2 tangentToDirectionToTheObject = new Vector2(directionFromObjectToCenter.y, -directionFromObjectToCenter.x).normalized * gravitationalFieldDirection;
-                float rotationForce = obj.mass * gravitationalRotation;
-                obj.AddForce(tangentToDirectionToTheObject * rotationForce * Time.fixedDeltaTime, ForceMode2D.Force);
-                obj.transform.up = Vector2.Lerp(obj.transform.up, directionFromObjectToCenter.normalized, 0.05f);
-            }
+            return;
         }
-        return;
+
+        foreach (IInfluencedByGravity obj in objectsInsideGravitationField)
+        {
+            Vector2 directionFromObjectToCenter = obj.GetBodyComponent.position - (Vector2)transform.position;
+            Vector2 tangentToDirectionToTheObject = new Vector2(-directionFromObjectToCenter.y, directionFromObjectToCenter.x).normalized * gravitationalFieldDirection;
+            float rotationForce = obj.GetBodyComponent.mass * gravitationalRotation;
+
+            obj.ApplyRotationalForce(tangentToDirectionToTheObject, rotationForce * Time.fixedDeltaTime);
+            obj.RotateTowardsGravitationCenter(Vector2.Lerp(obj.GetBodyComponent.transform.up, directionFromObjectToCenter.normalized, 0.05f));
+        }
     }
 
     protected virtual void ApplyGravityOnObjects()
     {
-        if (objectsInsideGravitationField.Count > 0 && playerInPlanet)
+        if(objectsInsideGravitationField.Count == 0)
         {
-            foreach (Rigidbody2D obj in objectsInsideGravitationField)
-            {
-                if(obj.tag != "Player")
-                {
-                    Vector2 directionFromObjectToCenter = obj.position - (Vector2)transform.position;
-                    float gravityForce = obj.mass * gravity;
-                    obj.AddForce(-directionFromObjectToCenter.normalized * gravityForce * Time.fixedDeltaTime, ForceMode2D.Force);
-                }   
-            }
+            return;
         }
-        return;
+
+        foreach (IInfluencedByGravity obj in objectsInsideGravitationField)
+        {
+                Vector2 directionFromObjectToCenter = obj.GetBodyComponent.position - (Vector2)transform.position;
+                float gravityForce = obj.GetBodyComponent.mass * gravity;
+
+                obj.ApplyGravity(-directionFromObjectToCenter.normalized, gravityForce * Time.fixedDeltaTime);
+        }
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D _collider)
     {
-        Rigidbody2D objectsBody = _collider.GetComponent<Rigidbody2D>();
-        if (objectsBody != null && objectsInsideGravitationField.Contains(objectsBody) == false)
+        IInfluencedByGravity obj = _collider.GetComponent<IInfluencedByGravity>();
+        if (obj != null && objectsInsideGravitationField.Contains(obj) == false)
         {
-            objectsInsideGravitationField.Add(objectsBody);
+            objectsInsideGravitationField.Add(obj);
             
         }
+
         if(_collider.tag == "Player")
             playerInPlanet = true;
-        return;
+
     }
 
     protected virtual void OnTriggerExit2D(Collider2D _collider)
     {
-        Rigidbody2D objectsBody = _collider.GetComponent<Rigidbody2D>();
-        if (objectsBody != null && objectsInsideGravitationField.Contains(objectsBody) == true)
+        IInfluencedByGravity obj = _collider.GetComponent<IInfluencedByGravity>();
+        if (obj != null && objectsInsideGravitationField.Contains(obj) == true)
         {
-            objectsInsideGravitationField.Remove(objectsBody);
+            objectsInsideGravitationField.Remove(obj);
         }
+
         if (_collider.tag == "Player")
             playerInPlanet = false;
-        return;
     }
 }

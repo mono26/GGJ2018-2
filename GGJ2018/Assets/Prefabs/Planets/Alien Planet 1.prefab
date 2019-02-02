@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4828159569485124}
   - component: {fileID: 212219729593935184}
-  - component: {fileID: 95898520540852702}
   - component: {fileID: 58273394592225014}
   - component: {fileID: 50537374701606884}
   - component: {fileID: 114995080456709442}
@@ -155,23 +154,6 @@ CircleCollider2D:
   m_Offset: {x: -0.14, y: 0.4}
   serializedVersion: 2
   m_Radius: 4.7
---- !u!95 &95898520540852702
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1076643016636238}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e68462c1f4d406346839e146482a4b7a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114211160479330264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,16 +179,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitationalFieldDirection: 1
-  gravitationalRotation: 9.8
+  gravitationalRotation: 100
   gravity: 100
   gravitationalField: {fileID: 58180459630791772}
+  playerInPlanet: 0
+  rotationSpeed: 4.4
   planetRadius: 4.9
   signal: {fileID: 114211160479330264}
-  objectsInsideGravitationField: []
   gravitationalFieldRadius: 0
   alien: {fileID: 114053472491642104, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
   numberOfAliens: 30
-  aliensInPlanet: []
 --- !u!212 &212046770694197386
 SpriteRenderer:
   m_ObjectHideFlags: 1

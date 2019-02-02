@@ -4,18 +4,37 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Alien : MonoBehaviour, EventHandler<HealthEvent>
+public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IInfluencedByGravity
 {
     [Header("Alien settings")]
-    [SerializeField] protected float lifeTime = 3.0f;
+    [SerializeField] float lifeTime = 3.0f;
+    [SerializeField] float groundCheckDistance = 0.5f;
+
+    [SerializeField] LayerMask planetsLayer;
 
     [Header("Alien components")]
     [SerializeField] protected Health healthComponent;
+    [SerializeField] Rigidbody2D bodyComponent;
+
+    public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
     private void Awake() 
     {
-        healthComponent = GetComponent<Health>();
+        if(healthComponent == null)
+        {
+            healthComponent = GetComponent<Health>();
+        }
+        if(bodyComponent == null)
+        {
+            bodyComponent = GetComponent<Rigidbody2D>();
+        }
+
         return;
+    }
+
+    void OnDrawGizmos() 
+    {
+        Gizmos.DrawRay(transform.position, -transform.up * groundCheckDistance);
     }
 
     protected void OnEnable()
@@ -73,9 +92,49 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>
         return weAreDead;
     }
 
+    public void ApplyGravity(Vector2 _direction, float _force)
+    {
+        if(IsOnGround())
+        {
+            return;
+        }
+
+        // In case the user forgets to normalize the direction vector.
+        Vector3 normalizedDirection = _direction.normalized;
+        bodyComponent.AddForce(_direction * _force, ForceMode2D.Force);
+    }
+
+    public void ApplyRotationalForce(Vector2 _direction, float _force)
+    {
+        // In case the user forgets to normalize the direction vector.
+        Vector3 normalizedDirection = _direction.normalized;
+        bodyComponent.AddForce(_direction * _force, ForceMode2D.Force);
+    }
+
+    bool IsOnGround()
+    {
+        bool touchingGround = false;
+        var groundHit = Physics2D.Raycast(transform.position, -transform.up, groundCheckDistance, planetsLayer);
+        if(groundHit.collider != null) 
+        {
+            if(groundHit.collider.CompareTag("Planet"))
+            {
+                Debug.LogError("Alien is touching ground");
+                touchingGround = true;
+            }
+        }
+        return touchingGround;
+    }
+
+    public void RotateTowardsGravitationCenter(Vector2 _gravitationCenterDirection)
+    {
+        transform.up = _gravitationCenterDirection;
+    }
+
     public void OnGameEvent(HealthEvent _healthEvent)
     {
-        if(AreWeDead(_healthEvent)) {
+        if(AreWeDead(_healthEvent)) 
+        {
             Destroy(gameObject);
         }
         return;

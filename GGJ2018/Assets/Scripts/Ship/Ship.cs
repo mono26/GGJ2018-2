@@ -25,38 +25,56 @@ public class ShipInput
     }
 }
 
-public class Ship : MonoBehaviour
+public class Ship : MonoBehaviour, IInfluencedByGravity
 {
     [Header("Ship components")]
-    [SerializeField] private BoxCollider2D hitBox;
-    [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private Rigidbody2D body;
-    [SerializeField] private ShipEngine engine;
-    [SerializeField] private Radar radar;
-    [SerializeField] private AtractorRay ray;
+    [SerializeField] private BoxCollider2D hitBoxComponent = null;
+    [SerializeField] private SpriteRenderer spriteComponent = null;
+    [SerializeField] private Rigidbody2D bodyComponent = null;
+    [SerializeField] private ShipEngine engineComponent = null;
+    [SerializeField] private Radar radarComponent = null;
+    [SerializeField] private AtractorRay atractorRayComponent = null;
 
     [Header("Ship editor debugging.")]
     [SerializeField] private ShipComponent[] components;
     [SerializeField] private ShipInput currentInput = new ShipInput();    // TODO save input in exterinput component
 
-    public Rigidbody2D GetShipBody { get { return body; } }
+    bool isOnPlanetGravitationalField;
+
+    public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
 	private void Awake()
     {
-        if (hitBox == null) {
-            hitBox = GetComponent<BoxCollider2D>();
+        if (hitBoxComponent == null) 
+        {
+            hitBoxComponent = GetComponent<BoxCollider2D>();
         }
-        if (sprite == null) {
-            sprite = GetComponent<SpriteRenderer>();
-            if(sprite == null) {
-                sprite = GetComponentInChildren<SpriteRenderer>();
+        if (spriteComponent == null) 
+        {
+            spriteComponent = GetComponent<SpriteRenderer>();
+            if(spriteComponent == null) 
+            {
+                spriteComponent = GetComponentInChildren<SpriteRenderer>();
             }
         }
-        if (body == null) {
-            body = GetComponent<Rigidbody2D>();
+        if (bodyComponent == null) 
+        {
+            bodyComponent = GetComponent<Rigidbody2D>();
         }
+        if (engineComponent == null) 
+        {
+            engineComponent = GetComponent<ShipEngine>();
+        }
+        if (radarComponent == null) 
+        {
+            radarComponent = GetComponent<Radar>();
+        }
+        if (atractorRayComponent == null) 
+        {
+            atractorRayComponent = GetComponent<AtractorRay>();
+        }
+
         components = GetComponents<ShipComponent>();
-        return;
     }
 
     private void Update ()
@@ -64,31 +82,33 @@ public class Ship : MonoBehaviour
         ActivateShipRay();
         ActivateShipRadar();
         HandleShipRadarFrequency();
+
         foreach (ShipComponent component in components){
             component.EveryFrame();
         }
-        return;
     }
 
     private void ActivateShipRay()
     {
-        if(ray != null && currentInput.GetRayState) {
-            ray.ActivateRay();
+        if(atractorRayComponent != null && currentInput.GetRayState) 
+        {
+            atractorRayComponent.ActivateRay();
         }
-        return;
     }
 
     private void ActivateShipRadar()
     {
-        if(ray != null && currentInput.GetRadarState) {
-            radar.ActivateRadar();
+        if(atractorRayComponent != null && currentInput.GetRadarState) 
+        {
+            radarComponent.ActivateRadar();
         }
     }
 
     private void HandleShipRadarFrequency()
     {
-        if(radar != null) {   
-            radar.ChangeFrecuency((int)currentInput.GetRadarFrequency);
+        if(radarComponent != null) 
+        {
+            radarComponent.ChangeFrecuency((int)currentInput.GetRadarFrequency);
         }
         return;
     }
@@ -96,22 +116,82 @@ public class Ship : MonoBehaviour
     private void FixedUpdate()
     {
         DriveShip();
-        return;
     }
 
     private void DriveShip()
     {
-        if(engine != null)
+        if(engineComponent != null)
         {
-            engine.ApplyEngineThrust(transform.right * currentInput.GetHorizontal);
-            engine.ApplyEngineThrust(transform.up * currentInput.GetVertical);
+            engineComponent.ApplyEngineThrust(transform.right * currentInput.GetHorizontal);
+            engineComponent.ApplyEngineThrust(transform.up * currentInput.GetVertical);
         }
-        return;
+    }
+
+    void OnTriggerEnter2D(Collider2D _collider)
+    {
+        if (!_collider.CompareTag("GravitationField"))
+        {
+            return;
+        }
+
+        var parentPlanet = _collider.transform.parent;
+        if(parentPlanet == null)
+        {
+            return;
+        }
+
+        if(parentPlanet.CompareTag("Planet"))
+        {
+            isOnPlanetGravitationalField = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D _collider)
+    {
+        if (!_collider.CompareTag("GravitationField"))
+        {
+            return;
+        }
+
+        var parentPlanet = _collider.transform.parent;
+        if(parentPlanet == null)
+        {
+            return;
+        }
+
+        if(parentPlanet.CompareTag("Planet"))
+        {
+            isOnPlanetGravitationalField = false;
+        }
+    }
+
+    public void ApplyGravity(Vector2 _direction, float _force)
+    {
+        if(isOnPlanetGravitationalField)
+        {
+            return;
+        }
+
+        // In case the user forgets to normalize the direction vector.
+        Vector3 normalizedDirection = _direction.normalized;
+        bodyComponent.AddForce(_direction * _force, ForceMode2D.Force);
+    }
+
+    public void ApplyRotationalForce(Vector2 _direction, float _force)
+    {
+        // In case the user forgets to normalize the direction vector.
+        Vector3 normalizedDirection = _direction.normalized;
+        bodyComponent.AddForce(_direction * _force, ForceMode2D.Force);
+    }
+
+
+    public void RotateTowardsGravitationCenter(Vector2 _gravitationCenterDirection)
+    {
+        transform.up = _gravitationCenterDirection;
     }
 
     public void ReceiveInput(ShipInput _inputToRecieve)
     {
         currentInput = _inputToRecieve;
-        return;
     }
 }

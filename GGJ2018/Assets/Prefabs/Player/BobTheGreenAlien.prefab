@@ -1249,12 +1249,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55465648f9b97054aa24c907a1d5758f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitBox: {fileID: 61075786538678366}
-  sprite: {fileID: 212372991652833954}
-  body: {fileID: 50335388593032238}
-  engine: {fileID: 114627262001852212}
-  radar: {fileID: 114489052112443842}
-  ray: {fileID: 114004955614317346}
+  hitBoxComponent: {fileID: 61075786538678366}
+  spriteComponent: {fileID: 212372991652833954}
+  bodyComponent: {fileID: 50335388593032238}
+  engineComponent: {fileID: 114627262001852212}
+  radarComponent: {fileID: 114489052112443842}
+  atractorRayComponent: {fileID: 114004955614317346}
   components: []
   currentInput:
     horizontal: 0

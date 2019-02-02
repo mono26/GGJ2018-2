@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>
+public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>, IInfluencedByGravity
 {
     [Header("Asteroid settings")]
     [SerializeField] protected float lifeTime = 10;
@@ -20,11 +20,12 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>
     // Use this for initialization
     protected void Start ()
     {
-        if(bodyComponent == null){
+        if(bodyComponent == null)
+        {
             bodyComponent = GetComponent<Rigidbody2D>();
         }
+
         StartCoroutine(DeadTimer());
-        return;
 	}
 
     protected void OnEnable()
@@ -64,17 +65,37 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>
     private bool WeReachedABlackholeCenter(BlackHoleEvent _blackHoleEvent)
     {
         bool centerReached = false;
-        if (_blackHoleEvent.GetAffectedObject.Equals(bodyComponent) && _blackHoleEvent.GetEventType == BlackHoleEventType.CenterReachead) {
+        if (_blackHoleEvent.GetAffectedObject.Equals(bodyComponent) && _blackHoleEvent.GetEventType == BlackHoleEventType.CenterReachead) 
+        {
             centerReached = true;
         }
         return centerReached;
     }
 
+    public void ApplyGravity(Vector2 _direction, float _force)
+    {
+        // In case the user forgets to normalize the direction vector.
+        Vector3 normalizedDirection = _direction.normalized;
+        bodyComponent.AddForce(_direction * _force, ForceMode2D.Force);
+    }
+
+    public void ApplyRotationalForce(Vector2 _direction, float _force)
+    {
+        // In case the user forgets to normalize the direction vector.
+        Vector3 normalizedDirection = _direction.normalized;
+        bodyComponent.AddForce(_direction * _force, ForceMode2D.Force);
+    }
+
+    public void RotateTowardsGravitationCenter(Vector2 _gravitationCenterDirection)
+    {
+        return;
+    }
+
     public void OnGameEvent(BlackHoleEvent _blackHoleEvent)
     {
-        if (WeReachedABlackholeCenter(_blackHoleEvent)) {
+        if (WeReachedABlackholeCenter(_blackHoleEvent)) 
+        {
             ReleaseAsteroid();
         }
-        return;
     }
 }

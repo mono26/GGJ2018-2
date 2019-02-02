@@ -37,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4485343844356438}
   - component: {fileID: 212130416342089136}
-  - component: {fileID: 95369347447082068}
   - component: {fileID: 50628130364634472}
   - component: {fileID: 114100064732119054}
   - component: {fileID: 114494846662596814}
@@ -172,23 +171,6 @@ PolygonCollider2D:
       - {x: 0.8444443, y: -1.4955776}
       - {x: 1.5788841, y: -0.89303803}
       - {x: 1.9830933, y: 0.2871616}
---- !u!95 &95369347447082068
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1491111122904462}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 842f6c6a36061c740a2534c8236f7548, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114100064732119054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,9 +186,10 @@ MonoBehaviour:
   gravitationalRotation: 9.8
   gravity: 100
   gravitationalField: {fileID: 58951071852926638}
+  playerInPlanet: 0
+  rotationSpeed: 0
   planetRadius: 2.2
   signal: {fileID: 0}
-  objectsInsideGravitationField: []
   gravitationalFieldRadius: 0
 --- !u!114 &114494846662596814
 MonoBehaviour:
