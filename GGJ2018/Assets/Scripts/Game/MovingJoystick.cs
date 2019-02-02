@@ -21,7 +21,7 @@ public class MovingJoystick : TouchJoystick, IPointerDownHandler, IPointerUpHand
 	}
 	void Start()
 	{
-		SetAlpha(0.3f);
+		SetAlpha(inactiveAlpha);
 
 		initialJoystickPosition = joystick.position;
 		initialKnobPosition = knob.position;
@@ -34,7 +34,7 @@ public class MovingJoystick : TouchJoystick, IPointerDownHandler, IPointerUpHand
 			return;
 		}
 
-		SetAlpha(1);
+		SetAlpha(activeAlpha);
 
 		joystick.position = pointerData.position;
 		//knob.anchoredPosition = pointerData.position;
@@ -48,7 +48,7 @@ public class MovingJoystick : TouchJoystick, IPointerDownHandler, IPointerUpHand
 
 	public void OnPointerUp(PointerEventData pointerData)
 	{
-		SetAlpha(0.3f);
+		SetAlpha(inactiveAlpha);
 
 		joystick.position = initialJoystickPosition;
 		knob.position = initialKnobPosition;
