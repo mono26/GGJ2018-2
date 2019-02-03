@@ -24,11 +24,10 @@ public class BlackHoleSpawner : Spawner
     {
         BlackHole spawnedBlackHole = GetBlackHoleToSpawn();
         float radius = spawnedBlackHole.GetSpawnableComponent.GetRadius;
-        Vector2 blackHoleSize = new Vector2(radius, radius);
         for(int i = 0; i < maxTriesToSpawn; i++)
         {
             Vector3 spawnPosition = CalculateRandomPosition();
-            if (IsAFreeSpot(spawnPosition, blackHoleSize)) 
+            if (IsAFreeSpot(spawnPosition, radius)) 
             {
                 PositionBlackHole(spawnedBlackHole, spawnPosition);
                 break;

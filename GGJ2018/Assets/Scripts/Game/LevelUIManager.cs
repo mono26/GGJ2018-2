@@ -17,6 +17,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     protected override void Awake()
     {
         base.Awake();
+
         Transform inputContainer = transform.Find("Virtual_Input");
         if (radarButton == null) {
             radarButton = inputContainer.Find("Radar_Button").gameObject;
@@ -59,9 +60,31 @@ public class LevelUIManager : Singleton<LevelUIManager>
     public void ActivatePlayerControls(bool _active)
     {
         movementJoystick.SetActive(_active);
-   //     radarFrequencyJoystick.SetActive(_active);
+        //radarFrequencyJoystick.SetActive(_active);
         radarButton.SetActive(_active);
         rayButton.SetActive(_active);
         return;
+    }
+
+    // Encontrar mejor manera de hacer esto. Si por event system o alguna otra manera.
+    public void DisplayInputButton(string _buttonToActivate, bool _buttonState)
+    {
+        switch (_buttonToActivate)
+        {
+            case "RadarButton":
+            {
+                radarButton.SetActive(_buttonState);
+                break;
+            }
+            case "RayButton":
+            {
+                rayButton.SetActive(_buttonState);
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>, IInfluencedByGravity
+public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>, IAffectedByGravity
 {
     [Header("Asteroid settings")]
     [SerializeField] protected float lifeTime = 10;

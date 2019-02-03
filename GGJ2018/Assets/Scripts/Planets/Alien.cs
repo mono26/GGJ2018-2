@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IInfluencedByGravity
+public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravity
 {
     [Header("Alien settings")]
     [SerializeField] float lifeTime = 3.0f;
@@ -15,6 +15,8 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IInfluencedByGrav
     [Header("Alien components")]
     [SerializeField] protected Health healthComponent;
     [SerializeField] Rigidbody2D bodyComponent;
+
+    Coroutine deathRoutine;
 
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
@@ -51,10 +53,20 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IInfluencedByGrav
 
     private void OnTriggerEnter2D(Collider2D _collider)
     {
-        if (_collider.CompareTag("GravitationField")) {
-            StopCoroutine(KillAlienAfterLifeTime());
+        if (!_collider.CompareTag("GravitationField")) 
+        {
+            return;
         }
-        return;
+
+        var parentPlanet = _collider.transform.parent;
+        if(parentPlanet.CompareTag("Planet"))
+        {
+            if(deathRoutine == null)
+            {
+                return;
+            }
+            StopCoroutine(deathRoutine);
+        }
     }
 
     private IEnumerator KillAlienAfterLifeTime()
@@ -68,7 +80,7 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IInfluencedByGrav
     private void OnTriggerExit2D(Collider2D _collision)
     {
         if (_collision.gameObject.CompareTag("GravitationField")) {
-            StartCoroutine(KillAlienAfterLifeTime());
+            deathRoutine = StartCoroutine(KillAlienAfterLifeTime());
         }
         return;
     }
@@ -119,7 +131,6 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IInfluencedByGrav
         {
             if(groundHit.collider.CompareTag("Planet"))
             {
-                Debug.LogError("Alien is touching ground");
                 touchingGround = true;
             }
         }

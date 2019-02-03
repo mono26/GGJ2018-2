@@ -56,10 +56,16 @@ public class BlackHole : Planet
 
     protected void CheckObjectsDistanceToCenter()
     {
-        foreach(IInfluencedByGravity obj in objectsInsideGravitationField)
+        for (int i =  objsInGravitationField.Count - 1; i > -1; i--)
         {
-            if(Vector3.Distance(obj.GetBodyComponent.position, transform.position) < minimumDistanceToCenter) {
-                EventManager.TriggerEvent<BlackHoleEvent>(new BlackHoleEvent(obj.GetBodyComponent.gameObject, BlackHoleEventType.CenterReachead));
+            if(objsInGravitationField[i] == null)
+            {
+                objsInGravitationField.RemoveAt(i);
+                continue;
+            }
+
+            if(Vector3.Distance(objsInGravitationField[i].GetBodyComponent.position, transform.position) < minimumDistanceToCenter) {
+                EventManager.TriggerEvent<BlackHoleEvent>(new BlackHoleEvent(objsInGravitationField[i].GetBodyComponent.gameObject, BlackHoleEventType.CenterReachead));
             }
         }
     }

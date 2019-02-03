@@ -25,7 +25,7 @@ public class ShipInput
     }
 }
 
-public class Ship : MonoBehaviour, IInfluencedByGravity
+public class Ship : MonoBehaviour, IAffectedByGravity
 {
     [Header("Ship components")]
     [SerializeField] private BoxCollider2D hitBoxComponent = null;
@@ -39,7 +39,7 @@ public class Ship : MonoBehaviour, IInfluencedByGravity
     [SerializeField] private ShipComponent[] components;
     [SerializeField] private ShipInput currentInput = new ShipInput();    // TODO save input in exterinput component
 
-    bool isOnPlanetGravitationalField;
+    bool isOnPlanetGravitationalField = false;
 
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
@@ -77,13 +77,20 @@ public class Ship : MonoBehaviour, IInfluencedByGravity
         components = GetComponents<ShipComponent>();
     }
 
+    void Start() 
+    {
+        LevelUIManager.Instance.DisplayInputButton("RadarButton", true);
+        LevelUIManager.Instance.DisplayInputButton("RayButton", false);
+    }
+
     private void Update ()
     {
         ActivateShipRay();
         ActivateShipRadar();
         HandleShipRadarFrequency();
 
-        foreach (ShipComponent component in components){
+        foreach (ShipComponent component in components)
+        {
             component.EveryFrame();
         }
     }
@@ -98,7 +105,12 @@ public class Ship : MonoBehaviour, IInfluencedByGravity
 
     private void ActivateShipRadar()
     {
-        if(atractorRayComponent != null && currentInput.GetRadarState) 
+        if(atractorRayComponent != null)
+        {
+            return;
+        }
+
+        if(currentInput.GetRadarState) 
         {
             radarComponent.ActivateRadar();
         }
@@ -106,11 +118,12 @@ public class Ship : MonoBehaviour, IInfluencedByGravity
 
     private void HandleShipRadarFrequency()
     {
-        if(radarComponent != null) 
+        if(radarComponent == null) 
         {
             radarComponent.ChangeFrecuency((int)currentInput.GetRadarFrequency);
         }
-        return;
+
+        radarComponent.ChangeFrecuency((int)currentInput.GetRadarFrequency);
     }
 
     private void FixedUpdate()
@@ -134,12 +147,14 @@ public class Ship : MonoBehaviour, IInfluencedByGravity
             return;
         }
 
-        var parentPlanet = _collider.transform.parent;
-        if(parentPlanet == null)
+        LevelUIManager.Instance.DisplayInputButton("RadarButton", false);
+        LevelUIManager.Instance.DisplayInputButton("RayButton", true);
+        if(radarComponent.IsRadarOn)
         {
-            return;
+            ActivateShipRadar();
         }
 
+        var parentPlanet = _collider.transform.parent;
         if(parentPlanet.CompareTag("Planet"))
         {
             isOnPlanetGravitationalField = true;
@@ -153,12 +168,14 @@ public class Ship : MonoBehaviour, IInfluencedByGravity
             return;
         }
 
-        var parentPlanet = _collider.transform.parent;
-        if(parentPlanet == null)
+        LevelUIManager.Instance.DisplayInputButton("RadarButton", true);
+        LevelUIManager.Instance.DisplayInputButton("RayButton", false);
+        if(atractorRayComponent.IsAlienRayOn)
         {
-            return;
+            ActivateShipRadar();
         }
 
+        var parentPlanet = _collider.transform.parent;
         if(parentPlanet.CompareTag("Planet"))
         {
             isOnPlanetGravitationalField = false;

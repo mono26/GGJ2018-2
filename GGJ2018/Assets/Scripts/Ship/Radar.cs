@@ -116,10 +116,12 @@ public class Radar : ShipComponent
     public void ActivateRadar()
     {
         isRadarOn = !isRadarOn;
-        if (isRadarOn) {
+        if (isRadarOn) 
+        {
             StartRadar();
         }
-        else {
+        else 
+        {
             StopRadar();
         }
         return;

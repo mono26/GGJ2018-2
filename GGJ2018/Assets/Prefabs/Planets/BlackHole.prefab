@@ -31,6 +31,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1571358981021388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4085442354785450}
+  - component: {fileID: 58733214615672322}
+  m_Layer: 13
+  m_Name: GravitationalField
+  m_TagString: GravitationField
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1677099381083558
 GameObject:
   m_ObjectHideFlags: 0
@@ -48,6 +64,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4085442354785450
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1571358981021388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4510848149404664}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4304023701253948
 Transform:
   m_ObjectHideFlags: 1
@@ -68,10 +97,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242909717354880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.33, y: 15.62, z: -4.04}
+  m_LocalPosition: {x: 28.07162, y: -10.431844, z: -4.04}
   m_LocalScale: {x: 1, y: 1, z: 5}
   m_Children:
   - {fileID: 4304023701253948}
+  - {fileID: 4085442354785450}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,6 +131,21 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242909717354880}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3.3
+--- !u!58 &58733214615672322
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1571358981021388}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -124,11 +169,11 @@ MonoBehaviour:
   gravitationalFieldDirection: 1
   gravitationalRotation: 16
   gravity: 200
-  gravitationalField: {fileID: 58626897860147646}
+  gravitationalField: {fileID: 58733214615672322}
+  playerInGravitationalField: 0
+  rotationSpeed: 0
   planetRadius: 3.3
-  playerInPlanet: 0
   signal: {fileID: 0}
-  gravitationalFieldRadius: 0
   lifeTime: 10
   lifeTimeCounter: 0
   spawnableComponent: {fileID: 114952423413972156}
@@ -204,7 +249,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -235967331
+  randomSeed: -2015101448
   InitialModule:
     serializedVersion: 3
     enabled: 1

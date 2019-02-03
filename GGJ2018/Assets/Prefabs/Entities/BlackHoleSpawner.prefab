@@ -53,7 +53,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnTimer: 0
   minTimeToSpawn: 5
-  maxTimeToSpawn: 10
+  maxTimeToSpawn: 25
   maxTriesToSpawn: 15
+  layerToCheckForSpawnCollision:
+    serializedVersion: 2
+    m_Bits: 256
+  minDistanceFromPlayer: 6
   maxDistanceFromPlayer: 5
   player: {fileID: 0}

@@ -36,11 +36,10 @@ public class AsteroidSpawner : Spawner
     {
         Asteroid spawnedAsteroid = GetAsteroidToSpawn();
         float radius = spawnedAsteroid.GetSpawnableComponent.GetRadius;
-        Vector2 asteroidSize = new Vector2(radius, radius);
         for(int i = 0; i < maxTriesToSpawn; i++)
         {
             Vector3 spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
-            if(IsAFreeSpot(spawnPosition, asteroidSize)) 
+            if(IsAFreeSpot(spawnPosition, radius)) 
             {
                 LaunchAsteroid(spawnedAsteroid, spawnPosition);
                 break;

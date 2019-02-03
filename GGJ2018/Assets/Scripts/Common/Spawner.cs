@@ -5,9 +5,10 @@ using UnityEngine;
 public abstract class Spawner : MonoBehaviour
 {
     [SerializeField] protected float spawnTimer;
-    [SerializeField] protected int minTimeToSpawn = 0;
-    [SerializeField] protected int maxTimeToSpawn = 10;
+    [SerializeField] int minTimeToSpawn = 0;
+    [SerializeField] int maxTimeToSpawn = 10;
     [SerializeField] protected int maxTriesToSpawn = 10;
+    [SerializeField] LayerMask layerToCheckForSpawnCollision;
 
     private void Start()
     {
@@ -21,10 +22,10 @@ public abstract class Spawner : MonoBehaviour
         return;
     }
 
-    protected bool IsAFreeSpot(Vector3 _positionToCheck, Vector2 _objectSize)
+    protected bool IsAFreeSpot(Vector3 _positionToCheck, float _objectSize)
     {
         bool isAFreeSpot = false;
-        RaycastHit2D freeSpotHit = Physics2D.BoxCast(_positionToCheck, _objectSize, 0, Vector2.zero, 0);
+        RaycastHit2D freeSpotHit = Physics2D.CircleCast(_positionToCheck, _objectSize, Vector2.zero, 0, layerToCheckForSpawnCollision);
         if (freeSpotHit.collider == null) {
             isAFreeSpot = true;
         }

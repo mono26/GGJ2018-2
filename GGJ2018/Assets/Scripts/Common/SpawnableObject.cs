@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-[RequireComponent(typeof(CircleCollider2D))]
 public class SpawnableObject : MonoBehaviour
 {
     [Header("Spawnable settings")]

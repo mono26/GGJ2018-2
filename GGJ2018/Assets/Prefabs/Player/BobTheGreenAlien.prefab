@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 20911679552111536}
   - component: {fileID: 124189234140370042}
   - component: {fileID: 81453674263166858}
+  - component: {fileID: 114156984383695892}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -627,7 +628,6 @@ GameObject:
   - component: {fileID: 223397720278477496}
   - component: {fileID: 114253260732229658}
   - component: {fileID: 114907072513685842}
-  - component: {fileID: 114386237127576186}
   m_Layer: 5
   m_Name: Static_UICanvas
   m_TagString: Untagged
@@ -1163,7 +1163,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1080706513235740}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1363,6 +1363,24 @@ MonoBehaviour:
   damageTags:
   - Alien
   damageOnTouch: 5
+--- !u!114 &114156984383695892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212705983445784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb55d37eedf255043b4e983f9475de60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverUI: {fileID: 1568283391504368}
+  pauseUI: {fileID: 1819345926371164}
+  winUI: {fileID: 1568283391504368}
+  radarButton: {fileID: 1941298289994266}
+  rayButton: {fileID: 1340802530709356}
+  movementJoystick: {fileID: 1799196510584680}
+  radarFrequencyJoystick: {fileID: 0}
 --- !u!114 &114209072009356730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1631,24 +1649,6 @@ MonoBehaviour:
   m_Text: 'Retry
 
 '
---- !u!114 &114386237127576186
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1746908027217708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb55d37eedf255043b4e983f9475de60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOverUI: {fileID: 1568283391504368}
-  pauseUI: {fileID: 1819345926371164}
-  winUI: {fileID: 1568283391504368}
-  radarButton: {fileID: 1941298289994266}
-  rayButton: {fileID: 1340802530709356}
-  movementJoystick: {fileID: 1799196510584680}
-  radarFrequencyJoystick: {fileID: 0}
 --- !u!114 &114465578780492410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1735,7 +1735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7920d8eb4547f84fb2ca53e3ec11cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  representedButtonID: Radar
+  representedButtonID: RadarButton
   canPress: 1
 --- !u!114 &114549878948921260
 MonoBehaviour:
@@ -1956,7 +1956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7920d8eb4547f84fb2ca53e3ec11cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  representedButtonID: Ray
+  representedButtonID: RayButton
   canPress: 1
 --- !u!114 &114654165359349814
 MonoBehaviour:
@@ -2332,8 +2332,8 @@ MonoBehaviour:
   horizontalID: Horizontal
   verticalID: Vertical
   radarfrequencyID: RadarFrequency
-  rayID: Ray
-  radarID: Radar
+  rayID: RayButton
+  radarID: RadarButton
   horizontal: 0
   vertical: 0
   radarFrequency: 0
@@ -13774,16 +13774,16 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1941298289994266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224348327328011298}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -378, y: 137.80492}
+  m_AnchoredPosition: {x: -150, y: 150}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224985866469200908
