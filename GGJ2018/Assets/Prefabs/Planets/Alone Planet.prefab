@@ -28,7 +28,7 @@ GameObject:
   m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1762959127595350
 GameObject:
@@ -45,7 +45,7 @@ GameObject:
   m_TagString: GravitationField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4225451247775882
 Transform:
@@ -136,13 +136,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitationalFieldDirection: 1
-  gravitationalRotation: 9.8
+  rotationSpeed: 4.4
   gravity: 100
-  gravitationalField: {fileID: 58622635712402336}
+  playerInGravitationalField: 0
   planetRadius: 6.3
-  playerInPlanet: 0
+  gravitationalFieldRadius: 10
   signal: {fileID: 0}
-  gravitationalFieldRadius: 0
+  gravitationalField: {fileID: 58622635712402336}
 --- !u!212 &212359388721485538
 SpriteRenderer:
   m_ObjectHideFlags: 1

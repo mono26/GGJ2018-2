@@ -29,7 +29,7 @@ GameObject:
   m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1805224864733508
 GameObject:
@@ -46,7 +46,7 @@ GameObject:
   m_TagString: GravitationField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1909506088884252
 GameObject:
@@ -61,7 +61,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4335827796629090
 Transform:
@@ -179,16 +179,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitationalFieldDirection: 1
-  gravitationalRotation: 100
-  gravity: 100
-  gravitationalField: {fileID: 58180459630791772}
-  playerInPlanet: 0
   rotationSpeed: 4.4
+  gravity: 100
+  playerInGravitationalField: 0
   planetRadius: 4.9
+  gravitationalFieldRadius: 10
   signal: {fileID: 114211160479330264}
-  gravitationalFieldRadius: 0
+  gravitationalField: {fileID: 58180459630791772}
   alien: {fileID: 114053472491642104, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
   numberOfAliens: 30
+  aliens: []
 --- !u!212 &212046770694197386
 SpriteRenderer:
   m_ObjectHideFlags: 1

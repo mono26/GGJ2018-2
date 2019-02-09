@@ -7,7 +7,7 @@ public class Planet : MonoBehaviour
     [SerializeField][Range(-1,1)] int gravitationalFieldDirection = 1; // +1 left, -1 right
     [SerializeField] float rotationSpeed = 4.4f;
     [SerializeField] float gravity = 9.8f;
-    [SerializeField]  bool playerInGravitationalField;
+    [SerializeField] bool playerInGravitationalField;
     [SerializeField] protected float planetRadius;
     [SerializeField] float gravitationalFieldRadius = 10.0f;
 
@@ -34,7 +34,6 @@ public class Planet : MonoBehaviour
         {
             signal = GetComponent<SignalEmitter>();
         }
-        else return;
     }
 
     protected virtual void Start()

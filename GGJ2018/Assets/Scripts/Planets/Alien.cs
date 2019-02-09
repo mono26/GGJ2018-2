@@ -65,24 +65,26 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravit
             {
                 return;
             }
+
             StopCoroutine(deathRoutine);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D _collision)
+    {
+        if (_collision.gameObject.CompareTag("GravitationField")) 
+        {
+            deathRoutine = StartCoroutine(KillAlienAfterLifeTime());
         }
     }
 
     private IEnumerator KillAlienAfterLifeTime()
     {
         yield return new WaitForSeconds(lifeTime);
-        healthComponent.TakeDamage(999);
-        DestroyObject(gameObject);
-        yield break;
-    }
 
-    private void OnTriggerExit2D(Collider2D _collision)
-    {
-        if (_collision.gameObject.CompareTag("GravitationField")) {
-            deathRoutine = StartCoroutine(KillAlienAfterLifeTime());
-        }
-        return;
+        healthComponent.TakeDamage(999);
+        
+        yield break;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

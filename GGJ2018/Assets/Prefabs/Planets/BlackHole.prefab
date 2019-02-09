@@ -29,7 +29,7 @@ GameObject:
   m_TagString: Blackhole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1571358981021388
 GameObject:
@@ -45,7 +45,7 @@ GameObject:
   m_TagString: GravitationField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1677099381083558
 GameObject:
@@ -62,7 +62,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4085442354785450
 Transform:
@@ -167,10 +167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitationalFieldDirection: 1
-  gravitationalRotation: 16
-  gravity: 200
-  playerInGravitationalField: 0
   rotationSpeed: 0
+  gravity: 9.8
+  playerInGravitationalField: 0
   planetRadius: 3.3
   gravitationalFieldRadius: 3
   signal: {fileID: 0}
