@@ -7,14 +7,15 @@ public class Planet : MonoBehaviour
     [SerializeField][Range(-1,1)] int gravitationalFieldDirection = 1; // +1 left, -1 right
     [SerializeField] float gravitationalRotation = 9.8f;
     [SerializeField] float gravity = 9.8f;
-    [SerializeField] CircleCollider2D gravitationalField;
     [SerializeField]  bool playerInGravitationalField;
     [SerializeField] float rotationSpeed;
     [SerializeField] protected float planetRadius;
+    [SerializeField] float gravitationalFieldRadius = 10.0f;
 
     [Header("Planet components")]
     [SerializeField]
     protected SignalEmitter signal;
+    [SerializeField] CircleCollider2D gravitationalField;
 
     [Header("Planet editor debuggin")]
     [SerializeField] protected List<IAffectedByGravity> objsInGravitationField = new List<IAffectedByGravity>();
@@ -27,10 +28,12 @@ public class Planet : MonoBehaviour
     protected virtual void Awake()
     {
         CircleCollider2D collider = GetComponent<CircleCollider2D>();
-        if (collider) {
+        if (collider) 
+        {
             planetRadius = GetComponent<CircleCollider2D>().radius;
         }
-        if (signal == false){
+        if (signal == null)
+        {
             signal = GetComponent<SignalEmitter>();
         }
         else return;
@@ -39,11 +42,12 @@ public class Planet : MonoBehaviour
     protected virtual void Start()
     {
         playerInGravitationalField = false;
-        float gravitationalFieldRadius = planetRadius + planetRadius;
+        
+        float gravFieldRadius = planetRadius + gravitationalFieldRadius;
         if(gravitationalField != null)
-            gravitationalField.radius = gravitationalFieldRadius;
-
-        return;
+        {
+            gravitationalField.radius = gravFieldRadius;
+        }
 	}
 
     protected virtual void FixedUpdate()

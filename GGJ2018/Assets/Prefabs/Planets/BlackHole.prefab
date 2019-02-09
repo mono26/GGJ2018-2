@@ -169,11 +169,12 @@ MonoBehaviour:
   gravitationalFieldDirection: 1
   gravitationalRotation: 16
   gravity: 200
-  gravitationalField: {fileID: 58733214615672322}
   playerInGravitationalField: 0
   rotationSpeed: 0
   planetRadius: 3.3
+  gravitationalFieldRadius: 3
   signal: {fileID: 0}
+  gravitationalField: {fileID: 58733214615672322}
   lifeTime: 10
   lifeTimeCounter: 0
   spawnableComponent: {fileID: 114952423413972156}

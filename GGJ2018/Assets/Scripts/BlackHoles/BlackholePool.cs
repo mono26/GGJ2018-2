@@ -26,13 +26,16 @@ public class BlackHolePool : Singleton<BlackHolePool>
 
     private void AddBlackHole()
     {
-        BlackHole instance = Instantiate(blackholePrefab);
-        instance.gameObject.SetActive(false);
-        blackholes.Add(instance);
+        BlackHole blackhole = Instantiate(blackholePrefab);
+        blackhole.transform.SetParent(transform);
+        blackhole.gameObject.SetActive(false);
+        blackholes.Add(blackhole);
     }
 
     public void ReleaseBlackHole(BlackHole blackhole)
     {
+        blackhole.transform.SetParent(transform);
+        blackhole.transform.position = transform.position;
         blackhole.gameObject.SetActive(false);
         blackholes.Add(blackhole);
     }
@@ -48,6 +51,7 @@ public class BlackHolePool : Singleton<BlackHolePool>
     {
         BlackHole blackhole = blackholes[blackholes.Count - 1];
         blackholes.RemoveAt(blackholes.Count - 1);
+        blackhole.transform.SetParent(null);
         blackhole.gameObject.SetActive(true);
         return blackhole;
     }

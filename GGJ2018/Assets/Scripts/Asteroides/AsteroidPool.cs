@@ -27,23 +27,18 @@ public class AsteroidPool : Singleton<AsteroidPool>
 
     private void AddAsteroide()
     {
-        Asteroid instance = Instantiate(asteroidePrefab);
-        instance.gameObject.SetActive(false);
-        asteroides.Add(instance);
+        Asteroid asteroid = Instantiate(asteroidePrefab);
+        asteroid.transform.SetParent(transform);
+        asteroid.gameObject.SetActive(false);
+        asteroides.Add(asteroid);
     }
 
     public void ReleaseAsteroide(Asteroid asteroide)
     {
+        asteroide.transform.SetParent(transform);
+        asteroide.transform.position = transform.position;
         asteroide.gameObject.SetActive(false);
         asteroides.Add(asteroide);
-    }
-
-    private Asteroid AllocateAsteroide()
-    {
-        Asteroid asteroide = asteroides[asteroides.Count - 1];
-        asteroides.RemoveAt(asteroides.Count - 1);
-        asteroide.gameObject.SetActive(true);
-        return asteroide;
     }
 
     public Asteroid GetAsteroide()
@@ -51,5 +46,14 @@ public class AsteroidPool : Singleton<AsteroidPool>
         if (asteroides.Count == 0)
             AddAsteroide();
         return AllocateAsteroide();
+    }
+
+    private Asteroid AllocateAsteroide()
+    {
+        Asteroid asteroide = asteroides[asteroides.Count - 1];
+        asteroides.RemoveAt(asteroides.Count - 1);
+        asteroide.transform.SetParent(null);
+        asteroide.gameObject.SetActive(true);
+        return asteroide;
     }
 }
