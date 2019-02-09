@@ -104,7 +104,7 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravit
         return weAreDead;
     }
 
-    public void ApplyGravity(Vector2 _direction, float _force)
+    public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce)
     {
         if(IsOnGround())
         {
@@ -112,15 +112,15 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravit
         }
 
         // In case the user forgets to normalize the direction vector.
-        Vector3 normalizedDirection = _direction.normalized;
-        bodyComponent.AddForce(_direction * _force, ForceMode2D.Force);
+        Vector3 normalizedDirection = _normalizedGravityDirection.normalized;
+        bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
     }
 
-    public void ApplyRotationalForce(Vector2 _direction, float _force)
+    public void ApplyRotationSpeed(Vector2 _normalizedRotationDirection, float _rotationSpeed)
     {
         // In case the user forgets to normalize the direction vector.
-        Vector3 normalizedDirection = _direction.normalized;
-        bodyComponent.AddForce(_direction * _force, ForceMode2D.Force);
+        Vector3 normalizedDirection = _normalizedRotationDirection.normalized;
+        bodyComponent.AddForce(_normalizedRotationDirection * _rotationSpeed, ForceMode2D.Force);
     }
 
     bool IsOnGround()

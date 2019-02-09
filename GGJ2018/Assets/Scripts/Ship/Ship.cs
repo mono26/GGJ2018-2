@@ -154,8 +154,8 @@ public class Ship : MonoBehaviour, IAffectedByGravity
             ActivateShipRadar();
         }
 
-        var parentPlanet = _collider.transform.parent;
-        if(parentPlanet.CompareTag("Planet"))
+        var planet = _collider.transform.parent;
+        if(planet.CompareTag("Planet"))
         {
             isOnPlanetGravitationalField = true;
         }
@@ -175,32 +175,32 @@ public class Ship : MonoBehaviour, IAffectedByGravity
             ActivateShipRadar();
         }
 
-        var parentPlanet = _collider.transform.parent;
-        if(parentPlanet.CompareTag("Planet"))
+        var planet = _collider.transform.parent;
+        if(planet.CompareTag("Planet"))
         {
             isOnPlanetGravitationalField = false;
         }
     }
 
-    public void ApplyGravity(Vector2 _direction, float _force)
+    public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce)
     {
         if(isOnPlanetGravitationalField)
         {
             return;
         }
 
+        Debug.LogError("Applying gravity to player");
         // In case the user forgets to normalize the direction vector.
-        Vector3 normalizedDirection = _direction.normalized;
-        bodyComponent.AddForce(_direction * _force, ForceMode2D.Force);
+        Vector3 normalizedDirection = _normalizedGravityDirection.normalized;
+        bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
     }
 
-    public void ApplyRotationalForce(Vector2 _direction, float _force)
+    public void ApplyRotationSpeed(Vector2 _normalizedRotationDirection, float _rotationForce)
     {
         // In case the user forgets to normalize the direction vector.
-        Vector3 normalizedDirection = _direction.normalized;
-        bodyComponent.AddForce(_direction * _force, ForceMode2D.Force);
+        Vector3 normalizedDirection = _normalizedRotationDirection.normalized;
+        bodyComponent.AddForce(_normalizedRotationDirection * _rotationForce, ForceMode2D.Force);
     }
-
 
     public void RotateTowardsGravitationCenter(Vector2 _gravitationCenterDirection)
     {

@@ -5,10 +5,9 @@ public class Planet : MonoBehaviour
 {
     [Header("Planet settings")]
     [SerializeField][Range(-1,1)] int gravitationalFieldDirection = 1; // +1 left, -1 right
-    [SerializeField] float gravitationalRotation = 9.8f;
+    [SerializeField] float rotationSpeed = 4.4f;
     [SerializeField] float gravity = 9.8f;
     [SerializeField]  bool playerInGravitationalField;
-    [SerializeField] float rotationSpeed;
     [SerializeField] protected float planetRadius;
     [SerializeField] float gravitationalFieldRadius = 10.0f;
 
@@ -21,7 +20,6 @@ public class Planet : MonoBehaviour
     [SerializeField] protected List<IAffectedByGravity> objsInGravitationField = new List<IAffectedByGravity>();
 
     public float GetPlanetRadius { get { return planetRadius; } }
-    public float GetGravitationalFieldStrenght { get { return gravitationalRotation; } }
     public SignalEmitter Signal { get { return signal; } }
 
     // Use this for initialization
@@ -80,9 +78,9 @@ public class Planet : MonoBehaviour
 
             Vector2 directionFromObjectToCenter = objsInGravitationField[i].GetBodyComponent.position - (Vector2)transform.position;
             Vector2 tangentToDirectionToTheObject = new Vector2(-directionFromObjectToCenter.y, directionFromObjectToCenter.x).normalized * gravitationalFieldDirection;
-            float rotationForce = objsInGravitationField[i].GetBodyComponent.mass * gravitationalRotation;
+            float rotationForceToApply = rotationSpeed * objsInGravitationField[i].GetBodyComponent.mass;
 
-            objsInGravitationField[i].ApplyRotationalForce(tangentToDirectionToTheObject, rotationForce * Time.fixedDeltaTime);
+            objsInGravitationField[i].ApplyRotationSpeed(tangentToDirectionToTheObject, rotationForceToApply * Time.fixedDeltaTime);
             objsInGravitationField[i].RotateTowardsGravitationCenter(Vector2.Lerp(objsInGravitationField[i].GetBodyComponent.transform.up, directionFromObjectToCenter.normalized, 0.05f));
         }
     }
@@ -103,9 +101,9 @@ public class Planet : MonoBehaviour
             }
 
             Vector2 directionFromObjectToCenter = objsInGravitationField[i].GetBodyComponent.position - (Vector2)transform.position;
-            float gravityForce = objsInGravitationField[i].GetBodyComponent.mass * gravity;
+            float gravityForceToApply = gravity * objsInGravitationField[i].GetBodyComponent.mass;
 
-            objsInGravitationField[i].ApplyGravity(-directionFromObjectToCenter.normalized, gravityForce * Time.fixedDeltaTime);
+            objsInGravitationField[i].ApplyGravity(-directionFromObjectToCenter.normalized, gravityForceToApply * Time.fixedDeltaTime);
         }
     }
 
