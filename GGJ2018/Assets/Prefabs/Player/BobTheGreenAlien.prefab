@@ -1942,7 +1942,7 @@ MonoBehaviour:
   ship: {fileID: 114020360296148358}
   fuelLossPerSecond: 1
   maxFuel: 500
-  thrust: 1900
+  thrust: 2300
   fuelDisplay: {fileID: 114890448170325758}
   currentFuel: 0
 --- !u!114 &114646980496384262

@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1437263803463854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.1627107, y: 8.115695, z: -2.703125}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,9 +55,12 @@ MonoBehaviour:
   minTimeToSpawn: 5
   maxTimeToSpawn: 25
   maxTriesToSpawn: 15
-  layerToCheckForSpawnCollision:
+  planetLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  blackholeLayerMask:
+    serializedVersion: 2
+    m_Bits: 8192
   minDistanceFromPlayer: 6
   maxDistanceFromPlayer: 5
   player: {fileID: 0}

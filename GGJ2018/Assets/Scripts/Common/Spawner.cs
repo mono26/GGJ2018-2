@@ -8,7 +8,8 @@ public abstract class Spawner : MonoBehaviour
     [SerializeField] int minTimeToSpawn = 0;
     [SerializeField] int maxTimeToSpawn = 10;
     [SerializeField] protected int maxTriesToSpawn = 10;
-    [SerializeField] LayerMask layerToCheckForSpawnCollision;
+    [SerializeField] LayerMask planetLayerMask;
+    [SerializeField] LayerMask blackholeLayerMask;
 
     private void Start()
     {
@@ -25,10 +26,12 @@ public abstract class Spawner : MonoBehaviour
     protected bool IsAFreeSpot(Vector3 _positionToCheck, float _objectSize)
     {
         bool isAFreeSpot = false;
-        RaycastHit2D freeSpotHit = Physics2D.CircleCast(_positionToCheck, _objectSize, Vector2.zero, 0, layerToCheckForSpawnCollision);
-        if (freeSpotHit.collider == null) {
+        RaycastHit2D freeSpotHit = Physics2D.CircleCast(_positionToCheck, _objectSize, Vector2.zero, 0, planetLayerMask | blackholeLayerMask);
+        if (freeSpotHit.collider == null) 
+        {
             isAFreeSpot = true;
         }
+
         return isAFreeSpot;
     }
     protected virtual void Spawn()

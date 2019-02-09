@@ -55,9 +55,12 @@ MonoBehaviour:
   minTimeToSpawn: 3
   maxTimeToSpawn: 10
   maxTriesToSpawn: 10
-  layerToCheckForSpawnCollision:
+  planetLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  blackholeLayerMask:
+    serializedVersion: 2
+    m_Bits: 8192
   maxForce: 95000
   minForce: 65000
   player: {fileID: 0}
