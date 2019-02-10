@@ -106,7 +106,7 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravit
         return weAreDead;
     }
 
-    public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce)
+    public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
     {
         if(IsOnGround())
         {

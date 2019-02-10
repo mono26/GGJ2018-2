@@ -34,6 +34,13 @@ public class Blackhole : Planet
 
     public SpawnableObject GetSpawnableComponent { get { return spawnableComponent; } }
 
+    protected override void Start() 
+    {
+        base.Start();
+
+        gravitySource = GravitySourceType.Blackhole;
+    }
+    
     protected void OnEnable ()
     {
         lifeTimeCounter = lifeTime;

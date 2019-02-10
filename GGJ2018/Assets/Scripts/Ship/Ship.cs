@@ -39,8 +39,6 @@ public class Ship : MonoBehaviour, IAffectedByGravity
     [SerializeField] private ShipComponent[] components;
     [SerializeField] private ShipInput currentInput = new ShipInput();    // TODO save input in exterinput component
 
-    bool isOnPlanetGravitationalField = false;
-
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
 	private void Awake()
@@ -137,7 +135,7 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         }
     }
 
-    void OnTriggerEnter2D(Collider2D _collider)
+    void OnTriggerStay2D(Collider2D _collider)
     {
         if (!_collider.CompareTag("GravitationField"))
         {
@@ -146,16 +144,10 @@ public class Ship : MonoBehaviour, IAffectedByGravity
 
         LevelUIManager.Instance.DisplayInputButton("RadarButton", false);
         LevelUIManager.Instance.DisplayInputButton("RayButton", true);
+
         if(radarComponent.IsRadarOn)
         {   
-            Debug.Log("Deactivating radar because is on and we enter a gravitaational field");
             ActivateShipRadar();
-        }
-
-        var planet = _collider.transform.parent;
-        if(planet.CompareTag("Planet"))
-        {
-            isOnPlanetGravitationalField = true;
         }
     }
 
@@ -172,17 +164,11 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         {
             ActivateShipRadar();
         }
-
-        var planet = _collider.transform.parent;
-        if(planet.CompareTag("Planet"))
-        {
-            isOnPlanetGravitationalField = false;
-        }
     }
 
-    public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce)
+    public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
     {
-        if(isOnPlanetGravitationalField)
+        if(_gravitySource.Equals(GravitySourceType.Planet))
         {
             return;
         }

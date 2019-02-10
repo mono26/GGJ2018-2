@@ -72,7 +72,7 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackholeEvent>, IAffectedBy
         return centerReached;
     }
 
-    public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce)
+    public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
     {
         // In case the user forgets to normalize the direction vector.
         Vector3 normalizedDirection = _normalizedGravityDirection.normalized;

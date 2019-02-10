@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+public enum GravitySourceType { Planet, Blackhole }
+
 public class Planet : MonoBehaviour
 {
     [Header("Planet settings")]
@@ -8,6 +10,7 @@ public class Planet : MonoBehaviour
     [SerializeField] float rotationSpeed = 4.4f;
     [SerializeField] float rotationForce = 9.8f;
     [SerializeField] float gravityForce = 9.8f;
+    [SerializeField] protected GravitySourceType gravitySource;
     [SerializeField] bool playerInGravitationalField;
     [SerializeField] protected float planetRadius;
     [SerializeField] float gravitationalFieldRadius = 10.0f;
@@ -39,6 +42,8 @@ public class Planet : MonoBehaviour
 
     protected virtual void Start()
     {
+        gravitySource = GravitySourceType.Planet;
+
         playerInGravitationalField = false;
         
         float gravFieldRadius = planetRadius + gravitationalFieldRadius;
@@ -76,12 +81,13 @@ public class Planet : MonoBehaviour
                 continue;
             }
 
-            Vector2 directionFromObjectToCenter = objsInGravitationField[i].GetBodyComponent.position - (Vector2)transform.position;
+            Vector2 directionFromObjectToCenter = (objsInGravitationField[i].GetBodyComponent.position - (Vector2)transform.position).normalized;
             Vector2 tangentToDirectionToTheObject = new Vector2(-directionFromObjectToCenter.y, directionFromObjectToCenter.x).normalized * gravitationalFieldDirection;
             float rotationForceToApply = rotationForce * objsInGravitationField[i].GetBodyComponent.mass;
 
             objsInGravitationField[i].ApplyRotationSpeed(tangentToDirectionToTheObject, rotationForceToApply * Time.fixedDeltaTime);
-            objsInGravitationField[i].RotateTowardsGravitationCenter(Vector2.Lerp(objsInGravitationField[i].GetBodyComponent.transform.up, directionFromObjectToCenter.normalized, 0.05f));
+            // Becuse we are using the opposite of the transform.up for the lerp. We must use the opposite of the lerp.
+            objsInGravitationField[i].RotateTowardsGravitationCenter(Vector2.Lerp(objsInGravitationField[i].GetBodyComponent.transform.up, directionFromObjectToCenter, 0.05f));
         }
     }
 
@@ -103,7 +109,7 @@ public class Planet : MonoBehaviour
             Vector2 directionFromObjectToCenter = objsInGravitationField[i].GetBodyComponent.position - (Vector2)transform.position;
             float gravityForceToApply = gravityForce * objsInGravitationField[i].GetBodyComponent.mass;
 
-            objsInGravitationField[i].ApplyGravity(-directionFromObjectToCenter.normalized, gravityForceToApply * Time.fixedDeltaTime);
+            objsInGravitationField[i].ApplyGravity(-directionFromObjectToCenter.normalized, gravityForceToApply * Time.fixedDeltaTime, gravitySource);
         }
     }
 
