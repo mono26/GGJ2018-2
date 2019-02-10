@@ -151,7 +151,8 @@ public class Ship : MonoBehaviour, IAffectedByGravity
 
         if (currentInput.GetHorizontalInput != 0 || currentInput.GetVerticalInput != 0)
         {
-            engineComponent.ApplyEngineThrust(transform.right * currentInput.GetHorizontalInput + transform.up * currentInput.GetVerticalInput);
+            engineComponent.ApplyEngineThrust( (transform.right * currentInput.GetHorizontalInput) + 
+            (transform.up * currentInput.GetVerticalInput) );
         }
     }
 
