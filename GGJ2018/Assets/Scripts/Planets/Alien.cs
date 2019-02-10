@@ -59,13 +59,13 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravit
         }
 
         var parentPlanet = _collider.transform.parent;
-        if(parentPlanet.CompareTag("Planet"))
+        if (parentPlanet.CompareTag("Planet"))
         {
             if(deathRoutine == null)
             {
                 return;
             }
-
+            
             StopCoroutine(deathRoutine);
         }
     }

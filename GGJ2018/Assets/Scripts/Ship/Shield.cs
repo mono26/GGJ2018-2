@@ -18,6 +18,7 @@ public class Shield : ShipComponent
 	void Start() 
 	{
 		shieldGameObject.SetActive(false);
+		duration = maxDuration;
 		isShieldOn = false;
 	}
 	public override void EveryFrame()
