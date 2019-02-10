@@ -12,71 +12,77 @@ public class TouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [Header("Touch Button settings")]
 	[SerializeField] private string representedButtonID;
-    public TouchButtonStates CurrentState { get; protected set; }
-
-    [SerializeField] private bool canPress = true;
+    [SerializeField] TouchButtonStates currentState;
+    public TouchButtonStates CurrentState { get { return currentState; } }
 
 	void Update ()
     {
-        if(CurrentState == TouchButtonStates.ButtonPressed && canPress) {
-			OnPointerPressed();
-		}
-		return;
+        if(currentState == TouchButtonStates.ButtonPressed) 
+        {
+			ButtonPressed();
+        }
     }
 
     protected virtual void LateUpdate()
     {
-        if (CurrentState == TouchButtonStates.ButtonUp) {
-            CurrentState = TouchButtonStates.Off;
-            
+        if (currentState == TouchButtonStates.ButtonUp) 
+        {
+            currentState = TouchButtonStates.Off;      
         }
-        if (CurrentState == TouchButtonStates.ButtonDown) {
-            CurrentState = TouchButtonStates.ButtonPressed;
+        if (currentState == TouchButtonStates.ButtonDown) 
+        {
+            currentState = TouchButtonStates.ButtonPressed;
         }
-		return;
     }
 
-    public virtual void OnPointerPressed()
+    public virtual void ButtonPressed()
     {
-        canPress = false;
-        CurrentState = TouchButtonStates.ButtonPressed;
+        currentState = TouchButtonStates.ButtonPressed;
 		InputManager.InteractWithButton(representedButtonID, InputButtonStates.Pressed);
-		return;
     }
 
     public virtual void OnPointerDown(PointerEventData data)
     {
-        if (CurrentState == TouchButtonStates.Off) 
+        if (currentState != TouchButtonStates.Off) 
 		{
-            canPress = false;
-        	CurrentState = TouchButtonStates.ButtonDown;
-			InputManager.InteractWithButton(representedButtonID, InputButtonStates.Down);
+            return;
         }
-		return;
+
+        ButtonDownFirstTime();
+    }
+
+    void ButtonDownFirstTime()
+    {
+        currentState = TouchButtonStates.ButtonDown;
+        InputManager.InteractWithButton(representedButtonID, InputButtonStates.Down);
     }
 
     public virtual void OnPointerUp(PointerEventData data)
     {
-        if (CurrentState == TouchButtonStates.ButtonPressed || CurrentState == TouchButtonStates.ButtonDown) 
+        if (currentState != TouchButtonStates.ButtonPressed && currentState != TouchButtonStates.ButtonDown) 
 		{
-            canPress = true;
-        	CurrentState = TouchButtonStates.ButtonUp;
-			InputManager.InteractWithButton(representedButtonID, InputButtonStates.Up);
+            return;
         }
-		return;
+
+        ButtonUp();
+    }
+
+    void ButtonUp()
+    {
+        currentState = TouchButtonStates.ButtonUp;
+        InputManager.InteractWithButton(representedButtonID, InputButtonStates.Up);
     }
 
     public virtual void DisableButton()
     {
-        CurrentState = TouchButtonStates.Disabled;
-		return;
+        currentState = TouchButtonStates.Disabled;
     }
 
     public virtual void EnableButton()
     {
-        if (CurrentState == TouchButtonStates.Disabled) {
-            CurrentState = TouchButtonStates.Off;
+        if (CurrentState == TouchButtonStates.Disabled) 
+        {
+            currentState = TouchButtonStates.Off;
         }
-		return;
     }
 }

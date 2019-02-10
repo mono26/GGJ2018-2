@@ -88,7 +88,8 @@ public static class InputManager
         // TODO implement exception for no registered button with id.
         InputButton buttonToReturn = null;
         InputButton button = null;
-        if(activeButtons.TryGetValue(_buttonID, out button)) {
+        if(activeButtons.TryGetValue(_buttonID, out button)) 
+        {
             buttonToReturn = button;
         }
         return buttonToReturn;

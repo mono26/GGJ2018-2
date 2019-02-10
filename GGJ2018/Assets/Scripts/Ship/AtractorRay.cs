@@ -15,7 +15,7 @@ public class AtractorRay : ShipComponent
     [SerializeField] protected GameObject door;
 
     [Header("Edittor debugging")]
-    protected Coroutine atractAliens;
+    protected Coroutine atractAliensRoutine;
     [SerializeField] private bool isAlienRayOn = false;
     public bool IsAlienRayOn { get { return isAlienRayOn; } }
 
@@ -45,7 +45,6 @@ public class AtractorRay : ShipComponent
         ufoRay.SetActive(false);
         door.SetActive(true);
         isAlienRayOn = false;
-        return;
     }
 
     private IEnumerator FindAliens()
@@ -63,16 +62,36 @@ public class AtractorRay : ShipComponent
         }
 
         yield return new WaitForSeconds(1 / ticksPerSecond);
-        atractAliens = StartCoroutine(FindAliens());
+        atractAliensRoutine = StartCoroutine(FindAliens());
         yield break;
     }
 
-    private void StartRay()
+    public void ActivateRay()
+    {
+        if (!isAlienRayOn) 
+        {
+            StartRay();
+        }
+        else 
+        {
+            StopRay();
+        }
+    }
+
+    void StartRay()
     {
         isAlienRayOn = true;
-        atractAliens = StartCoroutine(FindAliens());
-        ufoRay.SetActive(true);
-        door.SetActive(false);
+        atractAliensRoutine = StartCoroutine(FindAliens());
+
+        if (ufoRay != null)
+        {
+            ufoRay.SetActive(true);
+        }
+
+        if (door != null)
+        {
+            door.SetActive(false);
+        }   
     }
 
     /*private void OpenDoor()
@@ -81,23 +100,22 @@ public class AtractorRay : ShipComponent
         return;
     }*/
 
-    private void StopRay()
+    void StopRay()
     {
         isAlienRayOn = false;
-        StopCoroutine(atractAliens);
-        ufoRay.SetActive(false);
-        door.SetActive(true);
-    }
+        if (atractAliensRoutine != null)
+        {
+            StopCoroutine(atractAliensRoutine);
+        }
 
-    public void ActivateRay()
-    {
-        isAlienRayOn = !isAlienRayOn;
-        if (isAlienRayOn) {
-            StartRay();
+        if (ufoRay != null)
+        {
+            ufoRay.SetActive(false);
         }
-        else {
-            StopRay();
-        }
-        return;
+
+        if (door != null)
+        {
+            door.SetActive(true);
+        }    
     }
 }

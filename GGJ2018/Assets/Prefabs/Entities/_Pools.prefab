@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114727009090263700}
   - component: {fileID: 114360719424864778}
   m_Layer: 0
-  m_Name: Pools
+  m_Name: _Pools
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

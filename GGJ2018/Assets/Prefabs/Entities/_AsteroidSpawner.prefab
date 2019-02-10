@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4798524169299984}
   - component: {fileID: 114199038662733922}
   m_Layer: 0
-  m_Name: Asteroid Spawner
+  m_Name: _AsteroidSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnTimer: 0
   minTimeToSpawn: 3
-  maxTimeToSpawn: 10
+  maxTimeToSpawn: 12
   maxTriesToSpawn: 10
   planetLayerMask:
     serializedVersion: 2

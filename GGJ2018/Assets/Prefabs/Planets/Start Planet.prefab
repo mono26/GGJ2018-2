@@ -139,10 +139,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravitationalFieldDirection: -1
   rotationSpeed: 4.4
-  gravity: 100
+  rotationForce: 9.8
+  gravityForce: 9.8
   playerInGravitationalField: 0
   planetRadius: 0.33
-  gravitationalFieldRadius: 0
+  gravitationalFieldRadius: 10
   signal: {fileID: 0}
   gravitationalField: {fileID: 0}
 --- !u!212 &212036120968054520

@@ -6,7 +6,8 @@ public class Planet : MonoBehaviour
     [Header("Planet settings")]
     [SerializeField][Range(-1,1)] int gravitationalFieldDirection = 1; // +1 left, -1 right
     [SerializeField] float rotationSpeed = 4.4f;
-    [SerializeField] float gravity = 9.8f;
+    [SerializeField] float rotationForce = 9.8f;
+    [SerializeField] float gravityForce = 9.8f;
     [SerializeField] bool playerInGravitationalField;
     [SerializeField] protected float planetRadius;
     [SerializeField] float gravitationalFieldRadius = 10.0f;
@@ -77,7 +78,7 @@ public class Planet : MonoBehaviour
 
             Vector2 directionFromObjectToCenter = objsInGravitationField[i].GetBodyComponent.position - (Vector2)transform.position;
             Vector2 tangentToDirectionToTheObject = new Vector2(-directionFromObjectToCenter.y, directionFromObjectToCenter.x).normalized * gravitationalFieldDirection;
-            float rotationForceToApply = rotationSpeed * objsInGravitationField[i].GetBodyComponent.mass;
+            float rotationForceToApply = rotationForce * objsInGravitationField[i].GetBodyComponent.mass;
 
             objsInGravitationField[i].ApplyRotationSpeed(tangentToDirectionToTheObject, rotationForceToApply * Time.fixedDeltaTime);
             objsInGravitationField[i].RotateTowardsGravitationCenter(Vector2.Lerp(objsInGravitationField[i].GetBodyComponent.transform.up, directionFromObjectToCenter.normalized, 0.05f));
@@ -100,7 +101,7 @@ public class Planet : MonoBehaviour
             }
 
             Vector2 directionFromObjectToCenter = objsInGravitationField[i].GetBodyComponent.position - (Vector2)transform.position;
-            float gravityForceToApply = gravity * objsInGravitationField[i].GetBodyComponent.mass;
+            float gravityForceToApply = gravityForce * objsInGravitationField[i].GetBodyComponent.mass;
 
             objsInGravitationField[i].ApplyGravity(-directionFromObjectToCenter.normalized, gravityForceToApply * Time.fixedDeltaTime);
         }

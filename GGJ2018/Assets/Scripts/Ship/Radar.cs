@@ -47,7 +47,7 @@ public class Radar : ShipComponent
     }
 
     // Method for detecting planets in range
-    private IEnumerator DetectPlanet()
+    IEnumerator DetectPlanet()
     {
         nearplanets = Physics2D.OverlapCircleAll(ship.transform.position, range, layerMask);
         if (nearplanets.Length > 0)
@@ -68,17 +68,15 @@ public class Radar : ShipComponent
         yield break;
     }
 
-    private void AddPlanetWithSignal(Planet _planet)
+    void AddPlanetWithSignal(Planet _planet)
     {
         if (foundPlanetsWithSignal.Contains(_planet) == false)
         {
-            Debug.Log(_planet.gameObject.name + "Adding Planet" + _planet);
             foundPlanetsWithSignal.Add(_planet);
         }
-        return;
     }
 
-    private IEnumerator CheckDistanceToPlanetsInRadarAndRemove()
+    IEnumerator CheckDistanceToPlanetsInRadarAndRemove()
     {
         if (foundPlanetsWithSignal.Count > 0)
         {
@@ -97,26 +95,19 @@ public class Radar : ShipComponent
         distanceDetection = StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
     }
 
-    private void StartRadar()
+    public float CalculateDistanceToPlanet(int index)
     {
-        isRadarOn = true;
-        planetDetection = StartCoroutine(DetectPlanet());
-        distanceDetection = StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
-        return;
-    }
-
-    private void StopRadar()
-    {
-        isRadarOn = false;
-        StopCoroutine(planetDetection);
-        StopCoroutine(distanceDetection);
-        return;
+        if (foundPlanetsWithSignal[index] != null)
+        {
+            float dist = Vector3.Distance(ship.transform.position, foundPlanetsWithSignal[index].transform.position);
+            return dist;
+        }
+        return 0;
     }
 
     public void ActivateRadar()
     {
-        isRadarOn = !isRadarOn;
-        if (isRadarOn) 
+        if (!isRadarOn) 
         {
             StartRadar();
         }
@@ -127,14 +118,20 @@ public class Radar : ShipComponent
         return;
     }
 
-    public float CalculateDistanceToPlanet(int index)
+    void StartRadar()
     {
-        if (foundPlanetsWithSignal[index] != null)
-        {
-            float dist = Vector3.Distance(ship.transform.position, foundPlanetsWithSignal[index].transform.position);
-            return dist;
-        }
-        return 0;
+        isRadarOn = true;
+        planetDetection = StartCoroutine(DetectPlanet());
+        distanceDetection = StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
+        return;
+    }
+
+    void StopRadar()
+    {
+        isRadarOn = false;
+        StopCoroutine(planetDetection);
+        StopCoroutine(distanceDetection);
+        return;
     }
 
     public void ChangeFrecuency(int _value)

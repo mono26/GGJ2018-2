@@ -42,6 +42,8 @@ public class Blackhole : Planet
 
     protected override void FixedUpdate ()
     {
+        base.FixedUpdate();
+
         if (lifeTimeCounter > 0)
         {
             lifeTimeCounter -= Time.deltaTime;
@@ -50,8 +52,6 @@ public class Blackhole : Planet
         {
             BlackholePool.Instance.ReleaseBlackhole(this);
         }
-
-        base.FixedUpdate();
     }
 
     protected void CheckObjectsDistanceToCenter()

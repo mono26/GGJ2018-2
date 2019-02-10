@@ -85,42 +85,39 @@ public class Ship : MonoBehaviour, IAffectedByGravity
 
     private void Update ()
     {
-        ActivateShipRay();
-        ActivateShipRadar();
-        HandleShipRadarFrequency();
-
         foreach (ShipComponent component in components)
         {
             component.EveryFrame();
         }
+
+        if (currentInput.GetRadarState)
+        {
+            ActivateShipRadar();
+        }
+
+        if (currentInput.GetRayState)
+        {
+            ActivateShipRay();
+        }
+
+        HandleShipRadarFrequency();
     }
 
     private void ActivateShipRay()
     {
-        if(atractorRayComponent != null && currentInput.GetRayState) 
-        {
-            atractorRayComponent.ActivateRay();
-        }
+        atractorRayComponent.ActivateRay();
     }
 
     private void ActivateShipRadar()
     {
-        if(atractorRayComponent != null)
-        {
-            return;
-        }
-
-        if(currentInput.GetRadarState) 
-        {
-            radarComponent.ActivateRadar();
-        }
+        radarComponent.ActivateRadar();
     }
 
     private void HandleShipRadarFrequency()
     {
         if(radarComponent == null) 
         {
-            radarComponent.ChangeFrecuency((int)currentInput.GetRadarFrequency);
+            return;
         }
 
         radarComponent.ChangeFrecuency((int)currentInput.GetRadarFrequency);
@@ -150,7 +147,8 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         LevelUIManager.Instance.DisplayInputButton("RadarButton", false);
         LevelUIManager.Instance.DisplayInputButton("RayButton", true);
         if(radarComponent.IsRadarOn)
-        {
+        {   
+            Debug.Log("Deactivating radar because is on and we enter a gravitaational field");
             ActivateShipRadar();
         }
 

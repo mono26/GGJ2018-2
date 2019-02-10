@@ -15,12 +15,6 @@ public class ExternalInput : ShipComponent
     [SerializeField] bool rayState = false;
     [SerializeField] bool radarState = false;
 
-    public float GetHorizontal { get { return horizontal; } }
-    public float GetVertical { get { return vertical; } }
-    public float GetFrequency { get { return radarFrequency; } }
-    public bool GetRayState { get { return rayState; } }
-    public bool GetRadarState { get { return radarState; } }
-
     private void OnEnable() 
     {
         RegisterShipInput();
@@ -66,9 +60,8 @@ public class ExternalInput : ShipComponent
         vertical = InputManager.GetAxisValue(verticalID);
         // TODO check if its better to dot with a button.
         radarFrequency = InputManager.GetAxisValue(radarfrequencyID);
-        radarState = (InputManager.GetButtonState(radarID) == InputButtonStates.Down) ? true : false;
-        rayState = (InputManager.GetButtonState(rayID) == InputButtonStates.Down) ? true : false;
-        return;
+        radarState = InputManager.GetButtonState(radarID).Equals(InputButtonStates.Down) ? true : false;
+        rayState = InputManager.GetButtonState(rayID).Equals(InputButtonStates.Down) ? true : false;
     }
 }
 

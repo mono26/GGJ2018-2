@@ -167,8 +167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravitationalFieldDirection: 1
-  rotationSpeed: 0
-  gravity: 9.8
+  rotationSpeed: 10
+  rotationForce: 100
+  gravityForce: 300
   playerInGravitationalField: 0
   planetRadius: 3.3
   gravitationalFieldRadius: 3
