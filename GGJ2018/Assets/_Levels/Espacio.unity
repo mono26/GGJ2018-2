@@ -6589,26 +6589,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &690480100 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1194737749740578, guid: 8e7039ac06330324abb74dbfacce53f4,
-    type: 2}
-  m_PrefabInternal: {fileID: 1764804324}
---- !u!114 &690480103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 690480100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c251d82029c3b6418913f5fa85d8447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blackholePrefab: {fileID: 114658066407859314, guid: c4d1f1278f31f6d43ba389f6e898be00,
-    type: 2}
-  size: 10
-  blackholes: []
 --- !u!1 &692354786
 GameObject:
   m_ObjectHideFlags: 0

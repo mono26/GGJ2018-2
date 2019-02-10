@@ -5,9 +5,10 @@ public class BlackHolePool : Singleton<BlackHolePool>
 {
     [Header("Black Hole Pool settings")]
     [SerializeField] private BlackHole blackholePrefab;
-    [SerializeField] private int size = 10;
 
     [SerializeField] private List<BlackHole> blackholes;
+
+    [SerializeField] private int size = 10;
 
     // Use this for initialization
     protected override void Awake()
