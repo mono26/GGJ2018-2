@@ -4,17 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BlackHoleEventType { CenterReachead, LifeTimeEnd }
+public enum BlackholeEventType { CenterReachead, LifeTimeEnd }
 
-public class BlackHoleEvent : GameEvent
+public class BlackholeEvent : GameEvent
 {
     private GameObject affectedGameObject;
-    private BlackHoleEventType eventType;
+    private BlackholeEventType eventType;
 
     public GameObject GetAffectedObject { get { return affectedGameObject; } }
-    public BlackHoleEventType GetEventType { get { return eventType; } }
+    public BlackholeEventType GetEventType { get { return eventType; } }
 
-    public BlackHoleEvent(GameObject _affectedGameObject, BlackHoleEventType _eventType)
+    public BlackholeEvent(GameObject _affectedGameObject, BlackholeEventType _eventType)
     {
         affectedGameObject = _affectedGameObject;
         eventType = _eventType;
@@ -22,7 +22,7 @@ public class BlackHoleEvent : GameEvent
     }
 }
 
-public class BlackHole : Planet
+public class Blackhole : Planet
 {
     [Header("Black Hole settings")]
     [SerializeField] private float lifeTime;
@@ -48,7 +48,7 @@ public class BlackHole : Planet
         }
         else
         {
-            BlackHolePool.Instance.ReleaseBlackHole(this);
+            BlackholePool.Instance.ReleaseBlackhole(this);
         }
 
         base.FixedUpdate();
@@ -65,7 +65,7 @@ public class BlackHole : Planet
             }
 
             if(Vector3.Distance(objsInGravitationField[i].GetBodyComponent.position, transform.position) < minimumDistanceToCenter) {
-                EventManager.TriggerEvent<BlackHoleEvent>(new BlackHoleEvent(objsInGravitationField[i].GetBodyComponent.gameObject, BlackHoleEventType.CenterReachead));
+                EventManager.TriggerEvent<BlackholeEvent>(new BlackholeEvent(objsInGravitationField[i].GetBodyComponent.gameObject, BlackholeEventType.CenterReachead));
             }
         }
     }

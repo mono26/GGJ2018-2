@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHoleSpawner : Spawner
+public class BlackholeSpawner : Spawner
 {
     [Header("Black Hole Spawner settings")]
     [SerializeField] private float minDistanceFromPlayer = 6;
@@ -20,20 +20,20 @@ public class BlackHoleSpawner : Spawner
         return;
 	}
 
-    protected override void Spawn()
+    public override void Spawn()
     {
-        BlackHole spawnedBlackHole = GetBlackHoleToSpawn();
-        float radius = spawnedBlackHole.GetSpawnableComponent.GetRadius;
+        Blackhole spawnedBlackhole = GetBlackholeToSpawn();
+        float radius = spawnedBlackhole.GetSpawnableComponent.GetRadius;
         for(int i = 0; i < maxTriesToSpawn; i++)
         {
             Vector3 spawnPosition = CalculateRandomPosition();
             if (IsAFreeSpot(spawnPosition, radius)) 
             {
-                PositionBlackHole(spawnedBlackHole, spawnPosition);
+                PositionBlackhole(spawnedBlackhole, spawnPosition);
                 break;
             }
             else if (i == maxTriesToSpawn - 1){
-                ReturnUnabledToSpawnBlackHole(spawnedBlackHole);
+                ReturnUnabledToSpawnBlackhole(spawnedBlackhole);
             }
         }
         base.Spawn();
@@ -49,22 +49,22 @@ public class BlackHoleSpawner : Spawner
         return spawnPosition;
     }
 
-    private BlackHole GetBlackHoleToSpawn()
+    private Blackhole GetBlackholeToSpawn()
     {
-        BlackHole blackhole = BlackHolePool.Instance.GetBlackHole();
+        Blackhole blackhole = BlackholePool.Instance.GetBlackhole();
         blackhole.transform.position = new Vector2(999,999);
         return blackhole;
     }
     
-    private void PositionBlackHole(BlackHole _blackHoleToPosition, Vector3 _spawnPosition)
+    private void PositionBlackhole(Blackhole _blackHoleToPosition, Vector3 _spawnPosition)
     {
         _blackHoleToPosition.transform.position = _spawnPosition;
         return;
     }
 
-    private void ReturnUnabledToSpawnBlackHole(BlackHole _blackHoleToReturn)
+    private void ReturnUnabledToSpawnBlackhole(Blackhole _blackHoleToReturn)
     {
-        BlackHolePool.Instance.ReleaseBlackHole(_blackHoleToReturn);
+        BlackholePool.Instance.ReleaseBlackhole(_blackHoleToReturn);
         return;
     }
 }

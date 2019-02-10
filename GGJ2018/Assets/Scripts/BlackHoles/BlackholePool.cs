@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHolePool : Singleton<BlackHolePool>
+public class BlackholePool : Singleton<BlackholePool>
 {
     [Header("Black Hole Pool settings")]
-    [SerializeField] private BlackHole blackholePrefab;
+    [SerializeField] private Blackhole blackholePrefab;
 
-    [SerializeField] private List<BlackHole> blackholes;
+    [SerializeField] private List<Blackhole> blackholes;
 
     [SerializeField] private int size = 10;
 
@@ -14,26 +14,26 @@ public class BlackHolePool : Singleton<BlackHolePool>
     protected override void Awake()
     {
         base.Awake();
-        PrepareBlackHoles();
+        PrepareBlackholes();
         return;
     }
 
-    private void PrepareBlackHoles()
+    private void PrepareBlackholes()
     {
-        blackholes = new List<BlackHole>();
+        blackholes = new List<Blackhole>();
         for (int i = 0; i < size; i++)
-            AddBlackHole();
+            AddBlackhole();
     }
 
-    private void AddBlackHole()
+    private void AddBlackhole()
     {
-        BlackHole blackhole = Instantiate(blackholePrefab);
+        Blackhole blackhole = Instantiate(blackholePrefab);
         blackhole.transform.SetParent(transform);
         blackhole.gameObject.SetActive(false);
         blackholes.Add(blackhole);
     }
 
-    public void ReleaseBlackHole(BlackHole blackhole)
+    public void ReleaseBlackhole(Blackhole blackhole)
     {
         blackhole.transform.SetParent(transform);
         blackhole.transform.position = transform.position;
@@ -41,16 +41,16 @@ public class BlackHolePool : Singleton<BlackHolePool>
         blackholes.Add(blackhole);
     }
 
-    public BlackHole GetBlackHole()
+    public Blackhole GetBlackhole()
     {
         if (blackholes.Count == 0)
-            AddBlackHole();
-        return AllocateBlackHole();
+            AddBlackhole();
+        return AllocateBlackhole();
     }
 
-    private BlackHole AllocateBlackHole()
+    private Blackhole AllocateBlackhole()
     {
-        BlackHole blackhole = blackholes[blackholes.Count - 1];
+        Blackhole blackhole = blackholes[blackholes.Count - 1];
         blackholes.RemoveAt(blackholes.Count - 1);
         blackhole.transform.SetParent(null);
         blackhole.gameObject.SetActive(true);

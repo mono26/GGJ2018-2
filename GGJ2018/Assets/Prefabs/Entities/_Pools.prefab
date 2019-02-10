@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4954858234090856}
   - component: {fileID: 114727009090263700}
-  - component: {fileID: 114558771621764958}
+  - component: {fileID: 114360719424864778}
   m_Layer: 0
   m_Name: Pools
   m_TagString: Untagged
@@ -35,13 +35,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1194737749740578}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0688324, y: -0.5676966, z: -10.534359}
+  m_LocalPosition: {x: -6.6, y: 120.6, z: -10.534359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114558771621764958
+--- !u!114 &114360719424864778
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackholePrefab: {fileID: 114658066407859314, guid: c4d1f1278f31f6d43ba389f6e898be00,
     type: 2}
+  blackholes: []
   size: 10
 --- !u!114 &114727009090263700
 MonoBehaviour:
@@ -68,4 +69,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroidePrefab: {fileID: 114255368610047976, guid: f2647d68380f08a4eb8ce4af5d6921d1,
     type: 2}
+  asteroides: []
   size: 10

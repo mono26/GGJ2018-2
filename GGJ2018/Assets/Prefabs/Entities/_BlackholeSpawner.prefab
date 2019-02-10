@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4114037570164158}
   - component: {fileID: 114675835907499412}
   m_Layer: 0
-  m_Name: BlackHoleSpawner
+  m_Name: _BlackholeSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTimer: 0
-  minTimeToSpawn: 5
+  minTimeToSpawn: 10
   maxTimeToSpawn: 25
   maxTriesToSpawn: 15
   planetLayerMask:

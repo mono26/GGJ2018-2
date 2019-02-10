@@ -32,7 +32,7 @@ public class AsteroidSpawner : Spawner
         return;
 	}
 
-    protected override void Spawn()
+    public override void Spawn()
     {
         Asteroid spawnedAsteroid = GetAsteroidToSpawn();
         float radius = spawnedAsteroid.GetSpawnableComponent.GetRadius;

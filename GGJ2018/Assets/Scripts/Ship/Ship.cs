@@ -189,7 +189,6 @@ public class Ship : MonoBehaviour, IAffectedByGravity
             return;
         }
 
-        Debug.LogError("Applying gravity to player");
         // In case the user forgets to normalize the direction vector.
         Vector3 normalizedDirection = _normalizedGravityDirection.normalized;
         bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);

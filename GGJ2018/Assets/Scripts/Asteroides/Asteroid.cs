@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>, IAffectedByGravity
+public class Asteroid : MonoBehaviour, EventHandler<BlackholeEvent>, IAffectedByGravity
 {
     [Header("Asteroid settings")]
     [SerializeField] protected float lifeTime = 10;
@@ -30,13 +30,13 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>, IAffectedBy
 
     protected void OnEnable()
     {
-        EventManager.AddListener<BlackHoleEvent>(this);
+        EventManager.AddListener<BlackholeEvent>(this);
         return;
     }
 
     protected void OnDisable()
     {
-        EventManager.RemoveListener<BlackHoleEvent>(this);
+        EventManager.RemoveListener<BlackholeEvent>(this);
         return;
     }
 
@@ -62,10 +62,10 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>, IAffectedBy
         return;
     }
 
-    private bool WeReachedABlackholeCenter(BlackHoleEvent _blackHoleEvent)
+    private bool WeReachedABlackholeCenter(BlackholeEvent _blackholeEvent)
     {
         bool centerReached = false;
-        if (_blackHoleEvent.GetAffectedObject.Equals(bodyComponent) && _blackHoleEvent.GetEventType == BlackHoleEventType.CenterReachead) 
+        if (_blackholeEvent.GetAffectedObject.Equals(bodyComponent) && _blackholeEvent.GetEventType == BlackholeEventType.CenterReachead) 
         {
             centerReached = true;
         }
@@ -91,7 +91,7 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackHoleEvent>, IAffectedBy
         return;
     }
 
-    public void OnGameEvent(BlackHoleEvent _blackHoleEvent)
+    public void OnGameEvent(BlackholeEvent _blackHoleEvent)
     {
         if (WeReachedABlackholeCenter(_blackHoleEvent)) 
         {

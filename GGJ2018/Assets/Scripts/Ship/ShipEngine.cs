@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackHoleEvent>
+public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent>
 {
     [Header("Engine settings")]
     [SerializeField] private float fuelLossPerSecond = 1.0f;
@@ -29,13 +29,13 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackHoleEvent
 
     private void OnEnable()
     {
-        EventManager.AddListener<BlackHoleEvent>(this);
+        EventManager.AddListener<BlackholeEvent>(this);
         return;
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener<BlackHoleEvent>(this);
+        EventManager.RemoveListener<BlackholeEvent>(this);
         return;
     }
 
@@ -78,10 +78,10 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackHoleEvent
         return;
     }
 
-    private bool AreWeInABlackHoleCenter(BlackHoleEvent _blackHoleEvent)
+    private bool AreWeInABlackholeCenter(BlackholeEvent _blackHoleEvent)
     {
         bool centerReachead = false;
-        if(_blackHoleEvent.GetEventType == BlackHoleEventType.CenterReachead && _blackHoleEvent.GetAffectedObject.Equals(gameObject)){
+        if(_blackHoleEvent.GetEventType == BlackholeEventType.CenterReachead && _blackHoleEvent.GetAffectedObject.Equals(gameObject)){
             centerReachead = true;
         }
         return centerReachead;
@@ -96,9 +96,9 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackHoleEvent
         }
     }
 
-    public void OnGameEvent(BlackHoleEvent _blackHoleEvent)
+    public void OnGameEvent(BlackholeEvent _blackHoleEvent)
     {
-        if(AreWeInABlackHoleCenter(_blackHoleEvent)) {
+        if(AreWeInABlackholeCenter(_blackHoleEvent)) {
             TakeDamage(30);
         }
         return;
