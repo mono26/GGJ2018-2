@@ -56,10 +56,17 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackholeEvent>, IAffectedBy
         return;
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
         ReleaseAsteroid();
-        return;
+    }
+
+    protected void OnTriggerEnter2D(Collider2D _other)
+    {
+        if (_other.CompareTag("Shield"))
+        {
+            ReleaseAsteroid();
+        }
     }
 
     private bool WeReachedABlackholeCenter(BlackholeEvent _blackholeEvent)

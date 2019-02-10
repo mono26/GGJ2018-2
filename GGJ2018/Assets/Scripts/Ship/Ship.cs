@@ -4,45 +4,49 @@ using UnityEngine;
 [System.Serializable]
 public class ShipInput
 {
-    [SerializeField] private float horizontal, vertical, radarFrequency;
-    [SerializeField] private bool rayState, radarState;
+    [SerializeField] private float horizontalInput, verticalInput, radarFrequencyInput;
+    [SerializeField] private bool rayInput, radarInput, shieldInput;
 
-    public float GetHorizontal { get { return horizontal; } }
-    public float GetVertical { get { return vertical; } }
-    public float GetRadarFrequency { get { return radarFrequency; } }
-    public bool GetRayState { get { return rayState; } }
-    public bool GetRadarState { get { return radarState; } }
+    public float GetHorizontalInput { get { return horizontalInput; } }
+    public float GetVerticalInput { get { return verticalInput; } }
+    public float GetRadarFrequencyInput { get { return radarFrequencyInput; } }
+    public bool GetRayInput { get { return rayInput; } }
+    public bool GetRadarInput { get { return radarInput; } }
+    public bool GetShieldInput { get { return shieldInput; } }
 
     public ShipInput(){}
-    public ShipInput(float _horizontal, float _vertical, float _radarFrequency, bool _ray, bool _radar)
+    public ShipInput(float _horizontal, float _vertical, float _radarFrequency, bool _ray, bool _radar, bool _shield)
     {
-        horizontal = _horizontal;
-        vertical = _vertical;
-        radarFrequency = _radarFrequency;
-        rayState = _ray;
-        radarState = _radar;
-        return;
+        horizontalInput = _horizontal;
+        verticalInput = _vertical;
+        radarFrequencyInput = _radarFrequency;
+        rayInput = _ray;
+        radarInput = _radar;
+        shieldInput = _shield;
     }
 }
 
 public class Ship : MonoBehaviour, IAffectedByGravity
 {
     [Header("Ship components")]
-    [SerializeField] private BoxCollider2D hitBoxComponent = null;
-    [SerializeField] private SpriteRenderer spriteComponent = null;
-    [SerializeField] private Rigidbody2D bodyComponent = null;
-    [SerializeField] private ShipEngine engineComponent = null;
-    [SerializeField] private Radar radarComponent = null;
-    [SerializeField] private AtractorRay atractorRayComponent = null;
+    [SerializeField] BoxCollider2D hitBoxComponent = null;
+    [SerializeField] SpriteRenderer spriteComponent = null;
+    [SerializeField] Rigidbody2D bodyComponent = null;
+    [SerializeField] ShipEngine engineComponent = null;
+    [SerializeField] Radar radarComponent = null;
+    [SerializeField] AtractorRay atractorRayComponent = null;
+    [SerializeField] Shield shieldComponent = null;
 
     [Header("Ship editor debugging.")]
-    [SerializeField] private ShipComponent[] components;
-    [SerializeField] private ShipInput currentInput = new ShipInput();    // TODO save input in exterinput component
+    [SerializeField] ShipComponent[] components;
+    [SerializeField] ShipInput currentInput = new ShipInput();    // TODO save input in exterinput component
 
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
 	private void Awake()
     {
+        components = GetComponents<ShipComponent>();
+
         if (hitBoxComponent == null) 
         {
             hitBoxComponent = GetComponent<BoxCollider2D>();
@@ -71,8 +75,10 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         {
             atractorRayComponent = GetComponent<AtractorRay>();
         }
-
-        components = GetComponents<ShipComponent>();
+        if (shieldComponent == null) 
+        {
+            shieldComponent = GetComponent<Shield>();
+        }
     }
 
     void Start() 
@@ -88,27 +94,37 @@ public class Ship : MonoBehaviour, IAffectedByGravity
             component.EveryFrame();
         }
 
-        if (currentInput.GetRadarState)
+        if (currentInput.GetRadarInput)
         {
-            ActivateShipRadar();
+            ToggleShipRadar();
         }
 
-        if (currentInput.GetRayState)
+        if (currentInput.GetRayInput)
         {
-            ActivateShipRay();
+            ToggleShipRay();
+        }
+
+        if (currentInput.GetShieldInput)
+        {
+            ToggleShipShield();
         }
 
         HandleShipRadarFrequency();
     }
 
-    private void ActivateShipRay()
+    void ToggleShipRay()
     {
-        atractorRayComponent.ActivateRay();
+        atractorRayComponent.ToggleRay();
     }
 
-    private void ActivateShipRadar()
+    void ToggleShipRadar()
     {
-        radarComponent.ActivateRadar();
+        radarComponent.ToggleRadar();
+    }
+
+    void ToggleShipShield()
+    {
+        shieldComponent.ToggleShield();
     }
 
     private void HandleShipRadarFrequency()
@@ -118,7 +134,7 @@ public class Ship : MonoBehaviour, IAffectedByGravity
             return;
         }
 
-        radarComponent.ChangeFrecuency((int)currentInput.GetRadarFrequency);
+        radarComponent.ChangeFrecuency((int)currentInput.GetRadarFrequencyInput);
     }
 
     private void FixedUpdate()
@@ -128,10 +144,14 @@ public class Ship : MonoBehaviour, IAffectedByGravity
 
     private void DriveShip()
     {
-        if(engineComponent != null)
+        if(engineComponent == null)
         {
-            engineComponent.ApplyEngineThrust(transform.right * currentInput.GetHorizontal);
-            engineComponent.ApplyEngineThrust(transform.up * currentInput.GetVertical);
+            return;
+        }
+
+        if (currentInput.GetHorizontalInput != 0 || currentInput.GetVerticalInput != 0)
+        {
+            engineComponent.ApplyEngineThrust(transform.right * currentInput.GetHorizontalInput + transform.up * currentInput.GetVerticalInput);
         }
     }
 
@@ -147,7 +167,7 @@ public class Ship : MonoBehaviour, IAffectedByGravity
 
         if(radarComponent.IsRadarOn)
         {   
-            ActivateShipRadar();
+            ToggleShipRadar();
         }
     }
 
@@ -162,7 +182,7 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         LevelUIManager.Instance.DisplayInputButton("RayButton", false);
         if(atractorRayComponent.IsAlienRayOn)
         {
-            ActivateShipRadar();
+            ToggleShipRadar();
         }
     }
 

@@ -12,6 +12,7 @@ TagManager:
   - Planet
   - GravitationField
   - AsteroidSpawnPoint
+  - Shield
   layers:
   - Default
   - TransparentFX

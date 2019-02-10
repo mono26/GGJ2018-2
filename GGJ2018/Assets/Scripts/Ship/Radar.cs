@@ -31,19 +31,14 @@ public class Radar : ShipComponent
     protected virtual void Start()
     {
         foundPlanetsWithSignal = new List<Planet>();
-        return;
+
+        isRadarOn = false;
     }
 
     protected void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, range);
-    }
-
-    protected void OnEnable()
-    {
-        isRadarOn = false;
-        return;
     }
 
     // Method for detecting planets in range
@@ -105,33 +100,24 @@ public class Radar : ShipComponent
         return 0;
     }
 
-    public void ActivateRadar()
+    public void ToggleRadar()
     {
-        if (!isRadarOn) 
+        isRadarOn = !isRadarOn;
+        if (isRadarOn) 
         {
-            StartRadar();
+            planetDetection = StartCoroutine(DetectPlanet());
+            distanceDetection = StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
         }
-        else 
+
+        if (!isRadarOn && planetDetection != null)
         {
-            StopRadar();
+            StopCoroutine(planetDetection);
         }
-        return;
-    }
 
-    void StartRadar()
-    {
-        isRadarOn = true;
-        planetDetection = StartCoroutine(DetectPlanet());
-        distanceDetection = StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
-        return;
-    }
-
-    void StopRadar()
-    {
-        isRadarOn = false;
-        StopCoroutine(planetDetection);
-        StopCoroutine(distanceDetection);
-        return;
+        if (!isRadarOn && distanceDetection != null)
+        {
+            StopCoroutine(distanceDetection);
+        }
     }
 
     public void ChangeFrecuency(int _value)

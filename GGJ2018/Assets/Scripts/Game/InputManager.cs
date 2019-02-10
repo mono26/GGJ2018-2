@@ -7,8 +7,6 @@ public static class InputManager
 {
     private static bool forceMobileMode = true;
     private static bool IsOnMobile { get;  set; }
-    private static InputButton RayButton { get;  set; }
-    private static InputButton RadarButton { get;  set; }
 
     private static Dictionary<string, InputAxis> activeAxiss = new Dictionary<string, InputAxis>();
     private static Dictionary<string, InputButton> activeButtons = new Dictionary<string, InputButton>();  
@@ -122,12 +120,15 @@ public static class InputManager
     public static InputButtonStates GetButtonState(string _buttonID)
     {
         InputButtonStates buttonState = InputButtonStates.Off;
-        if(IsOnMobile){
+        if (IsOnMobile)
+        {
             buttonState = GetVirtualButtonState(_buttonID);
         }
-        else{
+        else
+        {
             buttonState = GetDesktopButtonState(_buttonID);
         }
+        
         return buttonState;
     }
 
