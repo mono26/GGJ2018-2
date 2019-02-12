@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MovingJoystick : TouchJoystick, IPointerDownHandler, IPointerUpHandler
 {
-	[SerializeField] float activeAlpha, inactiveAlpha;
+	[SerializeField] float activeAlpha = 1, inactiveAlpha = 0.3f;
 	[SerializeField] CanvasGroup touchArea;
 	[SerializeField] bool canMoveToClickPosition;
 

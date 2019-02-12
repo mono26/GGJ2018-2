@@ -6,11 +6,18 @@ using UnityEngine;
 public class ExternalInput : ShipComponent
 {
     [Header("External Input settings")]
-    [SerializeField] private string playerID;
-    [SerializeField] private string horizontalID, verticalID, radarfrequencyID, rayID, radarID, shieldID;
+    [SerializeField] string playerID;
+    [SerializeField] string horizontalID = "";
+    [SerializeField] string verticalID = "";
+    [SerializeField] string radarfrequencyID = "";
+    [SerializeField] string rayID = "";
+    [SerializeField] string radarID = "";
+    [SerializeField] string shieldID = "";
 
 	[Header("External Input editor debugging")]
-    [SerializeField] private float horizontalInput, verticalInput, radarFrequencyInput;
+    [SerializeField] float horizontalInput; 
+    [SerializeField] float verticalInput;
+    [SerializeField] float radarFrequencyInput;
     [SerializeField] bool rayInput = false;
     [SerializeField] bool radarInput = false;
     [SerializeField] bool shieldInput = false;
