@@ -57,10 +57,10 @@ public class LevelManager : Singleton<LevelManager>
         if (scoreText != null)
             scoreText.text = scorePoints.ToString();
 		// Look if the player score limit has reach
-        if (scorePoints >= maxScorePoints)
+        /*if (scorePoints >= maxScorePoints)
         {
             EndGame();
-        }
+        }*/
 
         return;
 	}
