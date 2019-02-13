@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackholeSpawner : Spawner
+public class BlackHoleSpawner : Spawner
 {
     [Header("Black Hole Spawner settings")]
     [SerializeField] private float minDistanceFromPlayer = 6;
