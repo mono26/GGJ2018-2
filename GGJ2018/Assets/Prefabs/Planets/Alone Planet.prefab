@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1389348805511480}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.71, y: 9.21, z: 0}
+  m_LocalPosition: {x: 14.284058, y: -12.73095, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4226321593502410}
@@ -108,7 +108,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 20.48
+  m_Radius: 16.1
 --- !u!58 &58711056632767648
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -139,9 +139,10 @@ MonoBehaviour:
   rotationSpeed: 10
   rotationForce: 100
   gravityForce: 100
+  gravitySource: 0
   playerInGravitationalField: 0
-  planetRadius: 6.3
-  gravitationalFieldRadius: 10
+  planetRadius: 6.1
+  minGravFieldDistFromPlanet: 10
   signal: {fileID: 0}
   gravitationalField: {fileID: 58622635712402336}
 --- !u!212 &212359388721485538

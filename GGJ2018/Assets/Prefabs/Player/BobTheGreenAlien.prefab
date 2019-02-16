@@ -966,7 +966,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052524117136162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.34, y: 10.99, z: 0}
+  m_LocalPosition: {x: 0, y: 5.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4993279399451076}
@@ -1365,7 +1365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 114020360296148358}
-  layerMask:
+  alienLayer:
     serializedVersion: 2
     m_Bits: 512
   range: 1.5
@@ -1964,7 +1964,7 @@ MonoBehaviour:
   ship: {fileID: 114020360296148358}
   range: 30
   ticksPerSecond: 1
-  layerMask:
+  planetsLayer:
     serializedVersion: 2
     m_Bits: 256
   foundPlanetsWithSignal: []

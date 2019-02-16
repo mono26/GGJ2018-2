@@ -17,6 +17,5 @@ public class SignalEmitter : MonoBehaviour
     public void TurnSignal(SignalState _state)
     {
         state = _state;
-        return;
     }
 }

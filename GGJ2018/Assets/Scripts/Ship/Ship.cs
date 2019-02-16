@@ -4,22 +4,20 @@ using UnityEngine;
 [System.Serializable]
 public class ShipInput
 {
-    [SerializeField] private float horizontalInput, verticalInput, radarFrequencyInput;
+    [SerializeField] private float horizontalInput, verticalInput;
     [SerializeField] private bool rayInput, radarInput, shieldInput;
 
     public float GetHorizontalInput { get { return horizontalInput; } }
     public float GetVerticalInput { get { return verticalInput; } }
-    public float GetRadarFrequencyInput { get { return radarFrequencyInput; } }
     public bool GetRayInput { get { return rayInput; } }
     public bool GetRadarInput { get { return radarInput; } }
     public bool GetShieldInput { get { return shieldInput; } }
 
     public ShipInput(){}
-    public ShipInput(float _horizontal, float _vertical, float _radarFrequency, bool _ray, bool _radar, bool _shield)
+    public ShipInput(float _horizontal, float _vertical, bool _ray, bool _radar, bool _shield)
     {
         horizontalInput = _horizontal;
         verticalInput = _vertical;
-        radarFrequencyInput = _radarFrequency;
         rayInput = _ray;
         radarInput = _radar;
         shieldInput = _shield;
@@ -34,6 +32,7 @@ public class Ship : MonoBehaviour, IAffectedByGravity
     [SerializeField] Rigidbody2D bodyComponent = null;
     [SerializeField] ShipEngine engineComponent = null;
     [SerializeField] Radar radarComponent = null;
+    [SerializeField] SignalOscilator oscilatorComponet = null;
     [SerializeField] AtractorRay atractorRayComponent = null;
     [SerializeField] Shield shieldComponent = null;
 
@@ -51,6 +50,7 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         {
             hitBoxComponent = GetComponent<BoxCollider2D>();
         }
+
         if (spriteComponent == null) 
         {
             spriteComponent = GetComponent<SpriteRenderer>();
@@ -59,22 +59,32 @@ public class Ship : MonoBehaviour, IAffectedByGravity
                 spriteComponent = GetComponentInChildren<SpriteRenderer>();
             }
         }
+
         if (bodyComponent == null) 
         {
             bodyComponent = GetComponent<Rigidbody2D>();
         }
+
         if (engineComponent == null) 
         {
             engineComponent = GetComponent<ShipEngine>();
         }
+
         if (radarComponent == null) 
         {
             radarComponent = GetComponent<Radar>();
         }
+
+        if (oscilatorComponet == null)
+        {
+            oscilatorComponet = GetComponent<SignalOscilator>();
+        }
+
         if (atractorRayComponent == null) 
         {
             atractorRayComponent = GetComponent<AtractorRay>();
         }
+
         if (shieldComponent == null) 
         {
             shieldComponent = GetComponent<Shield>();
@@ -108,8 +118,6 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         {
             ToggleShipShield();
         }
-
-        HandleShipRadarFrequency();
     }
 
     void ToggleShipRay()
@@ -120,21 +128,12 @@ public class Ship : MonoBehaviour, IAffectedByGravity
     void ToggleShipRadar()
     {
         radarComponent.ToggleRadar();
+        oscilatorComponet.ToggleOscilator();
     }
 
     void ToggleShipShield()
     {
         shieldComponent.ToggleShield();
-    }
-
-    private void HandleShipRadarFrequency()
-    {
-        if(radarComponent == null) 
-        {
-            return;
-        }
-
-        radarComponent.ChangeFrecuency((int)currentInput.GetRadarFrequencyInput);
     }
 
     private void FixedUpdate()

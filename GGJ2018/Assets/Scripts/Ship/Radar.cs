@@ -2,35 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO hacer que solo se muestre el planeta mas cercano siempre.
 public class Radar : ShipComponent
 {
     [Header("Radar settings")]
-    [SerializeField]
-    protected float range = 30f;
-    [SerializeField]
-    protected float ticksPerSecond = 1.0f;
-    [SerializeField]
-    protected LayerMask layerMask;
+    [SerializeField] float range = 30f;
+    [SerializeField] float ticksPerSecond = 1.0f;
+    [SerializeField] LayerMask planetsLayer;
 
     [Header("Editor debugging")]
-    [SerializeField]
-    protected List<Planet> foundPlanetsWithSignal;
-    public List<Planet> FoundPlanetsWithSignal { get { return foundPlanetsWithSignal; } }
-    [SerializeField]
-    protected bool isRadarOn;
-    public bool IsRadarOn { get { return isRadarOn; } }
-    [SerializeField]
-    protected int lookedSignal = 0;
-    public int LookedSigneld { get { return lookedSignal; } }
-    [SerializeField]
-    protected Collider2D[] nearplanets;
+    [SerializeField] Planet foundPlanetWithSignal = null;
+    [SerializeField] bool isRadarOn = false;
 
-    protected Coroutine planetDetection;
-    protected Coroutine distanceDetection;
+    public Planet FoundPlanetsWithSignal { get { return foundPlanetWithSignal; } }
+    public bool IsRadarOn { get { return isRadarOn; } }
+
+    Coroutine planetDetection;
+    Coroutine distanceDetection;
 
     protected virtual void Start()
     {
-        foundPlanetsWithSignal = new List<Planet>();
+        foundPlanetWithSignal = null;
 
         isRadarOn = false;
     }
@@ -44,60 +36,85 @@ public class Radar : ShipComponent
     // Method for detecting planets in range
     IEnumerator DetectPlanet()
     {
-        nearplanets = Physics2D.OverlapCircleAll(ship.transform.position, range, layerMask);
-        if (nearplanets.Length > 0)
+        Collider2D[] nearObjects = Physics2D.OverlapCircleAll(ship.transform.position, range, planetsLayer);
+        if (nearObjects.Length > 0)
         {
-            foreach (Collider2D planet in nearplanets)
+            List<Planet> nearPlanets = new List<Planet>();
+            foreach (Collider2D obj in nearObjects)
             {
-                if (planet.gameObject.CompareTag("Planet"))
+                if (obj.gameObject.CompareTag("Planet") || obj.gameObject.CompareTag("FuelPlanet"))
                 {
-                    Planet planetComponent = planet.GetComponent<Planet>();
-                    if (planetComponent.Signal !=  null) {
-                        AddPlanetWithSignal(planetComponent);
+                    Planet planetComponent = obj.GetComponent<Planet>();
+                    if (planetComponent == null)
+                    {
+                        planetComponent = obj.GetComponentInParent<Planet>();
                     }
+                    if (planetComponent == null || planetComponent.Signal ==  null) 
+                    {
+                        continue;
+                    }
+
+                    Debug.LogError("Planet found");
+                    nearPlanets.Add(planetComponent);
                 }
             }
+
+            AddNearestPlanetToRadar(nearPlanets);
         }
+
         yield return new WaitForSeconds(1 / ticksPerSecond);
+
         planetDetection = StartCoroutine(DetectPlanet());
-        yield break;
     }
 
-    void AddPlanetWithSignal(Planet _planet)
+    void AddNearestPlanetToRadar(List<Planet> _planetsToCheck)
     {
-        if (foundPlanetsWithSignal.Contains(_planet) == false)
+        if(_planetsToCheck.Count == 0)
         {
-            foundPlanetsWithSignal.Add(_planet);
+            return;
         }
-    }
 
-    IEnumerator CheckDistanceToPlanetsInRadarAndRemove()
-    {
-        if (foundPlanetsWithSignal.Count > 0)
+        float minDistance = CalculateSqrDistanceToPlanet(_planetsToCheck[0]);
+        int planet = 0;
+        for (int i = 0; i < _planetsToCheck.Count; i++)
         {
-            for (int i = 0; i < foundPlanetsWithSignal.Count; i++)
+            Debug.Log(_planetsToCheck[i].gameObject.name);
+            float distance = CalculateSqrDistanceToPlanet(_planetsToCheck[i]);
+            if (minDistance > distance)
             {
-                if (foundPlanetsWithSignal[i] != null && CalculateDistanceToPlanet(i) > range + foundPlanetsWithSignal[i].GetPlanetRadius)
-                {
-                    foundPlanetsWithSignal.Remove(foundPlanetsWithSignal[i]);
-                    if (lookedSignal >= foundPlanetsWithSignal.Count){
-                        lookedSignal = foundPlanetsWithSignal.Count - 1;
-                    }
-                }
+                minDistance = distance;
+                planet = i;
             }
         }
-        yield return new WaitForSeconds(1 / ticksPerSecond);
-        distanceDetection = StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
+
+        foundPlanetWithSignal = _planetsToCheck[planet];
     }
 
-    public float CalculateDistanceToPlanet(int index)
+    public float CalculateSqrDistanceToPlanet(Planet _planet)
     {
-        if (foundPlanetsWithSignal[index] != null)
+        float dist = float.MaxValue;
+        if (_planet == null)
         {
-            float dist = Vector3.Distance(ship.transform.position, foundPlanetsWithSignal[index].transform.position);
             return dist;
         }
-        return 0;
+
+        dist = (_planet.transform.position - ship.transform.position).sqrMagnitude;
+        return dist;
+    }
+
+    IEnumerator CheckIfPlanetIsOutOfBoundsAndRemove()
+    {
+        if (foundPlanetWithSignal != null)
+        {
+            float maxRange = (range + foundPlanetWithSignal.GetPlanetRadius) * (range + foundPlanetWithSignal.GetPlanetRadius);
+            if (CalculateSqrDistanceToPlanet(foundPlanetWithSignal) > maxRange)
+            {
+                foundPlanetWithSignal = null;
+            }
+        }
+        
+        yield return new WaitForSeconds(1 / ticksPerSecond);
+        distanceDetection = StartCoroutine(CheckIfPlanetIsOutOfBoundsAndRemove());
     }
 
     public void ToggleRadar()
@@ -106,7 +123,7 @@ public class Radar : ShipComponent
         if (isRadarOn) 
         {
             planetDetection = StartCoroutine(DetectPlanet());
-            distanceDetection = StartCoroutine(CheckDistanceToPlanetsInRadarAndRemove());
+            distanceDetection = StartCoroutine(CheckIfPlanetIsOutOfBoundsAndRemove());
         }
 
         if (!isRadarOn && planetDetection != null)
@@ -118,29 +135,5 @@ public class Radar : ShipComponent
         {
             StopCoroutine(distanceDetection);
         }
-    }
-
-    public void ChangeFrecuency(int _value)
-    {
-        _value = Mathf.Clamp(_value, -1, 1);
-        if (lookedSignal >= 0 && lookedSignal < foundPlanetsWithSignal.Count) {
-            lookedSignal += _value;
-        }
-        else {
-            lookedSignal = 0;
-        }
-        if(foundPlanetsWithSignal.Count > 0)
-        {
-            while (foundPlanetsWithSignal[lookedSignal] == null)
-            {
-                if (lookedSignal >= 0 && lookedSignal < foundPlanetsWithSignal.Count) {
-                    lookedSignal += _value;
-                }
-                else {
-                    lookedSignal = 0;
-                }
-            }
-        }
-        return;
     }
 }

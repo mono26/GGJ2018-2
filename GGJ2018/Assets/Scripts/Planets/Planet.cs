@@ -13,7 +13,7 @@ public class Planet : MonoBehaviour
     [SerializeField] protected GravitySourceType gravitySource;
     [SerializeField] bool playerInGravitationalField;
     [SerializeField] protected float planetRadius;
-    [SerializeField] float gravitationalFieldRadius = 10.0f;
+    [SerializeField] float minGravFieldDistFromPlanet = 10.0f;
 
     [Header("Planet components")]
     [SerializeField]
@@ -24,19 +24,36 @@ public class Planet : MonoBehaviour
     [SerializeField] protected List<IAffectedByGravity> objsInGravitationField = new List<IAffectedByGravity>();
 
     public float GetPlanetRadius { get { return planetRadius; } }
+    public float GetGravFieldRadius { get { return planetRadius + minGravFieldDistFromPlanet; } }
     public SignalEmitter Signal { get { return signal; } }
 
+    bool alreadyAwaked = false;
+
     // Use this for initialization
-    protected virtual void Awake()
+    public virtual void Awake()
     {
-        CircleCollider2D collider = GetComponent<CircleCollider2D>();
-        if (collider) 
+        if (!alreadyAwaked)
         {
-            planetRadius = GetComponent<CircleCollider2D>().radius;
-        }
-        if (signal == null)
-        {
-            signal = GetComponent<SignalEmitter>();
+            CircleCollider2D planetCollider = GetComponent<CircleCollider2D>();
+            if (planetCollider) 
+            {
+                GetComponent<CircleCollider2D>().radius = planetRadius;
+            }
+
+            if (gravitationalField == null)
+            {
+                GetComponentInChildren<CircleCollider2D>();
+            }
+
+            if(gravitationalField != null)
+            {
+                gravitationalField.radius = GetGravFieldRadius;
+            }
+
+            if (signal == null)
+            {
+                signal = GetComponent<SignalEmitter>();
+            }
         }
     }
 
@@ -45,12 +62,6 @@ public class Planet : MonoBehaviour
         gravitySource = GravitySourceType.Planet;
 
         playerInGravitationalField = false;
-        
-        float gravFieldRadius = planetRadius + gravitationalFieldRadius;
-        if(gravitationalField != null)
-        {
-            gravitationalField.radius = gravFieldRadius;
-        }
 	}
 
     protected virtual void FixedUpdate()

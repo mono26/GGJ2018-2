@@ -4,7 +4,7 @@ using UnityEngine;
 public class AtractorRay : ShipComponent
 {
     [Header("Atractor Ray settings")]
-    [SerializeField] protected LayerMask layerMask;
+    [SerializeField] protected LayerMask alienLayer;
     [SerializeField] protected float range = 1.5f;
     [SerializeField] protected float radius = 0.7f;
     [SerializeField] protected float ticksPerSecond = 10;
@@ -46,25 +46,6 @@ public class AtractorRay : ShipComponent
         return;
     }
 
-    private IEnumerator FindAliens()
-    {
-        RaycastHit2D[] aliensHit = Physics2D.CircleCastAll(ship.transform.position, radius, -ship.transform.up, range, layerMask);
-        if (aliensHit.Length > 0)
-        {
-            foreach (RaycastHit2D hit in aliensHit)
-            {
-                if (hit.collider.CompareTag("Alien"))
-                {
-                    hit.collider.GetComponent<Rigidbody2D>().AddForce(hit.transform.up * strenght);
-                }
-            }
-        }
-
-        yield return new WaitForSeconds(1 / ticksPerSecond);
-        atractAliensRoutine = StartCoroutine(FindAliens());
-        yield break;
-    }
-
     public void ToggleRay()
     {
         isAlienRayOn = !isAlienRayOn;
@@ -82,6 +63,25 @@ public class AtractorRay : ShipComponent
         TurnRayOn();
 
         OpenDoor();
+    }
+
+    IEnumerator FindAliens()
+    {
+        RaycastHit2D[] aliensHit = Physics2D.CircleCastAll(ship.transform.position, radius, -ship.transform.up, range, alienLayer);
+        if (aliensHit.Length > 0)
+        {
+            foreach (RaycastHit2D hit in aliensHit)
+            {
+                if (hit.collider.CompareTag("Alien"))
+                {
+                    hit.collider.GetComponent<Rigidbody2D>().AddForce(hit.transform.up * strenght);
+                }
+            }
+        }
+
+        yield return new WaitForSeconds(1 / ticksPerSecond);
+        atractAliensRoutine = StartCoroutine(FindAliens());
+        yield break;
     }
 
     void TurnRayOn()

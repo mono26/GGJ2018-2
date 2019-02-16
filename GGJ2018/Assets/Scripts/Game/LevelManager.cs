@@ -7,21 +7,19 @@ public class LevelManager : Singleton<LevelManager>
     //TODO create a class for managing UI only
     [Header("Level Manager settings")]
     [SerializeField]
-    private int initialScorePoints = 0;
+    protected AudioClip loseSfx = null;
     [SerializeField]
-    protected AudioClip loseSfx;
-    [SerializeField]
-    protected string mainMenuScene;
+    protected string mainMenuScene = null;
     [SerializeField]
     private int maxScorePoints = 30;
     [SerializeField]
-    protected AudioClip winSfx;
+    protected AudioClip winSfx = null;
 
     [Header("Components")]
     [SerializeField]
     private Image fuelBar;
     [SerializeField]
-    private Text scoreText;
+    private Text scoreText; //TODO move this to the LevelUIManager
 
     [Header("Editor debbuging")]
     private int scorePoints;
@@ -45,35 +43,29 @@ public class LevelManager : Singleton<LevelManager>
         if (fuelBar != null)
             fuelBar.gameObject.SetActive(true);
 
-        scorePoints = initialScorePoints;
+        scorePoints = 0;
 
         return;
 	}
 	
-	// Update is called once per frame
-	void Update ()
-    {
-        // Set score text to the actual score number
-        if (scoreText != null)
-            scoreText.text = scorePoints.ToString();
-		// Look if the player score limit has reach
-        /*if (scorePoints >= maxScorePoints)
-        {
-            EndGame();
-        }*/
-
-        return;
-	}
-
     public void IncreaseScore()
     {
         scorePoints += 1;
-        return;
+
+        if (scoreText != null)
+        {
+            scoreText.text = scorePoints.ToString();
+        }
+
+        if (scorePoints >= maxScorePoints)
+        {
+            EndGame();
+        }
     }
 
     public void EndGame()
     {
-        //TODO activate en game screen.
+        //TODO activate end game screen.
         LoadManager.LoadScene("Credits");
         return;
     }

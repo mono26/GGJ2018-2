@@ -153,7 +153,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 15.2
 --- !u!114 &114469543221975496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,9 +169,10 @@ MonoBehaviour:
   rotationSpeed: 10
   rotationForce: 100
   gravityForce: 100
+  gravitySource: 0
   playerInGravitationalField: 0
   planetRadius: 5.2
-  gravitationalFieldRadius: 10
+  minGravFieldDistFromPlanet: 10
   signal: {fileID: 114562478748535502}
   gravitationalField: {fileID: 58411296840660902}
   alien: {fileID: 114053472491642104, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}

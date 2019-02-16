@@ -9,7 +9,7 @@ public class AlienPlanet : Planet
 
     [SerializeField] List<Alien> aliens;
 
-    protected override void Awake()
+    public override void Awake()
     {
         base.Awake();
 
@@ -54,7 +54,6 @@ public class AlienPlanet : Planet
     protected void OnEnable()
     {
         signal.TurnSignal(SignalEmitter.SignalState.ON);
-        return;
     }
 
     void StopAliensMovement()

@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4485343844356438}
   - component: {fileID: 212130416342089136}
+  - component: {fileID: 58675462932209468}
   - component: {fileID: 50628130364634472}
   - component: {fileID: 114100064732119054}
   - component: {fileID: 114494846662596814}
@@ -70,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1491111122904462}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 37.6, y: -1.8, z: 0}
+  m_LocalPosition: {x: 14.392317, y: -13.5404, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4968955411117436}
@@ -124,6 +125,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 3
+--- !u!58 &58675462932209468
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1491111122904462}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.14, y: 0.4}
+  serializedVersion: 2
+  m_Radius: 2.1
 --- !u!58 &58951071852926638
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -138,7 +154,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 12.1
 --- !u!60 &60975574784675180
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -186,9 +202,10 @@ MonoBehaviour:
   rotationSpeed: 10
   rotationForce: 100
   gravityForce: 100
+  gravitySource: 0
   playerInGravitationalField: 0
-  planetRadius: 2.2
-  gravitationalFieldRadius: 10
+  planetRadius: 2.1
+  minGravFieldDistFromPlanet: 10
   signal: {fileID: 0}
   gravitationalField: {fileID: 58951071852926638}
 --- !u!114 &114494846662596814
@@ -203,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 1
-  type: 0
+  type: 1
 --- !u!212 &212130416342089136
 SpriteRenderer:
   m_ObjectHideFlags: 1

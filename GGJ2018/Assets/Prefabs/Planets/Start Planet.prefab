@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1213937508742488}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.89, y: -6.99, z: 0}
+  m_LocalPosition: {x: 15.16868, y: -13.133734, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4840410845170314}
@@ -108,7 +108,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.33
+  m_Radius: 4.5
 --- !u!95 &95359084304161248
 Animator:
   serializedVersion: 3
@@ -118,7 +118,7 @@ Animator:
   m_GameObject: {fileID: 1213937508742488}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7193e7952eeb141468e68e3b0233f0d2, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -141,9 +141,10 @@ MonoBehaviour:
   rotationSpeed: 4.4
   rotationForce: 9.8
   gravityForce: 9.8
+  gravitySource: 0
   playerInGravitationalField: 0
-  planetRadius: 0.33
-  gravitationalFieldRadius: 10
+  planetRadius: 4.5
+  minGravFieldDistFromPlanet: 10
   signal: {fileID: 0}
   gravitationalField: {fileID: 0}
 --- !u!212 &212036120968054520
