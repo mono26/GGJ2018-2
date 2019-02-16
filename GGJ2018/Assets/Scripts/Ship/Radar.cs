@@ -42,7 +42,7 @@ public class Radar : ShipComponent
             List<Planet> nearPlanets = new List<Planet>();
             foreach (Collider2D obj in nearObjects)
             {
-                if (obj.gameObject.CompareTag("Planet") || obj.gameObject.CompareTag("FuelPlanet"))
+                if (obj.gameObject.CompareTag("Planet"))
                 {
                     Planet planetComponent = obj.GetComponent<Planet>();
                     if (planetComponent == null)

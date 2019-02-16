@@ -66,7 +66,12 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         if (_collision.gameObject.CompareTag("Planet"))
         {
             Planet planetComponent = _collision.gameObject.GetComponent<Planet>();
-            if(planetComponent.Signal != null && planetComponent.Signal.Type == SignalEmitter.SignalType.FuelPlanet){
+            if(planetComponent == null)
+            {
+                planetComponent = _collision.gameObject.GetComponentInParent<Planet>();
+            }
+            if(planetComponent != null && planetComponent.Signal != null && planetComponent.Signal.Type == SignalEmitter.SignalType.FuelPlanet)
+            {
                 RechargeFuel(maxFuel);
             }
         }
@@ -75,6 +80,12 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
             // TODO eliminate magic number
             RechargeFuel(5);
         }
+    }
+
+    void RechargeFuel(float _fuelToAdd)
+    {
+        currentFuel += _fuelToAdd;
+        currentFuel = Mathf.Clamp(currentFuel, 0, maxFuel);
         return;
     }
 
@@ -101,13 +112,6 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         if(AreWeInABlackholeCenter(_blackHoleEvent)) {
             TakeDamage(30);
         }
-        return;
-    }
-
-    public void RechargeFuel(float _fuelToAdd)
-    {
-        currentFuel += _fuelToAdd;
-        currentFuel = Mathf.Clamp(currentFuel, 0, maxFuel);
         return;
     }
 }

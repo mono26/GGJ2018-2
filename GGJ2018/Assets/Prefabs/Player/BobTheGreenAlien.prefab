@@ -1391,13 +1391,13 @@ MonoBehaviour:
   bodyComponent: {fileID: 50335388593032238}
   engineComponent: {fileID: 114627262001852212}
   radarComponent: {fileID: 114489052112443842}
+  oscilatorComponet: {fileID: 114059371307357624}
   atractorRayComponent: {fileID: 114004955614317346}
   shieldComponent: {fileID: 114629711560785046}
   components: []
   currentInput:
     horizontalInput: 0
     verticalInput: 0
-    radarFrequencyInput: 0
     rayInput: 0
     radarInput: 0
     shieldInput: 0
@@ -1487,7 +1487,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   rayLenght: 3
-  rayIterations: 0
+  isOscilatorOn: 0
 --- !u!114 &114084582516287356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1967,10 +1967,8 @@ MonoBehaviour:
   planetsLayer:
     serializedVersion: 2
     m_Bits: 256
-  foundPlanetsWithSignal: []
+  foundPlanetWithSignal: {fileID: 0}
   isRadarOn: 0
-  lookedSignal: 0
-  nearplanets: []
 --- !u!114 &114496690306402064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2688,13 +2686,11 @@ MonoBehaviour:
   playerID: Player1
   horizontalID: Horizontal
   verticalID: Vertical
-  radarfrequencyID: RadarFrequency
   rayID: RayButton
   radarID: RadarButton
   shieldID: ShieldButton
   horizontalInput: 0
   verticalInput: 0
-  radarFrequencyInput: 0
   rayInput: 0
   radarInput: 0
   shieldInput: 0

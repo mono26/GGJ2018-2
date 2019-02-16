@@ -464,10 +464,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 1262883386866118, guid: e9fc52c01928c814588868868247ff44, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e9fc52c01928c814588868868247ff44, type: 2}
   m_IsPrefabParent: 0
@@ -600,6 +596,10 @@ Prefab:
         type: 2}
       propertyPath: layersToCheck.m_Bits
       value: 2304
+      objectReference: {fileID: 0}
+    - target: {fileID: 1874265655140844, guid: c0f00fadda844954aa85ab38276b46dc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0f00fadda844954aa85ab38276b46dc, type: 2}
@@ -849,7 +849,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1437263803463854, guid: 0d703d96b9bcee2449edbf7944d4a5b6, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114675835907499412, guid: 0d703d96b9bcee2449edbf7944d4a5b6,
         type: 2}
