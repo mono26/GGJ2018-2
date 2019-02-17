@@ -259,7 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9cb0b0dcc84a34e8687d7fb0a41c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerPosition: {x: 0, y: 0, z: 0}
   minDistanceToSpawn: 30
   maxDistanceToSpawn: 300
   minDistanceIntervalToSpawn: 25
@@ -278,7 +277,10 @@ MonoBehaviour:
   - {fileID: 114547883223953548, guid: 4d9f2961fde0e1546a172a9cd00502a0, type: 2}
   - {fileID: 114379990198208300, guid: bf51cefa2ef16c84a9f266bf5972e37a, type: 2}
   - {fileID: 114178262049866828, guid: a5cb07dc70d490e45a48e9114ded4dc1, type: 2}
+  asteroidWall: {fileID: 114510045144601786, guid: e4accfa9f7ce34349a0cfef0e14ac8c0,
+    type: 2}
   planetsContainer: {fileID: 684229114}
+  asteroidWallContainer: {fileID: 0}
 --- !u!4 &287492479
 Transform:
   m_ObjectHideFlags: 0

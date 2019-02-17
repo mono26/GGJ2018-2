@@ -5,8 +5,6 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour 
 {
 	[Header("Initial values")]
-	[Tooltip("Center position of the spawn area")]
-	[SerializeField] Vector3 centerPosition;
 	[Tooltip("Minimun distance to the center to spawn planets")]
 	[SerializeField] int minDistanceToSpawn = 15;
 	[Tooltip("Maximum distance to the center to spawn planets")]
@@ -28,22 +26,39 @@ public class LevelGenerator : MonoBehaviour
 	[Header("Prefabs")]
 	[SerializeField] Planet fuelPlanetPrefab;
 	[SerializeField] Planet[] planetsPrefabs;
+	[SerializeField] SpawnableObject asteroidWall;
 
-	[Header("Planets container")]
+	[Header("Containers")]
 	[SerializeField] Transform planetsContainer = null;
+	[SerializeField] Transform asteroidWallContainer = null;
 
 	Vector2 lastFuelPlanetPosition;
 
-	int GetRandomDistanceInterval { get { return Random.Range(minDistanceIntervalToSpawn, maxDistanceIntervalToSpawn); } }
-	int GetRandomAngleInterval { get { return Random.Range(minAngleIntervalToSpawn, maxAngleIntervalToSpawn); } }
+	int GetRandomDistanceInterval { get { return Random.Range(minDistanceIntervalToSpawn, maxDistanceIntervalToSpawn + 1); } }
+	int GetRandomAngleInterval { get { return Random.Range(minAngleIntervalToSpawn, maxAngleIntervalToSpawn + 1); } }
 	int GetRandomeStartAngle { get { return Random.Range(0, 365); } }
 	int GetRandomPlanetToSpawn { get { return Random.Range(0, planetsPrefabs.Length); } }
+	int GetRandomScale { get { return Random.Range(1, 6); } }
+
+	Vector3 GetRandomRotation
+	{
+		get
+		{
+			float z = Random.Range(0, 365);
+			return new Vector3(0, 0 , z);
+		}
+	}
 
 	void Awake()
 	{
 		if(planetsContainer == null)
 		{
 			planetsContainer = new GameObject("Planets").transform;
+		}
+
+		if(asteroidWallContainer == null)
+		{
+			asteroidWallContainer = new GameObject("AsteroidWall").transform;
 		}
 
 		GenerateLevel();
@@ -59,7 +74,10 @@ public class LevelGenerator : MonoBehaviour
 			totalDistance += GetRandomDistanceInterval;
 		}
 
-		SpawnAsteroidRing(maxDistanceToSpawn + GetRandomDistanceInterval);
+		int asteroidWallSpawnDistance = maxDistanceToSpawn + maxDistanceIntervalToSpawn;
+		SpawnAsteroidRing(asteroidWallSpawnDistance);
+		SpawnAsteroidRing(asteroidWallSpawnDistance + 5);
+		SpawnAsteroidRing(asteroidWallSpawnDistance + 10);
 	}
 
 	void SpawnPerimeter(int _distance)
@@ -113,12 +131,12 @@ public class LevelGenerator : MonoBehaviour
 		return newFuelPlanetPosition;
 	}
 
-	Vector2 CalculatePointInPerimeter(int _distance, int _angle)
+	Vector2 CalculatePointInPerimeter(int _distance, float _angle)
 	{
 		Vector3 pointInPerimeter = Vector2.zero;
 		float x = Mathf.Cos(_angle) * _distance;
         float y = Mathf.Sin(_angle) * _distance;
-		pointInPerimeter = new Vector2(x, y);
+		pointInPerimeter = new Vector3(x, y, 0);
 		return pointInPerimeter;
 	}
 
@@ -147,6 +165,26 @@ public class LevelGenerator : MonoBehaviour
 
 	void SpawnAsteroidRing(int _distance)
 	{
+		float angleCount = 0;
 
+		while (angleCount < 365)
+		{
+			if (angleCount >= 365)
+			{
+				continue;
+			}
+
+			int randomScale = GetRandomScale;
+			angleCount++;
+			SpawnAsteroid(asteroidWall, CalculatePointInPerimeter(_distance, angleCount), randomScale);
+		}
+	}
+
+	void SpawnAsteroid(SpawnableObject _asteroidWall, Vector2 _position, int _scale)
+	{
+		SpawnableObject asteroid = Instantiate(_asteroidWall, _position, Quaternion.Euler(GetRandomRotation));
+		float zScale = asteroid.transform.localScale.z;
+		asteroid.transform.localScale =  new Vector3(_scale, _scale, zScale);
+		asteroid.transform.SetParent(asteroidWallContainer);
 	}
 }
