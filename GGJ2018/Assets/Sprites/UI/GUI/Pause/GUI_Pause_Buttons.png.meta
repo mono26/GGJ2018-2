@@ -1,9 +1,12 @@
 fileFormatVersion: 2
-guid: 443a93b0217daa04babafb32ec2fe21b
-timeCreated: 1530807621
+guid: b3da132ed0d5ded4b89775eadfab2ccd
+timeCreated: 1551244205
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: GUI_Pause_Buttons_Restart
+    21300002: GUI_Pause_Buttons_Play
+    21300004: GUI_Pause_Buttons_Exit
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -36,11 +39,11 @@ TextureImporter:
     mipBias: -1
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -88,7 +91,49 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: GUI_Pause_Buttons_Restart
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 884
+        width: 304
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GUI_Pause_Buttons_Play
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 884
+        width: 303
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GUI_Pause_Buttons_Exit
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 884
+        width: 307
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 
