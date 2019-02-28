@@ -9,8 +9,8 @@ public class LoadManager : MonoBehaviour
     private static string loadingScreenSceneName = "LoadScreen";
     private static string sceneToLoad;
 
-    [SerializeField]
-    private Text loadingText;
+   /* [SerializeField]
+    private Text loadingText;*/
     [SerializeField]
     private Image loadingFill;
     private const float loadDelay = 0.5f;
@@ -31,8 +31,8 @@ public class LoadManager : MonoBehaviour
 
     private void Awake()
     {
-        if (loadingText == null)
-            loadingText = GameObject.Find("LoadingText").GetComponent<Text>();
+        /*if (loadingText == null)
+            loadingText = GameObject.Find("LoadingText").GetComponent<Text>();*/
         if (loadingFill == null)
             loadingFill = GameObject.Find("LoadingBar").GetComponentInChildren<Image>();
 
@@ -41,7 +41,7 @@ public class LoadManager : MonoBehaviour
 
     private void Start()
     {
-        loadingText.text = "Loading...";
+       // loadingText.text = "Loading...";
         if (sceneToLoad != "")
         {
             StartCoroutine(LoadLevel());
