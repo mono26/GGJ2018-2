@@ -162,6 +162,7 @@ public class Ship : MonoBehaviour, IAffectedByGravity
             return;
         }
 
+        // Changes active buttons on GUI if it enters a planet
         LevelUIManager.Instance.DisplayInputButton("RadarButton", false);
         LevelUIManager.Instance.DisplayInputButton("RayButton", true);
 
@@ -178,11 +179,12 @@ public class Ship : MonoBehaviour, IAffectedByGravity
             return;
         }
 
+        // Changes active buttons on GUI if it goes out of a planet
         LevelUIManager.Instance.DisplayInputButton("RadarButton", true);
         LevelUIManager.Instance.DisplayInputButton("RayButton", false);
         if(atractorRayComponent.IsAlienRayOn)
         {
-            ToggleShipRadar();
+            ToggleShipRay();
         }
     }
 

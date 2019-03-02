@@ -11,8 +11,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: WhataBox Creative Studio.
-  productName: GGJ2018
+  companyName: WaB Creative Studio.
+  productName: Lost in Space
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -158,7 +158,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.WhataBoxCreativeStudio.GGJ2018
+    Android: com.WhataBoxCreativeStudio.LostInSpace
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 19
@@ -260,7 +260,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 6ac0d275b9263244b9ea43f6f2a02216, type: 3}
+      m_Icon: {fileID: 2800000, guid: 9eb678d07a17c2c438c29c6730205e11, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

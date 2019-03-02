@@ -36,7 +36,7 @@ public class SignalOscilator : ShipComponent
 
     public void Start()
     {
-        //LocateSignalOscilatorInTheWorld();
+        LocateSignalOscilatorInTheWorld();
 
         float rayIterations = rayLenght / drawPositions.Length;
         oscilator.positionCount = drawPositions.Length;

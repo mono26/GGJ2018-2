@@ -1472,8 +1472,8 @@ MonoBehaviour:
   planetSignal: {r: 0, g: 1, b: 0, a: 1}
   gasStationSignal: {r: 0, g: 0, b: 1, a: 1}
   ticksPerSecond: 10
-  screenPositionX: 0.2
-  screenPositionY: 0.95
+  screenPositionX: 0.135
+  screenPositionY: 0.877
   radar: {fileID: 114489052112443842}
   oscilator: {fileID: 120090661626406014}
   drawPositions:
@@ -17324,7 +17324,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 455.85, y: -164.35}
+  m_AnchoredPosition: {x: 457.35, y: -164.35}
   m_SizeDelta: {x: 303, y: 292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224348327328011298
@@ -17457,7 +17457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 760.85, y: -164.35}
+  m_AnchoredPosition: {x: 457.35, y: -164.35}
   m_SizeDelta: {x: 307, y: 292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224591575484703160
@@ -17513,7 +17513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 152.35, y: -164.35}
+  m_AnchoredPosition: {x: 457.35, y: -164.35}
   m_SizeDelta: {x: 304, y: 292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224665918252512258
