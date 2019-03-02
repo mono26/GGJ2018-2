@@ -242,11 +242,10 @@ GameObject:
   - component: {fileID: 287492479}
   - component: {fileID: 287492478}
   - component: {fileID: 287492480}
-  - component: {fileID: 287492481}
   m_Layer: 17
   m_Name: _LevelGenerator
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -263,10 +262,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistanceToSpawn: 30
   maxDistanceToSpawn: 100
-  minDistanceIntervalToSpawn: 20
-  maxDistanceIntervalToSpawn: 40
+  minDistanceIntervalToSpawn: 15
+  maxDistanceIntervalToSpawn: 35
   minAngleIntervalToSpawn: 15
-  maxAngleIntervalToSpawn: 35
+  maxAngleIntervalToSpawn: 30
   layersToCheck:
     serializedVersion: 2
     m_Bits: 1280
@@ -281,8 +280,12 @@ MonoBehaviour:
   - {fileID: 114178262049866828, guid: a5cb07dc70d490e45a48e9114ded4dc1, type: 2}
   asteroidWall: {fileID: 114510045144601786, guid: e4accfa9f7ce34349a0cfef0e14ac8c0,
     type: 2}
+  spawnedZoneMark: {fileID: 1457295385073232, guid: 205013e7e703cd449ba9f9e6584312f0,
+    type: 2}
   planetsContainer: {fileID: 684229114}
   asteroidWallContainer: {fileID: 0}
+  marksContainer: {fileID: 0}
+  numberOfSpawnsToClearAZone: 4
 --- !u!4 &287492479
 Transform:
   m_ObjectHideFlags: 0
@@ -310,27 +313,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 50
---- !u!50 &287492481
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 287492477}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Radius: 60
 --- !u!1 &331721609 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1052524117136162, guid: e9fc52c01928c814588868868247ff44,
