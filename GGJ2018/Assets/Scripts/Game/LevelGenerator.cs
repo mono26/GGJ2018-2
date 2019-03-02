@@ -32,7 +32,7 @@ public class LevelGenerator : MonoBehaviour
 	[SerializeField] Transform planetsContainer = null;
 	[SerializeField] Transform asteroidWallContainer = null;
 
-	Vector2 lastFuelPlanetPosition;
+	bool isInitialGeneration = true;
 
 	int GetRandomDistanceInterval { get { return Random.Range(minDistanceIntervalToSpawn, maxDistanceIntervalToSpawn + 1); } }
 	int GetRandomAngleInterval { get { return Random.Range(minAngleIntervalToSpawn, maxAngleIntervalToSpawn + 1); } }
@@ -61,36 +61,41 @@ public class LevelGenerator : MonoBehaviour
 			asteroidWallContainer = new GameObject("AsteroidWall").transform;
 		}
 
-		GenerateLevel();
+		if (isInitialGeneration)
+		{
+			GenerateLevel(Vector2.zero);
+			isInitialGeneration = false;
+		}
 	}
 
-	void GenerateLevel()
+	void GenerateLevel(Vector2 _perimeterFromWherePlayerCame)
 	{
 		int totalDistance = minDistanceToSpawn;
+		Vector2 lastFuelPlanetPosition = Vector2.zero;
 		while (totalDistance <= maxDistanceToSpawn)
 		{
-			SpawnPerimeter(totalDistance);
+			SpawnPerimeter(totalDistance, lastFuelPlanetPosition, _perimeterFromWherePlayerCame);
 
 			totalDistance += GetRandomDistanceInterval;
 		}
 
-		int asteroidWallSpawnDistance = maxDistanceToSpawn + maxDistanceIntervalToSpawn;
-		SpawnAsteroidRing(asteroidWallSpawnDistance);
-		SpawnAsteroidRing(asteroidWallSpawnDistance + 5);
-		SpawnAsteroidRing(asteroidWallSpawnDistance + 10);
+		// int asteroidWallSpawnDistance = maxDistanceToSpawn + maxDistanceIntervalToSpawn;
+		// SpawnAsteroidRing(asteroidWallSpawnDistance);
+		// SpawnAsteroidRing(asteroidWallSpawnDistance + 5);
+		// SpawnAsteroidRing(asteroidWallSpawnDistance + 10);
 	}
 
-	void SpawnPerimeter(int _distance)
+	void SpawnPerimeter(int _distance, Vector2 _lastFuelPlanetPosition, Vector2 _perimeterFromWherePlayerCame)
 	{
 		int angleCount = 0;
 		int spawnAngle = GetRandomeStartAngle;
 		int randomAngleInterval;
 
 		// Spawn one FuelPlanet per perimeter.
-		Vector2 fuelPlanetPosition = CalculatePointInPerimeter(_distance, spawnAngle);
-		fuelPlanetPosition = AdjustFuelPlanetPosition(fuelPlanetPosition);
-		SpawnPlanet(fuelPlanetPrefab, fuelPlanetPosition);
-		lastFuelPlanetPosition = fuelPlanetPosition;
+		Vector2 fuelPlanetPosition = CalculateLocalSpawnPoint(_distance, spawnAngle);
+		fuelPlanetPosition = AdjustFuelPlanetPosition(fuelPlanetPosition, _lastFuelPlanetPosition);
+		SpawnPlanet(fuelPlanetPrefab, fuelPlanetPosition, _perimeterFromWherePlayerCame);
+		_lastFuelPlanetPosition = fuelPlanetPosition;
 
 		while (angleCount < 365)
 		{
@@ -102,25 +107,40 @@ public class LevelGenerator : MonoBehaviour
 				continue;
 			}
 
-			SpawnPlanet(planetsPrefabs[GetRandomPlanetToSpawn], CalculatePointInPerimeter(_distance, spawnAngle));
+			SpawnPlanet(planetsPrefabs[GetRandomPlanetToSpawn], CalculateLocalSpawnPoint(_distance, spawnAngle), _perimeterFromWherePlayerCame);
 		}
 	}
 
-	Vector2 AdjustFuelPlanetPosition(Vector2 _fuelPlanetPosition)
+	/// <summary>
+	/// Generates a local position spawn point inside a circle perimeter relative to the LevelGenerator.
+	/// </summary>
+	/// <param name="_distance"> Radius of the circle.</param>
+	/// <param name="_angle"> Angle of the point in the perimeter.</param>
+	/// <returns></returns>
+	Vector2 CalculateLocalSpawnPoint(int _distance, float _angle)
+	{
+		Vector3 pointInPerimeter = Vector2.zero;
+		float x = Mathf.Cos(_angle) * _distance;
+        float y = Mathf.Sin(_angle) * _distance;
+		pointInPerimeter = new Vector2(x, y);
+		return pointInPerimeter;
+	}
+
+	Vector2 AdjustFuelPlanetPosition(Vector2 _fuelPlanetPosition, Vector2 lastFuelPlanetPosition)
 	{
 		Vector2 newFuelPlanetPosition = _fuelPlanetPosition;
 		// 1 = Change only one axis, 2 = change both axis
 		int numberOfAxisChanges = Random.Range(1, 2);
 		// 1 = x, 2 = y
 		int axisToChange = Random.Range(1, 2);
-		if(lastFuelPlanetPosition.x >= 0 && _fuelPlanetPosition.x >= 0 || lastFuelPlanetPosition.x < 0 && _fuelPlanetPosition.x < 0)
+		if(lastFuelPlanetPosition.x > 0 && _fuelPlanetPosition.x > 0 || lastFuelPlanetPosition.x < 0 && _fuelPlanetPosition.x < 0)
 		{
 			if (numberOfAxisChanges == 2 || axisToChange == 1)
 			{
 				newFuelPlanetPosition.x *= -1;
 			}
 		}
-		if(lastFuelPlanetPosition.y >= 0 && _fuelPlanetPosition.y >= 0 || lastFuelPlanetPosition.y < 0 && _fuelPlanetPosition.y < 0)
+		if(lastFuelPlanetPosition.y > 0 && _fuelPlanetPosition.y > 0 || lastFuelPlanetPosition.y < 0 && _fuelPlanetPosition.y < 0)
 		{
 			if (numberOfAxisChanges == 2 || axisToChange == 2)
 			{
@@ -131,36 +151,72 @@ public class LevelGenerator : MonoBehaviour
 		return newFuelPlanetPosition;
 	}
 
-	Vector2 CalculatePointInPerimeter(int _distance, float _angle)
+	void SpawnPlanet(Planet _planetToSpawn, Vector2 _localPositionToSpawn, Vector2 _perimeterFromWherePlayerCame)
 	{
-		Vector3 pointInPerimeter = Vector2.zero;
-		float x = Mathf.Cos(_angle) * _distance;
-        float y = Mathf.Sin(_angle) * _distance;
-		pointInPerimeter = new Vector3(x, y, 0);
-		return pointInPerimeter;
-	}
-
-	void SpawnPlanet(Planet _planetToSpawn, Vector2 _positionToSpawn)
-	{
-		if(!CheckIfPositionIsFree(_positionToSpawn, _planetToSpawn.GetGravFieldRadius))
+		if (!isInitialGeneration && CheckIfSameFromPerimeterOfLastSpawn(_localPositionToSpawn, _perimeterFromWherePlayerCame))
 		{
 			return;
 		}
 
-		Planet newPlanet = Instantiate(_planetToSpawn, _positionToSpawn, Quaternion.identity);
+		if(!CheckIfPositionIsFree(_localPositionToSpawn, _planetToSpawn.GetGravFieldRadius))
+		{
+			return;
+		}
+
+		Vector3 worldPositionToSpawn = transform.position;
+		worldPositionToSpawn.x += _localPositionToSpawn.x;
+		worldPositionToSpawn.y += _localPositionToSpawn.y;
+		Planet newPlanet = Instantiate(_planetToSpawn, worldPositionToSpawn, Quaternion.identity);
 		newPlanet.Awake();
 		newPlanet.transform.SetParent(planetsContainer);
 	}
 
-	bool CheckIfPositionIsFree(Vector2 _position, float _radius)
+	bool CheckIfPositionIsFree(Vector2 _localPosition, float _radius)
 	{
-		bool positionIsFree = true;	
-		if(Physics2D.OverlapCircle(_position, _radius, layersToCheck) != null)
+		bool positionIsFree = true;
+		Vector3 positionToCheck = transform.position;
+		positionToCheck.x += _localPosition.x;
+		positionToCheck.y += _localPosition.y;
+		if(Physics2D.OverlapCircle(positionToCheck, _radius + 10, layersToCheck) != null)
 		{
 			positionIsFree = false;
 		}
 
 		return positionIsFree;
+	}
+
+	bool CheckIfSameFromPerimeterOfLastSpawn(Vector2 _position, Vector2 _perimeterFromWherePlayerCame)
+	{
+		Vector2 matchedPerimeterToGenerationPosition = -_perimeterFromWherePlayerCame;
+		bool sameXSide = false;
+		bool sameYSide = false;
+		if (matchedPerimeterToGenerationPosition.x > 0 && _position.x > 0 || matchedPerimeterToGenerationPosition.x < 0 && _position.x < 0)
+		{
+			sameXSide = true;
+		}
+		else if (matchedPerimeterToGenerationPosition.x > 0 && _position.x > 0 && matchedPerimeterToGenerationPosition.y == 0 && _position.y == 0)
+		{
+			return true;
+		}
+		else if (matchedPerimeterToGenerationPosition.x < 0 && _position.x < 0 && matchedPerimeterToGenerationPosition.x == 0 && _position.x == 0)
+		{
+			return true;
+		}
+		
+		if (matchedPerimeterToGenerationPosition.y > 0 && _position.y > 0 || matchedPerimeterToGenerationPosition.y < 0 && _position.y < 0)
+		{
+			sameYSide = true;
+		}
+		else if (matchedPerimeterToGenerationPosition.x == 0 && _position.x == 0 && matchedPerimeterToGenerationPosition.y > 0 && _position.y > 0)
+		{
+			return true;
+		}
+		else if (matchedPerimeterToGenerationPosition.x == 0 && _position.x == 0 && matchedPerimeterToGenerationPosition.y < 0 && _position.y < 0)
+		{
+			return true;
+		}
+
+		return (sameXSide && sameYSide) ? true : false;
 	}
 
 	void SpawnAsteroidRing(int _distance)
@@ -176,7 +232,7 @@ public class LevelGenerator : MonoBehaviour
 
 			int randomScale = GetRandomScale;
 			angleCount++;
-			SpawnAsteroid(asteroidWall, CalculatePointInPerimeter(_distance, angleCount), randomScale);
+			SpawnAsteroid(asteroidWall, CalculateLocalSpawnPoint(_distance, angleCount), randomScale);
 		}
 	}
 
@@ -186,5 +242,31 @@ public class LevelGenerator : MonoBehaviour
 		float zScale = asteroid.transform.localScale.z;
 		asteroid.transform.localScale =  new Vector3(_scale, _scale, zScale);
 		asteroid.transform.SetParent(asteroidWallContainer);
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (!other.CompareTag("Player"))
+		{
+			return;
+		}
+
+		Debug.LogError("Player exited the trigger");
+		Vector2 playerPosition = other.transform.position;
+		Vector2 playerLocalPosition = transform.InverseTransformPoint(playerPosition);
+		Vector2 perimeterFromWherePlayerCame = GetPerimeterFromWherePlayerCameFrom(playerLocalPosition);
+		Debug.LogError("Player came from perimeter: " + perimeterFromWherePlayerCame);
+		Debug.LogError("Matched perimeter: " + -perimeterFromWherePlayerCame);
+		transform.position = playerPosition;
+
+		GenerateLevel(perimeterFromWherePlayerCame);
+	}
+
+	Vector2 GetPerimeterFromWherePlayerCameFrom(Vector2 _playerLocalPosition)
+	{
+		float xPosition = _playerLocalPosition.x;
+		float yPosition = _playerLocalPosition.y;
+		Vector2 perimeterFromWherePlayerCame = new Vector2(xPosition / Mathf.Abs(xPosition), yPosition / Mathf.Abs(yPosition));
+		return perimeterFromWherePlayerCame;
 	}
 }
