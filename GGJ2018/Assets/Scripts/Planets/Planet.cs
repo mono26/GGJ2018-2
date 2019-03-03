@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum GravitySourceType { Planet, Blackhole }
 
-public class Planet : MonoBehaviour
+public class Planet : SpawnableObject
 {
     [Header("Planet settings")]
     [SerializeField][Range(-1,1)] int gravitationalFieldDirection = 1; // +1 left, -1 right
@@ -12,7 +12,6 @@ public class Planet : MonoBehaviour
     [SerializeField] float gravityForce = 9.8f;
     [SerializeField] protected GravitySourceType gravitySource;
     [SerializeField] bool playerInGravitationalField;
-    [SerializeField] protected float planetRadius;
     [SerializeField] float minGravFieldDistFromPlanet = 10.0f;
 
     [Header("Planet components")]
@@ -23,37 +22,40 @@ public class Planet : MonoBehaviour
     [Header("Planet editor debuggin")]
     [SerializeField] protected List<IAffectedByGravity> objsInGravitationField = new List<IAffectedByGravity>();
 
-    public float GetPlanetRadius { get { return planetRadius; } }
-    public float GetGravFieldRadius { get { return planetRadius + minGravFieldDistFromPlanet; } }
+    public float GetGravFieldRadius { get { return GetRadius + minGravFieldDistFromPlanet; } }
     public SignalEmitter Signal { get { return signal; } }
 
     bool alreadyAwaked = false;
 
     // Use this for initialization
-    public virtual void Awake()
+    public override void Awake()
     {
-        if (!alreadyAwaked)
+        if (alreadyAwaked)
         {
-            CircleCollider2D planetCollider = GetComponent<CircleCollider2D>();
-            if (planetCollider) 
-            {
-                GetComponent<CircleCollider2D>().radius = planetRadius;
-            }
+            return;
+        }
 
-            if (gravitationalField == null)
-            {
-                GetComponentInChildren<CircleCollider2D>();
-            }
+        base.Awake();
 
-            if(gravitationalField != null)
-            {
-                gravitationalField.radius = GetGravFieldRadius;
-            }
+        CircleCollider2D planetCollider = GetComponent<CircleCollider2D>();
+        if (planetCollider) 
+        {
+            GetComponent<CircleCollider2D>().radius = GetRadius;
+        }
 
-            if (signal == null)
-            {
-                signal = GetComponent<SignalEmitter>();
-            }
+        if (gravitationalField == null)
+        {
+            GetComponentInChildren<CircleCollider2D>();
+        }
+
+        if(gravitationalField != null)
+        {
+            gravitationalField.radius = GetGravFieldRadius;
+        }
+
+        if (signal == null)
+        {
+            signal = GetComponent<SignalEmitter>();
         }
     }
 
@@ -150,5 +152,15 @@ public class Planet : MonoBehaviour
         {
             playerInGravitationalField = false;
         }
+    }
+
+    public override void Release()
+    {
+        PoolsManager.Instance.ReleaseObjectToPool(this);
+    }
+
+    public override void ResetState() 
+    {
+        
     }
 }

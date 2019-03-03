@@ -106,7 +106,7 @@ public class Radar : ShipComponent
     {
         if (foundPlanetWithSignal != null)
         {
-            float maxRange = (range + foundPlanetWithSignal.GetPlanetRadius) * (range + foundPlanetWithSignal.GetPlanetRadius);
+            float maxRange = (range + foundPlanetWithSignal.GetRadius) * (range + foundPlanetWithSignal.GetRadius);
             if (CalculateSqrDistanceToPlanet(foundPlanetWithSignal) > maxRange)
             {
                 foundPlanetWithSignal = null;

@@ -8,6 +8,8 @@ public class SpawnerEditor : Editor
 	{
 		DrawDefaultInspector();
 
+		EditorGUILayout.Separator();
+		
 		Spawner spawner = target as Spawner;
 
 		if (GUILayout.Button("Spawn Object"))

@@ -269,15 +269,6 @@ MonoBehaviour:
   layersToCheck:
     serializedVersion: 2
     m_Bits: 1280
-  fuelPlanetPrefab: {fileID: 114100064732119054, guid: b7c6f5c3edbcb634ea9978843f83d7c9,
-    type: 2}
-  planetsPrefabs:
-  - {fileID: 114995080456709442, guid: 449614fad2a9be34e93e5c46d2b34cb6, type: 2}
-  - {fileID: 114469543221975496, guid: 9b5a59a19f939994185719004880754f, type: 2}
-  - {fileID: 114313213526104294, guid: cbcda9668f9b5d74cb9c87dad2248f78, type: 2}
-  - {fileID: 114547883223953548, guid: 4d9f2961fde0e1546a172a9cd00502a0, type: 2}
-  - {fileID: 114379990198208300, guid: bf51cefa2ef16c84a9f266bf5972e37a, type: 2}
-  - {fileID: 114178262049866828, guid: a5cb07dc70d490e45a48e9114ded4dc1, type: 2}
   asteroidWall: {fileID: 114510045144601786, guid: e4accfa9f7ce34349a0cfef0e14ac8c0,
     type: 2}
   spawnedZoneMark: {fileID: 1457295385073232, guid: 205013e7e703cd449ba9f9e6584312f0,
@@ -809,10 +800,6 @@ Prefab:
     - target: {fileID: 4954858234090856, guid: 8e7039ac06330324abb74dbfacce53f4, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194737749740578, guid: 8e7039ac06330324abb74dbfacce53f4, type: 2}
-      propertyPath: m_Name
-      value: _Pools
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8e7039ac06330324abb74dbfacce53f4, type: 2}

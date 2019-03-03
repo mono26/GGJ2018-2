@@ -25,40 +25,13 @@ public class BlackholeEvent : GameEvent
 public class Blackhole : Planet
 {
     [Header("Black Hole settings")]
-    [SerializeField] private float lifeTime;
     protected float minimumDistanceToCenter;
-    [SerializeField] private float lifeTimeCounter;
-
-    [Header("Balck Hole components")]
-    [SerializeField] private SpawnableObject spawnableComponent;
-
-    public SpawnableObject GetSpawnableComponent { get { return spawnableComponent; } }
 
     protected override void Start() 
     {
         base.Start();
 
         gravitySource = GravitySourceType.Blackhole;
-    }
-    
-    protected void OnEnable ()
-    {
-        lifeTimeCounter = lifeTime;
-        return;
-	}
-
-    protected override void FixedUpdate ()
-    {
-        base.FixedUpdate();
-
-        if (lifeTimeCounter > 0)
-        {
-            lifeTimeCounter -= Time.deltaTime;
-        }
-        else
-        {
-            BlackholePool.Instance.ReleaseBlackhole(this);
-        }
     }
 
     protected void CheckObjectsDistanceToCenter()

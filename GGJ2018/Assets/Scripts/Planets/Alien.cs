@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravity
+public class Alien : SpawnableObject, IAffectedByGravity
 {
     [Header("Alien settings")]
     [SerializeField] float lifeTime = 3.0f;
@@ -13,18 +13,22 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravit
     [SerializeField] LayerMask planetsLayer;
 
     [Header("Alien components")]
-    [SerializeField] protected Health healthComponent;
+    [SerializeField] AutoDestroyComponent destroyComponent;
     [SerializeField] Rigidbody2D bodyComponent;
 
     Coroutine deathRoutine;
 
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
-    private void Awake() 
+    public AutoDestroyComponent GetAutoDestroyComponent { get { return destroyComponent; } }
+
+    public override void Awake()
     {
-        if(healthComponent == null)
+        base.Awake();
+
+        if(destroyComponent == null)
         {
-            healthComponent = GetComponent<Health>();
+            destroyComponent = GetComponent<AutoDestroyComponent>();
         }
         if(bodyComponent == null)
         {
@@ -39,18 +43,6 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravit
         Gizmos.DrawRay(transform.position, -transform.up * groundCheckDistance);
     }
 
-    protected void OnEnable()
-    {
-        EventManager.AddListener<HealthEvent>(this);
-        return;
-    }
-
-    protected void OnDisable()
-    {
-        EventManager.RemoveListener<HealthEvent>(this);
-        return;
-    }
-
     private void OnTriggerEnter2D(Collider2D _collider)
     {
         if (!_collider.CompareTag("GravitationField")) 
@@ -59,30 +51,45 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravit
         }
 
         var parentPlanet = _collider.transform.parent;
-        if (parentPlanet.CompareTag("Planet"))
+        if (!parentPlanet.CompareTag("Planet"))
         {
-            if(deathRoutine == null)
-            {
-                return;
-            }
-            
-            StopCoroutine(deathRoutine);
+            return;
         }
+
+        if(deathRoutine == null)
+        {
+                return;
+        }
+            
+        StopCoroutine(deathRoutine);
     }
 
-    private void OnTriggerExit2D(Collider2D _collision)
+    private void OnTriggerExit2D(Collider2D _collider)
     {
-        if (_collision.gameObject.CompareTag("GravitationField")) 
+        if (!_collider.gameObject.CompareTag("GravitationField")) 
         {
-            deathRoutine = StartCoroutine(KillAlienAfterLifeTime());
+            return;
         }
+
+        var parentPlanet = _collider.transform.parent;
+        if (!parentPlanet.CompareTag("Planet"))
+        {
+            return;
+        }
+
+        if (this.isActiveAndEnabled == false)
+        {
+            return;
+        }
+
+        deathRoutine = StartCoroutine(KillAlienAfterLifeTime());
     }
 
     private IEnumerator KillAlienAfterLifeTime()
     {
         yield return new WaitForSeconds(lifeTime);
 
-        healthComponent.TakeDamage(999);
+        destroyComponent.AutoDestroy();
         
         yield break;
     }
@@ -91,19 +98,14 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravit
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            Release();
             LevelManager.Instance.IncreaseScore();
         }
-        return;
-    }
 
-    private bool AreWeDead(HealthEvent _healthEvent)
-    {
-        bool weAreDead = false;
-        if(_healthEvent.GetGameObjectWithHealth == gameObject && _healthEvent.GetEventType == HealthEventType.HealthDepleted){
-            weAreDead = true;
+        if (collision.gameObject.CompareTag("Asteroid"))
+        {
+            destroyComponent.AutoDestroy();
         }
-        return weAreDead;
     }
 
     public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
@@ -144,12 +146,8 @@ public class Alien : MonoBehaviour, EventHandler<HealthEvent>, IAffectedByGravit
         transform.up = _gravitationCenterDirection;
     }
 
-    public void OnGameEvent(HealthEvent _healthEvent)
+    public override void Release()
     {
-        if(AreWeDead(_healthEvent)) 
-        {
-            Destroy(gameObject);
-        }
-        return;
+        PoolsManager.Instance.ReleaseObjectToPool(this);
     }
 }

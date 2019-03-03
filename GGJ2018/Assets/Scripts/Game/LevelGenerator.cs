@@ -24,8 +24,6 @@ public class LevelGenerator : MonoBehaviour
 	[SerializeField] LayerMask layersToCheck;
 
 	[Header("Prefabs")]
-	[SerializeField] Planet fuelPlanetPrefab;
-	[SerializeField] Planet[] planetsPrefabs;
 	[SerializeField] SpawnableObject asteroidWall;
 	[SerializeField] GameObject spawnedZoneMark;
 
@@ -39,13 +37,13 @@ public class LevelGenerator : MonoBehaviour
 
 	bool isInitialGeneration = true;
 	int numberOfSpawns = 0;
+	int spawnedPlanets = 0;
 	Vector2 _lastFuelPlanetPosition;
 	List<GameObject> spawnedZones;
 
 	int GetRandomDistanceInterval { get { return Random.Range(minDistanceIntervalToSpawn, maxDistanceIntervalToSpawn + 1); } }
 	int GetRandomAngleInterval { get { return Random.Range(minAngleIntervalToSpawn, maxAngleIntervalToSpawn + 1); } }
 	int GetRandomeStartAngle { get { return Random.Range(0, 365); } }
-	int GetRandomPlanetToSpawn { get { return Random.Range(0, planetsPrefabs.Length); } }
 	int GetRandomScale { get { return Random.Range(1, 6); } }
 
 	Vector3 GetRandomRotation
@@ -74,10 +72,14 @@ public class LevelGenerator : MonoBehaviour
 			marksContainer = new GameObject("SpawnedMarks").transform;
 		}
 
+		spawnedZones = new List<GameObject>();
 
+	}
+
+	void Start() 
+	{
 		if (isInitialGeneration)
 		{
-			spawnedZones = new List<GameObject>();
 			GenerateLevel();
 			isInitialGeneration = false;
 		}
@@ -123,7 +125,7 @@ public class LevelGenerator : MonoBehaviour
 		// Spawn one FuelPlanet per perimeter.
 		Vector2 fuelPlanetPosition = CalculateSpawnPointRelativeToGenerator(_distance, spawnAngle);
 		fuelPlanetPosition = AdjustFuelPlanetPosition(fuelPlanetPosition, _lastFuelPlanetPosition);
-		SpawnPlanet(fuelPlanetPrefab, fuelPlanetPosition);
+		SpawnPlanet<FuelPlanet>(fuelPlanetPosition);
 		_lastFuelPlanetPosition = fuelPlanetPosition;
 
 		while (angleCount < 365)
@@ -137,7 +139,16 @@ public class LevelGenerator : MonoBehaviour
 			}
 
 			Vector2 spawnPositionRelativeToGenerator = CalculateSpawnPointRelativeToGenerator(_distance, spawnAngle);
-			SpawnPlanet(planetsPrefabs[GetRandomPlanetToSpawn], spawnPositionRelativeToGenerator);
+			if (spawnedPlanets % 2 == 0)
+			{
+				SpawnPlanet<AlienPlanet>(spawnPositionRelativeToGenerator);
+			}
+			else
+			{
+				SpawnPlanet<Planet>(spawnPositionRelativeToGenerator);
+			}
+
+			spawnedPlanets++;
 		}
 	}
 
@@ -181,24 +192,33 @@ public class LevelGenerator : MonoBehaviour
 		return newFuelPlanetPosition;
 	}
 
-	void SpawnPlanet(Planet _planetToSpawn, Vector2 _positionRelativeToGenerator)
+	void SpawnPlanet<T>(Vector2 _positionRelativeToGenerator) where T : Planet
 	{
-		if (!isInitialGeneration && CheckIfSameFromPerimeterOfLastSpawn(_positionRelativeToGenerator, _planetToSpawn.GetPlanetRadius))
+		T planetToSpawn = PoolsManager.Instance.GetObjectFromPool<T>();
+		if (!isInitialGeneration && CheckIfSameFromPerimeterOfLastSpawn(_positionRelativeToGenerator, planetToSpawn.GetRadius))
 		{
+			PoolsManager.Instance.ReleaseObjectToPool(planetToSpawn);
 			return;
 		}
 
-		if(!CheckIfPositionIsFree(_positionRelativeToGenerator, _planetToSpawn.GetGravFieldRadius))
+		if(!CheckIfPositionIsFree(_positionRelativeToGenerator, planetToSpawn.GetGravFieldRadius))
 		{
+			PoolsManager.Instance.ReleaseObjectToPool(planetToSpawn);
 			return;
+		}
+
+		AlienPlanet alienPlanet = planetToSpawn as AlienPlanet;
+		if (alienPlanet != null)
+		{
+			alienPlanet.SpawnAliens();
 		}
 
 		Vector3 worldPositionToSpawn = transform.position;
 		worldPositionToSpawn.x += _positionRelativeToGenerator.x;
 		worldPositionToSpawn.y += _positionRelativeToGenerator.y;
-		Planet newPlanet = Instantiate(_planetToSpawn, worldPositionToSpawn, Quaternion.identity);
-		newPlanet.Awake();
-		newPlanet.transform.SetParent(planetsContainer);
+		planetToSpawn.Awake();
+		planetToSpawn.transform.SetParent(planetsContainer);
+		planetToSpawn.transform.position = worldPositionToSpawn;
 	}
 
 	bool CheckIfPositionIsFree(Vector2 _positionRelativeToGenerator, float _radius)
@@ -242,13 +262,13 @@ public class LevelGenerator : MonoBehaviour
 
 			int randomScale = GetRandomScale;
 			angleCount++;
-			SpawnAsteroid(asteroidWall, CalculateSpawnPointRelativeToGenerator(_distance, angleCount), randomScale);
+			SpawnAsteroid(CalculateSpawnPointRelativeToGenerator(_distance, angleCount), randomScale);
 		}
 	}
 
-	void SpawnAsteroid(SpawnableObject _asteroidWall, Vector2 _position, int _scale)
+	void SpawnAsteroid(Vector2 _position, int _scale)
 	{
-		SpawnableObject asteroid = Instantiate(_asteroidWall, _position, Quaternion.Euler(GetRandomRotation));
+		Asteroid asteroid = PoolsManager.Instance.GetObjectFromPool<Asteroid>();
 		float zScale = asteroid.transform.localScale.z;
 		asteroid.transform.localScale =  new Vector3(_scale, _scale, zScale);
 		asteroid.transform.SetParent(asteroidWallContainer);

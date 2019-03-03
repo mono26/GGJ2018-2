@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 50613407309119470}
   - component: {fileID: 114469543221975496}
   - component: {fileID: 114562478748535502}
+  - component: {fileID: 114975521575017856}
+  - component: {fileID: 114738217547738004}
   m_Layer: 8
   m_Name: Alien Planet 2
   m_TagString: Planet
@@ -165,19 +167,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aba901a77848e49959d5b9af1c691e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5.2
+  collisionBody: {fileID: 58331147674821732}
+  visualRenderer: {fileID: 212251884888083670}
   gravitationalFieldDirection: -1
   rotationSpeed: 10
   rotationForce: 100
   gravityForce: 100
   gravitySource: 0
   playerInGravitationalField: 0
-  planetRadius: 5.2
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 114562478748535502}
   gravitationalField: {fileID: 58411296840660902}
-  alien: {fileID: 114053472491642104, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
-  numberOfAliens: 30
+  numberOfAliens: 15
   aliens: []
+  aliensContainer: {fileID: 4870655559519130}
 --- !u!114 &114562478748535502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,6 +195,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 1
   type: 0
+--- !u!114 &114738217547738004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050387121000458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53383f255089264fb3eee27865fcd19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfFragmentsToSpawn: 7
+  explosionForce: 1000
+  timeToSpawnGiantBlackHole: 3
+--- !u!114 &114975521575017856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050387121000458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0938ec99c51ee4899abf70c1eeed05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 60
+  spawnable: {fileID: 114469543221975496}
+  autoDestroyEffect: {fileID: 114738217547738004}
+  delayForRelease: 10
 --- !u!212 &212251884888083670
 SpriteRenderer:
   m_ObjectHideFlags: 1

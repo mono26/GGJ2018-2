@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHoleSpawner : Spawner
+public class BlackholeSpawner : Spawner
 {
     [Header("Black Hole Spawner settings")]
     [SerializeField] private float minDistanceFromPlayer = 6;
@@ -23,7 +23,7 @@ public class BlackHoleSpawner : Spawner
     public override void Spawn()
     {
         Blackhole spawnedBlackhole = GetBlackholeToSpawn();
-        float radius = spawnedBlackhole.GetSpawnableComponent.GetRadius;
+        float radius = spawnedBlackhole.GetRadius;
         for(int i = 0; i < maxTriesToSpawn; i++)
         {
             Vector3 spawnPosition = CalculateRandomPosition();
@@ -51,7 +51,7 @@ public class BlackHoleSpawner : Spawner
 
     private Blackhole GetBlackholeToSpawn()
     {
-        Blackhole blackhole = BlackholePool.Instance.GetBlackhole();
+        Blackhole blackhole = PoolsManager.Instance.GetObjectFromPool<Blackhole>();
         blackhole.transform.position = new Vector2(999,999);
         return blackhole;
     }
@@ -64,7 +64,7 @@ public class BlackHoleSpawner : Spawner
 
     private void ReturnUnabledToSpawnBlackhole(Blackhole _blackHoleToReturn)
     {
-        BlackholePool.Instance.ReleaseBlackhole(_blackHoleToReturn);
+        PoolsManager.Instance.ReleaseObjectToPool<Blackhole>(_blackHoleToReturn);
         return;
     }
 }

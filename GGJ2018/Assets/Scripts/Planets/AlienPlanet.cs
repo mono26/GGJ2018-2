@@ -4,31 +4,23 @@ using UnityEngine;
 public class AlienPlanet : Planet
 {
     [Header("Alien Planet settings")]
-    [SerializeField] Alien alien;
     [SerializeField] int numberOfAliens;
 
     [SerializeField] List<Alien> aliens;
+    [SerializeField] Transform aliensContainer;
 
-    public override void Awake()
+    void OnEnable() 
     {
-        base.Awake();
-
-        aliens = new List<Alien>();
-        SpawnAliensInPlanet();
-        LocateAliens();
-        ChangeAliensDirectionTowardsPlanet();
+        signal.TurnSignal(SignalEmitter.SignalState.ON);
     }
 
     void SpawnAliensInPlanet()
     {
-        if(alien != null)
+        for (int i = 0; i < numberOfAliens; i++)
         {
-            for (int i = 0; i < numberOfAliens; i++)
-            {
-                Alien alien = Instantiate(this.alien, transform.position, transform.rotation, transform.Find("Aliens"));
-                alien.transform.SetParent(transform);
-                aliens.Add(alien);
-            }
+            Alien alien = PoolsManager.Instance.GetObjectFromPool<Alien>();
+            alien.transform.SetParent(aliensContainer);
+            aliens.Add(alien);
         }
     }
 
@@ -37,8 +29,8 @@ public class AlienPlanet : Planet
         foreach (Alien alien in aliens)
         {
             int angle = Random.Range(0, 365);
-            float x = Mathf.Cos(angle) * (planetRadius + 0.3f);
-            float y = Mathf.Sin(angle) * (planetRadius + 0.3f);
+            float x = Mathf.Cos(angle) * (GetRadius + 0.3f);
+            float y = Mathf.Sin(angle) * (GetRadius + 0.3f);
             alien.transform.position = transform.position + new Vector3(x, y);
         }
     }
@@ -49,11 +41,6 @@ public class AlienPlanet : Planet
         {
             alien.transform.up = (alien.transform.position - transform.position).normalized;
         }
-    }
-
-    protected void OnEnable()
-    {
-        signal.TurnSignal(SignalEmitter.SignalState.ON);
     }
 
     void StopAliensMovement()
@@ -101,5 +88,29 @@ public class AlienPlanet : Planet
         {
             StopAliensMovement();
         }
+    }
+
+    public override void Release()
+    {
+        foreach (Alien alien in aliens)
+        {
+            if (alien == null)
+            {
+                continue;
+            }
+
+            alien.transform.SetParent(null);
+        }
+
+        aliens.Clear();
+        PoolsManager.Instance.ReleaseObjectToPool(this);
+    }
+
+    public void SpawnAliens()
+    {
+        aliens = new List<Alien>();
+        SpawnAliensInPlanet();
+        LocateAliens();
+        ChangeAliensDirectionTowardsPlanet();
     }
 }

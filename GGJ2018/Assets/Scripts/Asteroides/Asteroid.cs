@@ -4,28 +4,28 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Asteroid : MonoBehaviour, EventHandler<BlackholeEvent>, IAffectedByGravity
+public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffectedByGravity
 {
-    [Header("Asteroid settings")]
-    [SerializeField] protected float lifeTime = 10;
-
     [Header("Asteroid components")]
-    [SerializeField] protected GameObject deadParticle;
     [SerializeField] protected Rigidbody2D bodyComponent;
-    [SerializeField] private SpawnableObject spawnableComponent;
+    [SerializeField] AutoDestroyComponent destructionComponent;
 
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
-    public SpawnableObject GetSpawnableComponent { get { return spawnableComponent; } }
 
     // Use this for initialization
-    protected void Start ()
+    public override void Awake ()
     {
+        base.Awake();
+
         if(bodyComponent == null)
         {
             bodyComponent = GetComponent<Rigidbody2D>();
         }
 
-        StartCoroutine(DeadTimer());
+        if (destructionComponent == null)
+        {
+            destructionComponent = GetComponent<AutoDestroyComponent>();
+        }
 	}
 
     protected void OnEnable()
@@ -40,32 +40,16 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackholeEvent>, IAffectedBy
         return;
     }
 
-    protected IEnumerator DeadTimer()
-    {
-        yield return new WaitForSeconds(lifeTime);
-        AsteroidPool.Instance.ReleaseAsteroide(this);
-        yield break;
-    }
-
-    public void ReleaseAsteroid()
-    {
-        // TODO pass direction of movement from the asteroid to the rotation of the particle
-        var particle = Instantiate(deadParticle, transform.position, transform.rotation);
-        particle.transform.rotation = Quaternion.FromToRotation(particle.transform.up, bodyComponent.velocity);
-        AsteroidPool.Instance.ReleaseAsteroide(this);
-        return;
-    }
-
     protected void OnCollisionEnter2D(Collision2D collision)
     {
-        ReleaseAsteroid();
+        destructionComponent.AutoDestroy();
     }
 
     protected void OnTriggerEnter2D(Collider2D _other)
     {
         if (_other.CompareTag("Shield"))
         {
-            ReleaseAsteroid();
+            destructionComponent.AutoDestroy();
         }
     }
 
@@ -102,7 +86,12 @@ public class Asteroid : MonoBehaviour, EventHandler<BlackholeEvent>, IAffectedBy
     {
         if (WeReachedABlackholeCenter(_blackHoleEvent)) 
         {
-            ReleaseAsteroid();
+            destructionComponent.AutoDestroy();
         }
+    }
+
+    public override void Release()
+    {
+        PoolsManager.Instance.ReleaseObjectToPool<Asteroid>(this);
     }
 }

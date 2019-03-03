@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 212130416342089136}
   - component: {fileID: 58675462932209468}
   - component: {fileID: 50628130364634472}
-  - component: {fileID: 114100064732119054}
+  - component: {fileID: 114412541303669888}
   - component: {fileID: 114494846662596814}
   m_Layer: 8
   m_Name: Fuel Planet
@@ -187,7 +187,7 @@ PolygonCollider2D:
       - {x: 0.8444443, y: -1.4955776}
       - {x: 1.5788841, y: -0.89303803}
       - {x: 1.9830933, y: 0.2871616}
---- !u!114 &114100064732119054
+--- !u!114 &114412541303669888
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -195,19 +195,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1491111122904462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04ad66d8d9811e34286191edaa6eeff3, type: 3}
+  m_Script: {fileID: 11500000, guid: c997db2d6270f3e4f84e0c569bac725b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 2.1
+  collisionBody: {fileID: 60975574784675180}
+  visualRenderer: {fileID: 212130416342089136}
   gravitationalFieldDirection: 1
   rotationSpeed: 10
   rotationForce: 100
   gravityForce: 100
   gravitySource: 0
   playerInGravitationalField: 0
-  planetRadius: 2.1
   minGravFieldDistFromPlanet: 10
-  signal: {fileID: 0}
+  signal: {fileID: 114494846662596814}
   gravitationalField: {fileID: 58951071852926638}
+  rechargeValue: 100
+  rechargeCooldown: 0
+  cooldownTimer: 0
 --- !u!114 &114494846662596814
 MonoBehaviour:
   m_ObjectHideFlags: 1

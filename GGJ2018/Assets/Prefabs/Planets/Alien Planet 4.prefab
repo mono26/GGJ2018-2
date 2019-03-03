@@ -56,6 +56,8 @@ GameObject:
   - component: {fileID: 50759807507421058}
   - component: {fileID: 114547883223953548}
   - component: {fileID: 114337747323321020}
+  - component: {fileID: 114163823014391876}
+  - component: {fileID: 114424876709227678}
   m_Layer: 8
   m_Name: Alien Planet 4
   m_TagString: Planet
@@ -154,6 +156,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 14.5
+--- !u!114 &114163823014391876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1810407283923976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0938ec99c51ee4899abf70c1eeed05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 30
+  spawnable: {fileID: 114547883223953548}
+  autoDestroyEffect: {fileID: 114424876709227678}
+  delayForRelease: 10
 --- !u!114 &114337747323321020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,6 +184,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 1
   type: 0
+--- !u!114 &114424876709227678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1810407283923976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53383f255089264fb3eee27865fcd19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfFragmentsToSpawn: 7
+  explosionForce: 1000
+  timeToSpawnGiantBlackHole: 3
 --- !u!114 &114547883223953548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,19 +209,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aba901a77848e49959d5b9af1c691e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 4.5
+  collisionBody: {fileID: 58309378113034454}
+  visualRenderer: {fileID: 212690610004491504}
   gravitationalFieldDirection: 1
   rotationSpeed: 10
   rotationForce: 100
   gravityForce: 100
   gravitySource: 0
   playerInGravitationalField: 0
-  planetRadius: 4.5
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 114337747323321020}
   gravitationalField: {fileID: 58408090004370560}
-  alien: {fileID: 114053472491642104, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
-  numberOfAliens: 30
+  numberOfAliens: 6
   aliens: []
+  aliensContainer: {fileID: 4132273262464894}
 --- !u!212 &212690610004491504
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.8
+  collisionBody: {fileID: 58224094565840894}
+  visualRenderer: {fileID: 212002400596311176}
 --- !u!212 &212002400596311176
 SpriteRenderer:
   m_ObjectHideFlags: 1

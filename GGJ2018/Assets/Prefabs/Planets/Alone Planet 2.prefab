@@ -40,6 +40,8 @@ GameObject:
   - component: {fileID: 50935241412403000}
   - component: {fileID: 58841051525047866}
   - component: {fileID: 114178262049866828}
+  - component: {fileID: 114316142783744504}
+  - component: {fileID: 114297486379143456}
   m_Layer: 8
   m_Name: Alone Planet 2
   m_TagString: Planet
@@ -135,16 +137,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ad66d8d9811e34286191edaa6eeff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 4.5
+  collisionBody: {fileID: 58841051525047866}
+  visualRenderer: {fileID: 212338284238477042}
   gravitationalFieldDirection: -1
   rotationSpeed: 10
   rotationForce: 100
   gravityForce: 100
   gravitySource: 0
   playerInGravitationalField: 0
-  planetRadius: 4.5
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 0}
   gravitationalField: {fileID: 58315486521717562}
+--- !u!114 &114297486379143456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1839787355313182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53383f255089264fb3eee27865fcd19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfFragmentsToSpawn: 7
+  explosionForce: 1000
+  timeToSpawnGiantBlackHole: 3
+--- !u!114 &114316142783744504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1839787355313182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0938ec99c51ee4899abf70c1eeed05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 45
+  spawnable: {fileID: 114178262049866828}
+  autoDestroyEffect: {fileID: 114297486379143456}
+  delayForRelease: 10
 --- !u!212 &212100620997393202
 SpriteRenderer:
   m_ObjectHideFlags: 1

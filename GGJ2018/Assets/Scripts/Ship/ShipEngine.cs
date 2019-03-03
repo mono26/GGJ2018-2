@@ -63,16 +63,16 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
 
     private void OnCollisionEnter2D(Collision2D _collision)
     {
-        if (_collision.gameObject.CompareTag("Planet"))
+        if (_collision.gameObject.CompareTag("FuelPlanet"))
         {
-            Planet planetComponent = _collision.gameObject.GetComponent<Planet>();
+            FuelPlanet planetComponent = _collision.gameObject.GetComponent<FuelPlanet>();
             if(planetComponent == null)
             {
-                planetComponent = _collision.gameObject.GetComponentInParent<Planet>();
+                planetComponent = _collision.gameObject.GetComponentInParent<FuelPlanet>();
             }
-            if(planetComponent != null && planetComponent.Signal != null && planetComponent.Signal.Type == SignalEmitter.SignalType.FuelPlanet)
+            if(planetComponent != null)
             {
-                RechargeFuel(maxFuel);
+                planetComponent.RechargeShip(this);
             }
         }
         if (_collision.gameObject.CompareTag("Alien"))
@@ -82,7 +82,7 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         }
     }
 
-    void RechargeFuel(float _fuelToAdd)
+    public void RechargeFuel(float _fuelToAdd)
     {
         currentFuel += _fuelToAdd;
         currentFuel = Mathf.Clamp(currentFuel, 0, maxFuel);

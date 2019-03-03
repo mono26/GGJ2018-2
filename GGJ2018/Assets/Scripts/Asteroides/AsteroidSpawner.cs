@@ -26,7 +26,8 @@ public class AsteroidSpawner : Spawner
 	protected override void Update ()
     {
         base.Update();
-        if (spawnTimer <= 0) {
+        if (spawnTimer <= 0) 
+        {
             Spawn();
         }
         return;
@@ -35,7 +36,7 @@ public class AsteroidSpawner : Spawner
     public override void Spawn()
     {
         Asteroid spawnedAsteroid = GetAsteroidToSpawn();
-        float radius = spawnedAsteroid.GetSpawnableComponent.GetRadius;
+        float radius = spawnedAsteroid.GetRadius;
         for(int i = 0; i < maxTriesToSpawn; i++)
         {
             Vector3 spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
@@ -54,7 +55,7 @@ public class AsteroidSpawner : Spawner
 
     private Asteroid GetAsteroidToSpawn()
     {
-        Asteroid asteroid = AsteroidPool.Instance.GetAsteroide();
+        Asteroid asteroid = PoolsManager.Instance.GetObjectFromPool<Asteroid>();
         asteroid.transform.position = new Vector2(999,999);
         return asteroid;
     }
@@ -65,12 +66,10 @@ public class AsteroidSpawner : Spawner
         Vector2 unitDirection = (player.transform.position - _spawnPosition).normalized;
         _asteroidToLaunch.transform.position = _spawnPosition;
         _asteroidToLaunch.GetBodyComponent.AddForce(unitDirection * force, ForceMode2D.Force);
-        return;
     }
 
     private void ReturnUnabledToSpawnAsteroid(Asteroid _asteroidToReturn)
     {
-        AsteroidPool.Instance.ReleaseAsteroide(_asteroidToReturn);
-        return;
+        PoolsManager.Instance.ReleaseObjectToPool<Asteroid>(_asteroidToReturn);
     }
 }

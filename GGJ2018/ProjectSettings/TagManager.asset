@@ -5,12 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Alien
-  - Asteroide
   - Blackhole
   - Planet
   - GravitationField
   - AsteroidSpawnPoint
   - Shield
+  - FuelPlanet
+  - Asteroid
   layers:
   - Default
   - TransparentFX

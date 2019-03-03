@@ -150,6 +150,8 @@ GameObject:
   - component: {fileID: 50636949114898212}
   - component: {fileID: 114313213526104294}
   - component: {fileID: 114099197422520814}
+  - component: {fileID: 114895651023748266}
+  - component: {fileID: 114578525097204406}
   m_Layer: 8
   m_Name: Alien Planet 3
   m_TagString: Planet
@@ -387,19 +389,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aba901a77848e49959d5b9af1c691e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5.2
+  collisionBody: {fileID: 58738407727335882}
+  visualRenderer: {fileID: 212945185250267468}
   gravitationalFieldDirection: -1
   rotationSpeed: 10
   rotationForce: 100
   gravityForce: 100
   gravitySource: 0
   playerInGravitationalField: 0
-  planetRadius: 5.2
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 114099197422520814}
   gravitationalField: {fileID: 58199946706670938}
-  alien: {fileID: 114053472491642104, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
-  numberOfAliens: 30
+  numberOfAliens: 9
   aliens: []
+  aliensContainer: {fileID: 4564656846210904}
+--- !u!114 &114578525097204406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1826367231837382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53383f255089264fb3eee27865fcd19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfFragmentsToSpawn: 7
+  explosionForce: 1000
+  timeToSpawnGiantBlackHole: 3
+--- !u!114 &114895651023748266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1826367231837382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0938ec99c51ee4899abf70c1eeed05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 60
+  spawnable: {fileID: 114313213526104294}
+  autoDestroyEffect: {fileID: 114578525097204406}
+  delayForRelease: 10
 --- !u!212 &212008067058640286
 SpriteRenderer:
   m_ObjectHideFlags: 1

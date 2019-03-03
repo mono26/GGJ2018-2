@@ -23,11 +23,12 @@ GameObject:
   - component: {fileID: 50098178575817834}
   - component: {fileID: 58224094565840894}
   - component: {fileID: 114255368610047976}
-  - component: {fileID: 114510045144601786}
   - component: {fileID: 114184783772500382}
+  - component: {fileID: 114359681202792326}
+  - component: {fileID: 114012983714267926}
   m_Layer: 12
   m_Name: Asteroid
-  m_TagString: Asteroide
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,6 +111,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
+--- !u!114 &114012983714267926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1369015871017888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf65fc0d4acb4741ac5a1cbad128090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEffect: {fileID: 1768081658256074, guid: ef56f4b1cb2d41042996e81c9d427426,
+    type: 2}
 --- !u!114 &114184783772500382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,12 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d565fe092097145870cc91747ef06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 10
-  deadParticle: {fileID: 1768081658256074, guid: ef56f4b1cb2d41042996e81c9d427426,
-    type: 2}
+  radius: 0.8
+  collisionBody: {fileID: 58224094565840894}
+  visualRenderer: {fileID: 212002400596311176}
   bodyComponent: {fileID: 50098178575817834}
-  spawnableComponent: {fileID: 114510045144601786}
---- !u!114 &114510045144601786
+  destructionComponent: {fileID: 114359681202792326}
+--- !u!114 &114359681202792326
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -149,10 +163,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1369015871017888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5f7abbd3dedbb44dabdee9e8ff12871, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e0938ec99c51ee4899abf70c1eeed05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.8
+  lifeTime: 10
+  spawnable: {fileID: 114255368610047976}
+  autoDestroyEffect: {fileID: 114012983714267926}
+  delayForRelease: 0
 --- !u!212 &212002400596311176
 SpriteRenderer:
   m_ObjectHideFlags: 1
