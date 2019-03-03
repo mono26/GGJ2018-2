@@ -52,21 +52,25 @@ public class LevelManager : Singleton<LevelManager>
     {
         scorePoints += 1;
 
+
         if (scoreText != null)
         {
             scoreText.text = scorePoints.ToString();
         }
 
-        if (scorePoints >= maxScorePoints)
-        {
-            EndGame();
-        }
     }
 
     public void EndGame()
     {
-        //TODO activate end game screen.
-        LoadManager.LoadScene("Credits");
+        Time.timeScale = 0;
+
+        if (scorePoints > PlayerPrefs.GetInt("GlobalScore", 0))
+        {
+            PlayerPrefs.SetInt("GlobalScore", scorePoints);
+        }
+
+        LevelUIManager.Instance.ActivateGameOverUI(true);
+
         return;
     }
 
@@ -80,6 +84,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void RetryLevel()
     {
+        Time.timeScale = 1;
         //EventManager.TriggerEvent(new GameEvent(GameEventTypes.UnPause));
         LoadManager.LoadScene(SceneManager.GetActiveScene().name);
         return;

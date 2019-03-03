@@ -50,7 +50,7 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         base.EveryFrame();
         fuelDisplay.UpdateBar(currentFuel, maxFuel);
         if (currentFuel <= 0) {
-            LevelUIManager.Instance.ActivateGameOverUI(true);
+            LevelManager.Instance.EndGame();
         }
         return;
     }

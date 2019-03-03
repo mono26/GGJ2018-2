@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelUIManager : Singleton<LevelUIManager>
 {
@@ -53,7 +54,18 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     public void ActivatePauseUI(bool _active) { pauseUI.SetActive(_active); }
 
-    public void ActivateGameOverUI(bool _active) { gameOverUI.SetActive(_active); }
+    //Text to store the global score from playerprefs
+    private Text globalScoreText;
+    private int globalScore;
+
+    public void ActivateGameOverUI(bool _active)
+    {
+        globalScore = PlayerPrefs.GetInt("GlobalScore");
+        gameOverUI.SetActive(_active);
+        globalScoreText = gameOverUI.GetComponentInChildren<Text>();
+        globalScoreText.text = globalScore.ToString();
+        
+    }
 
     public void ActivateWinUI(bool _active) { winUI.SetActive(_active); }
 
