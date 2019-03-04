@@ -78,7 +78,7 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         if (_collision.gameObject.CompareTag("Alien"))
         {
             // TODO eliminate magic number
-            RechargeFuel(5);
+            // RechargeFuel(5);
         }
     }
 

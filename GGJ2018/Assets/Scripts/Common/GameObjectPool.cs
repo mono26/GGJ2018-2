@@ -16,13 +16,13 @@ public class GameObjectPool
     [SerializeField] PoolSettings settings;
 	[SerializeField] public List<SpawnableObject> pool;
 
-	[SerializeField] Transform poolContainer = null;
+	[SerializeField] private Transform poolContainer = null;
 
 	public GameObjectPool(PoolSettings _settings)
 	{
 		settings = _settings;
 
-		if (poolContainer == null)
+	    if (poolContainer == null)
 		{
 			poolContainer = new GameObject(_settings.prefabs[0].name + "_Container").transform;
 		}

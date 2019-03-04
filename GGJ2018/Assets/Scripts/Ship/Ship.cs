@@ -188,6 +188,15 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Alien"))
+        {
+
+            LevelManager.Instance.IncreaseScore();
+        }
+    }
+
     public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
     {
         if(_gravitySource.Equals(GravitySourceType.Planet))

@@ -11,13 +11,15 @@ public class LevelUIManager : Singleton<LevelUIManager>
     [SerializeField]
     private GameObject winUI;
     [SerializeField]
-    private GameObject radarButton, rayButton;
+    private GameObject radarButton, rayButton, shieldButton;
     [SerializeField]
-    private GameObject movementJoystick, radarFrequencyJoystick;
+    private GameObject movementJoystick;
 
     protected override void Awake()
     {
         base.Awake();
+
+        ActivatePlayerControls(true);
 
         Transform inputContainer = transform.Find("Virtual_Input");
         if (radarButton == null) {
@@ -26,11 +28,11 @@ public class LevelUIManager : Singleton<LevelUIManager>
         if (rayButton == null) {
             rayButton = inputContainer.Find("Ray_Button").gameObject;
         }
-        if (movementJoystick == null) {
-            movementJoystick = inputContainer.Find("Movement_Joystick").gameObject;
+        if (shieldButton == null) {
+            shieldButton = inputContainer.Find("Shield_Button").gameObject;
         }
         if (movementJoystick == null) {
-            movementJoystick = inputContainer.Find("Frequency_Joystick").gameObject;
+            movementJoystick = inputContainer.Find("Movement_Joystick").gameObject;
         }
         if (pauseUI == null) {
             pauseUI = inputContainer.Find("PauseUI").gameObject;
@@ -52,7 +54,11 @@ public class LevelUIManager : Singleton<LevelUIManager>
         return;
     }
 
-    public void ActivatePauseUI(bool _active) { pauseUI.SetActive(_active); }
+    public void ActivatePauseUI(bool _active)
+    {
+        ActivatePlayerControls(!_active);
+        pauseUI.SetActive(_active);
+    }
 
     //Text to store the global score from playerprefs
     private Text globalScoreText;
@@ -60,11 +66,11 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     public void ActivateGameOverUI(bool _active)
     {
+        ActivatePlayerControls(!_active);
         globalScore = PlayerPrefs.GetInt("GlobalScore");
         gameOverUI.SetActive(_active);
         globalScoreText = gameOverUI.GetComponentInChildren<Text>();
-        globalScoreText.text = globalScore.ToString();
-        
+        globalScoreText.text = globalScore.ToString();   
     }
 
     public void ActivateWinUI(bool _active) { winUI.SetActive(_active); }
@@ -74,6 +80,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         movementJoystick.SetActive(_active);
         radarButton.SetActive(_active);
         rayButton.SetActive(_active);
+        shieldButton.SetActive(_active);
     }
 
     // Encontrar mejor manera de hacer esto. Si por event system o alguna otra manera.
