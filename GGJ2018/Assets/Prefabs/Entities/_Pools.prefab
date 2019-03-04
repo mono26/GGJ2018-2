@@ -68,7 +68,7 @@ MonoBehaviour:
     - {fileID: 114412541303669888, guid: b7c6f5c3edbcb634ea9978843f83d7c9, type: 2}
     size: 5
   - prefabs:
-    - {fileID: 114793842810236096, guid: c4d1f1278f31f6d43ba389f6e898be00, type: 2}
+    - {fileID: 114583928705776018, guid: c4d1f1278f31f6d43ba389f6e898be00, type: 2}
     size: 5
   - prefabs:
     - {fileID: 114379990198208300, guid: bf51cefa2ef16c84a9f266bf5972e37a, type: 2}
