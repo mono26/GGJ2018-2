@@ -96,22 +96,16 @@ public class Alien : SpawnableObject, IAffectedByGravity
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Door"))
-        {
-            destroyComponent.AutoDestroy();
-        }
-
-       /* if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             Release();
-            
-        }*/
+            LevelManager.Instance.IncreaseScore();
+        }
 
         if (collision.gameObject.CompareTag("Asteroid"))
         {
             destroyComponent.AutoDestroy();
         }
-        
     }
 
     public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
