@@ -188,7 +188,7 @@ MonoBehaviour:
   rotationSpeed: 20
   rotationForce: 200
   gravityForce: 350
-  gravitySource: 0
+  gravitySource: 1
   playerInGravitationalField: 0
   minGravFieldDistFromPlanet: 2
   signal: {fileID: 0}
