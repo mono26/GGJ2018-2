@@ -40,26 +40,7 @@ public class PlanetExplosion : AutoDestroyEffect
 
 	void SpawnGiantBlackhole()
 	{
-		giantBlackSpawnProcess = StartCoroutine(SpawnGiantBlackholeWithDelay());
-	}
-
-	IEnumerator SpawnGiantBlackholeWithDelay()
-	{
-		yield return new WaitForSeconds(timeToSpawnGiantBlackHole);
-
 		GiantBlackhole giantBlackHole = PoolsManager.Instance.GetObjectFromPool<GiantBlackhole>();
 		giantBlackHole.transform.position = transform.position;
-
-		float size = 0;
-		while (size < 1)
-		{
-			giantBlackHole.transform.localScale = new Vector3 (size, size, 1);
-			size += Time.deltaTime;
-			size = Mathf.Clamp(size, 0, 1);
-
-			yield return null;
-		}
-
-		giantBlackHole.transform.localScale = new Vector3 (size, size, 1);
 	}
 }

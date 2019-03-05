@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class AutoDestroyComponent : MonoBehaviour 
 {
-	[SerializeField] int lifeTime = 10;
+	[SerializeField] int minLifeTime = 5, maxLifeTime = 15;
 	[SerializeField] SpawnableObject spawnable = null;
 	[SerializeField] AutoDestroyEffect autoDestroyEffect = null;
 	[SerializeField] int delayForRelease = 0;
 
-	Coroutine autoDestroyProcess;
 	float lifeTimeCounter;
 
 	void Awake() 
@@ -26,12 +25,13 @@ public class AutoDestroyComponent : MonoBehaviour
 	}
 
 	void OnEnable() 
-	{
+	{	
+		int lifeTime = Random.Range(minLifeTime, maxLifeTime);
 		lifeTimeCounter = lifeTime;
 	}
 
 	void Update() 
-	{
+	{	
 		lifeTimeCounter -= Time.deltaTime;
 
 		if (lifeTimeCounter <= 0)
@@ -42,11 +42,6 @@ public class AutoDestroyComponent : MonoBehaviour
 
 	public void AutoDestroy()
 	{
-		autoDestroyProcess = StartCoroutine(AutoDestroyWithDelay());
-	}
-
-	IEnumerator AutoDestroyWithDelay()
-	{
 		spawnable.EnableCollision(false);
 		spawnable.DisplayVisuals(false);
 
@@ -54,8 +49,6 @@ public class AutoDestroyComponent : MonoBehaviour
 		{
 			autoDestroyEffect.SpawnEffect();
 		}
-
-		yield return new WaitForSeconds(delayForRelease);
 
 		// Release to pool
 		spawnable.Release();
