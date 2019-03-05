@@ -806,16 +806,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114002115095682820, guid: 8e7039ac06330324abb74dbfacce53f4,
-        type: 2}
-      propertyPath: poolsSettings.Array.data[4].prefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 114974162859842386, guid: c4d1f1278f31f6d43ba389f6e898be00,
-        type: 2}
-    - target: {fileID: 1194737749740578, guid: 8e7039ac06330324abb74dbfacce53f4, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8e7039ac06330324abb74dbfacce53f4, type: 2}
   m_IsPrefabParent: 0

@@ -166,7 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0938ec99c51ee4899abf70c1eeed05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 7
+  minLifeTime: 5
+  maxLifeTime: 15
   spawnable: {fileID: 0}
   autoDestroyEffect: {fileID: 0}
   delayForRelease: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   playerInGravitationalField: 0
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 0}
-  gravitationalField: {fileID: 0}
+  gravitationalField: {fileID: 58733214615672322}
 --- !u!198 &198009345818855504
 ParticleSystem:
   m_ObjectHideFlags: 1

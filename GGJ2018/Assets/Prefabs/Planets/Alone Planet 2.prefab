@@ -174,7 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0938ec99c51ee4899abf70c1eeed05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 45
+  minLifeTime: 20
+  maxLifeTime: 30
   spawnable: {fileID: 114178262049866828}
   autoDestroyEffect: {fileID: 114297486379143456}
   delayForRelease: 10

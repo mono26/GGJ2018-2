@@ -54,26 +54,26 @@ MonoBehaviour:
   poolsSettings:
   - prefabs:
     - {fileID: 114053472491642104, guid: 6c655a53672c55e47a547ade40b1548d, type: 2}
-    size: 50
+    size: 100
   - prefabs:
     - {fileID: 114255368610047976, guid: f2647d68380f08a4eb8ce4af5d6921d1, type: 2}
-    size: 10
+    size: 20
   - prefabs:
     - {fileID: 114995080456709442, guid: 449614fad2a9be34e93e5c46d2b34cb6, type: 2}
     - {fileID: 114469543221975496, guid: 9b5a59a19f939994185719004880754f, type: 2}
     - {fileID: 114313213526104294, guid: cbcda9668f9b5d74cb9c87dad2248f78, type: 2}
     - {fileID: 114547883223953548, guid: 4d9f2961fde0e1546a172a9cd00502a0, type: 2}
-    size: 8
+    size: 16
   - prefabs:
     - {fileID: 114412541303669888, guid: b7c6f5c3edbcb634ea9978843f83d7c9, type: 2}
-    size: 5
+    size: 10
   - prefabs:
-    - {fileID: 114583928705776018, guid: c4d1f1278f31f6d43ba389f6e898be00, type: 2}
+    - {fileID: 114974162859842386, guid: c4d1f1278f31f6d43ba389f6e898be00, type: 2}
     size: 5
   - prefabs:
     - {fileID: 114379990198208300, guid: bf51cefa2ef16c84a9f266bf5972e37a, type: 2}
     - {fileID: 114178262049866828, guid: a5cb07dc70d490e45a48e9114ded4dc1, type: 2}
-    size: 8
+    size: 16
   - prefabs:
     - {fileID: 114520921145695574, guid: e2a2c6abc1e55c14dab5845223b0e1b0, type: 2}
     size: 5

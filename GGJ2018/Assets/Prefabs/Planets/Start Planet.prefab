@@ -137,13 +137,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ad66d8d9811e34286191edaa6eeff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 0
+  collisionBody: {fileID: 58600969339420060}
+  visualRenderer: {fileID: 212433247600774092}
   gravitationalFieldDirection: -1
   rotationSpeed: 4.4
   rotationForce: 9.8
   gravityForce: 9.8
   gravitySource: 0
   playerInGravitationalField: 0
-  planetRadius: 4.5
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 0}
   gravitationalField: {fileID: 0}
