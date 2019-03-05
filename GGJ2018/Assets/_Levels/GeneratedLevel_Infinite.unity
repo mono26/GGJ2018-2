@@ -232,79 +232,53 @@ Transform:
   m_PrefabParentObject: {fileID: 4341366673020408, guid: fd02f46d5dcd9a642aaf9ee69b9d7150,
     type: 2}
   m_PrefabInternal: {fileID: 348149140}
---- !u!1 &287492477
-GameObject:
+--- !u!1001 &122697112
+Prefab:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 287492479}
-  - component: {fileID: 287492478}
-  - component: {fileID: 287492480}
-  m_Layer: 17
-  m_Name: _LevelGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &287492478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 287492477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d9cb0b0dcc84a34e8687d7fb0a41c80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minDistanceToSpawn: 30
-  maxDistanceToSpawn: 100
-  minDistanceIntervalToSpawn: 15
-  maxDistanceIntervalToSpawn: 35
-  minAngleIntervalToSpawn: 15
-  maxAngleIntervalToSpawn: 30
-  layersToCheck:
-    serializedVersion: 2
-    m_Bits: 1280
-  asteroidWall: {fileID: 114510045144601786, guid: e4accfa9f7ce34349a0cfef0e14ac8c0,
-    type: 2}
-  spawnedZoneMark: {fileID: 1457295385073232, guid: 205013e7e703cd449ba9f9e6584312f0,
-    type: 2}
-  planetsContainer: {fileID: 684229114}
-  asteroidWallContainer: {fileID: 0}
-  marksContainer: {fileID: 0}
-  numberOfSpawnsToClearAZone: 4
---- !u!4 &287492479
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 287492477}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &287492480
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 287492477}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 60
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293223677156692, guid: d4ef277d5685cbc44b70a7b366e9e5f2,
+        type: 2}
+      propertyPath: planetsContainer
+      value: 
+      objectReference: {fileID: 684229114}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &331721609 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1052524117136162, guid: e9fc52c01928c814588868868247ff44,

@@ -232,68 +232,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4341366673020408, guid: fd02f46d5dcd9a642aaf9ee69b9d7150,
     type: 2}
   m_PrefabInternal: {fileID: 348149140}
---- !u!1 &287492477
-GameObject:
+--- !u!1001 &106851241
+Prefab:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 287492479}
-  - component: {fileID: 287492478}
-  m_Layer: 8
-  m_Name: _LevelGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &287492478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 287492477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d9cb0b0dcc84a34e8687d7fb0a41c80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minDistanceToSpawn: 30
-  maxDistanceToSpawn: 300
-  minDistanceIntervalToSpawn: 25
-  maxDistanceIntervalToSpawn: 50
-  minAngleIntervalToSpawn: 30
-  maxAngleIntervalToSpawn: 60
-  layersToCheck:
-    serializedVersion: 2
-    m_Bits: 1280
-  fuelPlanetPrefab: {fileID: 114100064732119054, guid: b7c6f5c3edbcb634ea9978843f83d7c9,
-    type: 2}
-  planetsPrefabs:
-  - {fileID: 114995080456709442, guid: 449614fad2a9be34e93e5c46d2b34cb6, type: 2}
-  - {fileID: 114469543221975496, guid: 9b5a59a19f939994185719004880754f, type: 2}
-  - {fileID: 114313213526104294, guid: cbcda9668f9b5d74cb9c87dad2248f78, type: 2}
-  - {fileID: 114547883223953548, guid: 4d9f2961fde0e1546a172a9cd00502a0, type: 2}
-  - {fileID: 114379990198208300, guid: bf51cefa2ef16c84a9f266bf5972e37a, type: 2}
-  - {fileID: 114178262049866828, guid: a5cb07dc70d490e45a48e9114ded4dc1, type: 2}
-  asteroidWall: {fileID: 114510045144601786, guid: e4accfa9f7ce34349a0cfef0e14ac8c0,
-    type: 2}
-  planetsContainer: {fileID: 684229114}
-  asteroidWallContainer: {fileID: 0}
---- !u!4 &287492479
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 287492477}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953103403865864, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d4ef277d5685cbc44b70a7b366e9e5f2, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &331721609 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1052524117136162, guid: e9fc52c01928c814588868868247ff44,

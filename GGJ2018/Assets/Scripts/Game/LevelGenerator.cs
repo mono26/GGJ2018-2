@@ -30,7 +30,7 @@ public class LevelGenerator : MonoBehaviour
 	[Header("Containers")]
 	[SerializeField] Transform planetsContainer = null;
 	[SerializeField] Transform asteroidWallContainer = null;
-	[SerializeField] Transform marksContainer;
+	[SerializeField] Transform marksContainer = null;
 
 	[Header("Clear parameters")]
 	[SerializeField] int numberOfSpawnsToClearAZone = 4;

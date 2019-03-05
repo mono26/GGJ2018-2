@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 50122391854520214}
   - component: {fileID: 58626897860147646}
   - component: {fileID: 212297474541861160}
-  - component: {fileID: 114793842810236096}
+  - component: {fileID: 114583928705776018}
   - component: {fileID: 114413777442062686}
   m_Layer: 13
   m_Name: Blackhole
@@ -167,10 +167,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 7
-  spawnable: {fileID: 114793842810236096}
+  spawnable: {fileID: 114583928705776018}
   autoDestroyEffect: {fileID: 0}
   delayForRelease: 0
---- !u!114 &114793842810236096
+--- !u!114 &114583928705776018
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1242909717354880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1180ba8585103f44180ff43976ba23d1, type: 3}
+  m_Script: {fileID: 11500000, guid: d5454d1ad28c8374c8a8e0ec79d29c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 3.3
@@ -187,10 +187,10 @@ MonoBehaviour:
   gravitationalFieldDirection: 1
   rotationSpeed: 10
   rotationForce: 100
-  gravityForce: 100
+  gravityForce: 150
   gravitySource: 1
   playerInGravitationalField: 0
-  minGravFieldDistFromPlanet: 10
+  minGravFieldDistFromPlanet: 1
   signal: {fileID: 0}
   gravitationalField: {fileID: 58733214615672322}
 --- !u!198 &198009345818855504

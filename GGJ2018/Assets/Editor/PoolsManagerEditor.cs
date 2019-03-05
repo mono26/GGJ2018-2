@@ -42,5 +42,7 @@ public class PoolsManagerEditor : Editor
 				}
 			}
 		}
+
+		Repaint();
 	}
 }
