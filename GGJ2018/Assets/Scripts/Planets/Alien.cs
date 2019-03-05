@@ -99,10 +99,14 @@ public class Alien : SpawnableObject, IAffectedByGravity
         if (collision.gameObject.CompareTag("Player"))
         {
             Release();
-            LevelManager.Instance.IncreaseScore();
+           // LevelManager.Instance.IncreaseScore();
         }
 
         if (collision.gameObject.CompareTag("Asteroid"))
+        {
+            destroyComponent.AutoDestroy();
+        }
+        if (collision.gameObject.CompareTag("Door"))
         {
             destroyComponent.AutoDestroy();
         }
