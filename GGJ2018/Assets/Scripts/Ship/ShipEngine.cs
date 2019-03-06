@@ -75,10 +75,15 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
                 planetComponent.RechargeShip(this);
             }
         }
-        if (_collision.gameObject.CompareTag("Alien"))
+        if (_collision.gameObject.CompareTag("Alien") && this.GetComponent<AtractorRay>().IsAlienRayOn)
         {
-            // TODO eliminate magic number
-            RechargeFuel(5);
+            LevelManager.Instance.IncreaseScore();
+            _collision.gameObject.SendMessage("Release");
+        }
+        if (_collision.gameObject.CompareTag("Alien") && !this.GetComponent<AtractorRay>().IsAlienRayOn)
+        {
+            
+            _collision.gameObject.SendMessage("TakeDamage");
         }
     }
 

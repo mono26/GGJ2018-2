@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Levels/LoadScreen.unity
     guid: d8a949da7514c2f4b85cf8c07e7790b2
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Levels/Espacio.unity
     guid: 02ee45729fa1cc048a90b801cbb7ad77
   - enabled: 1
     path: Assets/_Levels/Credits.unity
     guid: f722f149bd1c14442b09c841fd74e871
+  - enabled: 1
+    path: Assets/_Levels/GeneratedLevel_Infinite.unity
+    guid: 466722eca45795f4ebcb37304239d044

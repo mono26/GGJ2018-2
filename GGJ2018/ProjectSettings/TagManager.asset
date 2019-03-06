@@ -12,6 +12,7 @@ TagManager:
   - Shield
   - FuelPlanet
   - Asteroid
+  - Door
   layers:
   - Default
   - TransparentFX

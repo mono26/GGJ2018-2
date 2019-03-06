@@ -89,7 +89,6 @@ public class Alien : SpawnableObject, IAffectedByGravity
     {
         yield return new WaitForSeconds(lifeTime);
 
-        destroyComponent.AutoDestroy();
         
         yield break;
     }
@@ -98,18 +97,20 @@ public class Alien : SpawnableObject, IAffectedByGravity
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Release();
-           // LevelManager.Instance.IncreaseScore();
+           // destroyComponent.AutoDestroy();
+            //LevelManager.Instance.IncreaseScore();
         }
 
         if (collision.gameObject.CompareTag("Asteroid"))
         {
             destroyComponent.AutoDestroy();
+
         }
-        if (collision.gameObject.CompareTag("Door"))
-        {
-            destroyComponent.AutoDestroy();
-        }
+    }
+
+    public void TakeDamage()
+    {
+        destroyComponent.AutoDestroy();
     }
 
     public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
