@@ -28,7 +28,7 @@ public class AlienPlanet : Planet
     {
         foreach (Alien alien in aliens)
         {
-            int angle = Random.Range(0, 365);
+            int angle = Random.Range(0, 360);
             float x = Mathf.Cos(angle) * (GetRadius + 0.3f);
             float y = Mathf.Sin(angle) * (GetRadius + 0.3f);
             alien.transform.position = transform.position + new Vector3(x, y);

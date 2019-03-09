@@ -7,8 +7,9 @@ using UnityEngine;
 public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffectedByGravity
 {
     [Header("Asteroid components")]
-    [SerializeField] protected Rigidbody2D bodyComponent;
-    [SerializeField] AutoDestroyComponent destructionComponent;
+    [SerializeField] protected Rigidbody2D bodyComponent = null;
+    [SerializeField] AutoDestroyComponent destructionComponent = null;
+    [SerializeField] AudioClip crashSound = null;
 
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
@@ -48,6 +49,7 @@ public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffected
         }
 
         destructionComponent.AutoDestroy();
+        SoundManager.Instance.PlaySoundInPosition(transform.position, crashSound, 1.0f);
     }
 
     protected void OnTriggerEnter2D(Collider2D _other)

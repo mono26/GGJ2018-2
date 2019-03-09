@@ -6,9 +6,6 @@ public class PlanetExplosion : AutoDestroyEffect
 {
 	[SerializeField] int numberOfFragmentsToSpawn = 5;
 	[SerializeField] float explosionForce = 1000;
-	[SerializeField] int timeToSpawnGiantBlackHole = 5;
-
-	Coroutine giantBlackSpawnProcess;
 
 	public override void SpawnEffect()
 	{
@@ -17,8 +14,8 @@ public class PlanetExplosion : AutoDestroyEffect
 	}
 	void SpawnFragments()
 	{
-		float angleIncrease = 365/numberOfFragmentsToSpawn;
-		float startAngle = Random.Range(0, 364);
+		float angleIncrease = 360/numberOfFragmentsToSpawn;
+		float startAngle = Random.Range(0, 359);
 		for (int i = 0; i < numberOfFragmentsToSpawn; i++)
 		{
 			Asteroid fragment = PoolsManager.Instance.GetObjectFromPool<Asteroid>();

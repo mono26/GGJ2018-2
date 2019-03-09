@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PoolSettings
 {	
-    public SpawnableObject[] prefabs;
+    public Spawnable[] prefabs;
     public int size = 10;
 
 	// TODO Crear getters.
@@ -14,7 +14,7 @@ public class GameObjectPool
 {
 	[Header("Pool settings")]
     [SerializeField] PoolSettings settings;
-	[SerializeField] public List<SpawnableObject> pool;
+	[SerializeField] public List<Spawnable> pool;
 
 	[SerializeField] Transform poolContainer = null;
 
@@ -32,7 +32,7 @@ public class GameObjectPool
 	}
     void PreparePool()
     {
-        pool = new List<SpawnableObject>();
+        pool = new List<Spawnable>();
         for (int i = 0; i < settings.size; i++)
 		{
 			AddGameObject();
@@ -42,22 +42,22 @@ public class GameObjectPool
      void AddGameObject()
     {
         int prefabIndex = Random.Range(0, settings.prefabs.Length);
-        SpawnableObject obj = GameObject.Instantiate(settings.prefabs[prefabIndex]);
+        Spawnable obj = GameObject.Instantiate(settings.prefabs[prefabIndex]);
         obj.transform.SetParent(poolContainer);
         obj.gameObject.SetActive(false);
         pool.Add(obj);
     }
 
-    SpawnableObject AllocateGameObject()
+    Spawnable AllocateGameObject()
     {
-        SpawnableObject obj = pool[pool.Count - 1];
+        Spawnable obj = pool[pool.Count - 1];
         pool.RemoveAt(pool.Count - 1);
         obj.transform.SetParent(null);
         obj.gameObject.SetActive(true);
         return obj;
     }
 
-	public void ReleaseGameObject(SpawnableObject _obj)
+	public void ReleaseGameObject(Spawnable _obj)
     {
         _obj.transform.SetParent(poolContainer);
         _obj.transform.position = poolContainer.position;
@@ -65,14 +65,14 @@ public class GameObjectPool
         pool.Add(_obj);
     }
 
-    public SpawnableObject GetGameObject()
+    public Spawnable GetGameObject()
     {
         if (pool.Count == 0)
         {
             AddGameObject();
         }
 
-        SpawnableObject objectFromPool = AllocateGameObject();
+        Spawnable objectFromPool = AllocateGameObject();
         objectFromPool.ResetState();
         return objectFromPool;
     }

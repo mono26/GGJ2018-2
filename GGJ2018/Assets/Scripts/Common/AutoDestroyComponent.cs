@@ -7,7 +7,6 @@ public class AutoDestroyComponent : MonoBehaviour
 	[SerializeField] int minLifeTime = 5, maxLifeTime = 15;
 	[SerializeField] SpawnableObject spawnable = null;
 	[SerializeField] AutoDestroyEffect autoDestroyEffect = null;
-	[SerializeField] int delayForRelease = 0;
 
 	float lifeTimeCounter;
 

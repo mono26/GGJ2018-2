@@ -6,46 +6,38 @@ public class LevelManager : Singleton<LevelManager>
 {
     //TODO create a class for managing UI only
     [Header("Level Manager settings")]
-    [SerializeField]
-    protected AudioClip loseSfx = null;
-    [SerializeField]
-    protected string mainMenuScene = null;
-    [SerializeField]
-    private int maxScorePoints = 30;
-    [SerializeField]
-    protected AudioClip winSfx = null;
+    [SerializeField] AudioClip loseSfx = null;
+    [SerializeField] string mainMenuScene = null;
+    [SerializeField] int maxScorePoints = 30;
+    [SerializeField] AudioClip winSfx = null;
+    [SerializeField] AudioClip backGroundMusic;
 
     [Header("Components")]
-    [SerializeField]
-    private Image fuelBar;
-    [SerializeField]
-    private Text scoreText; //TODO move this to the LevelUIManager
+    [SerializeField] Text scoreText; //TODO move this to the LevelUIManager
 
     [Header("Editor debbuging")]
-    private int scorePoints;
+    [SerializeField] private int scorePoints;
 
     protected override void Awake()
     {
         base.Awake();
 
         if(scoreText != null)
+        {
             scoreText.gameObject.SetActive(false);
-        if (fuelBar != null)
-            fuelBar.gameObject.SetActive(false);
-
-        return;
+        }
     }
 
     void Start ()
     {
         if (scoreText != null)
+        {
             scoreText.gameObject.SetActive(true);
-        if (fuelBar != null)
-            fuelBar.gameObject.SetActive(true);
+        }
 
         scorePoints = 0;
 
-        return;
+        SoundManager.Instance.PlayBackGroundSound(backGroundMusic, 1.0f);
 	}
 	
     public void IncreaseScore()

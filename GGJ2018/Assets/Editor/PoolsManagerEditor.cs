@@ -34,10 +34,10 @@ public class PoolsManagerEditor : Editor
 				EditorGUILayout.LabelField(key.Name, GUILayout.Width(EditorGUIUtility.currentViewWidth));
 				EditorGUILayout.EndHorizontal();
 
-				foreach (SpawnableObject spawnable in objectPool.pool)
+				foreach (Spawnable spawnable in objectPool.pool)
 				{
 					EditorGUILayout.BeginHorizontal();
-					EditorGUILayout.ObjectField(spawnable, typeof(SpawnableObject), false, GUILayout.Width(EditorGUIUtility.currentViewWidth));
+					EditorGUILayout.ObjectField(spawnable, typeof(Spawnable), false, GUILayout.Width(EditorGUIUtility.currentViewWidth));
 					EditorGUILayout.EndHorizontal();
 				}
 			}

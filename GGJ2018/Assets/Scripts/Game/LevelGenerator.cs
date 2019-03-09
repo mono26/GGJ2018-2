@@ -43,14 +43,14 @@ public class LevelGenerator : MonoBehaviour
 
 	int GetRandomDistanceInterval { get { return Random.Range(minDistanceIntervalToSpawn, maxDistanceIntervalToSpawn + 1); } }
 	int GetRandomAngleInterval { get { return Random.Range(minAngleIntervalToSpawn, maxAngleIntervalToSpawn + 1); } }
-	int GetRandomeStartAngle { get { return Random.Range(0, 365); } }
+	int GetRandomeStartAngle { get { return Random.Range(0, 360); } }
 	int GetRandomScale { get { return Random.Range(1, 6); } }
 
 	Vector3 GetRandomRotation
 	{
 		get
 		{
-			float z = Random.Range(0, 365);
+			float z = Random.Range(0, 360);
 			return new Vector3(0, 0 , z);
 		}
 	}
@@ -128,12 +128,12 @@ public class LevelGenerator : MonoBehaviour
 		SpawnPlanet<FuelPlanet>(fuelPlanetPosition);
 		_lastFuelPlanetPosition = fuelPlanetPosition;
 
-		while (angleCount < 365)
+		while (angleCount < 360)
 		{
 			randomAngleInterval = GetRandomAngleInterval;
 			spawnAngle += randomAngleInterval;
 			angleCount += randomAngleInterval;
-			if (angleCount >= 365)
+			if (angleCount >= 360)
 			{
 				continue;
 			}
@@ -253,9 +253,9 @@ public class LevelGenerator : MonoBehaviour
 	{
 		float angleCount = 0;
 
-		while (angleCount < 365)
+		while (angleCount < 360)
 		{
-			if (angleCount >= 365)
+			if (angleCount >= 360)
 			{
 				continue;
 			}

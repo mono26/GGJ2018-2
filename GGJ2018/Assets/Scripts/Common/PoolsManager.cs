@@ -29,10 +29,10 @@ public class PoolsManager : Singleton<PoolsManager>
 		}
 	}
 
-	public T GetObjectFromPool<T>() where T : SpawnableObject
+	public T GetObjectFromPool<T>() where T : Spawnable
 	{
 		GameObjectPool pool = null;
-		SpawnableObject goToReturn = null;
+		Spawnable goToReturn = null;
 		if (pools.TryGetValue(typeof(T), out pool))
 		{
 			goToReturn = pool.GetGameObject();
@@ -41,7 +41,7 @@ public class PoolsManager : Singleton<PoolsManager>
 		return goToReturn as T;
 	}
 
-	public void ReleaseObjectToPool<T>(T _goToRelease) where T : SpawnableObject
+	public void ReleaseObjectToPool<T>(T _goToRelease) where T : Spawnable
 	{
 		GameObjectPool pool = null;
 		if (pools.TryGetValue(typeof(T), out pool))

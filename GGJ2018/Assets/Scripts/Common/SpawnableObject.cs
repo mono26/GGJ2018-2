@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SpawnableObject : MonoBehaviour
+public class SpawnableObject : Spawnable
 {
     [Header("Spawnable settings")]
     [SerializeField] private float radius;
@@ -22,11 +22,6 @@ public class SpawnableObject : MonoBehaviour
         {
             visualRenderer = GetComponent<SpriteRenderer>();
         }
-    }
-
-    public virtual void Release()
-    {
-
     }
 
     public void EnableCollision(bool _enable)
@@ -53,7 +48,7 @@ public class SpawnableObject : MonoBehaviour
         EnableCollision(true);
     }
 
-    public virtual void ResetState()
+    public override void ResetState()
     {
         EnableCollision(true);
         DisplayVisuals(true);
