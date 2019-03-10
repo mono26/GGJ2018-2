@@ -41,6 +41,9 @@ public class Ship : MonoBehaviour, IAffectedByGravity
     [SerializeField] ShipInput currentInput = new ShipInput();    // TODO save input in exterinput component
 
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
+    public AtractorRay GetRayComponent { get { return atractorRayComponent; } }
+    public Shield GetShieldComponent { get { return shieldComponent; } }
+    public ShipEngine GetEngineComponent { get { return engineComponent; } }
 
 	private void Awake()
     {

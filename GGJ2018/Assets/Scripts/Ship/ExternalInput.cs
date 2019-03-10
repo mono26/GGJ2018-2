@@ -1,7 +1,6 @@
 ﻿// Copyright (c) What a Box Creative Studio. All rights reserved.
 
 using UnityEngine;
-//using UnityStandardAssets.CrossPlatformInput;
 
 public class ExternalInput : ShipComponent
 {

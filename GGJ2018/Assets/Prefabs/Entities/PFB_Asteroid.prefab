@@ -152,10 +152,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.8
   collisionBody: {fileID: 58224094565840894}
-  visualRenderer: {fileID: 212002400596311176}
   bodyComponent: {fileID: 50098178575817834}
   destructionComponent: {fileID: 114359681202792326}
   crashSound: {fileID: 8300000, guid: a0564144f397d1d45bc41231f76250eb, type: 3}
+  shieldCrashSound: {fileID: 8300000, guid: ae5c201ab81b84e4a81350a572608b99, type: 3}
 --- !u!114 &114359681202792326
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -5,17 +5,18 @@ using UnityEngine;
 public class BlackHoleSpawner : Spawner
 {
     [Header("Black Hole Spawner settings")]
-    [SerializeField] private float minDistanceFromPlayer = 6;
-    [SerializeField] private float maxDistanceFromPlayer = 9;
+    [SerializeField] float minDistanceFromPlayer = 6;
+    [SerializeField] float maxDistanceFromPlayer = 9;
 
     [Header("Black Hole Spawner components")]
-    [SerializeField] protected GameObject player;
-    [SerializeField] protected AudioClip spawnSound;
+    [SerializeField] GameObject player;
+    [SerializeField] AudioClip spawnSound;
 
     protected override void Update()
     {
         base.Update();
-        if (spawnTimer <= 0) {
+        if (spawnTimer <= 0) 
+        {
             Spawn();
         }
         return;
@@ -31,7 +32,7 @@ public class BlackHoleSpawner : Spawner
             if (IsAFreeSpot(spawnPosition, radius)) 
             {
                 PositionBlackhole(spawnedBlackhole, spawnPosition);
-                SoundManager.Instance.PlaySoundInPosition(transform.position, spawnSound, 1.0f);
+                SoundManager.Instance.PlaySoundInPosition(transform.position, spawnSound, 0.5f);
                 break;
             }
             else if (i == maxTriesToSpawn - 1){

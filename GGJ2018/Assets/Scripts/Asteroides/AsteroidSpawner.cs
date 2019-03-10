@@ -9,18 +9,26 @@ public class AsteroidSpawner : Spawner
     [SerializeField] protected float minForce = 1500f;
 
     [Header("Components")]
-    [SerializeField] protected GameObject player;
-    [SerializeField] protected Transform[] spawnPoints;
+    [SerializeField] protected GameObject player = null;
+    [SerializeField] protected Transform[] spawnPoints = null;
 
     private void Awake()
     {
-        player = GameObject.Find("BobTheGreenAlien");
-        GameObject[] sPoints = GameObject.FindGameObjectsWithTag("AsteroidSpawnPoint");
-        spawnPoints = new Transform[sPoints.Length];
-        for (int i = 0; i < sPoints.Length; i++) {
-            spawnPoints[i] = sPoints[i].GetComponent<Transform>();
+        if (player == null)
+        {
+            player = GameObject.Find("PFB_BobTheGreenAlien");
         }
-        return;
+
+        if (spawnPoints == null)
+        {
+            GameObject[] sPoints = GameObject.FindGameObjectsWithTag("AsteroidSpawnPoint");
+            spawnPoints = new Transform[sPoints.Length];
+            for (int i = 0; i < sPoints.Length; i++)
+            {
+                spawnPoints[i] = sPoints[i].GetComponent<Transform>();
+            }
+        }
+
     }
 	
 	protected override void Update ()

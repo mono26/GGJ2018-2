@@ -12,7 +12,8 @@ public class SpawnableSound : Spawnable
 	{
 		// Mientras el sonido se este reproduciendo hacer nada
 		// Cuando termine el sonido Release()
-		if (duration > 0)
+		bool loop = sourceOfAudio.loop;
+		if (!loop && duration > 0)
 		{
 			duration -= Time.deltaTime;
 		}
@@ -31,10 +32,11 @@ public class SpawnableSound : Spawnable
 		// Reset sound audio source properties
 	}
 
-	public void PlaySound(AudioClip _sound, float _volume)
+	public void PlaySound(AudioClip _sound, float _volume, bool _loop = false)
 	{
 		SetVolume(_volume);
 		sourceOfAudio.clip = _sound;
+		sourceOfAudio.loop = _loop;
 		sourceOfAudio.Play();
 		duration = _sound.length;
 	}

@@ -57,8 +57,14 @@ MonoBehaviour:
   maxTriesToSpawn: 10
   layersToCheck:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2304
   maxForce: 95000
   minForce: 65000
   player: {fileID: 0}
-  spawnPoints: []
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

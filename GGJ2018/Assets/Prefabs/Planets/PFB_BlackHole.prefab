@@ -263,8 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0
-  collisionBody: {fileID: 0}
-  visualRenderer: {fileID: 0}
+  collisionBody: {fileID: 58626897860147646}
   gravitationalFieldDirection: 1
   rotationSpeed: 4.4
   rotationForce: 9.8

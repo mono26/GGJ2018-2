@@ -6,9 +6,8 @@ using UnityEngine;
 public class SpawnableObject : Spawnable
 {
     [Header("Spawnable settings")]
-    [SerializeField] private float radius;
+    [SerializeField] private float radius = 1.0f;
     [SerializeField] Collider2D collisionBody = null;
-    [SerializeField] SpriteRenderer visualRenderer = null;
     public float GetRadius { get { return radius; } }
 
     public virtual void Awake() 
@@ -16,11 +15,6 @@ public class SpawnableObject : Spawnable
         if (collisionBody == null)
         {
             collisionBody = GetComponent<Collider2D>();
-        }
-
-        if (visualRenderer == null)
-        {
-            visualRenderer = GetComponent<SpriteRenderer>();
         }
     }
 

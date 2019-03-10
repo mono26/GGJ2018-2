@@ -77,7 +77,7 @@ public class Alien : SpawnableObject, IAffectedByGravity
             return;
         }
 
-        if (this.isActiveAndEnabled == false)
+        if (gameObject.activeInHierarchy == false)
         {
             return;
         }

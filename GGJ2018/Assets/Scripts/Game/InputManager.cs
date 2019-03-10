@@ -68,13 +68,13 @@ public static class InputManager
         InputButtonStates buttonState = InputButtonStates.Off;
         if(button != null)
         {
-            if (Input.GetButtonDown(_buttonID)) {
+            if (Input.GetKeyDown(_buttonID)) {
                 buttonState = InputButtonStates.Down;
             }
-            if (Input.GetButton(_buttonID)) {
+            if (Input.GetKey(_buttonID)) {
                 buttonState = InputButtonStates.Pressed;
             }
-            if (Input.GetButtonUp(_buttonID)) {
+            if (Input.GetKeyUp(_buttonID)) {
                 buttonState = InputButtonStates.Up;
             }
         }

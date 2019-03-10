@@ -42,8 +42,8 @@ GameObject:
   - component: {fileID: 114412541303669888}
   - component: {fileID: 114494846662596814}
   m_Layer: 8
-  m_Name: Fuel Planet
-  m_TagString: Planet
+  m_Name: PFB_FuelPlanet
+  m_TagString: FuelPlanet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 60975574784675180}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Planet
+  m_TagString: FuelPlanet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -200,7 +200,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2.1
   collisionBody: {fileID: 60975574784675180}
-  visualRenderer: {fileID: 212130416342089136}
   gravitationalFieldDirection: 1
   rotationSpeed: 10
   rotationForce: 100

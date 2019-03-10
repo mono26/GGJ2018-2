@@ -10,6 +10,7 @@ public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffected
     [SerializeField] protected Rigidbody2D bodyComponent = null;
     [SerializeField] AutoDestroyComponent destructionComponent = null;
     [SerializeField] AudioClip crashSound = null;
+    [SerializeField] AudioClip shieldCrashSound = null;
 
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
@@ -48,8 +49,9 @@ public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffected
             return;
         }
 
+        SoundManager.Instance.PlaySoundInPosition(transform.position, crashSound, 0.1f);
+
         destructionComponent.AutoDestroy();
-        SoundManager.Instance.PlaySoundInPosition(transform.position, crashSound, 1.0f);
     }
 
     protected void OnTriggerEnter2D(Collider2D _other)
@@ -57,7 +59,7 @@ public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffected
         if (_other.CompareTag("Shield"))
         {
             destructionComponent.AutoDestroy();
-            SoundManager.Instance.PlaySoundInPosition(transform.position, crashSound, 1.0f);
+            SoundManager.Instance.PlaySoundInPosition(transform.position, shieldCrashSound, 0.1f);
         }
     }
 

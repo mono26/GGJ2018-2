@@ -118,6 +118,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4218939198969006}
+  - component: {fileID: 82752125458921036}
   - component: {fileID: 61075786538678366}
   - component: {fileID: 50335388593032238}
   - component: {fileID: 114020360296148358}
@@ -127,9 +128,9 @@ GameObject:
   - component: {fileID: 114004955614317346}
   - component: {fileID: 114629711560785046}
   - component: {fileID: 114946330032410694}
-  - component: {fileID: 82752125458921036}
+  - component: {fileID: 114833942155326082}
   m_Layer: 11
-  m_Name: BobTheGreenAlien
+  m_Name: PFB_BobTheGreenAlien
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1405,7 +1406,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1439,8 +1440,6 @@ MonoBehaviour:
   strenght: 1500
   ufoRay: {fileID: 1867904808052798}
   door: {fileID: 1080706513235740}
-  pAudioSource: {fileID: 0}
-  raySound: {fileID: 8300000, guid: 4ac6b7c218335064893ff443a31a17cb, type: 3}
   isAlienRayOn: 0
 --- !u!114 &114020360296148358
 MonoBehaviour:
@@ -2572,6 +2571,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Game Over
+--- !u!114 &114833942155326082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1052524117136162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b30c3f5ae0b5845849ee8aa43c9c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raySound: {fileID: 8300000, guid: 4ac6b7c218335064893ff443a31a17cb, type: 3}
+  shieldSound: {fileID: 8300000, guid: e0ccc7036c417844ca14a921521610cc, type: 3}
+  fuelRefillSound: {fileID: 8300000, guid: e02b3d4cca95c954e8010e3fa27fe2b5, type: 3}
+  shipAudio: {fileID: 82752125458921036}
+  ship: {fileID: 114020360296148358}
 --- !u!114 &114843640438275710
 MonoBehaviour:
   m_ObjectHideFlags: 1
