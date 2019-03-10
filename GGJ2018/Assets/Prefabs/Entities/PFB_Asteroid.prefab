@@ -138,7 +138,7 @@ MonoBehaviour:
   damageTags:
   - Player
   - Alien
-  damageOnTouch: 100
+  damageOnTouch: 75
 --- !u!114 &114255368610047976
 MonoBehaviour:
   m_ObjectHideFlags: 1

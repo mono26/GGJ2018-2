@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(BlackholeSpawner))]
+[CustomEditor(typeof(BlackHoleSpawner))]
 public class BlackholeSpawnerEditor : SpawnerEditor 
 {
 	public override void OnInspectorGUI() 

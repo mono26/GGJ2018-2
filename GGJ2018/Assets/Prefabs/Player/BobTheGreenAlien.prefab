@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 114004955614317346}
   - component: {fileID: 114629711560785046}
   - component: {fileID: 114946330032410694}
+  - component: {fileID: 82752125458921036}
   m_Layer: 11
   m_Name: BobTheGreenAlien
   m_TagString: Player
@@ -568,7 +569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1580697500715266
 GameObject:
   m_ObjectHideFlags: 1
@@ -1337,6 +1338,86 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1212705983445784}
   m_Enabled: 1
+--- !u!82 &82752125458921036
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1052524117136162}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114004955614317346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1358,6 +1439,8 @@ MonoBehaviour:
   strenght: 1500
   ufoRay: {fileID: 1867904808052798}
   door: {fileID: 1080706513235740}
+  pAudioSource: {fileID: 0}
+  raySound: {fileID: 8300000, guid: 4ac6b7c218335064893ff443a31a17cb, type: 3}
   isAlienRayOn: 0
 --- !u!114 &114020360296148358
 MonoBehaviour:
@@ -2204,7 +2287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.83448267, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2224,7 +2307,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Score
+  m_Text: 0
 --- !u!114 &114611753756388358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2289,7 +2372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 114020360296148358}
-  fuelLossPerSecond: 1
+  fuelLossPerSecond: 1.5
   maxFuel: 500
   thrust: 2300
   fuelDisplay: {fileID: 114890448170325758}
@@ -17111,10 +17194,10 @@ RectTransform:
   m_Father: {fileID: 224591575484703160}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 574.55, y: -185.35}
-  m_SizeDelta: {x: 307, y: 292}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224095275050209404
 RectTransform:
@@ -17263,7 +17346,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 455.85, y: -164.35}
+  m_AnchoredPosition: {x: 457.35, y: -164.35}
   m_SizeDelta: {x: 303, y: 292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224348327328011298
@@ -17359,7 +17442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 221}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 710, y: 138.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224560837099800878
@@ -17396,7 +17479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 760.85, y: -164.35}
+  m_AnchoredPosition: {x: 457.35, y: -164.35}
   m_SizeDelta: {x: 307, y: 292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224591575484703160
@@ -17416,7 +17499,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -62}
+  m_AnchoredPosition: {x: 0, y: -84.43411}
   m_SizeDelta: {x: 845.1, y: 370.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224600333302779582
@@ -17452,7 +17535,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 152.35, y: -164.35}
+  m_AnchoredPosition: {x: 457.35, y: -164.35}
   m_SizeDelta: {x: 304, y: 292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224665918252512258
@@ -17527,10 +17610,10 @@ RectTransform:
   m_Father: {fileID: 224591575484703160}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 269.05, y: -185.35}
-  m_SizeDelta: {x: 304, y: 292}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224759324117070656
 RectTransform:
@@ -17628,7 +17711,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 145}
+  m_AnchoredPosition: {x: 0, y: 123.99474}
   m_SizeDelta: {x: 410, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224899985962876644

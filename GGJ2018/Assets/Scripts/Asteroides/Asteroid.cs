@@ -57,6 +57,7 @@ public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffected
         if (_other.CompareTag("Shield"))
         {
             destructionComponent.AutoDestroy();
+            SoundManager.Instance.PlaySoundInPosition(transform.position, crashSound, 1.0f);
         }
     }
 

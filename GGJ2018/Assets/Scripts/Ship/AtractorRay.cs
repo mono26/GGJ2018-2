@@ -13,6 +13,8 @@ public class AtractorRay : ShipComponent
     [Header("Components")]
     [SerializeField] protected GameObject ufoRay;
     [SerializeField] protected GameObject door;
+    [SerializeField] protected AudioSource pAudioSource;
+    [SerializeField] protected AudioClip raySound;
 
     [Header("Edittor debugging")]
     protected Coroutine atractAliensRoutine;
@@ -22,6 +24,8 @@ public class AtractorRay : ShipComponent
     protected override void Awake()
     {
         base.Awake();
+
+
 
         if(ufoRay == null)
         {
@@ -34,6 +38,8 @@ public class AtractorRay : ShipComponent
         ufoRay.SetActive(false);
         door.SetActive(true);
         isAlienRayOn = false;
+
+        pAudioSource = this.gameObject.GetComponent<AudioSource>();
     }
 
     protected void OnDrawGizmos()
@@ -46,6 +52,13 @@ public class AtractorRay : ShipComponent
         return;
     }
 
+    private void PrepareSound(AudioClip clip)
+    { 
+        pAudioSource.clip = clip;
+        pAudioSource.loop = true;
+        pAudioSource.Play();
+    }
+
     public void ToggleRay()
     {
         isAlienRayOn = !isAlienRayOn;
@@ -53,11 +66,14 @@ public class AtractorRay : ShipComponent
         if (isAlienRayOn)
         {
             atractAliensRoutine = StartCoroutine(FindAliens());
-        } 
+            PrepareSound(raySound);
+            
+        } else pAudioSource.Stop();
 
         if (!isAlienRayOn && atractAliensRoutine != null)
         {
             StopCoroutine(atractAliensRoutine);
+            
         }
 
         TurnRayOn();
