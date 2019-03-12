@@ -270,11 +270,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9cb0b0dcc84a34e8687d7fb0a41c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistanceToSpawn: 30
+  minDistanceToSpawn: 20
   maxDistanceToSpawn: 100
   minDistanceIntervalToSpawn: 15
-  maxDistanceIntervalToSpawn: 35
-  minAngleIntervalToSpawn: 15
+  maxDistanceIntervalToSpawn: 30
+  minAngleIntervalToSpawn: 10
   maxAngleIntervalToSpawn: 30
   layersToCheck:
     serializedVersion: 2

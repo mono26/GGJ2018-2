@@ -400,6 +400,7 @@ MonoBehaviour:
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 114099197422520814}
   gravitationalField: {fileID: 58199946706670938}
+  autoDestroyComponent: {fileID: 114895651023748266}
   numberOfAliens: 9
   aliens: []
   aliensContainer: {fileID: 4564656846210904}
@@ -431,6 +432,7 @@ MonoBehaviour:
   maxLifeTime: 60
   spawnable: {fileID: 114313213526104294}
   autoDestroyEffect: {fileID: 114578525097204406}
+  lifeTimeCounter: 0
 --- !u!212 &212008067058640286
 SpriteRenderer:
   m_ObjectHideFlags: 1

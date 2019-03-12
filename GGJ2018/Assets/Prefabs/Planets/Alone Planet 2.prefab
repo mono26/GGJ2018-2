@@ -148,6 +148,7 @@ MonoBehaviour:
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 0}
   gravitationalField: {fileID: 58315486521717562}
+  autoDestroyComponent: {fileID: 114316142783744504}
 --- !u!114 &114297486379143456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,6 +177,7 @@ MonoBehaviour:
   maxLifeTime: 30
   spawnable: {fileID: 114178262049866828}
   autoDestroyEffect: {fileID: 114297486379143456}
+  lifeTimeCounter: 0
 --- !u!212 &212100620997393202
 SpriteRenderer:
   m_ObjectHideFlags: 1
