@@ -19,6 +19,8 @@ public class Planet : SpawnableObject
     protected SignalEmitter signal;
     [SerializeField] CircleCollider2D gravitationalField;
 
+    [SerializeField] AutoDestroyComponent autoDestroyComponent = null;
+
     [Header("Planet editor debuggin")]
     [SerializeField] protected List<IAffectedByGravity> objsInGravitationField = new List<IAffectedByGravity>();
 
@@ -56,6 +58,11 @@ public class Planet : SpawnableObject
         if (signal == null)
         {
             signal = GetComponent<SignalEmitter>();
+        }
+
+        if (autoDestroyComponent == null)
+        {
+            autoDestroyComponent = GetComponent<AutoDestroyComponent>();
         }
     }
 
@@ -159,8 +166,16 @@ public class Planet : SpawnableObject
         PoolsManager.Instance.ReleaseObjectToPool(this);
     }
 
-    public override void ResetState() 
+    public void SetLifeTimeAccordingToDistanceFromPlayer(float _distanceFromPlayer)
     {
+        if (autoDestroyComponent == null)
+        {
+            return;
+        }
         
+        int minLifeTime = autoDestroyComponent.GetMinLifeTime;
+        int maxLifeTime = autoDestroyComponent.GetMaxLifeTime;
+        int lifeTime = Random.Range(minLifeTime, maxLifeTime);
+        autoDestroyComponent.SetLifeTime(lifeTime + (_distanceFromPlayer * 2));
     }
 }

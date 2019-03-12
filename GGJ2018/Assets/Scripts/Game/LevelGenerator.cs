@@ -216,7 +216,11 @@ public class LevelGenerator : MonoBehaviour
 		Vector3 worldPositionToSpawn = transform.position;
 		worldPositionToSpawn.x += _positionRelativeToGenerator.x;
 		worldPositionToSpawn.y += _positionRelativeToGenerator.y;
+
+		// TODO refactorizar. Dejar que los planetas hagn esto por si solos.
 		planetToSpawn.Awake();
+		float distance = (worldPositionToSpawn - transform.position).magnitude;
+		planetToSpawn.SetLifeTimeAccordingToDistanceFromPlayer(distance);
 		planetToSpawn.transform.SetParent(planetsContainer);
 		planetToSpawn.transform.position = worldPositionToSpawn;
 	}
