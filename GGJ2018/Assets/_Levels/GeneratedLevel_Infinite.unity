@@ -270,11 +270,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9cb0b0dcc84a34e8687d7fb0a41c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistanceToSpawn: 30
+  minDistanceToSpawn: 20
   maxDistanceToSpawn: 100
   minDistanceIntervalToSpawn: 15
-  maxDistanceIntervalToSpawn: 35
-  minAngleIntervalToSpawn: 15
+  maxDistanceIntervalToSpawn: 30
+  minAngleIntervalToSpawn: 10
   maxAngleIntervalToSpawn: 30
   layersToCheck:
     serializedVersion: 2
@@ -286,7 +286,7 @@ MonoBehaviour:
   planetsContainer: {fileID: 684229114}
   asteroidWallContainer: {fileID: 0}
   marksContainer: {fileID: 0}
-  numberOfSpawnsToClearAZone: 4
+  numberOfSpawnsToClearAZone: 2
 --- !u!4 &287492479
 Transform:
   m_ObjectHideFlags: 0
@@ -4455,7 +4455,7 @@ Prefab:
     - target: {fileID: 224712508106878148, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -185.35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224712508106878148, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
@@ -4465,7 +4465,7 @@ Prefab:
     - target: {fileID: 224712508106878148, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 292
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224094327535046284, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
@@ -4485,7 +4485,7 @@ Prefab:
     - target: {fileID: 224094327535046284, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -185.35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224094327535046284, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
@@ -4495,7 +4495,7 @@ Prefab:
     - target: {fileID: 224094327535046284, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 292
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224940038307851354, guid: e9fc52c01928c814588868868247ff44,
         type: 2}

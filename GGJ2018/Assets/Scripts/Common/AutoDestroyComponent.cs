@@ -4,11 +4,29 @@ using UnityEngine;
 
 public class AutoDestroyComponent : MonoBehaviour 
 {
+	[Header("Settings")]
 	[SerializeField] int minLifeTime = 5, maxLifeTime = 15;
 	[SerializeField] SpawnableObject spawnable = null;
 	[SerializeField] AutoDestroyEffect autoDestroyEffect = null;
 
-	float lifeTimeCounter;
+	[Header("Editor debugging")]
+	[SerializeField] float lifeTimeCounter;
+
+	public int GetMinLifeTime
+	{
+		get
+		{
+			return minLifeTime;
+		}
+	}
+
+	public int GetMaxLifeTime
+	{
+		get
+		{
+			return maxLifeTime;
+		}
+	}
 
 	void Awake() 
 	{
@@ -51,5 +69,10 @@ public class AutoDestroyComponent : MonoBehaviour
 
 		// Release to pool
 		spawnable.Release();
+	}
+
+	public void SetLifeTime(float _lifeTime)
+	{
+		lifeTimeCounter = _lifeTime;
 	}
 }

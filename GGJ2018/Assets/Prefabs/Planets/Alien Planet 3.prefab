@@ -391,7 +391,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 5.2
   collisionBody: {fileID: 58738407727335882}
-  visualRenderer: {fileID: 212945185250267468}
   gravitationalFieldDirection: -1
   rotationSpeed: 10
   rotationForce: 100
@@ -401,6 +400,7 @@ MonoBehaviour:
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 114099197422520814}
   gravitationalField: {fileID: 58199946706670938}
+  autoDestroyComponent: {fileID: 114895651023748266}
   numberOfAliens: 9
   aliens: []
   aliensContainer: {fileID: 4564656846210904}
@@ -415,9 +415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53383f255089264fb3eee27865fcd19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfFragmentsToSpawn: 7
+  numberOfFragmentsToSpawn: 3
   explosionForce: 1000
-  timeToSpawnGiantBlackHole: 3
 --- !u!114 &114895651023748266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -433,7 +432,7 @@ MonoBehaviour:
   maxLifeTime: 60
   spawnable: {fileID: 114313213526104294}
   autoDestroyEffect: {fileID: 114578525097204406}
-  delayForRelease: 10
+  lifeTimeCounter: 0
 --- !u!212 &212008067058640286
 SpriteRenderer:
   m_ObjectHideFlags: 1

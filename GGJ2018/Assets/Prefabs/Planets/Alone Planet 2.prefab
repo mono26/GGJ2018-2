@@ -139,7 +139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 4.5
   collisionBody: {fileID: 58841051525047866}
-  visualRenderer: {fileID: 212338284238477042}
   gravitationalFieldDirection: -1
   rotationSpeed: 10
   rotationForce: 100
@@ -149,6 +148,7 @@ MonoBehaviour:
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 0}
   gravitationalField: {fileID: 58315486521717562}
+  autoDestroyComponent: {fileID: 114316142783744504}
 --- !u!114 &114297486379143456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,9 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53383f255089264fb3eee27865fcd19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfFragmentsToSpawn: 7
+  numberOfFragmentsToSpawn: 3
   explosionForce: 1000
-  timeToSpawnGiantBlackHole: 3
 --- !u!114 &114316142783744504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,7 +177,7 @@ MonoBehaviour:
   maxLifeTime: 30
   spawnable: {fileID: 114178262049866828}
   autoDestroyEffect: {fileID: 114297486379143456}
-  delayForRelease: 10
+  lifeTimeCounter: 0
 --- !u!212 &212100620997393202
 SpriteRenderer:
   m_ObjectHideFlags: 1
