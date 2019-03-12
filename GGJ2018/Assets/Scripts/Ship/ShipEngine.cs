@@ -81,7 +81,7 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         if (_collision.gameObject.CompareTag("Alien") && this.GetComponent<AtractorRay>().IsAlienRayOn)
         {
             LevelManager.Instance.IncreaseScore();
-            RechargeFuel(10.0f);
+            //RechargeFuel(10.0f);
             _collision.gameObject.SendMessage("Release");
         }
         if (_collision.gameObject.CompareTag("Alien") && !this.GetComponent<AtractorRay>().IsAlienRayOn)
