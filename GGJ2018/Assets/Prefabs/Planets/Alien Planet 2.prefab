@@ -169,7 +169,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 5.2
   collisionBody: {fileID: 58331147674821732}
-  visualRenderer: {fileID: 212251884888083670}
   gravitationalFieldDirection: -1
   rotationSpeed: 10
   rotationForce: 100
@@ -206,9 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53383f255089264fb3eee27865fcd19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfFragmentsToSpawn: 7
+  numberOfFragmentsToSpawn: 3
   explosionForce: 1000
-  timeToSpawnGiantBlackHole: 3
 --- !u!114 &114975521575017856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,7 +222,6 @@ MonoBehaviour:
   maxLifeTime: 70
   spawnable: {fileID: 114469543221975496}
   autoDestroyEffect: {fileID: 114738217547738004}
-  delayForRelease: 10
 --- !u!212 &212251884888083670
 SpriteRenderer:
   m_ObjectHideFlags: 1

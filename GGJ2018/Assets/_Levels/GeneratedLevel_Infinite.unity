@@ -286,7 +286,7 @@ MonoBehaviour:
   planetsContainer: {fileID: 684229114}
   asteroidWallContainer: {fileID: 0}
   marksContainer: {fileID: 0}
-  numberOfSpawnsToClearAZone: 4
+  numberOfSpawnsToClearAZone: 2
 --- !u!4 &287492479
 Transform:
   m_ObjectHideFlags: 0
@@ -1010,7 +1010,7 @@ Prefab:
     - target: {fileID: 224712508106878148, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -185.35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224712508106878148, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
@@ -1020,7 +1020,7 @@ Prefab:
     - target: {fileID: 224712508106878148, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 292
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224094327535046284, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
@@ -1040,7 +1040,7 @@ Prefab:
     - target: {fileID: 224094327535046284, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -185.35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224094327535046284, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
@@ -1050,7 +1050,7 @@ Prefab:
     - target: {fileID: 224094327535046284, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 292
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e9fc52c01928c814588868868247ff44, type: 2}
