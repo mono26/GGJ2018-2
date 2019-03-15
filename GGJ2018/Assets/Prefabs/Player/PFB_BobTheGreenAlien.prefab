@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 114249056155421212}
   - component: {fileID: 114523639337435270}
   m_Layer: 5
-  m_Name: Button_Radar
+  m_Name: Button_Boost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -570,7 +570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1580697500715266
 GameObject:
   m_ObjectHideFlags: 1
@@ -1457,7 +1457,7 @@ MonoBehaviour:
   bodyComponent: {fileID: 50335388593032238}
   engineComponent: {fileID: 114627262001852212}
   radarComponent: {fileID: 114489052112443842}
-  oscilatorComponet: {fileID: 114059371307357624}
+  oscilatorComponent: {fileID: 0}
   atractorRayComponent: {fileID: 114004955614317346}
   shieldComponent: {fileID: 114629711560785046}
   components: []
@@ -1465,7 +1465,7 @@ MonoBehaviour:
     horizontalInput: 0
     verticalInput: 0
     rayInput: 0
-    radarInput: 0
+    boostInput: 0
     shieldInput: 0
 --- !u!114 &114041766978979230
 MonoBehaviour:
@@ -1533,7 +1533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 114020360296148358}
-  minimunDistanceToPlanet: 5
+  minimunDistanceToPlanet: 10
   planetSignal: {r: 0, g: 1, b: 0, a: 1}
   gasStationSignal: {r: 0, g: 0.37931037, b: 1, a: 1}
   ticksPerSecond: 10
@@ -1542,6 +1542,16 @@ MonoBehaviour:
   radar: {fileID: 114489052112443842}
   oscilator: {fileID: 120090661626406014}
   drawPositions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -1657,11 +1667,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverUI: {fileID: 1568283391504368}
   pauseUI: {fileID: 1819345926371164}
-  winUI: {fileID: 1568283391504368}
-  radarButton: {fileID: 1042333345321648}
+  boostButton: {fileID: 1042333345321648}
   rayButton: {fileID: 1340802530709356}
   movementJoystick: {fileID: 1799196510584680}
-  radarFrequencyJoystick: {fileID: 0}
 --- !u!114 &114209072009356730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1928,7 +1936,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3a9d00afd408ce744b735aa50ca2f960, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f80a3674e6e7ab0409a6793374ec0368, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2081,7 +2089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 114020360296148358}
-  range: 30
+  range: 50
   ticksPerSecond: 1
   planetsLayer:
     serializedVersion: 2
@@ -2139,7 +2147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7920d8eb4547f84fb2ca53e3ec11cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  representedButtonID: RadarButton
+  representedButtonID: BoostButton
   currentState: 0
 --- !u!114 &114549878948921260
 MonoBehaviour:
@@ -2372,10 +2380,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 114020360296148358}
   fuelLossPerSecond: 1.5
-  maxFuel: 500
+  fuelLossPerBoost: 1500
+  maxFuel: 2500
   thrust: 2300
+  boost: 4600
   fuelDisplay: {fileID: 114890448170325758}
   currentFuel: 0
+  canBoost: 0
+  boostCooldown: 8
+  boostTimer: 0
 --- !u!114 &114629711560785046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2599,7 +2612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.50344825, a: 0.472}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.472}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2681,6 +2694,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 114843640438275710}
   _percent: 0
+  fullGasColor: {r: 0.53782964, g: 1, b: 0.31617647, a: 0.7058824}
+  midGasColor: {r: 1, g: 0.79107505, b: 0.24264705, a: 0.7058824}
+  lowGasColor: {r: 1, g: 0.40669373, b: 0.1397059, a: 0.7058824}
 --- !u!114 &114907072513685842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2762,12 +2778,12 @@ MonoBehaviour:
   horizontalID: Horizontal
   verticalID: Vertical
   rayID: RayButton
-  radarID: RadarButton
+  boostID: BoostButton
   shieldID: ShieldButton
   horizontalInput: 0
   verticalInput: 0
   rayInput: 0
-  radarInput: 0
+  boostInput: 0
   shieldInput: 0
 --- !u!114 &114956628426225100
 MonoBehaviour:
@@ -2904,6 +2920,16 @@ LineRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 1
   m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -17175,7 +17201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 3.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 103.59, y: 103.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224033918549583798
@@ -17209,10 +17235,10 @@ RectTransform:
   m_Father: {fileID: 224591575484703160}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 422.55, y: -185.35}
+  m_SizeDelta: {x: 307, y: 292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224095275050209404
 RectTransform:
@@ -17324,8 +17350,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 3.2}
-  m_SizeDelta: {x: 130.7, y: 130.7}
+  m_AnchoredPosition: {x: 4, y: 3.2}
+  m_SizeDelta: {x: 119.27, y: 119.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224345850256984442
 RectTransform:
@@ -17343,7 +17369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -183.99995, y: 402}
+  m_AnchoredPosition: {x: -134, y: 397}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224347964869015814
@@ -17439,7 +17465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -184, y: 402}
+  m_AnchoredPosition: {x: -134.00008, y: 402}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224531720073527242
@@ -17457,7 +17483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 710, y: 138.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224560837099800878
@@ -17476,7 +17502,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 160, y: 162}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224591121970670542
@@ -17514,7 +17540,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -84.43411}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 845.1, y: 370.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224600333302779582
@@ -17625,10 +17651,10 @@ RectTransform:
   m_Father: {fileID: 224591575484703160}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 422.55, y: -185.35}
+  m_SizeDelta: {x: 304, y: 292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224759324117070656
 RectTransform:
@@ -17726,7 +17752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 123.99474}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 410, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224899985962876644
@@ -17745,7 +17771,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -5}
-  m_SizeDelta: {x: 127.2, y: 127.2}
+  m_SizeDelta: {x: 110.48, y: 110.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224940038307851354
 RectTransform:
@@ -17763,7 +17789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -184, y: 144}
+  m_AnchoredPosition: {x: -134, y: 144}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &225082555097147978

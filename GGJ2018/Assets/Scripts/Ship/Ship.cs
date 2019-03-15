@@ -5,21 +5,21 @@ using UnityEngine;
 public class ShipInput
 {
     [SerializeField] private float horizontalInput, verticalInput;
-    [SerializeField] private bool rayInput, radarInput, shieldInput;
+    [SerializeField] private bool rayInput, boostInput, shieldInput;
 
     public float GetHorizontalInput { get { return horizontalInput; } }
     public float GetVerticalInput { get { return verticalInput; } }
     public bool GetRayInput { get { return rayInput; } }
-    public bool GetRadarInput { get { return radarInput; } }
+    public bool GetBoostInput { get { return boostInput; } }
     public bool GetShieldInput { get { return shieldInput; } }
 
     public ShipInput(){}
-    public ShipInput(float _horizontal, float _vertical, bool _ray, bool _radar, bool _shield)
+    public ShipInput(float _horizontal, float _vertical, bool _ray, bool _boost, bool _shield)
     {
         horizontalInput = _horizontal;
         verticalInput = _vertical;
         rayInput = _ray;
-        radarInput = _radar;
+        boostInput = _boost;
         shieldInput = _shield;
     }
 }
@@ -32,7 +32,7 @@ public class Ship : MonoBehaviour, IAffectedByGravity
     [SerializeField] Rigidbody2D bodyComponent = null;
     [SerializeField] ShipEngine engineComponent = null;
     [SerializeField] Radar radarComponent = null;
-    [SerializeField] SignalOscilator oscilatorComponet = null;
+    [SerializeField] SignalOscilator oscilatorComponent = null;
     [SerializeField] AtractorRay atractorRayComponent = null;
     [SerializeField] Shield shieldComponent = null;
 
@@ -78,9 +78,9 @@ public class Ship : MonoBehaviour, IAffectedByGravity
             radarComponent = GetComponent<Radar>();
         }
 
-        if (oscilatorComponet == null)
+        if (oscilatorComponent == null)
         {
-            oscilatorComponet = GetComponent<SignalOscilator>();
+            oscilatorComponent = GetComponent<SignalOscilator>();
         }
 
         if (atractorRayComponent == null) 
@@ -96,20 +96,26 @@ public class Ship : MonoBehaviour, IAffectedByGravity
 
     void Start() 
     {
-        LevelUIManager.Instance.DisplayInputButton("RadarButton", true);
+        LevelUIManager.Instance.DisplayInputButton("BoostButton", true);
         LevelUIManager.Instance.DisplayInputButton("RayButton", false);
+        ToggleShipRadar();
     }
 
     private void Update ()
     {
+        /*if(Input.GetKeyDown(KeyCode.Space))
+        {
+            ApplyBoost();
+        }*/
+
         foreach (ShipComponent component in components)
         {
             component.EveryFrame();
         }
 
-        if (currentInput.GetRadarInput)
+        if (currentInput.GetBoostInput)
         {
-            ToggleShipRadar();
+            ApplyBoost();
         }
 
         if (currentInput.GetRayInput)
@@ -131,7 +137,7 @@ public class Ship : MonoBehaviour, IAffectedByGravity
     void ToggleShipRadar()
     {
         radarComponent.ToggleRadar();
-        oscilatorComponet.ToggleOscilator();
+        oscilatorComponent.ToggleOscilator();
     }
 
     void ToggleShipShield()
@@ -158,21 +164,44 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         }
     }
 
-    void OnTriggerStay2D(Collider2D _collider)
+    private void ApplyBoost()
+    {
+
+        if (engineComponent == null)
+        {
+            return;
+        }
+
+        if (currentInput.GetHorizontalInput != 0 || currentInput.GetVerticalInput != 0)
+        {
+            engineComponent.ApplyBoost((transform.right * currentInput.GetHorizontalInput) +
+            (transform.up * currentInput.GetVerticalInput));
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D _collider)
     {
         if (!_collider.CompareTag("GravitationField"))
         {
             return;
         }
 
+
+
+        
+        ToggleShipRadar();
+    }
+
+    void OnTriggerStay2D(Collider2D _collider)
+    {
+        if (!_collider.CompareTag("GravitationField"))
+        {
+            return;
+        }
         // Changes active buttons on GUI if it enters a planet
-        LevelUIManager.Instance.DisplayInputButton("RadarButton", false);
+        LevelUIManager.Instance.DisplayInputButton("BoostButton", false);
         LevelUIManager.Instance.DisplayInputButton("RayButton", true);
 
-        if(radarComponent.IsRadarOn)
-        {   
-            ToggleShipRadar();
-        }
     }
 
     void OnTriggerExit2D(Collider2D _collider)
@@ -183,12 +212,14 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         }
 
         // Changes active buttons on GUI if it goes out of a planet
-        LevelUIManager.Instance.DisplayInputButton("RadarButton", true);
+        LevelUIManager.Instance.DisplayInputButton("BoostButton", true);
         LevelUIManager.Instance.DisplayInputButton("RayButton", false);
         if(atractorRayComponent.IsAlienRayOn)
         {
             ToggleShipRay();
         }
+
+        ToggleShipRadar();
     }
 
     public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)

@@ -9,20 +9,27 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
 {
     [Header("Engine settings")]
     [SerializeField] private float fuelLossPerSecond = 1.0f;
+    [SerializeField] private float fuelLossPerBoost = 5.0f;
     [SerializeField] private float maxFuel = 9999.0f;
     [SerializeField] private float thrust = 1000f;
+    [SerializeField] private float boost = 3000f;
+    
 
     [Header("Components ")]
     [SerializeField] private ProgressBar fuelDisplay;
 
     [Header("Editor debugging")]
     [SerializeField] private float currentFuel;
+    [SerializeField] private bool canBoost;
+    [SerializeField] private float boostCooldown;
+    [SerializeField] private float boostTimer;
 
     public float GetCurrentFuel { get { return currentFuel; } }
     public float GetMaxFuel { get { return maxFuel; } }
 
     private void Start()
     {
+        canBoost = true;
         currentFuel = maxFuel;
         fuelDisplay.UpdateBar(currentFuel, maxFuel);
         return;
@@ -40,9 +47,9 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         return;
     }
 
-    private void LoseFuel()
+    private void LoseFuelAmount(float amount)
     {
-        currentFuel -= fuelLossPerSecond * Time.deltaTime;
+        currentFuel -= amount * Time.deltaTime;
         return;
     }
 
@@ -52,6 +59,15 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         fuelDisplay.UpdateBar(currentFuel, maxFuel);
         if (currentFuel <= 0) {
             LevelManager.Instance.EndGame();
+        }
+        if (canBoost == false)
+        {
+            boostTimer += 1 * Time.fixedDeltaTime;
+            if(boostTimer >= boostCooldown)
+            {
+                canBoost = true;
+                boostTimer = 0;
+            }
         }
         return;
     }
@@ -111,8 +127,19 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         if(currentFuel > 0)
         {
             ship.GetBodyComponent.AddForce(_direction * thrust);
-            LoseFuel();
+            LoseFuelAmount(fuelLossPerSecond);
         }
+    }
+
+    public void ApplyBoost(Vector3 _direction)
+    {
+        if (currentFuel > 0 && canBoost)
+        {
+            ship.GetBodyComponent.AddForce(_direction * boost);
+            LoseFuelAmount(fuelLossPerBoost);
+            canBoost = false;
+        }
+
     }
 
     public void OnGameEvent(BlackholeEvent _blackHoleEvent)

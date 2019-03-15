@@ -209,6 +209,7 @@ MonoBehaviour:
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 114494846662596814}
   gravitationalField: {fileID: 58951071852926638}
+  autoDestroyComponent: {fileID: 0}
   rechargeValue: 100
   rechargeCooldown: 0
   cooldownTimer: 0
@@ -223,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21061d08f11a7b0408a01e8dac6eb087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 1
+  state: 0
   type: 1
 --- !u!212 &212130416342089136
 SpriteRenderer:

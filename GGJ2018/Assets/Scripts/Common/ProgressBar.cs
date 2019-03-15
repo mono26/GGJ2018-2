@@ -8,12 +8,18 @@ public class ProgressBar : MonoBehaviour
     protected Image progressBar;
     [SerializeField]
     protected float _percent;
+    [SerializeField]
+    protected Color fullGasColor;
+    [SerializeField]
+    protected Color midGasColor;
+    [SerializeField]
+    protected Color lowGasColor;
 
     protected void Awake()
     {
         if(progressBar == null)
             progressBar = transform.Find("ProgressFill").GetComponent<Image>();
-
+        progressBar.color = fullGasColor;
         return;
     }
 
@@ -24,6 +30,10 @@ public class ProgressBar : MonoBehaviour
         {
             progressBar.fillAmount = _percent;
         }
+        if (_percent < 0.6)
+            progressBar.color = midGasColor;
+        if (_percent < 0.3)
+            progressBar.color = lowGasColor;
 
         return;
     }

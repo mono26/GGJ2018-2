@@ -9,14 +9,14 @@ public class ExternalInput : ShipComponent
     [SerializeField] string horizontalID = "";
     [SerializeField] string verticalID = "";
     [SerializeField] string rayID = "";
-    [SerializeField] string radarID = "";
+    [SerializeField] string boostID = "";
     [SerializeField] string shieldID = "";
 
 	[Header("External Input editor debugging")]
     [SerializeField] float horizontalInput; 
     [SerializeField] float verticalInput;
     [SerializeField] bool rayInput = false;
-    [SerializeField] bool radarInput = false;
+    [SerializeField] bool boostInput = false;
     [SerializeField] bool shieldInput = false;
 
     private void OnEnable() 
@@ -29,7 +29,7 @@ public class ExternalInput : ShipComponent
         InputManager.RegisterAxis(verticalID);
         InputManager.RegisterAxis(horizontalID);
         InputManager.RegisterButton(rayID);
-        InputManager.RegisterButton(radarID);
+        InputManager.RegisterButton(boostID);
         InputManager.RegisterButton(shieldID);
     }
 
@@ -43,14 +43,14 @@ public class ExternalInput : ShipComponent
         InputManager.UnRegisterAxis(verticalID);
         InputManager.UnRegisterAxis(horizontalID);
         InputManager.UnRegisterButton(rayID);
-        InputManager.UnRegisterButton(radarID);
+        InputManager.UnRegisterButton(boostID);
         InputManager.UnRegisterButton(shieldID);
     }
 
     public override void EveryFrame()
     {
         GetTheInput();
-        ship.ReceiveInput(new ShipInput(horizontalInput, verticalInput, rayInput, radarInput, shieldInput));
+        ship.ReceiveInput(new ShipInput(horizontalInput, verticalInput, rayInput, boostInput, shieldInput));
     }
 
     protected virtual void GetTheInput()
@@ -58,7 +58,7 @@ public class ExternalInput : ShipComponent
         horizontalInput = InputManager.GetAxisValue(horizontalID);
         verticalInput = InputManager.GetAxisValue(verticalID);
         // TODO check if its better to dot with a button.
-        radarInput = InputManager.GetButtonState(radarID).Equals(InputButtonStates.Down) ? true : false;
+        boostInput = InputManager.GetButtonState(boostID).Equals(InputButtonStates.Down) ? true : false;
         rayInput = InputManager.GetButtonState(rayID).Equals(InputButtonStates.Down) ? true : false;
         shieldInput = InputManager.GetButtonState(shieldID).Equals(InputButtonStates.Down) ? true : false;
     }

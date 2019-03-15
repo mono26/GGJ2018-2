@@ -9,19 +9,17 @@ public class LevelUIManager : Singleton<LevelUIManager>
     [SerializeField]
     private GameObject pauseUI;
     [SerializeField]
-    private GameObject winUI;
+    private GameObject boostButton, rayButton;
     [SerializeField]
-    private GameObject radarButton, rayButton;
-    [SerializeField]
-    private GameObject movementJoystick, radarFrequencyJoystick;
+    private GameObject movementJoystick;
 
     protected override void Awake()
     {
         base.Awake();
 
         Transform inputContainer = transform.Find("Virtual_Input");
-        if (radarButton == null) {
-            radarButton = inputContainer.Find("Radar_Button").gameObject;
+        if (boostButton == null) {
+            boostButton = inputContainer.Find("Boost_Button").gameObject;
         }
         if (rayButton == null) {
             rayButton = inputContainer.Find("Ray_Button").gameObject;
@@ -35,9 +33,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
         if (pauseUI == null) {
             pauseUI = inputContainer.Find("PauseUI").gameObject;
         }
-        if (winUI == null) {
-            winUI = inputContainer.Find("WinGameUI").gameObject;
-        }
         if (gameOverUI == null) {
             gameOverUI = inputContainer.Find("GameOverUI").gameObject;
         }
@@ -48,7 +43,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
     {
         ActivatePauseUI(false);
         ActivateGameOverUI(false);
-        ActivateWinUI(false);
         return;
     }
 
@@ -67,12 +61,10 @@ public class LevelUIManager : Singleton<LevelUIManager>
         
     }
 
-    public void ActivateWinUI(bool _active) { winUI.SetActive(_active); }
-
     public void ActivatePlayerControls(bool _active)
     {
         movementJoystick.SetActive(_active);
-        radarButton.SetActive(_active);
+        boostButton.SetActive(_active);
         rayButton.SetActive(_active);
     }
 
@@ -81,9 +73,9 @@ public class LevelUIManager : Singleton<LevelUIManager>
     {
         switch (_buttonToActivate)
         {
-            case "RadarButton":
+            case "BoostButton":
             {
-                radarButton.SetActive(_buttonState);
+                boostButton.SetActive(_buttonState);
                 break;
             }
             case "RayButton":
