@@ -19,6 +19,7 @@ public class AlienPlanet : Planet
         if (aliens.Count == 0)
         {
             signal.TurnSignal(SignalEmitter.SignalState.OFF);
+            return;
         }
     }
 
@@ -55,7 +56,8 @@ public class AlienPlanet : Planet
     {
         for(int i = aliens.Count - 1; i > -1; i--)
         {
-            if(aliens[i] == null)
+            // TODO remover lista y usar array
+            if(!aliens[i].gameObject.activeInHierarchy)
             {
                 aliens.RemoveAt(i);
                 continue;

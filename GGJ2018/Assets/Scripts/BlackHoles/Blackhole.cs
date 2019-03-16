@@ -26,12 +26,26 @@ public class Blackhole : Planet
 {
     [Header("Black Hole settings")]
     protected float minimumDistanceToCenter;
+    float currentSize = 0;
 
     protected override void Start() 
     {
         base.Start();
 
         gravitySource = GravitySourceType.Blackhole;
+    }
+
+    void OnEnable() 
+    {
+        currentSize = 0;
+    }
+    void Update()
+    {
+		transform.localScale = new Vector3 (currentSize, currentSize, 1);
+		currentSize += Time.deltaTime/2;
+		currentSize = Mathf.Clamp(currentSize, 0, 1);
+
+		transform.localScale = new Vector3 (currentSize, currentSize, 1);
     }
 
     protected void CheckObjectsDistanceToCenter()

@@ -43,7 +43,7 @@ public class Radar : ShipComponent
             List<Planet> nearPlanets = new List<Planet>();
             foreach (Collider2D obj in nearObjects)
             {
-                if (obj.gameObject.CompareTag("Planet"))
+                if (obj.gameObject.CompareTag("Planet") || obj.gameObject.CompareTag("FuelPlanet"))
                 {
                     Planet planetComponent = obj.GetComponent<Planet>();
                     if (planetComponent == null)
@@ -59,7 +59,7 @@ public class Radar : ShipComponent
                         continue;
                     }
 
-                    Debug.LogError("Planet found");
+                    Debug.LogError("Found planet: " + planetComponent.gameObject.name);
                     nearPlanets.Add(planetComponent);
                 }
             }
@@ -83,7 +83,6 @@ public class Radar : ShipComponent
         int planet = 0;
         for (int i = 0; i < _planetsToCheck.Count; i++)
         {
-            Debug.Log(_planetsToCheck[i].gameObject.name);
             float distance = CalculateSqrDistanceToPlanet(_planetsToCheck[i]);
             if (minDistance > distance)
             {
