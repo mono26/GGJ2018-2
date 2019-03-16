@@ -14,6 +14,14 @@ public class AlienPlanet : Planet
         signal.TurnSignal(SignalEmitter.SignalState.ON);
     }
 
+    void Update()
+    {
+        if (aliens.Count == 0)
+        {
+            signal.TurnSignal(SignalEmitter.SignalState.OFF);
+        }
+    }
+
     void SpawnAliensInPlanet()
     {
         for (int i = 0; i < numberOfAliens; i++)

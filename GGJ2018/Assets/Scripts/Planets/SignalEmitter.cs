@@ -8,11 +8,10 @@ public class SignalEmitter : MonoBehaviour
     public enum SignalState { ON, OFF }
 
     [Header("Editor debugging")]
-    [SerializeField]
-    protected SignalState state = SignalState.OFF;
-    [SerializeField]
-    protected SignalType type;
+    [SerializeField] SignalState state = SignalState.OFF;
+    [SerializeField] SignalType type;
     public SignalType Type { get { return type; } }
+    public SignalState GetState { get {return state; } }
 
     public void TurnSignal(SignalState _state)
     {

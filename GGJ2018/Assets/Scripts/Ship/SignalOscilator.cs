@@ -50,7 +50,8 @@ public class SignalOscilator : ShipComponent
         }
 
         isOscilatorOn = false;
-        TurnOscilatorOn();
+        
+        ToggleOscilator();
     }
 
     void LocateSignalOscilatorInTheWorld()
@@ -80,12 +81,12 @@ public class SignalOscilator : ShipComponent
     {
         if (radar.FoundPlanetsWithSignal != null)
         {
-            if (radar.FoundPlanetsWithSignal.Signal.Type == SignalEmitter.SignalType.AlienPlanet)
+            if (radar.FoundPlanetsWithSignal.GetSignal.Type == SignalEmitter.SignalType.AlienPlanet)
             {
                 oscilator.startColor = planetSignal;
                 oscilator.endColor = planetSignal;
             }
-            if (radar.FoundPlanetsWithSignal.Signal.Type == SignalEmitter.SignalType.FuelPlanet)
+            if (radar.FoundPlanetsWithSignal.GetSignal.Type == SignalEmitter.SignalType.FuelPlanet)
             {
                 oscilator.startColor = gasStationSignal;
                 oscilator.endColor = gasStationSignal;
@@ -119,13 +120,12 @@ public class SignalOscilator : ShipComponent
         }
     }
 
-    public void ToggleOscilator()
+    void ToggleOscilator()
     {
         isOscilatorOn = !isOscilatorOn;
         if (isOscilatorOn) 
         {
             oscilatorUpdate = StartCoroutine(UpdateSignalOscilator());
-
         }
 
         if (!isOscilatorOn && oscilatorUpdate != null)
@@ -142,5 +142,25 @@ public class SignalOscilator : ShipComponent
         {
             oscilator.gameObject.SetActive(isOscilatorOn);
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D _collider) 
+    {
+        if (!_collider.CompareTag("GravitationField"))
+        {
+            return;
+        }
+        
+        ToggleOscilator();
+    }
+
+    void OnTriggerExit2D(Collider2D other) 
+    {
+        if (!other.CompareTag("GravitationField"))
+        {
+            return;
+        }
+
+        ToggleOscilator();
     }
 }

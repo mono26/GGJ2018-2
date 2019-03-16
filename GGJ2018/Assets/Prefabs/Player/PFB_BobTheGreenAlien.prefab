@@ -1556,12 +1556,6 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
   rayLenght: 3
   isOscilatorOn: 0
 --- !u!114 &114084582516287356
@@ -2380,14 +2374,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 114020360296148358}
   fuelLossPerSecond: 1.5
-  fuelLossPerBoost: 1500
+  fuelLossPerBoost: 5
   maxFuel: 2500
   thrust: 2300
-  boost: 4600
+  boost: 3000
   fuelDisplay: {fileID: 114890448170325758}
   currentFuel: 0
   canBoost: 0
-  boostCooldown: 8
+  boostCooldown: 0
   boostTimer: 0
 --- !u!114 &114629711560785046
 MonoBehaviour:
@@ -2694,9 +2688,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 114843640438275710}
   _percent: 0
-  fullGasColor: {r: 0.53782964, g: 1, b: 0.31617647, a: 0.7058824}
-  midGasColor: {r: 1, g: 0.79107505, b: 0.24264705, a: 0.7058824}
-  lowGasColor: {r: 1, g: 0.40669373, b: 0.1397059, a: 0.7058824}
+  fullGasColor: {r: 0, g: 0, b: 0, a: 0}
+  midGasColor: {r: 0, g: 0, b: 0, a: 0}
+  lowGasColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114907072513685842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2778,7 +2772,7 @@ MonoBehaviour:
   horizontalID: Horizontal
   verticalID: Vertical
   rayID: RayButton
-  boostID: BoostButton
+  boostID: 
   shieldID: ShieldButton
   horizontalInput: 0
   verticalInput: 0

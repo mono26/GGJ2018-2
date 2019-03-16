@@ -25,7 +25,7 @@ public class Planet : SpawnableObject
     [SerializeField] protected List<IAffectedByGravity> objsInGravitationField = new List<IAffectedByGravity>();
 
     public float GetGravFieldRadius { get { return GetRadius + minGravFieldDistFromPlanet; } }
-    public SignalEmitter Signal { get { return signal; } }
+    public SignalEmitter GetSignal { get { return signal; } }
 
     bool alreadyAwaked = false;
 

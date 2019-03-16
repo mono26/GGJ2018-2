@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO hacer que solo se muestre el planeta mas cercano siempre.
 public class Radar : ShipComponent
 {
     [Header("Radar settings")]
@@ -25,6 +24,8 @@ public class Radar : ShipComponent
         foundPlanetWithSignal = null;
 
         isRadarOn = false;
+
+        ToggleRadar();
     }
 
     protected void OnDrawGizmos()
@@ -49,7 +50,11 @@ public class Radar : ShipComponent
                     {
                         planetComponent = obj.GetComponentInParent<Planet>();
                     }
-                    if (planetComponent == null || planetComponent.Signal ==  null) 
+                    if (planetComponent == null || planetComponent.GetSignal ==  null) 
+                    {
+                        continue;
+                    }
+                    if (planetComponent.GetSignal.GetState == SignalEmitter.SignalState.OFF)
                     {
                         continue;
                     }
@@ -117,7 +122,27 @@ public class Radar : ShipComponent
         distanceDetection = StartCoroutine(CheckIfPlanetIsOutOfBoundsAndRemove());
     }
 
-    public void ToggleRadar()
+    void OnTriggerEnter2D(Collider2D _collider) 
+    {
+        if (!_collider.CompareTag("GravitationField"))
+        {
+            return;
+        }
+        
+        ToggleRadar();
+    }
+
+    void OnTriggerExit2D(Collider2D other) 
+    {
+        if (!other.CompareTag("GravitationField"))
+        {
+            return;
+        }
+
+        ToggleRadar();
+    }
+
+    void ToggleRadar()
     {
         isRadarOn = !isRadarOn;
         if (isRadarOn) 

@@ -98,7 +98,6 @@ public class Ship : MonoBehaviour, IAffectedByGravity
     {
         LevelUIManager.Instance.DisplayInputButton("BoostButton", true);
         LevelUIManager.Instance.DisplayInputButton("RayButton", false);
-        ToggleShipRadar();
     }
 
     private void Update ()
@@ -134,12 +133,6 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         atractorRayComponent.ToggleRay();
     }
 
-    void ToggleShipRadar()
-    {
-        radarComponent.ToggleRadar();
-        oscilatorComponent.ToggleOscilator();
-    }
-
     void ToggleShipShield()
     {
         shieldComponent.ToggleShield();
@@ -166,7 +159,6 @@ public class Ship : MonoBehaviour, IAffectedByGravity
 
     private void ApplyBoost()
     {
-
         if (engineComponent == null)
         {
             return;
@@ -179,19 +171,6 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D _collider)
-    {
-        if (!_collider.CompareTag("GravitationField"))
-        {
-            return;
-        }
-
-
-
-        
-        ToggleShipRadar();
-    }
-
     void OnTriggerStay2D(Collider2D _collider)
     {
         if (!_collider.CompareTag("GravitationField"))
@@ -201,7 +180,6 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         // Changes active buttons on GUI if it enters a planet
         LevelUIManager.Instance.DisplayInputButton("BoostButton", false);
         LevelUIManager.Instance.DisplayInputButton("RayButton", true);
-
     }
 
     void OnTriggerExit2D(Collider2D _collider)
@@ -218,8 +196,6 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         {
             ToggleShipRay();
         }
-
-        ToggleShipRadar();
     }
 
     public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
