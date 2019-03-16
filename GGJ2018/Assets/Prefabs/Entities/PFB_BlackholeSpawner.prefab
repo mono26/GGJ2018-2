@@ -26,7 +26,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4114037570164158
 Transform:
   m_ObjectHideFlags: 1
@@ -59,6 +59,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 10496
   minDistanceFromPlayer: 6
-  maxDistanceFromPlayer: 5
+  maxDistanceFromPlayer: 9
   player: {fileID: 0}
   spawnSound: {fileID: 8300000, guid: 9d0e7338342720548889c0207d653fec, type: 3}
