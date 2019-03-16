@@ -55,7 +55,7 @@ public class ShipSounds : MonoBehaviour
 			StopShieldSound();
 		}
 
-		float currentFuel = ship.GetEngineComponent.GetCurrentFuel;
+		float currentFuel = ship.GetEngineComponent.CurrentFuel;
 		if (currentFuel > lastFuelAmount)
 		{
 			PlayFueldRefilSound();
@@ -64,7 +64,7 @@ public class ShipSounds : MonoBehaviour
 
 	void LateUpdate() 
 	{
-		lastFuelAmount = ship.GetEngineComponent.GetCurrentFuel;
+		lastFuelAmount = ship.GetEngineComponent.CurrentFuel;
 	}
 
 	public void PlayRaySound()
@@ -82,7 +82,7 @@ public class ShipSounds : MonoBehaviour
 	public void PlayFueldRefilSound()
 	{
 		float maxFuel = ship.GetEngineComponent.GetMaxFuel;
-		float currentFuel = ship.GetEngineComponent.GetCurrentFuel;
+		float currentFuel = ship.GetEngineComponent.CurrentFuel;
 		float differenceBetweenLastAndCurrent = currentFuel - lastFuelAmount;
 		float duration = differenceBetweenLastAndCurrent / maxFuel;
 		SoundManager.Instance.PlaySoundInObject(ref shipAudio, fuelRefillSound, 0.3f, false, duration);
