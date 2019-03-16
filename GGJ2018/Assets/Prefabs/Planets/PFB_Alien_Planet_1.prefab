@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114159881713291538}
   - component: {fileID: 114935151904312158}
   m_Layer: 8
-  m_Name: Alien Planet 1
+  m_Name: PFB_Alien_Planet_1
   m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

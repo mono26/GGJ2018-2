@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 114163823014391876}
   - component: {fileID: 114424876709227678}
   m_Layer: 8
-  m_Name: Alien Planet 4
+  m_Name: PFB_Alien_Planet_4
   m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

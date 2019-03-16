@@ -168,9 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minLifeTime: 5
-  maxLifeTime: 15
+  maxLifeTime: 10
   spawnable: {fileID: 114255368610047976}
   autoDestroyEffect: {fileID: 114012983714267926}
+  lifeTimeCounter: 0
 --- !u!212 &212002400596311176
 SpriteRenderer:
   m_ObjectHideFlags: 1

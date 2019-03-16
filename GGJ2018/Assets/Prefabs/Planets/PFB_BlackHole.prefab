@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 50122391854520214}
   - component: {fileID: 58626897860147646}
   - component: {fileID: 212297474541861160}
-  - component: {fileID: 114413777442062686}
   - component: {fileID: 114974162859842386}
+  - component: {fileID: 114413777442062686}
   - component: {fileID: 82921163293262030}
   m_Layer: 13
   m_Name: PFB_BlackHole
@@ -249,8 +249,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minLifeTime: 5
   maxLifeTime: 15
-  spawnable: {fileID: 0}
+  spawnable: {fileID: 114974162859842386}
   autoDestroyEffect: {fileID: 0}
+  lifeTimeCounter: 0
 --- !u!114 &114974162859842386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -273,6 +274,7 @@ MonoBehaviour:
   minGravFieldDistFromPlanet: 10
   signal: {fileID: 0}
   gravitationalField: {fileID: 58733214615672322}
+  autoDestroyComponent: {fileID: 0}
 --- !u!198 &198009345818855504
 ParticleSystem:
   m_ObjectHideFlags: 1

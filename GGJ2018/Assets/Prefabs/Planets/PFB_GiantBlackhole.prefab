@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114520921145695574}
   - component: {fileID: 114145983075180590}
   m_Layer: 13
-  m_Name: GiantBlackhole
+  m_Name: PFB_GiantBlackhole
   m_TagString: Blackhole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   maxLifeTime: 7
   spawnable: {fileID: 114520921145695574}
   autoDestroyEffect: {fileID: 0}
-  delayForRelease: 0
+  lifeTimeCounter: 0
 --- !u!114 &114520921145695574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,7 +184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 5
   collisionBody: {fileID: 58137083601449790}
-  visualRenderer: {fileID: 212993732996086170}
   gravitationalFieldDirection: 1
   rotationSpeed: 20
   rotationForce: 200
@@ -194,6 +193,7 @@ MonoBehaviour:
   minGravFieldDistFromPlanet: 2
   signal: {fileID: 0}
   gravitationalField: {fileID: 58147810658383690}
+  autoDestroyComponent: {fileID: 0}
 --- !u!198 &198222371435537922
 ParticleSystem:
   m_ObjectHideFlags: 1

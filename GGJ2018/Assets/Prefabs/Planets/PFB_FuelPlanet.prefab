@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 114412541303669888}
   - component: {fileID: 114494846662596814}
   - component: {fileID: 61445221890668144}
-  - component: {fileID: 114080694058000922}
   m_Layer: 8
   m_Name: PFB_FuelPlanet
   m_TagString: FuelPlanet
@@ -198,20 +197,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.26, y: 0.89}
   m_EdgeRadius: 0
---- !u!114 &114080694058000922
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1491111122904462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab34439e3b0987145840394443495a10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reloadTime: 1
-  amountPerSecond: 20
-  engine: {fileID: 0}
 --- !u!114 &114412541303669888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -237,7 +222,7 @@ MonoBehaviour:
   autoDestroyComponent: {fileID: 0}
   rechargeValue: 100
   rechargeCooldown: 0
-  cooldownTimer: 0
+  refillEffect: {fileID: 0}
 --- !u!114 &114494846662596814
 MonoBehaviour:
   m_ObjectHideFlags: 1

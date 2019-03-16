@@ -916,20 +916,6 @@ Prefab:
       propertyPath: m_Name
       value: 'PFB_BlackholeSpawner '
       objectReference: {fileID: 0}
-    - target: {fileID: 1437263803463854, guid: 0d703d96b9bcee2449edbf7944d4a5b6, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114675835907499412, guid: 0d703d96b9bcee2449edbf7944d4a5b6,
-        type: 2}
-      propertyPath: layersToCheck.m_Bits
-      value: 10496
-      objectReference: {fileID: 0}
-    - target: {fileID: 114675835907499412, guid: 0d703d96b9bcee2449edbf7944d4a5b6,
-        type: 2}
-      propertyPath: spawnSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 9d0e7338342720548889c0207d653fec, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d703d96b9bcee2449edbf7944d4a5b6, type: 2}
   m_IsPrefabParent: 0
@@ -942,11 +928,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4218939198969006, guid: e9fc52c01928c814588868868247ff44, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4218939198969006, guid: e9fc52c01928c814588868868247ff44, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.92
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4218939198969006, guid: e9fc52c01928c814588868868247ff44, type: 2}
       propertyPath: m_LocalPosition.z
