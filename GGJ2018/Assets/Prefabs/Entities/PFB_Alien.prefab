@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114053472491642104}
   - component: {fileID: 114181395919061302}
   - component: {fileID: 114074011161693738}
+  - component: {fileID: 114661445491744808}
   m_Layer: 9
   m_Name: PFB_Alien
   m_TagString: Alien
@@ -103,7 +104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.5
   collisionBody: {fileID: 61978725436455394}
-  visualRenderer: {fileID: 212761370544525494}
   lifeTime: 5
   groundCheckDistance: 0.26
   planetsLayer:
@@ -135,10 +135,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0938ec99c51ee4899abf70c1eeed05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minLifeTime: 70
-  maxLifeTime: 80
+  minLifeTime: 5
+  maxLifeTime: 5
   spawnable: {fileID: 114053472491642104}
   autoDestroyEffect: {fileID: 114074011161693738}
+  enableTimedAutoDestroy: 0
+  lifeTimeCounter: 0
+--- !u!114 &114661445491744808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1493918104206506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e598367a94238bb4f8dd64f0683e8139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheckDistance: 0.5
+  planetsLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  bodyComponent: {fileID: 50765660470139336}
 --- !u!212 &212761370544525494
 SpriteRenderer:
   m_ObjectHideFlags: 1

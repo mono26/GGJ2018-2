@@ -4,7 +4,7 @@ using UnityEngine;
 public class AlienPlanet : Planet
 {
     [Header("Alien Planet settings")]
-    [SerializeField] int numberOfAliens;
+    [SerializeField] int numberOfAliens = 5;
 
     [SerializeField] List<Alien> aliens;
     [SerializeField] Transform aliensContainer;

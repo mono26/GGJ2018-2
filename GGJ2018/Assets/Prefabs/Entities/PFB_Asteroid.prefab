@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114184783772500382}
   - component: {fileID: 114359681202792326}
   - component: {fileID: 114012983714267926}
+  - component: {fileID: 114763723273823754}
   m_Layer: 12
   m_Name: PFB_Asteroid
   m_TagString: Asteroid
@@ -172,6 +173,22 @@ MonoBehaviour:
   spawnable: {fileID: 114255368610047976}
   autoDestroyEffect: {fileID: 114012983714267926}
   lifeTimeCounter: 0
+--- !u!114 &114763723273823754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1369015871017888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e598367a94238bb4f8dd64f0683e8139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheckDistance: 0.5
+  planetsLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  bodyComponent: {fileID: 50098178575817834}
 --- !u!212 &212002400596311176
 SpriteRenderer:
   m_ObjectHideFlags: 1

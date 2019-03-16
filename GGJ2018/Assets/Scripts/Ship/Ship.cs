@@ -25,7 +25,7 @@ public class ShipInput
 }
 
 // TODO Remove IAffectedByGravity
-public class Ship : MonoBehaviour, IAffectedByGravity
+public class Ship : MonoBehaviour
 {
     [Header("Ship components")]
     [SerializeField] BoxCollider2D hitBoxComponent = null;
@@ -199,29 +199,31 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         }
     }
 
-    public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
-    {
-        if(_gravitySource.Equals(GravitySourceType.Planet))
-        {
-            return;
-        }
+    // public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
+    // {
+    //     if(_gravitySource.Equals(GravitySourceType.Planet))
+    //     {
+    //         return;
+    //     }
 
-        // In case the user forgets to normalize the direction vector.
-        Vector3 normalizedDirection = _normalizedGravityDirection.normalized;
-        bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
-    }
+    //     // In case the user forgets to normalize the direction vector.
+    //     Vector3 normalizedDirection = _normalizedGravityDirection.normalized;
+    //     bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
+    // }
 
-    public void ApplyRotation(Vector2 _normalizedRotationDirection, float _rotationForce)
-    {
-        // In case the user forgets to normalize the direction vector.
-        Vector3 normalizedDirection = _normalizedRotationDirection.normalized;
-        bodyComponent.AddForce(_normalizedRotationDirection * _rotationForce, ForceMode2D.Force);
-    }
+    // public void ApplyRotation(Vector2 _normalizedRotationDirection, float _rotationForce)
+    // {
+    //     // In case the user forgets to normalize the direction vector.
+    //     Vector3 normalizedDirection = _normalizedRotationDirection.normalized;
+    //     bodyComponent.AddForce(_normalizedRotationDirection * _rotationForce, ForceMode2D.Force);
+    // }
 
-    public void RotateTowardsGravitationCenter(Vector2 _gravitationCenterDirection)
-    {
-        transform.up = _gravitationCenterDirection;
-    }
+    // public void RotateTowardsGravitationCenter(Vector2 _gravitationCenterDirection)
+    // {
+    //     Debug.DrawRay(transform.position, -_gravitationCenterDirection, Color.yellow, 10);
+    //     Debug.DrawRay(transform.position, -transform.up, Color.red, 10);
+    //     transform.up = _gravitationCenterDirection;
+    // }
 
     public void ReceiveInput(ShipInput _inputToRecieve)
     {

@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 114629711560785046}
   - component: {fileID: 114946330032410694}
   - component: {fileID: 114833942155326082}
+  - component: {fileID: 114010106321084200}
   m_Layer: 11
   m_Name: PFB_BobTheGreenAlien
   m_TagString: Player
@@ -952,7 +953,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052524117136162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.92, z: 0}
+  m_LocalPosition: {x: -5, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4993279399451076}
@@ -1441,6 +1442,22 @@ MonoBehaviour:
   ufoRay: {fileID: 1867904808052798}
   door: {fileID: 1080706513235740}
   isAlienRayOn: 0
+--- !u!114 &114010106321084200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1052524117136162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2b2fb079f88b141bc981bfee9eecfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheckDistance: 0.5
+  planetsLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  bodyComponent: {fileID: 50335388593032238}
 --- !u!114 &114020360296148358
 MonoBehaviour:
   m_ObjectHideFlags: 1

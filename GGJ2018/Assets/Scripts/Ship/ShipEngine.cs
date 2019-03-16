@@ -78,18 +78,6 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         return;
     }
 
-    private void OnCollisionEnter2D(Collision2D _collision)
-    {
-        if (_collision.gameObject.CompareTag("Alien") && this.GetComponent<AtractorRay>().IsAlienRayOn)
-        {
-            //RechargeFuel(10.0f);
-        }
-        if (_collision.gameObject.CompareTag("Alien") && !this.GetComponent<AtractorRay>().IsAlienRayOn)
-        {  
-            _collision.gameObject.SendMessage("TakeDamage");
-        }
-    }
-
     public void RechargeFuel(float _fuelToAdd)
     {
         currentFuel += _fuelToAdd;

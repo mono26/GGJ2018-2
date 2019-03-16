@@ -5,7 +5,7 @@ using UnityEngine;
 
 // TODO Remove IAffectedByGravity
 [RequireComponent(typeof(Rigidbody2D))]
-public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffectedByGravity
+public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>
 {
     [Header("Asteroid components")]
     [SerializeField] protected Rigidbody2D bodyComponent = null;
@@ -74,24 +74,24 @@ public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffected
         return centerReached;
     }
 
-    public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
-    {
-        // In case the user forgets to normalize the direction vector.
-        Vector3 normalizedDirection = _normalizedGravityDirection.normalized;
-        bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
-    }
+    // public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
+    // {
+    //     // In case the user forgets to normalize the direction vector.
+    //     Vector3 normalizedDirection = _normalizedGravityDirection.normalized;
+    //     bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
+    // }
 
-    public void ApplyRotation(Vector2 _normalizedRotationDirection, float _rotationForce)
-    {
-        // In case the user forgets to normalize the direction vector.
-        Vector3 normalizedDirection = _normalizedRotationDirection.normalized;
-        bodyComponent.AddForce(_normalizedRotationDirection * _rotationForce, ForceMode2D.Force);
-    }
+    // public void ApplyRotation(Vector2 _normalizedRotationDirection, float _rotationForce)
+    // {
+    //     // In case the user forgets to normalize the direction vector.
+    //     Vector3 normalizedDirection = _normalizedRotationDirection.normalized;
+    //     bodyComponent.AddForce(_normalizedRotationDirection * _rotationForce, ForceMode2D.Force);
+    // }
 
-    public void RotateTowardsGravitationCenter(Vector2 _gravitationCenterDirection)
-    {
-        return;
-    }
+    // public void RotateTowardsGravitationCenter(Vector2 _gravitationCenterDirection)
+    // {
+    //     return;
+    // }
 
     public void OnGameEvent(BlackholeEvent _blackHoleEvent)
     {

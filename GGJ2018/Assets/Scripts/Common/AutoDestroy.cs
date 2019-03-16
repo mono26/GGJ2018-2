@@ -8,25 +8,14 @@ public class AutoDestroy : MonoBehaviour
 	[SerializeField] int minLifeTime = 5, maxLifeTime = 15;
 	[SerializeField] SpawnableObject spawnable = null;
 	[SerializeField] AutoDestroyEffect autoDestroyEffect = null;
+	[SerializeField] bool enableTimedAutoDestroy = true;
 
 	[Header("Editor debugging")]
 	[SerializeField] float lifeTimeCounter;
 
-	public int GetMinLifeTime
-	{
-		get
-		{
-			return minLifeTime;
-		}
-	}
+	public int GetMinLifeTime { get { return minLifeTime; } }
 
-	public int GetMaxLifeTime
-	{
-		get
-		{
-			return maxLifeTime;
-		}
-	}
+	public int GetMaxLifeTime { get { return maxLifeTime; } }
 
 	void Awake() 
 	{
@@ -43,12 +32,22 @@ public class AutoDestroy : MonoBehaviour
 
 	void OnEnable() 
 	{	
+		if (!enableTimedAutoDestroy)
+		{
+			return;
+		}
+
 		int lifeTime = Random.Range(minLifeTime, maxLifeTime);
 		lifeTimeCounter = lifeTime;
 	}
 
 	void Update() 
 	{	
+		if (!enableTimedAutoDestroy)
+		{
+			return;
+		}
+		
 		lifeTimeCounter -= Time.deltaTime;
 
 		if (lifeTimeCounter <= 0)

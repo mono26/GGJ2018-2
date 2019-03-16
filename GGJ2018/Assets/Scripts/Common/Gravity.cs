@@ -2,33 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gravity : MonoBehaviour, IAffectedByGravity 
+public class Gravity : MonoBehaviour, IAffectedByGravity
 {
 	[Header("Settings")]
 	[SerializeField] float groundCheckDistance = 0.5f;
-    [SerializeField] LayerMask planetsLayer = 1 << LayerMask.NameToLayer("Planet");
+    [SerializeField] LayerMask planetsLayer;
 
 	[Header("Dependencies")]
 	[SerializeField] Rigidbody2D bodyComponent;
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
-	public virtual void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
+	public virtual void ApplyGravity(Planet _planet)
     {
         if(IsOnGround())
         {
             return;
         }
 
+        Vector2 directionToCenter = ((Vector2)_planet.transform.position - (Vector2)transform.position).normalized;
+        float gravityForceToApply = _planet.GetGravityForce * GetBodyComponent.mass;
+
         // In case the user forgets to normalize the direction vector.
-        Vector3 normalizedDirection = _normalizedGravityDirection.normalized;
-        bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
+        bodyComponent.AddForce(directionToCenter * gravityForceToApply * Time.fixedDeltaTime, ForceMode2D.Force);
     }
 
 	bool IsOnGround()
     {
         bool touchingGround = false;
         var groundHit = Physics2D.Raycast(transform.position, -transform.up, groundCheckDistance, planetsLayer);
-        if(groundHit.collider != null) 
+        if(groundHit.collider != null)
         {
             if(groundHit.collider.CompareTag("Planet"))
             {
@@ -38,15 +40,24 @@ public class Gravity : MonoBehaviour, IAffectedByGravity
         return touchingGround;
     }
 
-    public void ApplyRotation(Vector2 _normalizedRotationDirection, float _rotationSpeed)
+    public void ApplyRotation(Planet _planet)
     {
+        Vector2 directionToCenter = ((Vector2)transform.position - (Vector2)_planet.transform.position).normalized;
+        Vector2 directionToCenterTanget = new Vector2(-directionToCenter.y, directionToCenter.x).normalized * _planet.GetGravFieldDirection;
+        // Debug.DrawRay(transform.position, directionToCenterTanget, Color.green, 3);
+        float rotationForceToApply = _planet.GetRotationForce * GetBodyComponent.mass;
+
         // In case the user forgets to normalize the direction vector.
-        Vector3 normalizedDirection = _normalizedRotationDirection.normalized;
-        bodyComponent.AddForce(_normalizedRotationDirection * _rotationSpeed, ForceMode2D.Force);
+        bodyComponent.AddForce(directionToCenterTanget * rotationForceToApply * Time.fixedDeltaTime, ForceMode2D.Force);
     }
 
-	public void RotateTowardsGravitationCenter(Vector2 _gravitationCenterDirection)
+	public void RotateTowardsGravitationCenter(Planet _planet)
     {
-        transform.up = _gravitationCenterDirection;
+        // Debug.DrawLine(transform.position, _planet.transform.position, Color.yellow, 3);
+        Vector2 directionToCenter = ((Vector2)transform.position - (Vector2)_planet.transform.position).normalized;
+        // Debug.DrawRay(transform.position, directionToCenter, Color.green, 3);
+        Vector2 targetRotation = Vector2.Lerp((Vector2)transform.up, directionToCenter, 0.05f);
+
+        transform.up = targetRotation;
     }
 }

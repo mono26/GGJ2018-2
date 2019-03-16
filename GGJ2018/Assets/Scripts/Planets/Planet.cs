@@ -7,24 +7,28 @@ public class Planet : SpawnableObject
 {
     [Header("Planet settings")]
     [SerializeField][Range(-1,1)] int gravitationalFieldDirection = 1; // +1 left, -1 right
+    // TODO create rotation component
     [SerializeField] float rotationSpeed = 4.4f;
     [SerializeField] float rotationForce = 9.8f;
     [SerializeField] float gravityForce = 9.8f;
+    [SerializeField] float gravFieldRadius = 14;
     [SerializeField] protected GravitySourceType gravitySource;
-    [SerializeField] bool playerInGravitationalField;
-    [SerializeField] float minGravFieldDistFromPlanet = 10.0f;
+    [SerializeField] bool playerInGravitationalField = false;
 
     [Header("Planet components")]
-    [SerializeField]
-    protected SignalEmitter signal;
-    [SerializeField] CircleCollider2D gravitationalField;
+    [SerializeField] protected SignalEmitter signal;
+    [SerializeField] CircleCollider2D gravitationalField = null;
 
     [SerializeField] AutoDestroy autoDestroyComponent = null;
 
     [Header("Planet editor debuggin")]
     [SerializeField] protected List<IAffectedByGravity> objsInGravitationField = new List<IAffectedByGravity>();
 
-    public float GetGravFieldRadius { get { return GetRadius + minGravFieldDistFromPlanet; } }
+    public float GetRotationForce { get { return rotationForce; } }
+    public float GetGravityForce { get { return gravityForce; } }
+    public float GetGravFieldRadius { get { return gravFieldRadius; } }
+    public int GetGravFieldDirection { get { return gravitationalFieldDirection; } }
+    public GravitySourceType GetGravitySource { get { return gravitySource; } }
     public SignalEmitter GetSignal { get { return signal; } }
 
     bool alreadyAwaked = false;
@@ -52,7 +56,7 @@ public class Planet : SpawnableObject
 
         if(gravitationalField != null)
         {
-            gravitationalField.radius = GetGravFieldRadius;
+            gravFieldRadius = gravitationalField.radius;
         }
 
         if (signal == null)
@@ -101,13 +105,9 @@ public class Planet : SpawnableObject
                 continue;
             }
 
-            Vector2 directionFromObjectToCenter = (objsInGravitationField[i].GetBodyComponent.position - (Vector2)transform.position).normalized;
-            Vector2 tangentToDirectionToTheObject = new Vector2(-directionFromObjectToCenter.y, directionFromObjectToCenter.x).normalized * gravitationalFieldDirection;
-            float rotationForceToApply = rotationForce * objsInGravitationField[i].GetBodyComponent.mass;
-
-            objsInGravitationField[i].ApplyRotation(tangentToDirectionToTheObject, rotationForceToApply * Time.fixedDeltaTime);
+            objsInGravitationField[i].ApplyRotation(this);
             // Becuse we are using the opposite of the transform.up for the lerp. We must use the opposite of the lerp.
-            objsInGravitationField[i].RotateTowardsGravitationCenter(Vector2.Lerp(objsInGravitationField[i].GetBodyComponent.transform.up, directionFromObjectToCenter, 0.05f));
+            objsInGravitationField[i].RotateTowardsGravitationCenter(this);
         }
     }
 
@@ -126,10 +126,7 @@ public class Planet : SpawnableObject
                 continue;
             }
 
-            Vector2 directionFromObjectToCenter = objsInGravitationField[i].GetBodyComponent.position - (Vector2)transform.position;
-            float gravityForceToApply = gravityForce * objsInGravitationField[i].GetBodyComponent.mass;
-
-            objsInGravitationField[i].ApplyGravity(-directionFromObjectToCenter.normalized, gravityForceToApply * Time.fixedDeltaTime, gravitySource);
+            objsInGravitationField[i].ApplyGravity(this);
         }
     }
 
