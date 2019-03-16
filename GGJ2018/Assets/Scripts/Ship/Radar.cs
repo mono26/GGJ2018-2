@@ -59,7 +59,6 @@ public class Radar : ShipComponent
                         continue;
                     }
 
-                    Debug.LogError("Found planet: " + planetComponent.gameObject.name);
                     nearPlanets.Add(planetComponent);
                 }
             }

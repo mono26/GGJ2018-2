@@ -35,6 +35,5 @@ public abstract class Spawner : MonoBehaviour
     public virtual void Spawn()
     {
         spawnTimer = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-        return;
     }
 }

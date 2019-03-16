@@ -21,7 +21,7 @@ public interface IAffectedByGravity
     /// </summary>
     /// <param name="_direction"> The normalized direction of the gravity.</param>
     /// <param name="_force"> The amount of force to apply. Not affected by DeltaTime or FixedDeltaTime.</param>
-    void ApplyRotationSpeed(Vector2 _direction, float _force);
+    void ApplyRotation(Vector2 _direction, float _force);
 
     /// <summary>
     /// Rotate the objects so it is aligned towards the center of the gravitational field. Using the transform up vector.

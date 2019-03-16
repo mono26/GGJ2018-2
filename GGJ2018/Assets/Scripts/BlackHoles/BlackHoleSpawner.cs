@@ -15,11 +15,11 @@ public class BlackHoleSpawner : Spawner
     protected override void Update()
     {
         base.Update();
+
         if (spawnTimer <= 0) 
         {
             Spawn();
         }
-        return;
 	}
 
     public override void Spawn()
@@ -35,20 +35,23 @@ public class BlackHoleSpawner : Spawner
                 SoundManager.Instance.PlaySoundInPosition(transform.position, spawnSound, 0.5f);
                 break;
             }
-            else if (i == maxTriesToSpawn - 1){
+            else if (i == maxTriesToSpawn - 1)
+            {
                 ReturnUnabledToSpawnBlackhole(spawnedBlackhole);
             }
         }
+
         base.Spawn();
-        return;
     }
 
     private Vector3 CalculateRandomPosition()
     {
         float randomDistance = Random.Range(minDistanceFromPlayer, maxDistanceFromPlayer);
-        float xDistance = Random.Range(-randomDistance, randomDistance);
-        float yDistance = Random.Range(-randomDistance, randomDistance);
-        Vector3 spawnPosition = player.transform.position + new Vector3(xDistance, yDistance);
+        int angle = Random.Range(0, 360);
+        float x = Mathf.Cos(angle) * randomDistance;
+        float y = Mathf.Sin(angle) * randomDistance;
+
+        Vector3 spawnPosition = player.transform.position + new Vector3(x, y);
         return spawnPosition;
     }
 

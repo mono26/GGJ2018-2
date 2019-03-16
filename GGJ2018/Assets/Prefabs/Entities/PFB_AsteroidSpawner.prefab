@@ -26,7 +26,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4798524169299984
 Transform:
   m_ObjectHideFlags: 1
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTimer: 0
-  minTimeToSpawn: 3
+  minTimeToSpawn: 5
   maxTimeToSpawn: 12
   maxTriesToSpawn: 10
   layersToCheck:

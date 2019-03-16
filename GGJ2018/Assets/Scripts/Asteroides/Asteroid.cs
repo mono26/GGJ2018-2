@@ -3,6 +3,7 @@
 using System.Collections;
 using UnityEngine;
 
+// TODO Remove IAffectedByGravity
 [RequireComponent(typeof(Rigidbody2D))]
 public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffectedByGravity
 {
@@ -80,7 +81,7 @@ public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>, IAffected
         bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
     }
 
-    public void ApplyRotationSpeed(Vector2 _normalizedRotationDirection, float _rotationForce)
+    public void ApplyRotation(Vector2 _normalizedRotationDirection, float _rotationForce)
     {
         // In case the user forgets to normalize the direction vector.
         Vector3 normalizedDirection = _normalizedRotationDirection.normalized;

@@ -105,7 +105,7 @@ public class Planet : SpawnableObject
             Vector2 tangentToDirectionToTheObject = new Vector2(-directionFromObjectToCenter.y, directionFromObjectToCenter.x).normalized * gravitationalFieldDirection;
             float rotationForceToApply = rotationForce * objsInGravitationField[i].GetBodyComponent.mass;
 
-            objsInGravitationField[i].ApplyRotationSpeed(tangentToDirectionToTheObject, rotationForceToApply * Time.fixedDeltaTime);
+            objsInGravitationField[i].ApplyRotation(tangentToDirectionToTheObject, rotationForceToApply * Time.fixedDeltaTime);
             // Becuse we are using the opposite of the transform.up for the lerp. We must use the opposite of the lerp.
             objsInGravitationField[i].RotateTowardsGravitationCenter(Vector2.Lerp(objsInGravitationField[i].GetBodyComponent.transform.up, directionFromObjectToCenter, 0.05f));
         }

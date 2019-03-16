@@ -3,6 +3,7 @@
 using System.Collections;
 using UnityEngine;
 
+// TODO Remove IAffectedByGravity
 [RequireComponent(typeof(Rigidbody2D))]
 public class Alien : SpawnableObject, IAffectedByGravity
 {
@@ -58,7 +59,7 @@ public class Alien : SpawnableObject, IAffectedByGravity
 
         if(deathRoutine == null)
         {
-                return;
+            return;
         }
             
         StopCoroutine(deathRoutine);
@@ -97,8 +98,11 @@ public class Alien : SpawnableObject, IAffectedByGravity
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-           // destroyComponent.AutoDestroy();
-            //LevelManager.Instance.IncreaseScore();
+            // El component de AutoDestruccion se encargar de Spawnear la particula y de hacer relese al Pool
+            // destroyComponent.AutoDestroyObject();
+            // Si no se quiere que el component de AutoDestruccion maneje el Release al pool. NOTA: No se reproduce ninguna particula de esta manera.
+            Release();
+            LevelManager.Instance.IncreaseScore();
         }
 
         if (collision.gameObject.CompareTag("Asteroid"))
@@ -125,7 +129,7 @@ public class Alien : SpawnableObject, IAffectedByGravity
         bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
     }
 
-    public void ApplyRotationSpeed(Vector2 _normalizedRotationDirection, float _rotationSpeed)
+    public void ApplyRotation(Vector2 _normalizedRotationDirection, float _rotationSpeed)
     {
         // In case the user forgets to normalize the direction vector.
         Vector3 normalizedDirection = _normalizedRotationDirection.normalized;

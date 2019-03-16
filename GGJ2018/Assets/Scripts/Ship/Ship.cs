@@ -24,6 +24,7 @@ public class ShipInput
     }
 }
 
+// TODO Remove IAffectedByGravity
 public class Ship : MonoBehaviour, IAffectedByGravity
 {
     [Header("Ship components")]
@@ -210,7 +211,7 @@ public class Ship : MonoBehaviour, IAffectedByGravity
         bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
     }
 
-    public void ApplyRotationSpeed(Vector2 _normalizedRotationDirection, float _rotationForce)
+    public void ApplyRotation(Vector2 _normalizedRotationDirection, float _rotationForce)
     {
         // In case the user forgets to normalize the direction vector.
         Vector3 normalizedDirection = _normalizedRotationDirection.normalized;
