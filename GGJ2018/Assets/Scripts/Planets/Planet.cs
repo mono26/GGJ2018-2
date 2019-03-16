@@ -19,7 +19,7 @@ public class Planet : SpawnableObject
     protected SignalEmitter signal;
     [SerializeField] CircleCollider2D gravitationalField;
 
-    [SerializeField] AutoDestroyComponent autoDestroyComponent = null;
+    [SerializeField] AutoDestroy autoDestroyComponent = null;
 
     [Header("Planet editor debuggin")]
     [SerializeField] protected List<IAffectedByGravity> objsInGravitationField = new List<IAffectedByGravity>();
@@ -62,7 +62,7 @@ public class Planet : SpawnableObject
 
         if (autoDestroyComponent == null)
         {
-            autoDestroyComponent = GetComponent<AutoDestroyComponent>();
+            autoDestroyComponent = GetComponent<AutoDestroy>();
         }
     }
 

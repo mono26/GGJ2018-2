@@ -13,14 +13,14 @@ public class Alien : SpawnableObject, IAffectedByGravity
     [SerializeField] LayerMask planetsLayer;
 
     [Header("Alien components")]
-    [SerializeField] AutoDestroyComponent destroyComponent;
+    [SerializeField] AutoDestroy destroyComponent;
     [SerializeField] Rigidbody2D bodyComponent;
 
     Coroutine deathRoutine;
 
     public Rigidbody2D GetBodyComponent { get { return bodyComponent; } }
 
-    public AutoDestroyComponent GetAutoDestroyComponent { get { return destroyComponent; } }
+    public AutoDestroy GetAutoDestroyComponent { get { return destroyComponent; } }
 
     public override void Awake()
     {
@@ -28,7 +28,7 @@ public class Alien : SpawnableObject, IAffectedByGravity
 
         if(destroyComponent == null)
         {
-            destroyComponent = GetComponent<AutoDestroyComponent>();
+            destroyComponent = GetComponent<AutoDestroy>();
         }
         if(bodyComponent == null)
         {
@@ -103,14 +103,14 @@ public class Alien : SpawnableObject, IAffectedByGravity
 
         if (collision.gameObject.CompareTag("Asteroid"))
         {
-            destroyComponent.AutoDestroy();
+            destroyComponent.AutoDestroyObject();
 
         }
     }
 
     public void TakeDamage()
     {
-        destroyComponent.AutoDestroy();
+        destroyComponent.AutoDestroyObject();
     }
 
     public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)

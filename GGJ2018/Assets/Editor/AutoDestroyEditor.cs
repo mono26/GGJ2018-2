@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(AutoDestroyComponent))]
+[CustomEditor(typeof(AutoDestroy))]
 public class AutoDestroyEditor : Editor 
 {
 	public override void OnInspectorGUI()
@@ -13,11 +13,11 @@ public class AutoDestroyEditor : Editor
 
 		EditorGUILayout.Separator();
 
-		AutoDestroyComponent autoDestroy = target as AutoDestroyComponent;
+		AutoDestroy autoDestroy = target as AutoDestroy;
 
 		if (GUILayout.Button("Auto Destroy"))
 		{
-			autoDestroy.AutoDestroy();
+			autoDestroy.AutoDestroyObject();
 		}
 	}
 }

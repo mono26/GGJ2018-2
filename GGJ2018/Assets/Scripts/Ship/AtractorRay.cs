@@ -23,8 +23,6 @@ public class AtractorRay : ShipComponent
     {
         base.Awake();
 
-
-
         if(ufoRay == null)
         {
             ufoRay = transform.Find("UFORay").gameObject;

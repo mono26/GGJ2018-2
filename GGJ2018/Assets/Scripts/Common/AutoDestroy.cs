@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoDestroyComponent : MonoBehaviour 
+public class AutoDestroy : MonoBehaviour 
 {
 	[Header("Settings")]
 	[SerializeField] int minLifeTime = 5, maxLifeTime = 15;
@@ -53,11 +53,11 @@ public class AutoDestroyComponent : MonoBehaviour
 
 		if (lifeTimeCounter <= 0)
 		{
-			AutoDestroy();
+			AutoDestroyObject();
 		}
 	}
 
-	public void AutoDestroy()
+	public void AutoDestroyObject()
 	{
 		spawnable.EnableCollision(false);
 		spawnable.DisplayVisuals(false);
