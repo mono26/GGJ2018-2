@@ -37,10 +37,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4485343844356438}
   - component: {fileID: 212130416342089136}
-  - component: {fileID: 58675462932209468}
   - component: {fileID: 50628130364634472}
   - component: {fileID: 114412541303669888}
   - component: {fileID: 114494846662596814}
+  - component: {fileID: 61445221890668144}
+  - component: {fileID: 114080694058000922}
   m_Layer: 8
   m_Name: PFB_FuelPlanet
   m_TagString: FuelPlanet
@@ -125,21 +126,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 3
---- !u!58 &58675462932209468
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1491111122904462}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.14, y: 0.4}
-  serializedVersion: 2
-  m_Radius: 2.1
 --- !u!58 &58951071852926638
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -187,6 +173,45 @@ PolygonCollider2D:
       - {x: 0.8444443, y: -1.4955776}
       - {x: 1.5788841, y: -0.89303803}
       - {x: 1.9830933, y: 0.2871616}
+--- !u!61 &61445221890668144
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1491111122904462}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.6, y: 0.76}
+  m_SpriteTilingProperty:
+    border: {x: 2.6799998, y: 1.4399999, z: 2.05, w: 0.865}
+    pivot: {x: 0.53174603, y: 0.43464053}
+    oldSize: {x: 10.24, y: 10.24}
+    newSize: {x: 0.2, y: 0.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.26, y: 0.89}
+  m_EdgeRadius: 0
+--- !u!114 &114080694058000922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1491111122904462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab34439e3b0987145840394443495a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reloadTime: 1
+  amountPerSecond: 20
+  engine: {fileID: 0}
 --- !u!114 &114412541303669888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,7 +330,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6fa73de7f12618f4e814e1e89142d72c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.22794116, g: 1, b: 0.8402635, a: 0.528}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

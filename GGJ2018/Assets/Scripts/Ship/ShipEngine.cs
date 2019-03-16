@@ -24,7 +24,7 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
     [SerializeField] private float boostCooldown;
     [SerializeField] private float boostTimer;
 
-    public float GetCurrentFuel { get { return currentFuel; } }
+    public float CurrentFuel { get { return currentFuel; } set { currentFuel = value; } }
     public float GetMaxFuel { get { return maxFuel; } }
 
     private void Start()
@@ -80,7 +80,7 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
 
     private void OnCollisionEnter2D(Collision2D _collision)
     {
-        if (_collision.gameObject.CompareTag("FuelPlanet"))
+       /* if (_collision.gameObject.CompareTag("FuelPlanet"))
         {
             FuelPlanet fuelPlanet = _collision.gameObject.GetComponent<FuelPlanet>();
             if(fuelPlanet == null)
@@ -93,7 +93,7 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
             }
 
             fuelPlanet.RechargeShip(this);
-        }
+        }*/
         if (_collision.gameObject.CompareTag("Alien") && this.GetComponent<AtractorRay>().IsAlienRayOn)
         {
             LevelManager.Instance.IncreaseScore();
