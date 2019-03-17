@@ -139,7 +139,7 @@ MonoBehaviour:
   damageTags:
   - Player
   - Alien
-  damageOnTouch: 75
+  damageOnTouch: 250
 --- !u!114 &114255368610047976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,6 +172,7 @@ MonoBehaviour:
   maxLifeTime: 10
   spawnable: {fileID: 114255368610047976}
   autoDestroyEffect: {fileID: 114012983714267926}
+  enableTimedAutoDestroy: 1
   lifeTimeCounter: 0
 --- !u!114 &114763723273823754
 MonoBehaviour:

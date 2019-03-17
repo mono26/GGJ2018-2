@@ -4,33 +4,27 @@ using UnityEngine;
 
 public class FuelPlanet : Planet
 {
-	[SerializeField] int rechargeValue = 100;
-	[SerializeField] float rechargeCooldown = 0;
+	/*[SerializeField] int rechargeValue = 100;
+	[SerializeField] float rechargeCooldown = 5;
 	[SerializeField] GameObject refillEffect;
 
-	Coroutine refillRoutine;
+	Coroutine refillRoutine;*/
 
 	protected override void OnTriggerEnter2D(Collider2D collision)
     {
 		base.OnTriggerEnter2D(collision);
 
-        if (collision.gameObject.tag == "Player")
-        {
-			ShipEngine engine = collision.gameObject.GetComponent<ShipEngine>();
-            refillRoutine = StartCoroutine(ReloadFuel(engine));
-        }
+
     }
     protected override void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            StopCoroutine(refillRoutine);
-        }
+        base.OnTriggerExit2D(collision);
     }
 
-	private IEnumerator ReloadFuel(ShipEngine _engine)
+	/*private IEnumerator ReloadFuel(ShipEngine _engine)
     {
         _engine.RechargeFuel(rechargeValue);
+        Debug.Log("Reloading " + rechargeValue);
 
 		if (refillEffect != null)
 		{
@@ -40,5 +34,5 @@ public class FuelPlanet : Planet
         yield return new WaitForSeconds(rechargeCooldown);
 
 		refillRoutine = StartCoroutine(ReloadFuel(_engine));
-    }
+    }*/
 }

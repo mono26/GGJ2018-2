@@ -30,10 +30,16 @@ public class ProgressBar : MonoBehaviour
         {
             progressBar.fillAmount = _percent;
         }
+        if (_percent < 1)
+            progressBar.color = fullGasColor;
+
         if (_percent < 0.6)
             progressBar.color = midGasColor;
+
         if (_percent < 0.3)
             progressBar.color = lowGasColor;
+        
+
 
         return;
     }

@@ -2704,10 +2704,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 114843640438275710}
-  _percent: 0
-  fullGasColor: {r: 0, g: 0, b: 0, a: 0}
-  midGasColor: {r: 0, g: 0, b: 0, a: 0}
-  lowGasColor: {r: 0, g: 0, b: 0, a: 0}
+  _percent: 0.9996156
+  fullGasColor: {r: 0.31617647, g: 1, b: 0.5189655, a: 0.941}
+  midGasColor: {r: 0.9558824, g: 0.83237386, b: 0.31628463, a: 0.934}
+  lowGasColor: {r: 1, g: 0.44416836, b: 0.16911763, a: 0.947}
 --- !u!114 &114907072513685842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3188,7 +3188,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.13
+      scalar: 1.35
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -3229,7 +3229,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.13
+      scalar: 0.03
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -3741,7 +3741,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 150
+      scalar: 100
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -3823,7 +3823,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -3834,19 +3834,19 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 1
+          value: 1
+          inSlope: -2
+          outSlope: -2
           tangentMode: 0
         - serializedVersion: 2
           time: 1
-          value: 1
-          inSlope: 1
+          value: 0
+          inSlope: 0
           outSlope: 0
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_RotationOrder: 0
       minCurve:
         serializedVersion: 2
         m_Curve:
