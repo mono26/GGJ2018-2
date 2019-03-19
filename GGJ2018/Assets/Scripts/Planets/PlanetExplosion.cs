@@ -6,6 +6,8 @@ public class PlanetExplosion : AutoDestroyEffect
 {
 	[SerializeField] int numberOfFragmentsToSpawn = 5;
 	[SerializeField] float explosionForce = 1000;
+	[SerializeField] float minScale = 1;
+	[SerializeField] float maxScale = 3;
 
 	public override void SpawnEffect()
 	{
@@ -19,7 +21,8 @@ public class PlanetExplosion : AutoDestroyEffect
 		for (int i = 0; i < numberOfFragmentsToSpawn; i++)
 		{
 			Asteroid fragment = PoolsManager.Instance.GetObjectFromPool<Asteroid>();
-			fragment.TurnCollisionOffForSeconds(1.5f);
+			ScaleRandomly(ref fragment);
+			fragment.TurnCollisionOffForSeconds(0.5f);
 			Vector2 launchDirection = CalculateLaunchDirection(startAngle + (i*angleIncrease));
 			fragment.transform.position = transform.position;
 			fragment.GetBodyComponent.AddForce(launchDirection * explosionForce, ForceMode2D.Impulse);
@@ -40,4 +43,10 @@ public class PlanetExplosion : AutoDestroyEffect
 		GiantBlackhole giantBlackHole = PoolsManager.Instance.GetObjectFromPool<GiantBlackhole>();
 		giantBlackHole.transform.position = transform.position;
 	}
+
+	void ScaleRandomly(ref Asteroid _asteroidToScale)
+    {
+        float randomScale = Random.Range(minScale, maxScale);
+        _asteroidToScale.transform.localScale = new Vector3(randomScale, randomScale, 1);
+    }
 }

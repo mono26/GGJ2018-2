@@ -46,5 +46,7 @@ public class SpawnableObject : Spawnable
     {
         EnableCollision(true);
         DisplayVisuals(true);
+
+        transform.localScale = Vector3.one;
     }
 }

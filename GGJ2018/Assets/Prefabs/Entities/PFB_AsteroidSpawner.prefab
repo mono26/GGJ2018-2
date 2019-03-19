@@ -59,7 +59,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2304
   maxForce: 95000
-  minForce: 65000
+  minForce: 45000
   player: {fileID: 0}
   spawnPoints:
   - {fileID: 0}

@@ -7,7 +7,7 @@ public class SignalOscilator : ShipComponent
     [SerializeField] protected float minimunDistanceToPlanet = 5;    //In metters
     [SerializeField] protected Color planetSignal = Color.green;
     [SerializeField] protected Color gasStationSignal = Color.blue;
-    [SerializeField] protected float ticksPerSecond = 10;
+    [SerializeField] protected float ticksPerSecond = 30;
     [SerializeField] protected float screenPositionX = 0.8f;
     [SerializeField] protected float screenPositionY = 0.9f;
 

@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class AsteroidSpawner : Spawner
 {
-    [Header("Asteroid settings")]
-    [SerializeField] protected float maxForce = 3500f;
-    [SerializeField] protected float minForce = 1500f;
+    [Header("Settings")]
+    [SerializeField] float maxForce = 3500f;
+    [SerializeField] float minForce = 1500f;
+    [SerializeField] float minScale = 1;
+    [SerializeField] float maxScale = 2;
 
     [Header("Components")]
-    [SerializeField] protected GameObject player = null;
-    [SerializeField] protected Transform[] spawnPoints = null;
+    [SerializeField] GameObject player = null;
+    [SerializeField] Transform[] spawnPoints = null;
 
-    private void Awake()
+    void Awake()
     {
         if (player == null)
         {
@@ -61,23 +63,30 @@ public class AsteroidSpawner : Spawner
         return;
     }
 
-    private Asteroid GetAsteroidToSpawn()
+    Asteroid GetAsteroidToSpawn()
     {
         Asteroid asteroid = PoolsManager.Instance.GetObjectFromPool<Asteroid>();
-        asteroid.transform.position = new Vector2(999,999);
+        ScaleRandomly(ref asteroid);
         return asteroid;
     }
 
-    private void LaunchAsteroid(Asteroid _asteroidToLaunch, Vector3 _spawnPosition)
+    void LaunchAsteroid(Asteroid _asteroidToLaunch, Vector3 _spawnPosition)
     {
         float force = Random.Range(minForce, maxForce);
         Vector2 unitDirection = (player.transform.position - _spawnPosition).normalized;
         _asteroidToLaunch.transform.position = _spawnPosition;
+        _asteroidToLaunch.transform.right = unitDirection;
         _asteroidToLaunch.GetBodyComponent.AddForce(unitDirection * force, ForceMode2D.Force);
     }
 
-    private void ReturnUnabledToSpawnAsteroid(Asteroid _asteroidToReturn)
+    void ReturnUnabledToSpawnAsteroid(Asteroid _asteroidToReturn)
     {
         PoolsManager.Instance.ReleaseObjectToPool<Asteroid>(_asteroidToReturn);
+    }
+
+    void ScaleRandomly(ref Asteroid _asteroidToScale)
+    {
+        float randomScale = Random.Range(minScale, maxScale);
+        _asteroidToScale.transform.localScale = new Vector3(randomScale, randomScale, 1);
     }
 }
