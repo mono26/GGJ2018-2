@@ -46,7 +46,11 @@ public class Ship : MonoBehaviour
     public Shield GetShieldComponent { get { return shieldComponent; } }
     public ShipEngine GetEngineComponent { get { return engineComponent; } }
 
-	private void Awake()
+    //Interface EventHandler
+    public delegate void UIAction();
+    public static event UIAction UpdateButton;
+
+    private void Awake()
     {
         components = GetComponents<ShipComponent>();
 
@@ -97,8 +101,7 @@ public class Ship : MonoBehaviour
 
     void Start() 
     {
-        LevelUIManager.Instance.DisplayInputButton("BoostButton", true);
-        LevelUIManager.Instance.DisplayInputButton("RayButton", false);
+        UpdateButton();
     }
 
     private void Update ()
@@ -179,9 +182,11 @@ public class Ship : MonoBehaviour
             return;
         }
         // Changes active buttons on GUI if it enters a planet
-        LevelUIManager.Instance.DisplayInputButton("BoostButton", false);
+        UpdateButton();
+        /*LevelUIManager.Instance.DisplayInputButton("BoostButton", false);
         LevelUIManager.Instance.DisplayInputButton("RayButton", true);
-    }
+        */
+        }
 
     void OnTriggerExit2D(Collider2D _collider)
     {
@@ -191,8 +196,9 @@ public class Ship : MonoBehaviour
         }
 
         // Changes active buttons on GUI if it goes out of a planet
-        LevelUIManager.Instance.DisplayInputButton("BoostButton", true);
-        LevelUIManager.Instance.DisplayInputButton("RayButton", false);
+        UpdateButton();
+        /*LevelUIManager.Instance.DisplayInputButton("BoostButton", true);
+        LevelUIManager.Instance.DisplayInputButton("RayButton", false);*/
         if(atractorRayComponent.IsAlienRayOn)
         {
             ToggleShipRay();

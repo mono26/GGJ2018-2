@@ -13,6 +13,16 @@ public class LevelUIManager : Singleton<LevelUIManager>
     [SerializeField]
     private GameObject movementJoystick;
 
+    private void OnEnable()
+    {
+        Ship.UpdateButton += UpdateButton;
+
+    }
+    private void OnDisable()
+    {
+        Ship.UpdateButton -= UpdateButton;
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -66,6 +76,12 @@ public class LevelUIManager : Singleton<LevelUIManager>
         movementJoystick.SetActive(_active);
         boostButton.SetActive(_active);
         rayButton.SetActive(_active);
+    }
+
+    private void UpdateButton()
+    {
+        boostButton.SetActive(_buttonState);
+        rayButton.SetActive(_buttonState);
     }
 
     // Encontrar mejor manera de hacer esto. Si por event system o alguna otra manera.
