@@ -27,9 +27,15 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
     public float CurrentFuel { get { return currentFuel; } set { currentFuel = value; } }
     public float GetMaxFuel { get { return maxFuel; } }
 
+
+    public delegate void GameEvent();
+    public static event GameEvent PlayerCanBoost;
+
+
     private void Start()
-    {
+    {      
         canBoost = true;
+        //PlayerCanBoost();
         currentFuel = maxFuel;
         fuelDisplay.UpdateBar(currentFuel, maxFuel);
         return;
@@ -65,7 +71,9 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
             boostTimer += 1 * Time.fixedDeltaTime;
             if(boostTimer >= boostCooldown)
             {
+                PlayerCanBoost();
                 canBoost = true;
+                
                 boostTimer = 0;
             }
         }
@@ -109,7 +117,9 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         {
             ship.GetBodyComponent.AddForce(_direction * boost);
             LoseFuelAmount(fuelLossPerBoost);
+           
             canBoost = false;
+            PlayerCanBoost();
         }
 
     }

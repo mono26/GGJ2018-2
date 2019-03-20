@@ -50,6 +50,9 @@ public class Ship : MonoBehaviour
     public delegate void UIAction();
     public static event UIAction UpdateButton;
 
+    public delegate void GameEvent();
+    public static event GameEvent PlayerInOrbit;
+
     private void Awake()
     {
         components = GetComponents<ShipComponent>();
@@ -106,10 +109,10 @@ public class Ship : MonoBehaviour
 
     private void Update ()
     {
-        /*if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             ApplyBoost();
-        }*/
+        }
 
         foreach (ShipComponent component in components)
         {
@@ -175,6 +178,16 @@ public class Ship : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D _collider)
+    {
+        if (!_collider.CompareTag("GravitationField"))
+        {
+            return;
+        }
+        // Changes active buttons on GUI if it enters a planet
+        PlayerInOrbit();
+    }
+
     void OnTriggerStay2D(Collider2D _collider)
     {
         if (!_collider.CompareTag("GravitationField"))
@@ -183,10 +196,8 @@ public class Ship : MonoBehaviour
         }
         // Changes active buttons on GUI if it enters a planet
         UpdateButton();
-        /*LevelUIManager.Instance.DisplayInputButton("BoostButton", false);
-        LevelUIManager.Instance.DisplayInputButton("RayButton", true);
-        */
-        }
+
+    }
 
     void OnTriggerExit2D(Collider2D _collider)
     {
@@ -196,9 +207,9 @@ public class Ship : MonoBehaviour
         }
 
         // Changes active buttons on GUI if it goes out of a planet
+        PlayerInOrbit();
         UpdateButton();
-        /*LevelUIManager.Instance.DisplayInputButton("BoostButton", true);
-        LevelUIManager.Instance.DisplayInputButton("RayButton", false);*/
+
         if(atractorRayComponent.IsAlienRayOn)
         {
             ToggleShipRay();

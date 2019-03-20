@@ -12,20 +12,36 @@ public class LevelUIManager : Singleton<LevelUIManager>
     private GameObject boostButton, rayButton;
     [SerializeField]
     private GameObject movementJoystick;
+    [SerializeField]
+    private bool playerInOrbit;
+    [SerializeField]
+    private bool playerCanBoost;
+    [SerializeField]
+    private Color buttonActiveColor;
+    [SerializeField]
+    private Color buttonUnableColor;
+    [SerializeField]
+    private Image boostButtonImage;
+
 
     private void OnEnable()
     {
         Ship.UpdateButton += UpdateButton;
-
+        Ship.PlayerInOrbit += PlayerInOrbit;
+        ShipEngine.PlayerCanBoost += PlayerCanBoost;
     }
     private void OnDisable()
     {
         Ship.UpdateButton -= UpdateButton;
+        Ship.PlayerInOrbit -= PlayerInOrbit;
+        ShipEngine.PlayerCanBoost -= PlayerCanBoost;
     }
 
     protected override void Awake()
     {
         base.Awake();
+
+
 
         Transform inputContainer = transform.Find("Virtual_Input");
         if (boostButton == null) {
@@ -51,6 +67,8 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     protected void Start ()
     {
+        playerInOrbit = false;
+        PlayerCanBoost();
         ActivatePauseUI(false);
         ActivateGameOverUI(false);
         return;
@@ -67,8 +85,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         globalScore = PlayerPrefs.GetInt("GlobalScore");
         gameOverUI.SetActive(_active);
         globalScoreText = gameOverUI.GetComponentInChildren<Text>();
-        globalScoreText.text = globalScore.ToString();
-        
+        globalScoreText.text = globalScore.ToString();     
     }
 
     public void ActivatePlayerControls(bool _active)
@@ -78,31 +95,43 @@ public class LevelUIManager : Singleton<LevelUIManager>
         rayButton.SetActive(_active);
     }
 
-    private void UpdateButton()
+
+    private void PlayerCanBoost()
     {
-        boostButton.SetActive(_buttonState);
-        rayButton.SetActive(_buttonState);
+
+        if (!playerCanBoost)
+        {
+            playerCanBoost = true;
+            boostButtonImage.color = buttonActiveColor;
+            Debug.Log("hey" + playerCanBoost);
+        }
+        else
+        {
+            playerCanBoost = false;
+            boostButtonImage.color = buttonUnableColor;
+            Debug.Log("hey" + playerCanBoost);
+        }
     }
 
-    // Encontrar mejor manera de hacer esto. Si por event system o alguna otra manera.
-    public void DisplayInputButton(string _buttonToActivate, bool _buttonState)
+    private void UpdateButton()
     {
-        switch (_buttonToActivate)
+        if (playerInOrbit)
         {
-            case "BoostButton":
-            {
-                boostButton.SetActive(_buttonState);
-                break;
-            }
-            case "RayButton":
-            {
-                rayButton.SetActive(_buttonState);
-                break;
-            }
-            default:
-            {
-                break;
-            }
+            boostButton.SetActive(false);
+            rayButton.SetActive(true);
         }
+        else
+        {
+            boostButton.SetActive(true);
+            rayButton.SetActive(false);
+        }
+    }
+
+    private void PlayerInOrbit()
+    {
+        if (!playerInOrbit)
+            playerInOrbit = true;
+        else
+            playerInOrbit = false;
     }
 }
