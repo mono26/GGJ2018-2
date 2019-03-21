@@ -88,7 +88,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 350
+  m_Mass: 150
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0938ec99c51ee4899abf70c1eeed05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minLifeTime: 7
-  maxLifeTime: 12
+  minLifeTime: 11
+  maxLifeTime: 15
   spawnable: {fileID: 114255368610047976}
   autoDestroyEffect: {fileID: 114012983714267926}
   enableTimedAutoDestroy: 1

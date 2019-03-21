@@ -34,6 +34,7 @@ public class Asteroid : SpawnableObject, EventHandler<BlackholeEvent>
     protected void OnEnable()
     {
         EventManager.AddListener<BlackholeEvent>(this);
+        this.GetComponent<DamageOnTouch>().SetDamageOnTouch(1);
         return;
     }
 

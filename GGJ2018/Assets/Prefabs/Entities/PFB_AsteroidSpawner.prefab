@@ -52,14 +52,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTimer: 0
-  minTimeToSpawn: 5
-  maxTimeToSpawn: 12
+  minTimeToSpawn: 10
+  maxTimeToSpawn: 17
   maxTriesToSpawn: 10
   layersToCheck:
     serializedVersion: 2
     m_Bits: 2304
-  maxForce: 95000
-  minForce: 45000
+  slowSpeed: 50000
+  midSpeed: 60000
+  fastSpeed: 70000
+  maxSpeed: 80000
+  slowProbability: 0.2
+  midProbability: 0.35
+  fastProbability: 0.25
+  maxProbability: 0.2
+  oneProbability: 0.4
+  twoProbability: 0.38
+  threeProbability: 0.22
+  damageFormulaConstant: 0.0017
+  minScale: 1
+  maxScale: 2
+  minNumberOfAsteroids: 1
+  maxNumberOfAsteroids: 3
   player: {fileID: 0}
   spawnPoints:
   - {fileID: 0}

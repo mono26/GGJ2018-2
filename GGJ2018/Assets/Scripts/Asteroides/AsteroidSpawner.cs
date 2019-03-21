@@ -5,8 +5,26 @@ using UnityEngine;
 public class AsteroidSpawner : Spawner
 {
     [Header("Settings")]
-    [SerializeField] float maxForce = 3500f;
-    [SerializeField] float minForce = 1500f;
+
+    //Speed values for random speed
+    [SerializeField] float slowSpeed = 1600f;
+    [SerializeField] float midSpeed = 1600f;
+    [SerializeField] float fastSpeed = 1600f;
+    [SerializeField] float maxSpeed = 3500f;
+
+    //Probability distribution for random speed
+    [SerializeField] float slowProbability;
+    [SerializeField] float midProbability;
+    [SerializeField] float fastProbability;
+    [SerializeField] float maxProbability;
+
+    //Probability distribution for random amount
+    [SerializeField] float oneProbability;
+    [SerializeField] float twoProbability;
+    [SerializeField] float threeProbability;
+
+    [SerializeField] float damageFormulaConstant;
+
     [SerializeField] float minScale = 1;
     [SerializeField] float maxScale = 2;
     
@@ -49,11 +67,12 @@ public class AsteroidSpawner : Spawner
     public override void Spawn()
     {
 
-        int numberOfAsteroids = Random.Range(minNumberOfAsteroids, maxNumberOfAsteroids + 1);
+        int numberOfAsteroids = GetRandomAmount();
         Vector3[] lastSpawnPositions = new Vector3[numberOfAsteroids];
         for (int i = 0; i < numberOfAsteroids; i++)
         {
             Asteroid spawnedAsteroid = GetAsteroidToSpawn();
+           
             float radius = spawnedAsteroid.GetRadius;
             lastSpawnPositions[i] = Vector3.zero;
             for(int j = 0; j < maxTriesToSpawn; j++)
@@ -98,12 +117,15 @@ public class AsteroidSpawner : Spawner
     {
         Asteroid asteroid = PoolsManager.Instance.GetObjectFromPool<Asteroid>();
         ScaleRandomly(ref asteroid);
+
         return asteroid;
     }
 
     void LaunchAsteroid(Asteroid _asteroidToLaunch, Vector3 _spawnPosition)
     {
-        float force = Random.Range(minForce, maxForce);
+        float force = GetRandomSpeed();
+        float size = _asteroidToLaunch.transform.localScale.magnitude;
+        _asteroidToLaunch.GetComponent<DamageOnTouch>().SetDamageOnTouch(GetAsteroidDamage(force, size));
         Vector2 unitDirection = (player.transform.position - _spawnPosition).normalized;
         _asteroidToLaunch.transform.position = _spawnPosition;
         _asteroidToLaunch.transform.right = unitDirection;
@@ -119,5 +141,68 @@ public class AsteroidSpawner : Spawner
     {
         float randomScale = Random.Range(minScale, maxScale);
         _asteroidToScale.transform.localScale = new Vector3(randomScale, randomScale, 1);
+    }
+
+    //Gets damage for spawned asteroid based on size and speed
+    float GetAsteroidDamage(float speed, float size)
+    {
+        float damage = damageFormulaConstant * speed * size;
+
+        return damage;
+    }
+
+    //Gets random amount for asteroids to spawn based on probability distribution
+    int GetRandomAmount()
+    {
+        int amount;
+
+        float amountProbability = Random.Range(0.0f, 1.1f);
+        Debug.Log(amountProbability);
+
+        if (amountProbability < oneProbability)
+        {
+            amount = 1;
+            return amount;
+        }
+        else if (amountProbability < oneProbability + twoProbability)
+        {
+            amount = 2;
+            return amount;
+        }
+        else
+        {
+            amount = 3;
+            return amount;
+        }
+    }
+
+    //Gets random speed for asteroids based on probability distribution
+    float GetRandomSpeed()
+    {
+        float speed;
+
+        float speedProbability = Random.Range(0.0f, 1.1f);
+        Debug.Log(speedProbability);
+
+        if (speedProbability < slowProbability)
+        {
+            speed = slowSpeed;
+            return speed;
+        }
+        else if (speedProbability < slowProbability + midProbability)
+        {
+            speed = midSpeed;
+            return speed;
+        }
+        else if (speedProbability < slowProbability + midProbability + fastProbability)
+        {
+            speed = fastSpeed;
+            return speed;
+        }
+        else
+        {
+            speed = maxSpeed;
+            return speed;
+        }
     }
 }
