@@ -9,6 +9,9 @@ public class AsteroidSpawner : Spawner
     [SerializeField] float minForce = 1500f;
     [SerializeField] float minScale = 1;
     [SerializeField] float maxScale = 2;
+    
+    [SerializeField] int minNumberOfAsteroids = 1;
+    [SerializeField] int maxNumberOfAsteroids = 3;
 
     [Header("Components")]
     [SerializeField] GameObject player = null;
@@ -45,22 +48,50 @@ public class AsteroidSpawner : Spawner
 
     public override void Spawn()
     {
-        Asteroid spawnedAsteroid = GetAsteroidToSpawn();
-        float radius = spawnedAsteroid.GetRadius;
-        for(int i = 0; i < maxTriesToSpawn; i++)
+
+        int numberOfAsteroids = Random.Range(minNumberOfAsteroids, maxNumberOfAsteroids + 1);
+        Vector3[] lastSpawnPositions = new Vector3[numberOfAsteroids];
+        for (int i = 0; i < numberOfAsteroids; i++)
         {
-            Vector3 spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
-            if(IsAFreeSpot(spawnPosition, radius)) 
+            Asteroid spawnedAsteroid = GetAsteroidToSpawn();
+            float radius = spawnedAsteroid.GetRadius;
+            lastSpawnPositions[i] = Vector3.zero;
+            for(int j = 0; j < maxTriesToSpawn; j++)
             {
-                LaunchAsteroid(spawnedAsteroid, spawnPosition);
-                break;
-            }
-            else if (i == maxTriesToSpawn - 1){
-                ReturnUnabledToSpawnAsteroid(spawnedAsteroid);
+                Vector3 spawnPosition = Vector3.zero;
+                while (AlreadySpawnedInPosition(lastSpawnPositions, spawnPosition))
+                {
+                    spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
+                }
+
+                if(IsAFreeSpot(spawnPosition, radius)) 
+                {
+                    LaunchAsteroid(spawnedAsteroid, spawnPosition);
+                    lastSpawnPositions[i] = spawnPosition;
+                    break;
+                }
+                else if (i == maxTriesToSpawn - 1)
+                {
+                    ReturnUnabledToSpawnAsteroid(spawnedAsteroid);
+                }
             }
         }
+
         base.Spawn();
-        return;
+    }
+
+    bool AlreadySpawnedInPosition(Vector3[] _positions, Vector3 _positionToCheck)
+    {
+        bool alreadySpawned = false;
+        foreach (Vector3 position in _positions)
+        {
+            if (position.Equals(_positionToCheck))
+            {
+                alreadySpawned = true;
+            }
+        }
+
+        return alreadySpawned;
     }
 
     Asteroid GetAsteroidToSpawn()

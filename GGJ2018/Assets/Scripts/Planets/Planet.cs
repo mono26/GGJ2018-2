@@ -10,7 +10,7 @@ public class Planet : SpawnableObject
     // TODO create rotation component
     [SerializeField] float rotationSpeed = 4.4f;
     [SerializeField] float rotationForce = 9.8f;
-    [SerializeField] float gravityForce = 9.8f;
+    [SerializeField] protected float gravityForce = 9.8f;
     [SerializeField] float gravFieldRadius = 14;
     [SerializeField] protected GravitySourceType gravitySource;
     [SerializeField] bool playerInGravitationalField = false;

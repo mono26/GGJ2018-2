@@ -1387,7 +1387,7 @@ MonoBehaviour:
   range: 1.5
   radius: 0.7
   ticksPerSecond: 10
-  strenght: 1500
+  strenght: 1000
   ufoRay: {fileID: 1867904808052798}
   door: {fileID: 1080706513235740}
   isAlienRayOn: 0

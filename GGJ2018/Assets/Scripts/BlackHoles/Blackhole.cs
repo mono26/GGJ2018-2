@@ -24,8 +24,12 @@ public class BlackholeEvent : GameEvent
 
 public class Blackhole : Planet
 {
-    [Header("Black Hole settings")]
+    [Header("Settings")]
+    [SerializeField] float maxForce = 10;
+    [SerializeField] float minForce = 7;
     protected float minimumDistanceToCenter;
+
+    float currentForce;
     float currentSize = 0;
 
     protected override void Start() 
@@ -38,14 +42,23 @@ public class Blackhole : Planet
     void OnEnable() 
     {
         currentSize = 0;
+        transform.localScale = new Vector3 (0, 0, 1);
     }
+
     void Update()
     {
-		transform.localScale = new Vector3 (currentSize, currentSize, 1);
-		currentSize += Time.deltaTime/2;
-		currentSize = Mathf.Clamp(currentSize, 0, 1);
+        if (!currentSize.Equals(1.0f))
+        {
+            currentSize += Time.deltaTime/2;
+            currentSize = Mathf.Clamp(currentSize, 0, 1);
+            transform.localScale = new Vector3 (currentSize, currentSize, 1);
+        }
 
-		transform.localScale = new Vector3 (currentSize, currentSize, 1);
+        if (!gravityForce.Equals(minForce))
+        {
+            float forceDifference = maxForce - minForce;
+            gravityForce += forceDifference * Time.deltaTime/2;
+        }
     }
 
     protected void CheckObjectsDistanceToCenter()

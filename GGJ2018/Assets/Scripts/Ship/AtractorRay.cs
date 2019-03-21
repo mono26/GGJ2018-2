@@ -74,7 +74,10 @@ public class AtractorRay : ShipComponent
             {
                 if (hit.collider.CompareTag("Alien"))
                 {
-                    hit.collider.GetComponent<Rigidbody2D>().AddForce(hit.transform.up * strenght);
+                    Rigidbody2D alienBody = hit.collider.GetComponent<Rigidbody2D>();
+                    Vector3 directionToShip = (transform.position - hit.collider.transform.position).normalized;
+                    float forceToApply = strenght * alienBody.mass;
+                    alienBody.AddForce(directionToShip * forceToApply);
                 }
             }
         }

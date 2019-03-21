@@ -172,10 +172,10 @@ MonoBehaviour:
   gravitationalFieldDirection: -1
   rotationSpeed: 10
   rotationForce: 100
-  gravityForce: 100
+  gravityForce: 245
+  gravFieldRadius: 14
   gravitySource: 0
   playerInGravitationalField: 0
-  minGravFieldDistFromPlanet: 10
   signal: {fileID: 114562478748535502}
   gravitationalField: {fileID: 58411296840660902}
   autoDestroyComponent: {fileID: 114975521575017856}
@@ -208,6 +208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfFragmentsToSpawn: 3
   explosionForce: 1000
+  minScale: 1
+  maxScale: 3
 --- !u!114 &114975521575017856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,6 +225,7 @@ MonoBehaviour:
   maxLifeTime: 70
   spawnable: {fileID: 114469543221975496}
   autoDestroyEffect: {fileID: 114738217547738004}
+  enableTimedAutoDestroy: 1
   lifeTimeCounter: 0
 --- !u!212 &212251884888083670
 SpriteRenderer:
