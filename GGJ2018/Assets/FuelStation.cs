@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FuelStation : MonoBehaviour {
+public class FuelStation : MonoBehaviour
+{
     [SerializeField] int rechargeValue = 100;
     [SerializeField] float rechargeCooldown = 5;
     [SerializeField] private ParticleSystem reloadingParticles;

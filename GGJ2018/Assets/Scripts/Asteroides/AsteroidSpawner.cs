@@ -157,7 +157,6 @@ public class AsteroidSpawner : Spawner
         int amount;
 
         float amountProbability = Random.Range(0.0f, 1.1f);
-        Debug.Log(amountProbability);
 
         if (amountProbability < oneProbability)
         {
@@ -182,7 +181,6 @@ public class AsteroidSpawner : Spawner
         float speed;
 
         float speedProbability = Random.Range(0.0f, 1.1f);
-        Debug.Log(speedProbability);
 
         if (speedProbability < slowProbability)
         {

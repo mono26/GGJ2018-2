@@ -103,13 +103,11 @@ public class LevelUIManager : Singleton<LevelUIManager>
         {
             playerCanBoost = true;
             boostButtonImage.color = buttonActiveColor;
-            Debug.Log("hey" + playerCanBoost);
         }
         else
         {
             playerCanBoost = false;
             boostButtonImage.color = buttonUnableColor;
-            Debug.Log("hey" + playerCanBoost);
         }
     }
 

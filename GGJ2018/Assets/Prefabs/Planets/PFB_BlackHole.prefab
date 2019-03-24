@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114974162859842386}
   - component: {fileID: 114413777442062686}
   - component: {fileID: 82921163293262030}
+  - component: {fileID: 114941592796170352}
   m_Layer: 13
   m_Name: PFB_BlackHole
   m_TagString: Blackhole
@@ -140,7 +141,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3.3
+  m_Radius: 4.89
 --- !u!58 &58733214615672322
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -155,7 +156,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4.3
+  m_Radius: 4.956457
 --- !u!82 &82921163293262030
 AudioSource:
   m_ObjectHideFlags: 1
@@ -247,12 +248,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0938ec99c51ee4899abf70c1eeed05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minLifeTime: 5
-  maxLifeTime: 15
+  minLifeTime: 10
+  maxLifeTime: 18
   spawnable: {fileID: 114974162859842386}
   autoDestroyEffect: {fileID: 0}
   enableTimedAutoDestroy: 1
   lifeTimeCounter: 0
+--- !u!114 &114941592796170352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242909717354880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d7dff9fbae9654ea93eff7fa6ad6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTags:
+  - Alien
+  - Player
+  damageOnTouch: 35
+  sendDamageTimer: 0.5
 --- !u!114 &114974162859842386
 MonoBehaviour:
   m_ObjectHideFlags: 1

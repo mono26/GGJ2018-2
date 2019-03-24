@@ -32,6 +32,11 @@ public class Blackhole : Planet
     float currentForce;
     float currentSize = 0;
 
+    protected override void OnTriggerEnter2D(Collider2D _collider)
+    {
+        base.OnTriggerEnter2D(_collider);
+    }
+
     protected override void Start() 
     {
         base.Start();
@@ -73,6 +78,7 @@ public class Blackhole : Planet
 
             if(Vector3.Distance(objsInGravitationField[i].GetBodyComponent.position, transform.position) < minimumDistanceToCenter) {
                 EventManager.TriggerEvent<BlackholeEvent>(new BlackholeEvent(objsInGravitationField[i].GetBodyComponent.gameObject, BlackholeEventType.CenterReachead));
+               
             }
         }
     }

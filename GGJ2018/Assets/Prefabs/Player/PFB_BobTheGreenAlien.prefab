@@ -1387,7 +1387,7 @@ MonoBehaviour:
   range: 1.5
   radius: 0.7
   ticksPerSecond: 10
-  strenght: 1000
+  strenght: 50
   ufoRay: {fileID: 1867904808052798}
   door: {fileID: 1080706513235740}
   isAlienRayOn: 0
@@ -1501,7 +1501,7 @@ MonoBehaviour:
   ship: {fileID: 114020360296148358}
   minimunDistanceToPlanet: 10
   planetSignal: {r: 0, g: 1, b: 0, a: 1}
-  gasStationSignal: {r: 0, g: 0.37931037, b: 1, a: 1}
+  gasStationSignal: {r: 0, g: 0.6275863, b: 1, a: 1}
   ticksPerSecond: 10
   screenPositionX: 0.135
   screenPositionY: 0.877
@@ -1538,6 +1538,7 @@ MonoBehaviour:
   damageTags:
   - Alien
   damageOnTouch: 5
+  sendDamageTimer: 0
 --- !u!114 &114109247372342320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2264,7 +2265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 114020360296148358}
   fuelLossPerSecond: 1.5
-  fuelLossPerBoost: 5
+  fuelLossPerBoost: 500
   maxFuel: 2500
   thrust: 2300
   boost: 3000
@@ -2662,7 +2663,7 @@ MonoBehaviour:
   horizontalID: Horizontal
   verticalID: Vertical
   rayID: RayButton
-  boostID: 
+  boostID: BoostButton
   shieldID: ShieldButton
   horizontalInput: 0
   verticalInput: 0

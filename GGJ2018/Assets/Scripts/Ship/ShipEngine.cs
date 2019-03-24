@@ -53,7 +53,7 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         return;
     }
 
-    private void LoseFuelAmount(float amount)
+    public void LoseFuelAmount(float amount)
     {
         currentFuel -= amount * Time.deltaTime;
         return;

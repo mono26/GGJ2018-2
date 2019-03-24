@@ -184,6 +184,8 @@ public class Ship : MonoBehaviour
         {
             return;
         }
+
+
         // Changes active buttons on GUI if it enters a planet
         PlayerInOrbit();
     }
