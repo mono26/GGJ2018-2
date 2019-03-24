@@ -647,6 +647,7 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 292
+<<<<<<< HEAD
 >>>>>>> parent of d821fb1... 1. El backgrounde se mueve cada vez que se genera el nivel.
       objectReference: {fileID: 0}
     - target: {fileID: 224712508106878148, guid: e9fc52c01928c814588868868247ff44,
@@ -689,6 +690,8 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 292
+=======
+>>>>>>> parent of d821fb1... 1. El backgrounde se mueve cada vez que se genera el nivel.
       objectReference: {fileID: 0}
     - target: {fileID: 224347964869015814, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
@@ -710,6 +713,7 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: -185.35
 =======
       value: -164.35
@@ -717,6 +721,9 @@ Prefab:
 =======
       value: -164.35
 >>>>>>> parent of 9cdb45c... prefabs settings
+=======
+      value: -164.35
+>>>>>>> parent of d821fb1... 1. El backgrounde se mueve cada vez que se genera el nivel.
       objectReference: {fileID: 0}
     - target: {fileID: 224347964869015814, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
@@ -758,7 +765,10 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 292
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of d821fb1... 1. El backgrounde se mueve cada vez que se genera el nivel.
       objectReference: {fileID: 0}
     - target: {fileID: 198838382110648594, guid: e9fc52c01928c814588868868247ff44,
         type: 2}
