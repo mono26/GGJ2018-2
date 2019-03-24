@@ -192,20 +192,13 @@ public class Ship : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D _collider)
     {
-
-
-        if (_collider.CompareTag("Planet"))
-        {
-            // Changes active buttons on GUI if it enters a planet
-            UpdateButton();
-        }
-
         if (!_collider.CompareTag("GravitationField"))
         {
             return;
         }
 
-
+        // Changes active buttons on GUI if it enters a planet
+        UpdateButton();
 
     }
 
