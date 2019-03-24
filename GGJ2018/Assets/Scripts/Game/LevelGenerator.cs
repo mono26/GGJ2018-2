@@ -26,6 +26,7 @@ public class LevelGenerator : MonoBehaviour
 	[Header("Prefabs")]
 	[SerializeField] SpawnableObject asteroidWall;
 	[SerializeField] GameObject spawnedZoneMark;
+	[SerializeField] GameObject backGround;
 
 	[Header("Containers")]
 	[SerializeField] Transform planetsContainer = null;
@@ -39,13 +40,12 @@ public class LevelGenerator : MonoBehaviour
 	int numberOfSpawns = 0;
 	int spawnedPlanets = 0;
 	Vector2 _lastFuelPlanetPosition;
-	List<GameObject> spawnedZones;
+	GameObject[] spawnedZones;
 
 	int GetRandomDistanceInterval { get { return Random.Range(minDistanceIntervalToSpawn, maxDistanceIntervalToSpawn + 1); } }
 	int GetRandomAngleInterval { get { return Random.Range(minAngleIntervalToSpawn, maxAngleIntervalToSpawn + 1); } }
 	int GetRandomeStartAngle { get { return Random.Range(0, 360); } }
 	int GetRandomScale { get { return Random.Range(1, 6); } }
-
 	Vector3 GetRandomRotation
 	{
 		get
@@ -59,20 +59,20 @@ public class LevelGenerator : MonoBehaviour
 	{
 		if(planetsContainer == null)
 		{
-			planetsContainer = new GameObject("Planets").transform;
+			planetsContainer = new GameObject("Container_Planets").transform;
 		}
 
 		if(asteroidWallContainer == null)
 		{
-			asteroidWallContainer = new GameObject("AsteroidWall").transform;
+			asteroidWallContainer = new GameObject("Container_AsteroidWall").transform;
 		}
 
 		if(marksContainer == null)
 		{
-			marksContainer = new GameObject("SpawnedMarks").transform;
+			marksContainer = new GameObject("Container_SpawnedMarks").transform;
 		}
 
-		spawnedZones = new List<GameObject>();
+		spawnedZones = new GameObject[2];
 
 	}
 
@@ -96,24 +96,26 @@ public class LevelGenerator : MonoBehaviour
 			totalDistance += GetRandomDistanceInterval;
 		}
 
-		numberOfSpawns++;
-
 		// int asteroidWallSpawnDistance = maxDistanceToSpawn + maxDistanceIntervalToSpawn;
 		// SpawnAsteroidRing(asteroidWallSpawnDistance);
 		// SpawnAsteroidRing(asteroidWallSpawnDistance + 5);
 		// SpawnAsteroidRing(asteroidWallSpawnDistance + 10);
 
-		GameObject newMark = Instantiate(spawnedZoneMark, transform.position, Quaternion.identity);
-		newMark.GetComponent<CircleCollider2D>().radius = maxDistanceToSpawn - maxDistanceIntervalToSpawn - minDistanceIntervalToSpawn;
-		newMark.transform.SetParent(marksContainer);
-		spawnedZones.Add(newMark);
-
-		if (numberOfSpawns % numberOfSpawnsToClearAZone == 0)
+		int modIndex = numberOfSpawns % numberOfSpawnsToClearAZone;
+		if (spawnedZones[modIndex] == null)
 		{
-			GameObject markedZone = spawnedZones[0];
-			spawnedZones.RemoveAt(0);
-			Destroy(markedZone);
+			GameObject newMark = Instantiate(spawnedZoneMark, transform.position, Quaternion.identity);
+			newMark.GetComponent<CircleCollider2D>().radius = maxDistanceToSpawn - maxDistanceIntervalToSpawn - minDistanceIntervalToSpawn;
+			newMark.transform.SetParent(marksContainer);
+
+			spawnedZones[modIndex] = newMark;
 		}
+		else
+		{
+			spawnedZones[modIndex].transform.position = transform.position;
+		}
+
+		numberOfSpawns++;
 	}
 
 	void SpawnPerimeter(int _distance)
@@ -287,6 +289,11 @@ public class LevelGenerator : MonoBehaviour
 
 		Vector2 playerPosition = other.transform.position;
 		transform.position = playerPosition;
+
+		if (backGround != null)
+		{
+			backGround.transform.position = playerPosition;
+		}
 
 		GenerateLevel();
 	}
