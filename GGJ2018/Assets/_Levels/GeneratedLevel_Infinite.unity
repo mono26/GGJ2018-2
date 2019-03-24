@@ -801,46 +801,6 @@ Prefab:
       value: 0
 >>>>>>> parent of d821fb1... 1. El backgrounde se mueve cada vez que se genera el nivel.
       objectReference: {fileID: 0}
-    - target: {fileID: 198838382110648594, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: playOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198838382110648594, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: randomSeed
-      value: -1673074229
-      objectReference: {fileID: 0}
-    - target: {fileID: 198838382110648594, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: moveWithTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 199874260108805422, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_SortingLayerID
-      value: -1829263865
-      objectReference: {fileID: 0}
-    - target: {fileID: 199874260108805422, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_SortingLayer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 199874260108805422, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 199874260108805422, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_SortMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 199874260108805422, guid: e9fc52c01928c814588868868247ff44,
-        type: 2}
-      propertyPath: m_RenderMode
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e9fc52c01928c814588868868247ff44, type: 2}
   m_IsPrefabParent: 0
