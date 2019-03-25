@@ -36,6 +36,7 @@ public class Ship : MonoBehaviour
     [SerializeField] SignalOscilator oscilatorComponent = null;
     [SerializeField] AtractorRay atractorRayComponent = null;
     [SerializeField] Shield shieldComponent = null;
+    [SerializeField] ParticleSystem trailParticles;
 
     [Header("Ship editor debugging.")]
     [SerializeField] ShipComponent[] components;
@@ -161,7 +162,15 @@ public class Ship : MonoBehaviour
         {
             engineComponent.ApplyEngineThrust( (transform.right * currentInput.GetHorizontalInput) + 
             (transform.up * currentInput.GetVerticalInput) );
-        }
+            if (trailParticles.isStopped && !atractorRayComponent.IsAlienRayOn)
+            {
+                trailParticles.Play();
+            }
+            
+        }else
+            {
+                trailParticles.Stop();
+            }
     }
 
     private void ApplyBoost()
@@ -193,18 +202,11 @@ public class Ship : MonoBehaviour
     void OnTriggerStay2D(Collider2D _collider)
     {
 
-
-        if (_collider.CompareTag("Planet"))
-        {
-            // Changes active buttons on GUI if it enters a planet
-            UpdateButton();
-        }
-
         if (!_collider.CompareTag("GravitationField"))
         {
             return;
         }
-
+        UpdateButton();
 
 
     }
@@ -226,6 +228,13 @@ public class Ship : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Planet"))
+        {
+            engineComponent.LoseFuelAmount(400);
+        }
+    }
     // public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
     // {
     //     if(_gravitySource.Equals(GravitySourceType.Planet))

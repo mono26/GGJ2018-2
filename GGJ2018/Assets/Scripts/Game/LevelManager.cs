@@ -30,6 +30,7 @@ public class LevelManager : Singleton<LevelManager>
 
     void Start ()
     {
+        Time.timeScale = 1;
         if (scoreText != null)
         {
             scoreText.gameObject.SetActive(true);
@@ -76,9 +77,9 @@ public class LevelManager : Singleton<LevelManager>
 
     public void RetryLevel()
     {
-        Time.timeScale = 1;
         //EventManager.TriggerEvent(new GameEvent(GameEventTypes.UnPause));
         LoadManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
         return;
     }
 }
