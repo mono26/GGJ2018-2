@@ -57,7 +57,7 @@ MonoBehaviour:
   maxTriesToSpawn: 15
   layersToCheck:
     serializedVersion: 2
-    m_Bits: 10496
+    m_Bits: 11520
   minDistanceFromPlayer: 6
   maxDistanceFromPlayer: 9
   player: {fileID: 0}

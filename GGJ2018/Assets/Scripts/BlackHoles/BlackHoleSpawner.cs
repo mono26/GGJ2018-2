@@ -25,7 +25,7 @@ public class BlackHoleSpawner : Spawner
     public override void Spawn()
     {
         Blackhole spawnedBlackhole = GetBlackholeToSpawn();
-        float radius = spawnedBlackhole.GetRadius;
+        float radius = spawnedBlackhole.GetGravFieldRadius;
         for(int i = 0; i < maxTriesToSpawn; i++)
         {
             Vector3 spawnPosition = CalculateRandomPosition();
