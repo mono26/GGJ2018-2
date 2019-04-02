@@ -56,12 +56,17 @@ public class AsteroidSpawner : Spawner
 	
 	protected override void Update ()
     {
+        if (!DebugMenu.Instance.GetAsteroidsEnabled)
+        {
+            return;
+        }
+
         base.Update();
+
         if (spawnTimer <= 0) 
         {
             Spawn();
         }
-        return;
 	}
 
     public override void Spawn()

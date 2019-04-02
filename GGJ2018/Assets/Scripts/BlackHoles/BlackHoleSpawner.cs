@@ -14,6 +14,11 @@ public class BlackHoleSpawner : Spawner
 
     protected override void Update()
     {
+        if (!DebugMenu.Instance.GetBlackholesEnabled)
+        {
+            return;
+        }
+
         base.Update();
 
         if (spawnTimer <= 0) 

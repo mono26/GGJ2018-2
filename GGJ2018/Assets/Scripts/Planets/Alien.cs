@@ -90,6 +90,7 @@ public class Alien : SpawnableObject
     {
         yield return new WaitForSeconds(lifeTime);
 
+        Release();
         
         yield break;
     }

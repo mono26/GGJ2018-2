@@ -14,10 +14,7 @@ public class SoundManager : Singleton<SoundManager>
 	public void PlaySoundInObject(ref AudioSource _source, AudioClip _sound, float _volume, bool _loop = false, float _duration = 1.0f)
 	{
 		_source.volume = _volume;
-		if (_duration == 1.0f && _loop)
-		{
-			_source.loop = _loop;
-		}
+		_source.loop = _loop;
 
 		PlayPlaySoundForCertainAmountOfTime(_source, _sound, _duration);
 	}
