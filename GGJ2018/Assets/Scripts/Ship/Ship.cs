@@ -189,6 +189,8 @@ public class Ship : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _collider)
     {
+        Debug.LogError(_collider.gameObject.name);
+
         if (!_collider.CompareTag("GravitationField"))
         {
             return;
