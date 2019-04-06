@@ -189,13 +189,12 @@ public class Ship : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _collider)
     {
-        Debug.LogError(_collider.gameObject.name);
+        // Debug.LogError(_collider.gameObject.name);
 
         if (!_collider.CompareTag("GravitationField"))
         {
             return;
         }
-
 
         // Changes active buttons on GUI if it enters a planet
         PlayerInOrbit();
@@ -208,9 +207,8 @@ public class Ship : MonoBehaviour
         {
             return;
         }
+
         UpdateButton();
-
-
     }
 
     void OnTriggerExit2D(Collider2D _collider)
@@ -237,31 +235,6 @@ public class Ship : MonoBehaviour
             engineComponent.LoseFuelAmount(400);
         }
     }
-    // public void ApplyGravity(Vector2 _normalizedGravityDirection, float _gravityForce, GravitySourceType _gravitySource)
-    // {
-    //     if(_gravitySource.Equals(GravitySourceType.Planet))
-    //     {
-    //         return;
-    //     }
-
-    //     // In case the user forgets to normalize the direction vector.
-    //     Vector3 normalizedDirection = _normalizedGravityDirection.normalized;
-    //     bodyComponent.AddForce(_normalizedGravityDirection * _gravityForce, ForceMode2D.Force);
-    // }
-
-    // public void ApplyRotation(Vector2 _normalizedRotationDirection, float _rotationForce)
-    // {
-    //     // In case the user forgets to normalize the direction vector.
-    //     Vector3 normalizedDirection = _normalizedRotationDirection.normalized;
-    //     bodyComponent.AddForce(_normalizedRotationDirection * _rotationForce, ForceMode2D.Force);
-    // }
-
-    // public void RotateTowardsGravitationCenter(Vector2 _gravitationCenterDirection)
-    // {
-    //     Debug.DrawRay(transform.position, -_gravitationCenterDirection, Color.yellow, 10);
-    //     Debug.DrawRay(transform.position, -transform.up, Color.red, 10);
-    //     transform.up = _gravitationCenterDirection;
-    // }
 
     public void ReceiveInput(ShipInput _inputToRecieve)
     {

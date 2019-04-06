@@ -30,6 +30,11 @@ public class SoundManager : Singleton<SoundManager>
 
 	public void PlayBackGroundSound(AudioClip _sound, float _volume, float _duration = 1.0f, bool _loop = false)
 	{
+		if (backGroundSource == null)
+		{
+			return;
+		}
+
 		backGroundSource.volume = _volume;
 		if (_duration == 1.0f && _loop)
 		{

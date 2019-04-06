@@ -19,6 +19,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] int minAngleIntervalToSpawn = 30;
     [Tooltip("Maximum angle interval to add up and walk the perimeter")]
     [SerializeField] int maxAngleIntervalToSpawn = 60;
+    [SerializeField][Range(0.0f, 1.0f)] float chanceToSpawnWeapons = 0.3f;
 
     [Header("Layers to check for a free spot")]
     [SerializeField] LayerMask layersToCheck;
@@ -141,14 +142,21 @@ public class LevelGenerator : MonoBehaviour
             }
 
             Vector2 spawnPositionRelativeToGenerator = CalculateSpawnPointRelativeToGenerator(_distance, spawnAngle);
+            Planet planet = null;
             if (spawnedPlanets % 2 == 0)
             {
-                SpawnPlanet<AlienPlanet>(spawnPositionRelativeToGenerator);
+                planet = SpawnPlanet<AlienPlanet>(spawnPositionRelativeToGenerator);
+                if (planet != null)
+                {
+                    ((AlienPlanet)planet).SpawnAliens();
+                }
             }
             else
             {
-                SpawnPlanet<Planet>(spawnPositionRelativeToGenerator);
+                planet = SpawnPlanet<Planet>(spawnPositionRelativeToGenerator);
             }
+
+            AddWeaponsToPlanet(ref planet);
 
             spawnedPlanets++;
         }
@@ -163,8 +171,8 @@ public class LevelGenerator : MonoBehaviour
     Vector2 CalculateSpawnPointRelativeToGenerator(int _distance, float _angle)
     {
         Vector3 pointInPerimeter = Vector2.zero;
-        float x = Mathf.Cos(_angle) * _distance;
-        float y = Mathf.Sin(_angle) * _distance;
+        float x = Mathf.Cos(Mathf.Deg2Rad * _angle) * _distance;
+        float y = Mathf.Sin(Mathf.Deg2Rad * _angle) * _distance;
         pointInPerimeter = new Vector2(x, y);
         return pointInPerimeter;
     }
@@ -194,25 +202,19 @@ public class LevelGenerator : MonoBehaviour
         return newFuelPlanetPosition;
     }
 
-    void SpawnPlanet<T>(Vector2 _positionRelativeToGenerator) where T : Planet
+    T SpawnPlanet<T>(Vector2 _positionRelativeToGenerator) where T : Planet
     {
         T planetToSpawn = PoolsManager.Instance.GetObjectFromPool<T>();
         if (!isInitialGeneration && CheckIfSameFromPerimeterOfLastSpawn(_positionRelativeToGenerator, planetToSpawn.GetRadius))
         {
             PoolsManager.Instance.ReleaseObjectToPool(planetToSpawn);
-            return;
+            return null;
         }
 
         if (!CheckIfPositionIsFree(_positionRelativeToGenerator, planetToSpawn.GetGravFieldRadius))
         {
             PoolsManager.Instance.ReleaseObjectToPool(planetToSpawn);
-            return;
-        }
-
-        AlienPlanet alienPlanet = planetToSpawn as AlienPlanet;
-        if (alienPlanet != null)
-        {
-            alienPlanet.SpawnAliens();
+            return null;
         }
 
         Vector3 worldPositionToSpawn = transform.position;
@@ -220,11 +222,13 @@ public class LevelGenerator : MonoBehaviour
         worldPositionToSpawn.y += _positionRelativeToGenerator.y;
 
         // TODO refactorizar. Dejar que los planetas hagn esto por si solos.
-        planetToSpawn.Awake();
+        // planetToSpawn.Awake();
         float distance = (worldPositionToSpawn - transform.position).magnitude;
         planetToSpawn.SetLifeTimeAccordingToDistanceFromPlayer(distance);
         planetToSpawn.transform.SetParent(planetsContainer);
         planetToSpawn.transform.position = worldPositionToSpawn;
+
+        return planetToSpawn;
     }
 
     bool CheckIfPositionIsFree(Vector2 _positionRelativeToGenerator, float _radius)
@@ -239,6 +243,21 @@ public class LevelGenerator : MonoBehaviour
         }
 
         return positionIsFree;
+    }
+
+    void AddWeaponsToPlanet(ref Planet _planet)
+    {
+        if (_planet == null)
+        {
+            return;
+        }
+
+        float weaponsChance = Random.Range(0.0f, 1.0f);
+
+        if (weaponsChance >= chanceToSpawnWeapons)
+        {
+            _planet.gameObject.AddComponent<PlanetDefenses>();
+        }
     }
 
     bool CheckIfSameFromPerimeterOfLastSpawn(Vector2 _positionRelativeToGenerator, float _radius)
@@ -286,6 +305,8 @@ public class LevelGenerator : MonoBehaviour
         {
             return;
         }
+
+        Debug.LogError("Player exited zone");
 
         Vector2 playerPosition = other.transform.position;
         transform.position = playerPosition;

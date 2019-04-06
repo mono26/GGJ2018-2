@@ -53,8 +53,8 @@ public class BlackHoleSpawner : Spawner
     {
         float randomDistance = Random.Range(minDistanceFromPlayer, maxDistanceFromPlayer);
         int angle = Random.Range(0, 360);
-        float x = Mathf.Cos(angle) * randomDistance;
-        float y = Mathf.Sin(angle) * randomDistance;
+        float x = Mathf.Cos(Mathf.Deg2Rad * angle) * randomDistance;
+        float y = Mathf.Sin(Mathf.Deg2Rad * angle) * randomDistance;
 
         Vector3 spawnPosition = player.transform.position + new Vector3(x, y);
         return spawnPosition;

@@ -93,15 +93,6 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         return;
     }
 
-    private bool AreWeInABlackholeCenter(BlackholeEvent _blackHoleEvent)
-    {
-        bool centerReachead = false;
-        if(_blackHoleEvent.GetEventType == BlackholeEventType.CenterReachead && _blackHoleEvent.GetAffectedObject.Equals(gameObject)){
-            centerReachead = true;
-        }
-        return centerReachead;
-    }
-
     public void ApplyEngineThrust(Vector3 _direction)
     {
         if(currentFuel > 0)
@@ -129,6 +120,28 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         if(AreWeInABlackholeCenter(_blackHoleEvent)) {
             TakeDamage(30);
         }
-        return;
+    }
+
+    private bool AreWeInABlackholeCenter(BlackholeEvent _blackHoleEvent)
+    {
+        bool centerReachead = false;
+        if(_blackHoleEvent.GetEventType == BlackholeEventType.CenterReachead && _blackHoleEvent.GetAffectedObject.Equals(gameObject)){
+            centerReachead = true;
+        }
+        
+        return centerReachead;
+    }
+
+    void OnTriggerEnter2D(Collider2D _collider)
+    {
+        // Debug.LogError(_collider.gameObject.name);
+
+        if (!_collider.CompareTag("Bullet"))
+        {
+            return;
+        }
+
+        // Changes active buttons on GUI if it enters a planet
+        TakeDamage(5.0f);
     }
 }

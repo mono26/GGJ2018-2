@@ -5,7 +5,7 @@ public enum GravitySourceType { Planet, Blackhole }
 
 public class Planet : SpawnableObject
 {
-    [Header("Planet settings")]
+    [Header("Settings")]
     [SerializeField][Range(-1,1)] int gravitationalFieldDirection = 1; // +1 left, -1 right
     // TODO create rotation component
     [SerializeField] float rotationSpeed = 4.4f;
@@ -15,7 +15,7 @@ public class Planet : SpawnableObject
     [SerializeField] protected GravitySourceType gravitySource;
     [SerializeField] bool playerInGravitationalField = false;
 
-    [Header("Planet components")]
+    [Header("Components")]
     [SerializeField] protected SignalEmitter signal;
     [SerializeField] CircleCollider2D gravitationalField = null;
 
@@ -24,12 +24,14 @@ public class Planet : SpawnableObject
     [Header("Planet editor debuggin")]
     [SerializeField] protected List<IAffectedByGravity> objsInGravitationField = new List<IAffectedByGravity>();
 
+
     public float GetRotationForce { get { return rotationForce; } }
     public float GetGravityForce { get { return gravityForce; } }
     public float GetGravFieldRadius { get { return gravFieldRadius; } }
     public int GetGravFieldDirection { get { return gravitationalFieldDirection; } }
     public GravitySourceType GetGravitySource { get { return gravitySource; } }
     public SignalEmitter GetSignal { get { return signal; } }
+    public Vector2 GetCenterPosition { get {return (Vector2)transform.position + GetCollisionBody.offset; } }
 
     bool alreadyAwaked = false;
 
@@ -160,7 +162,20 @@ public class Planet : SpawnableObject
 
     public override void Release()
     {
+        DestroyWeapons();
+
         PoolsManager.Instance.ReleaseObjectToPool(this);
+    }
+
+    void DestroyWeapons()
+    {
+        PlanetDefenses weapons = GetComponent<PlanetDefenses>();
+        if (weapons == null)
+        {
+            return;
+        }
+
+        Destroy(weapons);
     }
 
     public void SetLifeTimeAccordingToDistanceFromPlayer(float _distanceFromPlayer)

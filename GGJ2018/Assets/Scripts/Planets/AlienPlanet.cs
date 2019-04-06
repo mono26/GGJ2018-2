@@ -23,8 +23,17 @@ public class AlienPlanet : Planet
         }
     }
 
+    public void SpawnAliens()
+    {
+        SpawnAliensInPlanet();
+        LocateAliens();
+        AlignAliensTowarsCenter();
+    }
+
     void SpawnAliensInPlanet()
     {
+        aliens = new List<Alien>();
+
         for (int i = 0; i < numberOfAliens; i++)
         {
             Alien alien = PoolsManager.Instance.GetObjectFromPool<Alien>();
@@ -38,17 +47,17 @@ public class AlienPlanet : Planet
         foreach (Alien alien in aliens)
         {
             int angle = Random.Range(0, 360);
-            float x = Mathf.Cos(angle) * (GetRadius + 0.3f);
-            float y = Mathf.Sin(angle) * (GetRadius + 0.3f);
-            alien.transform.position = transform.position + new Vector3(x, y);
+            float x = Mathf.Cos(Mathf.Deg2Rad * angle) * (GetRadius + 0.3f);
+            float y = Mathf.Sin(Mathf.Deg2Rad * angle) * (GetRadius + 0.3f);
+            alien.transform.position = GetCenterPosition + new Vector2(x, y);
         }
     }
 
-    private void ChangeAliensDirectionTowardsPlanet()
+    private void AlignAliensTowarsCenter()
     {
         foreach (Alien alien in aliens)
         {
-            alien.transform.up = (alien.transform.position - transform.position).normalized;
+            alien.transform.up = ((Vector2)alien.transform.position - GetCenterPosition).normalized;
         }
     }
 
@@ -114,13 +123,5 @@ public class AlienPlanet : Planet
 
         aliens.Clear();
         PoolsManager.Instance.ReleaseObjectToPool(this);
-    }
-
-    public void SpawnAliens()
-    {
-        aliens = new List<Alien>();
-        SpawnAliensInPlanet();
-        LocateAliens();
-        ChangeAliensDirectionTowardsPlanet();
     }
 }

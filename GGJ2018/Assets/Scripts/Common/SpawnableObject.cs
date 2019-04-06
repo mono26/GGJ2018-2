@@ -9,6 +9,7 @@ public class SpawnableObject : Spawnable
     [SerializeField] private float radius = 1.0f;
     [SerializeField] Collider2D collisionBody = null;
     public float GetRadius { get { return radius; } }
+    public Collider2D GetCollisionBody { get { return collisionBody; } }
 
     public virtual void Awake() 
     {

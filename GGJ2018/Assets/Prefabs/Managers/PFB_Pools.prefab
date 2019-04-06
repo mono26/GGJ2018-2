@@ -80,3 +80,9 @@ MonoBehaviour:
   - prefabs:
     - {fileID: 114663917763857666, guid: 270adc3dcab323a43b9e27c40abf3679, type: 2}
     size: 5
+  - prefabs:
+    - {fileID: 114235932149521292, guid: f6b554cd38ce0814782dd594b2bb3d00, type: 2}
+    size: 20
+  - prefabs:
+    - {fileID: 114963052261696800, guid: 4320736636a57a849bfe3aabb90b2e21, type: 2}
+    size: 20

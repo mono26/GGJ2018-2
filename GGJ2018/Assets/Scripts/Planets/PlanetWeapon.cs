@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanetWeapon : MonoBehaviour 
+public class PlanetWeapon : Spawnable 
 {
+	[Header("Settings")]
 	[SerializeField] Transform barrelPivot = null;
-	[SerializeField] Transform shootPosition = null;
+	[SerializeField] Transform shootPoint = null;
 	[SerializeField] float maxRoation = 45.0f;
 	[SerializeField][Range(0, 1)] float rotationSpeed = 0.5f;
 
-	Transform target;
+	[Header("Shooting")]
+	[SerializeField] float cooldown = 1.0f;
+	[SerializeField] float shootForce = 1000.0f;
+	[SerializeField] Bullet bullet = null;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+	Transform target = null;
+	float lastShoot = 0.0f;
 	
 	// Update is called once per frame
 	void Update () 
@@ -46,6 +48,11 @@ public class PlanetWeapon : MonoBehaviour
 		targetDirection.z = 0;
 		Vector3 nextDirection = Vector3.Lerp(barrelPivot.up, targetDirection, rotationSpeed);
 		barrelPivot.up = nextDirection;
+
+		if (lastShoot + cooldown < Time.timeSinceLevelLoad)
+		{
+			Shoot();
+		}
 	}
 
 	bool IsInsideShootAngle()
@@ -62,6 +69,17 @@ public class PlanetWeapon : MonoBehaviour
 		return insideAngle;
 	}
 
+	void Shoot()
+	{
+		Bullet bulletToShoot = PoolsManager.Instance.GetObjectFromPool<Bullet>();
+		Debug.LogError("bulletToShoot: " + bulletToShoot);
+		bulletToShoot.transform.position = shootPoint.position;
+		bulletToShoot.transform.rotation = shootPoint.rotation;
+		bulletToShoot.Shoot(barrelPivot.up, shootForce);
+
+		lastShoot = Time.timeSinceLevelLoad;
+	}
+
 	void OnTriggerEnter2D(Collider2D _collider) 
 	{
 		if (!_collider.CompareTag("Player"))
@@ -69,7 +87,6 @@ public class PlanetWeapon : MonoBehaviour
 			return;
 		}
 
-        Debug.LogError(_collider.gameObject.name);
 		target = _collider.transform;
 	}
 

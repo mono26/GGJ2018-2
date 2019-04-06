@@ -23,7 +23,7 @@ public class PlanetExplosion : AutoDestroyEffect
 			Asteroid fragment = PoolsManager.Instance.GetObjectFromPool<Asteroid>();
 			ScaleRandomly(ref fragment);
 			fragment.TurnCollisionOffForSeconds(0.5f);
-			Vector2 launchDirection = CalculateLaunchDirection(startAngle + (i*angleIncrease));
+			Vector2 launchDirection = CalculateLaunchDirection(startAngle + (i * angleIncrease));
 			fragment.transform.position = transform.position;
 			fragment.GetBodyComponent.AddForce(launchDirection * explosionForce, ForceMode2D.Impulse);
 		}
@@ -32,8 +32,8 @@ public class PlanetExplosion : AutoDestroyEffect
 	Vector2 CalculateLaunchDirection(float _angle)
 	{
 		Vector3 launcheDirection = Vector2.zero;
-		float x = Mathf.Cos(_angle);
-		float y = Mathf.Sin(_angle);
+		float x = Mathf.Cos(Mathf.Deg2Rad * _angle);
+		float y = Mathf.Sin(Mathf.Deg2Rad * _angle);
 		launcheDirection = new Vector2(x, y);
 		return launcheDirection;
 	}
