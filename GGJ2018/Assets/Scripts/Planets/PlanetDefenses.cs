@@ -10,7 +10,7 @@ public class PlanetDefenses : MonoBehaviour
 
 	List<PlanetWeapon> weapons;
 
-	void Awake() 
+	void Start() 
 	{
 		SpawnWeapons();
 	}
@@ -49,7 +49,6 @@ public class PlanetDefenses : MonoBehaviour
             float x = Mathf.Cos(Mathf.Deg2Rad * angle) * (_planet.GetRadius + 0.3f);
             float y = Mathf.Sin(Mathf.Deg2Rad * angle) * (_planet.GetRadius + 0.3f);
             weapon.transform.position = _planet.GetCenterPosition + new Vector2(x, y);
-            Debug.DrawLine(_planet.GetCenterPosition, _planet.GetCenterPosition + new Vector2(x, y), Color.red, 3.0f);
         }
     }
 

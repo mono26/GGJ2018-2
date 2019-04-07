@@ -156,7 +156,7 @@ public class LevelGenerator : MonoBehaviour
                 planet = SpawnPlanet<Planet>(spawnPositionRelativeToGenerator);
             }
 
-            AddWeaponsToPlanet(ref planet);
+            // AddWeaponsToPlanet(ref planet);
 
             spawnedPlanets++;
         }

@@ -146,6 +146,14 @@ public class Planet : SpawnableObject
         }
     }
 
+    void OnTriggerStay2D(Collider2D _collider)
+    {
+        if(_collider.tag == "Player")
+        {
+            playerInGravitationalField = true;
+        }
+    }
+
     protected virtual void OnTriggerExit2D(Collider2D _collider)
     {
         IAffectedByGravity obj = _collider.GetComponent<IAffectedByGravity>();
@@ -162,7 +170,7 @@ public class Planet : SpawnableObject
 
     public override void Release()
     {
-        DestroyWeapons();
+        // DestroyWeapons();
 
         PoolsManager.Instance.ReleaseObjectToPool(this);
     }

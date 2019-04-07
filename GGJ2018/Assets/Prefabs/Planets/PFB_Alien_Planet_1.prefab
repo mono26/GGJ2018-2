@@ -26,12 +26,13 @@ GameObject:
   - component: {fileID: 114211160479330264}
   - component: {fileID: 114159881713291538}
   - component: {fileID: 114935151904312158}
+  - component: {fileID: 114610805262297744}
   m_Layer: 8
   m_Name: PFB_Alien_Planet_1
   m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1805224864733508
 GameObject:
@@ -48,7 +49,7 @@ GameObject:
   m_TagString: GravitationField
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1909506088884252
 GameObject:
@@ -63,7 +64,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4335827796629090
 Transform:
@@ -186,6 +187,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 1
   type: 0
+--- !u!114 &114610805262297744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1076643016636238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7cd2b9d7b939cd488ab5e05fe828f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minNumberOfWeapons: 2
+  maxNumberOfWeapons: 5
 --- !u!114 &114935151904312158
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -24,7 +24,6 @@ public class ShipInput
     }
 }
 
-// TODO Remove IAffectedByGravity
 public class Ship : MonoBehaviour
 {
     [Header("Ship components")]
@@ -138,6 +137,8 @@ public class Ship : MonoBehaviour
 
     void ToggleShipRay()
     {
+        Debug.LogError("Toggling ship ray");
+
         atractorRayComponent.ToggleRay();
     }
 
@@ -190,41 +191,45 @@ public class Ship : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D _collider)
     {
         // Debug.LogError(_collider.gameObject.name);
-
-        if (!_collider.CompareTag("GravitationField"))
+        if (_collider.CompareTag("GravitationField"))
         {
-            return;
+            // Changes active buttons on GUI if it enters a planet
+            PlayerInOrbit();
         }
 
-        // Changes active buttons on GUI if it enters a planet
-        PlayerInOrbit();
+        if (_collider.CompareTag("ShootZone"))
+        {
+            PlanetWeapon weapon = _collider.GetComponent<PlanetWeapon>();
+            weapon.SetTarget(transform);
+        }
     }
 
     void OnTriggerStay2D(Collider2D _collider)
     {
-
-        if (!_collider.CompareTag("GravitationField"))
+        if (_collider.CompareTag("GravitationField"))
         {
-            return;
+            UpdateButton();
         }
-
-        UpdateButton();
     }
 
     void OnTriggerExit2D(Collider2D _collider)
     {
-        if (!_collider.CompareTag("GravitationField"))
+        if (_collider.CompareTag("GravitationField"))
         {
-            return;
+            // Changes active buttons on GUI if it goes out of a planet
+            PlayerInOrbit();
+            UpdateButton();
+            
+            if(atractorRayComponent.IsAlienRayOn)
+            {
+                ToggleShipRay();
+            }
         }
 
-        // Changes active buttons on GUI if it goes out of a planet
-        PlayerInOrbit();
-        UpdateButton();
-
-        if(atractorRayComponent.IsAlienRayOn)
+        if (_collider.CompareTag("ShootZone"))
         {
-            ToggleShipRay();
+            PlanetWeapon weapon = _collider.GetComponent<PlanetWeapon>();
+            weapon.SetTarget(null);
         }
     }
 

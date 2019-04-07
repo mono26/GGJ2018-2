@@ -80,23 +80,28 @@ public class PlanetWeapon : Spawnable
 		lastShoot = Time.timeSinceLevelLoad;
 	}
 
-	void OnTriggerEnter2D(Collider2D _collider) 
+	// void OnTriggerEnter2D(Collider2D _collider) 
+	// {
+	// 	if (!_collider.CompareTag("Player"))
+	// 	{
+	// 		return;
+	// 	}
+
+	// 	target = _collider.transform;
+	// }
+
+	// void OnTriggerExit2D(Collider2D _collider) 
+	// {
+	// 	if (!_collider.CompareTag("Player"))
+	// 	{
+	// 		return;
+	// 	}
+
+	// 	target = null;
+	// }
+
+	public void SetTarget(Transform _target)
 	{
-		if (!_collider.CompareTag("Player"))
-		{
-			return;
-		}
-
-		target = _collider.transform;
-	}
-
-	void OnTriggerExit2D(Collider2D _collider) 
-	{
-		if (!_collider.CompareTag("Player"))
-		{
-			return;
-		}
-
-		target = null;
+		target = _target;
 	}
 }

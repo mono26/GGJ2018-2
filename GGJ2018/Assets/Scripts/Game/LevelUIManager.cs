@@ -71,7 +71,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
         PlayerCanBoost();
         ActivatePauseUI(false);
         ActivateGameOverUI(false);
-        return;
     }
 
     public void ActivatePauseUI(bool _active) { pauseUI.SetActive(_active); }

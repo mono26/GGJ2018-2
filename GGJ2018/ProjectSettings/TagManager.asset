@@ -14,6 +14,7 @@ TagManager:
   - Asteroid
   - Door
   - Bullet
+  - ShootZone
   layers:
   - Default
   - TransparentFX
