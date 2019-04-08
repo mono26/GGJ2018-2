@@ -46,6 +46,8 @@ public class Ship : MonoBehaviour
     public Shield GetShieldComponent { get { return shieldComponent; } }
     public ShipEngine GetEngineComponent { get { return engineComponent; } }
 
+    bool isOnGravitationField = false;
+
     //Interface EventHandler
     public delegate void UIAction();
     public static event UIAction UpdateButton;
@@ -124,7 +126,7 @@ public class Ship : MonoBehaviour
             ApplyBoost();
         }
 
-        if (currentInput.GetRayInput)
+        if (isOnGravitationField && currentInput.GetRayInput)
         {
             ToggleShipRay();
         }
@@ -195,6 +197,8 @@ public class Ship : MonoBehaviour
         {
             // Changes active buttons on GUI if it enters a planet
             PlayerInOrbit();
+
+            isOnGravitationField = true;
         }
 
         if (_collider.CompareTag("ShootZone"))
@@ -209,6 +213,8 @@ public class Ship : MonoBehaviour
         if (_collider.CompareTag("GravitationField"))
         {
             UpdateButton();
+
+            isOnGravitationField = true;
         }
     }
 
@@ -224,6 +230,8 @@ public class Ship : MonoBehaviour
             {
                 ToggleShipRay();
             }
+
+            isOnGravitationField = false;
         }
 
         if (_collider.CompareTag("ShootZone"))

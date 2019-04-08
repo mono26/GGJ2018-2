@@ -10,11 +10,23 @@ public enum TouchButtonStates { Off, ButtonDown, ButtonPressed, ButtonUp, Disabl
 
 public class TouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    [Header("Touch Button settings")]
+    [Header("Settings")]
 	[SerializeField] private string representedButtonID;
     [SerializeField] TouchButtonStates currentState;
+    [SerializeField] Color pressedColor =  Color.gray;
+    [SerializeField] Color releasedColor =  Color.white;
+
+    [Header("Components")]
+    [SerializeField] Image button =  null;
     public TouchButtonStates CurrentState { get { return currentState; } }
 
+    void Awake() 
+    {
+        if (button == null)
+        {
+            button = GetComponent<Image>();
+        }
+    }
 	void Update ()
     {
         if(currentState == TouchButtonStates.ButtonPressed) 
@@ -27,7 +39,9 @@ public class TouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (currentState == TouchButtonStates.ButtonUp) 
         {
-            currentState = TouchButtonStates.Off;      
+            currentState = TouchButtonStates.Off;
+
+
         }
         if (currentState == TouchButtonStates.ButtonDown) 
         {
@@ -55,6 +69,8 @@ public class TouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         currentState = TouchButtonStates.ButtonDown;
         InputManager.InteractWithButton(representedButtonID, InputButtonStates.Down);
+
+        button.color = pressedColor;
     }
 
     public virtual void OnPointerUp(PointerEventData data)
@@ -71,6 +87,8 @@ public class TouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         currentState = TouchButtonStates.ButtonUp;
         InputManager.InteractWithButton(representedButtonID, InputButtonStates.Up);
+
+        button.color = releasedColor;
     }
 
     public virtual void DisableButton()

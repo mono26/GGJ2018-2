@@ -97,7 +97,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     private void PlayerCanBoost()
     {
-
         if (!playerCanBoost)
         {
             playerCanBoost = true;

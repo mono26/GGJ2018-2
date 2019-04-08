@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class InputManager
 {
-    private static bool forceMobileMode = true;
+    private static bool forceMobileMode = false;
     private static bool IsOnMobile { get;  set; }
 
     private static Dictionary<string, InputAxis> activeAxiss = new Dictionary<string, InputAxis>();
@@ -68,16 +68,25 @@ public static class InputManager
         InputButtonStates buttonState = InputButtonStates.Off;
         if(button != null)
         {
-            if (Input.GetKeyDown(_buttonID)) {
+            if (Input.GetButtonDown(_buttonID)) 
+            {
+                Debug.LogError("_buttonID: " + _buttonID + "Down");
                 buttonState = InputButtonStates.Down;
             }
-            if (Input.GetKey(_buttonID)) {
+            else if (Input.GetButton(_buttonID)) 
+            {
                 buttonState = InputButtonStates.Pressed;
+
+                Debug.LogError("_buttonID: " + _buttonID +"Pressed");
             }
-            if (Input.GetKeyUp(_buttonID)) {
+            else if (Input.GetButtonUp(_buttonID)) 
+            {
+                Debug.LogError("_buttonID: " + _buttonID + "Up");
+
                 buttonState = InputButtonStates.Up;
             }
         }
+
         return buttonState;
     }
 
