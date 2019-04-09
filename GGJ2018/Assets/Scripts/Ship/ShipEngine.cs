@@ -112,7 +112,6 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
             canBoost = false;
             PlayerCanBoost();
         }
-
     }
 
     public void OnGameEvent(BlackholeEvent _blackHoleEvent)
@@ -130,18 +129,5 @@ public class ShipEngine : ShipComponent, Damageable, EventHandler<BlackholeEvent
         }
         
         return centerReachead;
-    }
-
-    void OnTriggerEnter2D(Collider2D _collider)
-    {
-        // Debug.LogError(_collider.gameObject.name);
-
-        if (!_collider.CompareTag("Bullet"))
-        {
-            return;
-        }
-
-        // Changes active buttons on GUI if it enters a planet
-        TakeDamage(5.0f);
     }
 }

@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d0d86c2b8cd4a459d546db758ea4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
+  radius: 0.2
   collisionBody: {fileID: 61175062067480390}
+  damage: 10
   body: {fileID: 50075965269858620}
 --- !u!114 &114588011671444726
 MonoBehaviour:

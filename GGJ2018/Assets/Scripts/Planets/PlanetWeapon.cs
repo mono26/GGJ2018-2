@@ -72,7 +72,6 @@ public class PlanetWeapon : Spawnable
 	void Shoot()
 	{
 		Bullet bulletToShoot = PoolsManager.Instance.GetObjectFromPool<Bullet>();
-		Debug.LogError("bulletToShoot: " + bulletToShoot);
 		bulletToShoot.transform.position = shootPoint.position;
 		bulletToShoot.transform.rotation = shootPoint.rotation;
 		bulletToShoot.Shoot(barrelPivot.up, shootForce);

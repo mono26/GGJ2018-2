@@ -175,17 +175,6 @@ public class Planet : SpawnableObject
         PoolsManager.Instance.ReleaseObjectToPool(this);
     }
 
-    void DestroyWeapons()
-    {
-        PlanetDefenses weapons = GetComponent<PlanetDefenses>();
-        if (weapons == null)
-        {
-            return;
-        }
-
-        Destroy(weapons);
-    }
-
     public void SetLifeTimeAccordingToDistanceFromPlayer(float _distanceFromPlayer)
     {
         if (autoDestroyComponent == null)
