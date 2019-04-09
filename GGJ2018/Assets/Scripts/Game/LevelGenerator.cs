@@ -157,8 +157,6 @@ public class LevelGenerator : MonoBehaviour
             }
 
             // AddWeaponsToPlanet(ref planet);
-
-            spawnedPlanets++;
         }
     }
 
@@ -227,6 +225,8 @@ public class LevelGenerator : MonoBehaviour
         planetToSpawn.SetLifeTimeAccordingToDistanceFromPlayer(distance);
         planetToSpawn.transform.SetParent(planetsContainer);
         planetToSpawn.transform.position = worldPositionToSpawn;
+
+        spawnedPlanets++;
 
         return planetToSpawn;
     }

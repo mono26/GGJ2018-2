@@ -6,7 +6,7 @@ using UnityEngine;
 public static class InputManager
 {
     private static bool forceMobileMode = false;
-    private static bool IsOnMobile { get;  set; }
+    public static bool IsOnMobile { get; private set; }
 
     private static Dictionary<string, InputAxis> activeAxiss = new Dictionary<string, InputAxis>();
     private static Dictionary<string, InputButton> activeButtons = new Dictionary<string, InputButton>();  
@@ -14,7 +14,6 @@ public static class InputManager
     static InputManager()
     {
         DetectTypeOfInput();
-        return;
 	}
 
     private static void DetectTypeOfInput()
@@ -35,6 +34,7 @@ public static class InputManager
 #if UNITY_EDITOR
                 LevelUIManager.Instance.ActivatePlayerControls(false);
                 IsOnMobile = false;
+                Debug.LogError("IsOnMobile: " + IsOnMobile);
 #endif
             }    
         }
@@ -117,7 +117,7 @@ public static class InputManager
     public static float GetAxisValue(string _axisID)
     {
         float axisValue = 0;
-        if(IsOnMobile){
+        if(IsOnMobile || DebugMenu.Instance.GetIsMobileInputEnabled){
             axisValue = GetVirtualAxisValue(_axisID);
         }
         else{

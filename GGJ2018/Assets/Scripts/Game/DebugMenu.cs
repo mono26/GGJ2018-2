@@ -15,23 +15,30 @@ public class DebugMenu : Singleton<DebugMenu>
 	[SerializeField] Button asteroids = null;
 	[SerializeField] Button blackholes = null;
 	[SerializeField] Button rechargeFuel =  null;
+	[SerializeField] Button mobile =  null;
 
 	bool isDebugEnabled = false;
 	bool areBlackholesEnabled = true;
 	bool areAsteroidsEnabled =  true;
+	bool isMobileInputEnabled = false;
 
 	public bool GetAsteroidsEnabled { get { return areAsteroidsEnabled; } }
 
 	public bool GetBlackholesEnabled { get { return areBlackholesEnabled; } }
 
+	public bool GetIsMobileInputEnabled { get { return isMobileInputEnabled; } }
+
 	void Start() 
 	{
 		areAsteroidsEnabled = true;
-		areBlackholesEnabled =  true;
+		areBlackholesEnabled = true;
+		isMobileInputEnabled = InputManager.IsOnMobile;
 
 		isDebugEnabled = false;
 
 		container.SetActive(false);
+
+		mobile.image.color = isMobileInputEnabled ? isEnabled : isDisabled;
 	}
 
 	public void ToggleDebugMenu()
@@ -60,5 +67,14 @@ public class DebugMenu : Singleton<DebugMenu>
 		ShipEngine engine = FindObjectOfType<ShipEngine>();
 
 		engine.RechargeFuel(999f);
+	}
+
+	public void ToggleMobileInput()
+	{
+		isMobileInputEnabled = !isMobileInputEnabled;
+
+		mobile.image.color = isMobileInputEnabled ? isEnabled : isDisabled;
+
+		LevelUIManager.Instance.ActivatePlayerControls(isMobileInputEnabled);
 	}
 }

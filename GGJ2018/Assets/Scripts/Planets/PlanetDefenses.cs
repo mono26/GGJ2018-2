@@ -59,19 +59,4 @@ public class PlanetDefenses : MonoBehaviour
             weapon.transform.up = (weapon.transform.position - transform.position).normalized;
         }
     }
-
-	void OnDestroy() 
-	{
-        if (weapons.Count == 0)
-        {
-            return;
-        }
-
-		foreach (PlanetWeapon weapon in weapons)
-		{
-			Destroy(weapon.gameObject);
-		}
-
-		weapons.Clear();
-	}
 }

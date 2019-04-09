@@ -4,24 +4,15 @@ using UnityEngine.UI;
 public class LevelUIManager : Singleton<LevelUIManager>
 {
     [Header("Game state UI's")]
-    [SerializeField]
-    private GameObject gameOverUI;
-    [SerializeField]
-    private GameObject pauseUI;
-    [SerializeField]
-    private GameObject boostButton, rayButton;
-    [SerializeField]
-    private GameObject movementJoystick;
-    [SerializeField]
-    private bool playerInOrbit;
-    [SerializeField]
-    private bool playerCanBoost;
-    [SerializeField]
-    private Color buttonActiveColor;
-    [SerializeField]
-    private Color buttonUnableColor;
-    [SerializeField]
-    private Image boostButtonImage;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject pauseUI;
+    [SerializeField] private GameObject boostButton, rayButton, shieldButton;
+    [SerializeField] private GameObject movementJoystick;
+    [SerializeField] private bool playerInOrbit;
+    [SerializeField] private bool playerCanBoost;
+    [SerializeField] private Color buttonActiveColor;
+    [SerializeField] private Color buttonUnableColor;
+    [SerializeField] private Image boostButtonImage;
 
 
     private void OnEnable()
@@ -40,8 +31,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
     protected override void Awake()
     {
         base.Awake();
-
-
 
         Transform inputContainer = transform.Find("Virtual_Input");
         if (boostButton == null) {
@@ -62,7 +51,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
         if (gameOverUI == null) {
             gameOverUI = inputContainer.Find("GameOverUI").gameObject;
         }
-        return;
     }
 
     protected void Start ()
@@ -92,6 +80,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         movementJoystick.SetActive(_active);
         boostButton.SetActive(_active);
         rayButton.SetActive(_active);
+        shieldButton.SetActive(_active);
     }
 
 
@@ -111,6 +100,11 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     private void UpdateButton()
     {
+        if (!InputManager.IsOnMobile)
+        {
+            return;
+        }
+
         if (playerInOrbit)
         {
             boostButton.SetActive(false);
