@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Atlas_Planetas
+  m_EditorData:
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - m_BuildTarget: Android
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 65
+      m_TextureCompression: 1
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+    packingParameters:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 46f88af2c6ea2f940834fe864e871327, type: 3}
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: bead0e8952f972d43922bfe80a3feec0, type: 3}
+  - {fileID: 21300000, guid: 42220007f6c078946add8335c360e9a6, type: 3}
+  - {fileID: 21300000, guid: 041ced82f189762429151f803869c699, type: 3}
+  - {fileID: 21300000, guid: f9ee326c13fa9e94aadc3449c5550907, type: 3}
+  - {fileID: 21300000, guid: fa9ed8967c5fc554fa01e54416b7045b, type: 3}
+  - {fileID: 21300000, guid: 6fa73de7f12618f4e814e1e89142d72c, type: 3}
+  - {fileID: 21300000, guid: 4243c27fbe2f2624f96615996ab98f51, type: 3}
+  - {fileID: 21300000, guid: 131ec457f510e1544880873f4851b74a, type: 3}
+  - {fileID: 21300000, guid: 9e27a06a9b150e94995d5b473ffd8263, type: 3}
+  - {fileID: 21300000, guid: 1c934683caa4414418b84342258f4bcf, type: 3}
+  - {fileID: 21300000, guid: 77a37a2681ce0b846b770ba323e3d124, type: 3}
+  - {fileID: 21300000, guid: 6863d7be892ff9e4fae6a8c6a4513bd0, type: 3}
+  - {fileID: 21300000, guid: c8a4cabdca3db58439d53892d7f63f3a, type: 3}
+  - {fileID: 21300000, guid: 62271da5ec19dac4d9a13fc630e9fb25, type: 3}
+  - {fileID: 21300000, guid: ee381b42ed1a8654c99aa3247c2776e6, type: 3}
+  - {fileID: 21300000, guid: e7ea50ee250bf714da37ce0ee5b911a3, type: 3}
+  - {fileID: 21300000, guid: 061546ff5823fd54599eaafe682986df, type: 3}
+  - {fileID: 21300000, guid: 3b15b6057571a9c47843f774b2291819, type: 3}
+  - {fileID: 21300000, guid: c28486a78a4b8d649ac2b147b3b439b7, type: 3}
+  - {fileID: 21300000, guid: 35c3183587d82254bad53d71241465ad, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - planeta-gas
+  - planeta4
+  - planeta2
+  - planeta3
+  - planeta1
+  - luz-planeta-gas
+  - planetraro2
+  - planeta-raro1
+  - luzplaneta1
+  - luzplaneta3
+  - luzplaneta2
+  - Luzplaneta4
+  - luzplanetararo2
+  - luzplanetararo1
+  - aura6
+  - aura4
+  - aura5
+  - aura2
+  - aura3
+  - aura1
+  m_Tag: Atlas_Planetas
+  m_IsVariant: 0
