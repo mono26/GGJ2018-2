@@ -3,10 +3,12 @@
 --- !u!687078895 &4343727234628468602
 SpriteAtlas:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Atlas_AlienShip
   m_EditorData:
+    serializedVersion: 2
     textureSettings:
       serializedVersion: 2
       anisoLevel: 1
@@ -19,7 +21,20 @@ SpriteAtlas:
       crunchedCompression: 0
       sRGB: 1
     platformSettings:
-    - m_BuildTarget: Android
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: Android
       m_MaxTextureSize: 4096
       m_ResizeAlgorithm: 0
       m_TextureFormat: 65
@@ -29,7 +44,8 @@ SpriteAtlas:
       m_AllowsAlphaSplitting: 0
       m_Overridden: 1
       m_AndroidETC2FallbackOverride: 0
-    packingParameters:
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
+    packingSettings:
       serializedVersion: 2
       padding: 4
       blockOffset: 1
@@ -39,31 +55,32 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 8cd5e65a98b64e34db64740d4ad90c03, type: 3}
+    totalSpriteSurfaceArea: 25690112
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 857fa532879bef440b232b4747a223c0, type: 3}
-  - {fileID: 21300000, guid: 4682d0de29c42ea4f871a27a32b19d66, type: 3}
-  - {fileID: 21300000, guid: 2cff29988d738ae4ab73bd1ee6f8422d, type: 3}
   - {fileID: 21300000, guid: 901e2d5211320a34895759542d0b5469, type: 3}
-  - {fileID: 21300000, guid: 21aadedf776048747a35b49fd29a7feb, type: 3}
   - {fileID: 21300000, guid: 5ef4fb255bd6f15439bf622260d93e32, type: 3}
-  - {fileID: 21300000, guid: 0f70a49ca21650b47958fd814a54f371, type: 3}
-  - {fileID: 21300000, guid: 732d17bfbbdb7cd499aba29c40387878, type: 3}
-  - {fileID: 21300000, guid: 680bc0bfc208bbc45a7297a1a83107bd, type: 3}
-  - {fileID: 21300000, guid: 6abbdf3ccd944a9478e1188c168a28ca, type: 3}
+  - {fileID: 21300000, guid: 2cff29988d738ae4ab73bd1ee6f8422d, type: 3}
   - {fileID: 21300000, guid: f450b7abcf273e94cb813a92d0c8592c, type: 3}
+  - {fileID: 21300000, guid: 6abbdf3ccd944a9478e1188c168a28ca, type: 3}
+  - {fileID: 21300000, guid: 0f70a49ca21650b47958fd814a54f371, type: 3}
+  - {fileID: 21300000, guid: 4682d0de29c42ea4f871a27a32b19d66, type: 3}
+  - {fileID: 21300000, guid: 680bc0bfc208bbc45a7297a1a83107bd, type: 3}
+  - {fileID: 21300000, guid: 732d17bfbbdb7cd499aba29c40387878, type: 3}
+  - {fileID: 21300000, guid: 21aadedf776048747a35b49fd29a7feb, type: 3}
   m_PackedSpriteNamesToIndex:
   - luz_nave
-  - nave
-  - alien 1
   - Alien_Armado
-  - alien
   - alien_manos
-  - SPR_ShipGlass
-  - SPRT_ShipTrailParticle
-  - GUI_Joystick
-  - SPRT_Shield
+  - alien 1
   - GUI_JoystickBackground
+  - SPRT_Shield
+  - SPR_ShipGlass
+  - nave
+  - GUI_Joystick
+  - SPRT_ShipTrailParticle
+  - alien
   m_Tag: Atlas_AlienShip
   m_IsVariant: 0
